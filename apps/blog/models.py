@@ -521,7 +521,6 @@ class ArticleNote(models.Model):
 
         # Render the description text
         self.render_description()
-        self.description_html = render_html(self.description, force_nofollow=False)
 
         # Save the note
         super(ArticleNote, self).save(*args, **kwargs)
