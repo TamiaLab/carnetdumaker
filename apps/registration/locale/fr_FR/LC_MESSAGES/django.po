@@ -1,0 +1,182 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/registration/admin.py:55
+#, python-format
+msgid "%d users were successfully activated."
+msgstr "%d utilisateurs ont été activés avec succès."
+
+#: apps/registration/admin.py:56
+msgid "Activate users"
+msgstr "Activer les utilisateurs"
+
+#: apps/registration/admin.py:73 apps/registration/admin.py:90
+#, python-format
+msgid "%d emails successfully sent."
+msgstr "%d emails ont été envoyés avec succès."
+
+#: apps/registration/admin.py:74
+msgid "Re-send activation emails"
+msgstr "Renvoyer les emails d'activation"
+
+#: apps/registration/admin.py:91
+msgid "Reset expiration date and re-send activation emails"
+msgstr ""
+"Réinitialiser les dates d'expiration et renvoyer les emails d'activation"
+
+#: apps/registration/admin.py:115
+msgid "Successfully deleted expired registrations in selection."
+msgstr ""
+"Les inscriptions expirées dans la sélection ont été supprimées avec succès."
+
+#: apps/registration/admin.py:116
+msgid "Delete expired registrations"
+msgstr "Supprimer les inscriptions expirées"
+
+#: apps/registration/apps.py:15 apps/registration/views.py:95
+msgid "User registration"
+msgstr "Inscription"
+
+#: apps/registration/forms.py:29
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: apps/registration/forms.py:30
+msgid "The username may contain only letters, numbers and @.+-_ characters."
+msgstr ""
+"Le nom d'utilisateur peut contenir uniquement des lettres, des chiffres et "
+"les caractéres @.+-_"
+
+#: apps/registration/forms.py:32
+msgid "E-mail"
+msgstr "Adresse email"
+
+#: apps/registration/forms.py:35
+msgid "E-mail (again)"
+msgstr "Adresse email (vérification)"
+
+#: apps/registration/forms.py:40
+msgid "Password"
+msgstr "Mot de passe"
+
+#: apps/registration/forms.py:44
+msgid "Password (again)"
+msgstr "Mot de passe (vérification)"
+
+#: apps/registration/forms.py:52
+msgid "This username is not allowed, please chose another one."
+msgstr "Ce nom d'utilisateur n'est pas autorisé, veuillez en choisir un autre."
+
+#: apps/registration/forms.py:56
+msgid "An user with that username already exists."
+msgstr "Un utilisateur avec ce pseudonyme existe déja."
+
+#: apps/registration/forms.py:66
+msgid ""
+"This email address or email provider is not allowed, please chose another "
+"one."
+msgstr ""
+"Cette adresse email et/ou cet hébergeur d'emails n'est pas autorisé, "
+"veuillez utiliser une autre adresse."
+
+#: apps/registration/forms.py:71
+msgid "An user with that email address already exists."
+msgstr "Un utilisateur avec cette adresse email existe déja."
+
+#: apps/registration/forms.py:85
+msgid "The two password fields didn't match."
+msgstr "Les deux champs de mot de passe ne correspondent pas."
+
+#: apps/registration/forms.py:90
+msgid "The two email fields didn't match."
+msgstr "Les deux champs d'adresse email ne correspondent pas."
+
+#: apps/registration/forms.py:133
+msgid "You must agree to the terms to register."
+msgstr "Vous devez accepter les CGU pour vous inscrire."
+
+#: apps/registration/forms.py:137
+#, python-format
+msgid "I have read and agree to the <a href=\"%s\">Terms of Service</a>"
+msgstr ""
+"J'ai lu et j'accepte les <a href=\"%s\">Conditions Générales d'Utilisation</"
+"a>"
+
+#: apps/registration/models.py:45
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/registration/models.py:47
+msgid "Activation key"
+msgstr "Clé d'activation"
+
+#: apps/registration/models.py:51
+msgid "Activation key used"
+msgstr "Clé d'activation utilisée"
+
+#: apps/registration/models.py:54
+msgid "Last key mailing date"
+msgstr "Dernière date de mailing"
+
+#: apps/registration/models.py:62
+msgid "User registration profile"
+msgstr "Profil utilisateur pour l'inscription"
+
+#: apps/registration/models.py:63
+msgid "User registration profiles"
+msgstr "Profils utilisateur pour l'inscription"
+
+#: apps/registration/models.py:92
+msgid "Key expired"
+msgstr "Clé expirée"
+
+#: apps/registration/models.py:197
+msgid "Mail sent recently"
+msgstr "Email envoyé récemment"
+
+#: apps/registration/models.py:206 apps/registration/models.py:214
+msgid "Banned username"
+msgstr "Pseudonyme interdit"
+
+#: apps/registration/models.py:215
+msgid "Banned usernames"
+msgstr "Pseudonymes interdits"
+
+#: apps/registration/models.py:228 apps/registration/models.py:236
+msgid "Banned email"
+msgstr "Adresse email interdite"
+
+#: apps/registration/models.py:237
+msgid "Banned emails"
+msgstr "Adresses email interdites"
+
+#: apps/registration/views.py:114
+msgid "Registration done"
+msgstr "Inscription enregistrée"
+
+#: apps/registration/views.py:133
+msgid "Registration closed"
+msgstr "Inscription fermée"
+
+#: apps/registration/views.py:178
+msgid "Account activation unsuccessful"
+msgstr "Activation du compte impossible"
+
+#: apps/registration/views.py:197
+msgid "Registration complete"
+msgstr "Inscription terminée"

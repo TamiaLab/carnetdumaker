@@ -1,0 +1,264 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@tamialab.fr>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/accounts/admin.py:70 apps/accounts/models.py:73
+msgid "Avatar"
+msgstr "Avatar"
+
+#: apps/accounts/admin.py:74
+msgid "General preferences"
+msgstr "Préférences générales"
+
+#: apps/accounts/admin.py:79
+msgid "Privacy preferences"
+msgstr "Préférences de vie privée"
+
+#: apps/accounts/admin.py:86
+msgid "Personal information"
+msgstr "Informations personnelles"
+
+#: apps/accounts/admin.py:93
+msgid "Social network information"
+msgstr "Informations sur les réseaux sociaux"
+
+#: apps/accounts/admin.py:103
+msgid "Other information"
+msgstr "Autres informations"
+
+#: apps/accounts/admin.py:118 apps/accounts/models.py:71
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/accounts/admin.py:127
+msgid "Current avatar"
+msgstr "Avatar actuel"
+
+#: apps/accounts/admin.py:136
+msgid "Last login date"
+msgstr "Date de dernière connexion"
+
+#: apps/accounts/admin.py:144
+#: apps/accounts/templates/admin/accounts/change_form.html:6
+msgid "Edit raw user"
+msgstr "Modifier l'utilisateur brut"
+
+#: apps/accounts/admin.py:153
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/accounts/apps.py:15 apps/accounts/models.py:217
+msgid "User profiles"
+msgstr "Profils utilisateur"
+
+#: apps/accounts/forms.py:27
+msgid "First name"
+msgstr "Prénom"
+
+#: apps/accounts/forms.py:32
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: apps/accounts/forms.py:80
+msgid "Cannot get image's dimensions. Please upload a valid image file."
+msgstr ""
+"Impossible d'obtenir les dimensions de l'image. Merci de téléverser un "
+"fichier image valide."
+
+#: apps/accounts/forms.py:84
+#, python-format
+msgid ""
+"Uploaded avatar's image is too small. Minimum dimensions are %(minh)dx"
+"%(minw)d pixels."
+msgstr ""
+"L'image envoyée est trop petite. Les dimensions minimum sont de %(minh)dx"
+"%(minw)d pixels."
+
+#: apps/accounts/forms.py:90
+#, python-format
+msgid ""
+"Uploaded avatar's image is too big. Maximum dimensions are %(maxh)dx%(maxw)d "
+"pixels."
+msgstr ""
+"L'image envoyée est trop grande. Les dimensions maximum sont de %(maxh)dx"
+"%(maxw)d pixels."
+
+#: apps/accounts/models.py:81
+msgid "Timezone"
+msgstr "Zone de temps"
+
+#: apps/accounts/models.py:84
+msgid "Preferred language"
+msgstr "Langue préférée"
+
+#: apps/accounts/models.py:89
+msgid "Country"
+msgstr "Pays"
+
+#: apps/accounts/models.py:92
+msgid "Last login IP address"
+msgstr "Dernière adresse IP de connexion"
+
+#: apps/accounts/models.py:98
+msgid "Last and first names public"
+msgstr "Nom et prénom publics"
+
+#: apps/accounts/models.py:101
+msgid "Email address public"
+msgstr "Adresse email publique"
+
+#: apps/accounts/models.py:104
+msgid "Search by email address allowed"
+msgstr "Recherche par adresse email autorisée"
+
+#: apps/accounts/models.py:107
+msgid "Online status public"
+msgstr "Status \"en ligne\" public"
+
+#: apps/accounts/models.py:110
+msgid "Accept to receive newsletter"
+msgstr "Accepte de recevoir la newsletter"
+
+#: apps/accounts/models.py:113
+msgid "Gender"
+msgstr "Sexe"
+
+#: apps/accounts/models.py:115
+msgid "Location"
+msgstr "Emplacement géographique"
+
+#: apps/accounts/models.py:120
+msgid "Company"
+msgstr "Entreprise"
+
+#: apps/accounts/models.py:125
+msgid "Biography"
+msgstr "Biographie"
+
+#: apps/accounts/models.py:127
+msgid "Biography (raw HTML)"
+msgstr "Biographie (HTML brut)"
+
+#: apps/accounts/models.py:131
+msgid "Signature"
+msgstr "Signature"
+
+#: apps/accounts/models.py:133
+msgid "Signature (raw HTML)"
+msgstr "Signature (HTML brut)"
+
+#: apps/accounts/models.py:137
+msgid "Website name"
+msgstr "Nom du site web"
+
+#: apps/accounts/models.py:138
+msgid "The website URL will be used if empty."
+msgstr "L'URL du site web sera utilisée si non spécifié"
+
+#: apps/accounts/models.py:143
+msgid "Website url"
+msgstr "URL du site web"
+
+#: apps/accounts/models.py:147
+msgid "Jabber nickname"
+msgstr "Nom d'utilisateur Jabber"
+
+#: apps/accounts/models.py:152
+msgid "Skype nickname"
+msgstr "Nom d'utilisateur Skype"
+
+#: apps/accounts/models.py:157
+msgid "Twitter nickname"
+msgstr "Nom d'utilisateur Twitter"
+
+#: apps/accounts/models.py:162
+msgid "Facebook URL"
+msgstr "URL page/profil Facebook"
+
+#: apps/accounts/models.py:169
+msgid ""
+"Please enter a valid Facebook page or profile URL. Examples: https://www."
+"facebook.com/MyPage, https://www.facebook.com/pages/MyPage/123456."
+msgstr ""
+"Merci de saisir une URL de page/profil Facebook valide. Exemples : https://"
+"www.facebook.com/MaPage, https://www.facebook.com/pages/MaPage/123456."
+
+#: apps/accounts/models.py:175
+msgid "Google+ URL"
+msgstr "URL page/profil Google+"
+
+#: apps/accounts/models.py:182
+msgid ""
+"Please enter a valid Google+ page or profile URL. Examples: https://plus."
+"google.com/+MyPage, https://plus.google.com/1234536789, https://plus.google."
+"com/u/0/+MyPage, https://plus.google.com/u/0/123456789."
+msgstr ""
+"Merci de saisir une URL de page/profil Google+ valide. Exemples : https://"
+"plus.google.com/+MaPage, https://plus.google.com/1234536789, https://plus."
+"google.com/u/0/+MaPage, https://plus.google.com/u/0/123456789."
+
+#: apps/accounts/models.py:190
+msgid "Youtube URL"
+msgstr "URL chaine/profil Youtube"
+
+#: apps/accounts/models.py:197
+msgid ""
+"Please enter a valid Youtube channel or profile URL. Examples: https://www."
+"youtube.com/c/MySuperChannel, https://www.youtube.com/user/MySuperChannel, "
+"https://www.youtube.com/channel/0123456789."
+msgstr ""
+"Merci de saisir une URL de chaine/profil Youtube valide. Exemples : https://"
+"www.youtube.com/c/MaSuperChaine, https://www.youtube.com/user/MaSuperChaine, "
+"https://www.youtube.com/channel/0123456789."
+
+#: apps/accounts/models.py:204
+msgid "Last modification date"
+msgstr "Dernière date de modification"
+
+#: apps/accounts/models.py:207
+msgid "Last activity date"
+msgstr "Date de dernière activité"
+
+#: apps/accounts/models.py:216
+msgid "User profile"
+msgstr "Profil utilisateur"
+
+#: apps/accounts/models.py:306
+msgid "Is online"
+msgstr "Est en ligne"
+
+#: apps/accounts/templatetags/accounts.py:36
+#: apps/accounts/tests/test_templatetags.py:48
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/accounts/views.py:45
+msgid "Members list"
+msgstr "Liste des membres"
+
+#: apps/accounts/views.py:78
+#, python-format
+msgid "Public profile of %s"
+msgstr "Profil public de %s"
+
+#: apps/accounts/views.py:119
+msgid "Your profile information has been successfully updated!"
+msgstr "Vos informations de profil ont été mise à jour avec succès !"
+
+#: apps/accounts/views.py:127
+msgid "My account"
+msgstr "Mon compte"

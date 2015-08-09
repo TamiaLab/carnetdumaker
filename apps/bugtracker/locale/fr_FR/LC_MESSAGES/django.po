@@ -1,0 +1,411 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/bugtracker/admin.py:37
+msgid "Component information"
+msgstr "Information sur le composant"
+
+#: apps/bugtracker/admin.py:83
+msgid "General information"
+msgstr "Informations générales"
+
+#: apps/bugtracker/admin.py:88 apps/bugtracker/forms.py:75
+#: apps/bugtracker/models.py:306 apps/bugtracker/models.py:367
+msgid "Comment text"
+msgstr "Texte du commentaire"
+
+#: apps/bugtracker/admin.py:103 apps/bugtracker/admin.py:334
+msgid "ID"
+msgstr "ID"
+
+#: apps/bugtracker/admin.py:118
+msgid "Author"
+msgstr "Auteur"
+
+#: apps/bugtracker/admin.py:163
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/bugtracker/admin.py:174
+msgid "Modification comment"
+msgstr "Commentaire de modification"
+
+#: apps/bugtracker/admin.py:305
+msgid "Issue information"
+msgstr "Information sur le problème"
+
+#: apps/bugtracker/admin.py:313
+msgid "Issue date and time"
+msgstr "Date et heure du problème"
+
+#: apps/bugtracker/admin.py:317
+msgid "Issue status"
+msgstr "Statut du problème"
+
+#: apps/bugtracker/admin.py:346
+msgid "Component"
+msgstr "Composant"
+
+#: apps/bugtracker/admin.py:361 apps/bugtracker/models.py:92
+msgid "Submitter"
+msgstr "Auteur"
+
+#: apps/bugtracker/admin.py:377 apps/bugtracker/models.py:105
+msgid "Assigned to"
+msgstr "Assigné à"
+
+#: apps/bugtracker/admin.py:414 apps/bugtracker/admin.py:452
+#: apps/bugtracker/models.py:492
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/bugtracker/admin.py:442 apps/bugtracker/models.py:295
+#: apps/bugtracker/models.py:418 apps/bugtracker/models.py:461
+msgid "Related issue"
+msgstr "Problème lié"
+
+#: apps/bugtracker/apps.py:15
+msgid "Bug tracker"
+msgstr "Gestionnaire de bugs"
+
+#: apps/bugtracker/constants.py:19
+msgid "Issue open"
+msgstr "Ticket ouvert"
+
+#: apps/bugtracker/constants.py:20
+msgid "Issue reopened"
+msgstr "Ticket rouvert"
+
+#: apps/bugtracker/constants.py:21
+msgid "Need more details"
+msgstr "Nécessite plus de détails"
+
+#: apps/bugtracker/constants.py:22
+msgid "Issue confirmed"
+msgstr "Problème confirmé"
+
+#: apps/bugtracker/constants.py:23
+msgid "Working on"
+msgstr "En cours de résolution"
+
+#: apps/bugtracker/constants.py:24
+msgid "Deferred (no time for that now)"
+msgstr "Reporté (pas de temps pour le moment)"
+
+#: apps/bugtracker/constants.py:25
+msgid "Duplicate issue"
+msgstr "Doublon"
+
+#: apps/bugtracker/constants.py:26
+msgid "Won't fix (sorry)"
+msgstr "Ne sera pas résolu (désolé)"
+
+#: apps/bugtracker/constants.py:27
+msgid "Closed"
+msgstr "Fermé"
+
+#: apps/bugtracker/constants.py:28
+msgid "Fixed"
+msgstr "Résolu"
+
+#: apps/bugtracker/constants.py:43
+msgid "Godzilla (We're doomed!)"
+msgstr "Godzilla (on est foutu !)"
+
+#: apps/bugtracker/constants.py:44
+msgid "Critical (serious bug, need quick hotfix)"
+msgstr "Critique (problème sérieux, nécessite un fix rapidement)"
+
+#: apps/bugtracker/constants.py:45
+msgid "Major (serious bug)"
+msgstr "Majeur (problème sérieux)"
+
+#: apps/bugtracker/constants.py:46
+msgid "Minor (simple bug)"
+msgstr "Mineur (problème simple)"
+
+#: apps/bugtracker/constants.py:47
+msgid "Trivial (cosmetic issues)"
+msgstr "Trivial (défaut cosmétique)"
+
+#: apps/bugtracker/constants.py:48
+msgid "Need review"
+msgstr "Nécessite réfléxion"
+
+#: apps/bugtracker/constants.py:49
+msgid "Feature request"
+msgstr "Demande d'ajout de fonctionnalité"
+
+#: apps/bugtracker/constants.py:50
+msgid "Wishlist request"
+msgstr "Souhait pour plus tard"
+
+#: apps/bugtracker/constants.py:51
+msgid "Invalid"
+msgstr "Ticket invalide"
+
+#: apps/bugtracker/constants.py:52
+msgid "Not my fault"
+msgstr "Pas ma faute"
+
+#: apps/bugtracker/constants.py:62
+msgid "Design errors - back to the drawing board"
+msgstr "Erreur de conception - besoin de revoir le code en profondeur"
+
+#: apps/bugtracker/constants.py:63
+msgid "Important"
+msgstr "Important"
+
+#: apps/bugtracker/constants.py:64
+msgid "Normal"
+msgstr "Normal"
+
+#: apps/bugtracker/constants.py:65
+msgid "Low"
+msgstr "Faible"
+
+#: apps/bugtracker/constants.py:66
+msgid "Optional (will fix someday)"
+msgstr "Optionnel (sera fixé un jour)"
+
+#: apps/bugtracker/feeds.py:21 apps/bugtracker/feeds.py:23
+msgid "Latest issue tickets"
+msgstr "Derniers tickets de bug"
+
+#: apps/bugtracker/feeds.py:49 apps/bugtracker/feeds.py:111
+#: apps/bugtracker/feeds.py:168 apps/bugtracker/feeds.py:200
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/bugtracker/feeds.py:83
+msgid "Latest comments"
+msgstr "Derniers commentaires"
+
+#: apps/bugtracker/feeds.py:85
+msgid "Latest comments, all tickets together"
+msgstr "Derniers commentaires, tout tickets confondus"
+
+#: apps/bugtracker/feeds.py:149 apps/bugtracker/feeds.py:161
+#, python-format
+msgid "Latest comments for ticket #%d"
+msgstr "Derniers commentaires pour le ticket #%d"
+
+#: apps/bugtracker/forms.py:27 apps/bugtracker/models.py:75
+msgid "Title"
+msgstr "Titre"
+
+#: apps/bugtracker/forms.py:29
+msgid "Problem description"
+msgstr "Description du problème"
+
+#: apps/bugtracker/forms.py:32 apps/bugtracker/forms.py:78
+msgid "Notify me of new reply"
+msgstr "Me notifier en cas de réponse"
+
+#: apps/bugtracker/models.py:40
+msgid "Name (for display)"
+msgstr "Nom (pour affichage)"
+
+#: apps/bugtracker/models.py:43
+msgid "Name (for internal use)"
+msgstr "Nom (pour usage interne)"
+
+#: apps/bugtracker/models.py:46 apps/bugtracker/models.py:86
+msgid "Description"
+msgstr "Description"
+
+#: apps/bugtracker/models.py:51
+msgid "Application component"
+msgstr "Composant d'application"
+
+#: apps/bugtracker/models.py:52
+msgid "Application components"
+msgstr "Composants d'application"
+
+#: apps/bugtracker/models.py:88
+msgid "Description (raw HTML)"
+msgstr "Description (HTML brut)"
+
+#: apps/bugtracker/models.py:95
+msgid "Submission date"
+msgstr "Date de soumission"
+
+#: apps/bugtracker/models.py:99
+msgid "Last modification date"
+msgstr "Date de dernière modification"
+
+#: apps/bugtracker/models.py:112
+msgid "Status"
+msgstr "Statut"
+
+#: apps/bugtracker/models.py:118
+msgid "Priority"
+msgstr "Priorité"
+
+#: apps/bugtracker/models.py:124
+msgid "Difficulty"
+msgstr "Difficulté"
+
+#: apps/bugtracker/models.py:130
+msgid "Submitter IP address"
+msgstr "Adresse IP du submitter"
+
+#: apps/bugtracker/models.py:136
+msgid "Issue ticket"
+msgstr "Ticket de problème"
+
+#: apps/bugtracker/models.py:137
+msgid "Issue tickets"
+msgstr "Tickets de problème"
+
+#: apps/bugtracker/models.py:300
+msgid "Comment author"
+msgstr "Auteur du commentaire"
+
+#: apps/bugtracker/models.py:302
+msgid "Publication date"
+msgstr "Date de publication"
+
+#: apps/bugtracker/models.py:310
+msgid "Comment text (raw HTML)"
+msgstr "Texte du commentaire (HTML brut)"
+
+#: apps/bugtracker/models.py:312
+msgid "Author IP address"
+msgstr "Adresse IP de l'auteur"
+
+#: apps/bugtracker/models.py:318
+msgid "Issue comment"
+msgstr "Commentaire de ticket"
+
+#: apps/bugtracker/models.py:319
+msgid "Issue comments"
+msgstr "Commentaires de ticket"
+
+#: apps/bugtracker/models.py:424
+msgid "Related comment"
+msgstr "Derniers commentaires"
+
+#: apps/bugtracker/models.py:426
+msgid "Change date"
+msgstr "Date de modification"
+
+#: apps/bugtracker/models.py:430
+msgid "Field name"
+msgstr "Nom du champ"
+
+#: apps/bugtracker/models.py:432
+msgid "Old value"
+msgstr "Ancienne valeur"
+
+#: apps/bugtracker/models.py:436
+msgid "New value"
+msgstr "Nouvelle valeur"
+
+#: apps/bugtracker/models.py:441
+msgid "Issue change"
+msgstr "Modification de probléme"
+
+#: apps/bugtracker/models.py:442
+msgid "Issue changes"
+msgstr "Modifications de probléme"
+
+#: apps/bugtracker/models.py:466
+msgid "Subscriber"
+msgstr "Abonnés"
+
+#: apps/bugtracker/models.py:468
+msgid "Active"
+msgstr "Actif"
+
+#: apps/bugtracker/models.py:475
+msgid "Issue ticket subscription"
+msgstr "Abonnement à un ticket"
+
+#: apps/bugtracker/models.py:476
+msgid "Issue ticket subscriptions"
+msgstr "Abonnements aux tickets"
+
+#: apps/bugtracker/models.py:494
+msgid "Notify me of new issue"
+msgstr "Me notifier en cas de nouveau ticket"
+
+#: apps/bugtracker/models.py:497
+msgid "Notify me of new reply by default"
+msgstr "Me notifier par défaut en cas de réponse"
+
+#: apps/bugtracker/models.py:500
+msgid "Last comment date"
+msgstr "Date du dernier commentaire"
+
+#: apps/bugtracker/models.py:508
+msgid "Bug tracker user profile"
+msgstr "Profil utilisateur pour le gestionnaire de bugs"
+
+#: apps/bugtracker/models.py:509
+msgid "Bug tracker user profiles"
+msgstr "Profils utilisateur pour le gestionnaire de bugs"
+
+#: apps/bugtracker/views.py:41
+msgid "Bug tracker index page"
+msgstr "Page d'accueil du gestionnaire de bugs"
+
+#: apps/bugtracker/views.py:63
+msgid "Tickets list"
+msgstr "Liste des tickets"
+
+#: apps/bugtracker/views.py:86
+msgid "My tickets list"
+msgstr "Mes tickets"
+
+#: apps/bugtracker/views.py:185
+msgid "Ticket creation"
+msgstr "Nouveau ticket"
+
+#: apps/bugtracker/views.py:272
+msgid "Ticket detail"
+msgstr "Détail du ticket"
+
+#: apps/bugtracker/views.py:310
+msgid "Your ticket have been successfully updated!"
+msgstr "Votre ticket a été mis à jour avec succès"
+
+#: apps/bugtracker/views.py:319
+msgid "Ticket edition"
+msgstr "Editer le ticket"
+
+#: apps/bugtracker/views.py:357
+msgid "Ticket subscribe"
+msgstr "Suivre le ticket"
+
+#: apps/bugtracker/views.py:395
+msgid "Ticket unsubscribe"
+msgstr "Ne plus suivre le ticket"
+
+#: apps/bugtracker/views.py:453
+msgid "Your bug tracker preferences has been successfully updated!"
+msgstr ""
+"Vos préférences du gestionnaire de bugs ont été mises à jour avec succès !"
+
+#: apps/bugtracker/views.py:461
+msgid "My bug tracker preferences"
+msgstr "Mes préférences du gestionnaire de bugs"
+
+#: apps/bugtracker/views.py:492
+msgid "My tickets subscription list"
+msgstr "Mes tickets suivis"

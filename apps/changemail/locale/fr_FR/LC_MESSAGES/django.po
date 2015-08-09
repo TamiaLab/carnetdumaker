@@ -1,0 +1,49 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@tamialab.fr>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/changemail/apps.py:15
+msgid "Change user email"
+msgstr "Modifier l'adresse email de l'utilisateur"
+
+#: apps/changemail/forms.py:22
+msgid "New email address"
+msgstr "Nouvelle adresse email"
+
+#: apps/changemail/forms.py:25
+msgid "New email address (repeat)"
+msgstr "Nouvelle adresse email (confirmation)"
+
+#: apps/changemail/forms.py:36
+msgid "The two email addresses didn't match."
+msgstr "Les deux adresses emails ne correspondent pas."
+
+#: apps/changemail/views.py:81
+msgid "Change email address"
+msgstr "Modifier l'adresse email"
+
+#: apps/changemail/views.py:102
+msgid "Email change confirmation link sent"
+msgstr "Lien de confirmation de changement d'email envoyé"
+
+#: apps/changemail/views.py:160
+msgid "Email address modification unsuccessful"
+msgstr "Echec de la modification de l'adresse email"
+
+#: apps/changemail/views.py:181
+msgid "Email change complete"
+msgstr "Modification de l'adresse email terminée"

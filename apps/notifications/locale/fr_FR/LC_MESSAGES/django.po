@@ -1,0 +1,98 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/notifications/admin.py:68 apps/notifications/models.py:40
+msgid "Recipient"
+msgstr "Destinataire"
+
+#: apps/notifications/admin.py:100 apps/notifications/models.py:191
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/notifications/apps.py:15 apps/notifications/models.py:66
+msgid "Notifications"
+msgstr "Notifications"
+
+#: apps/notifications/models.py:42
+msgid "Notification date"
+msgstr "Date de notification"
+
+#: apps/notifications/models.py:46
+msgid "Unread"
+msgstr "Non lu"
+
+#: apps/notifications/models.py:49
+msgid "Dismiss code"
+msgstr "Code d'auto-lecture"
+
+#: apps/notifications/models.py:55
+msgid "Title"
+msgstr "Titre"
+
+#: apps/notifications/models.py:58
+msgid "Message (plain text)"
+msgstr "Message (texte brut)"
+
+#: apps/notifications/models.py:60
+msgid "Message (raw HTML)"
+msgstr "Message (HTML brut)"
+
+#: apps/notifications/models.py:65
+msgid "Notification"
+msgstr "Notification"
+
+#: apps/notifications/models.py:172
+#, python-format
+msgid ""
+"You have %(count)d unread notifications <a href=\"%(link)s\" class=\"alert-"
+"link\">Click here to see them</a>."
+msgstr ""
+"Vous avez %(count)d notifications non lues <a href=\"%(link)s\" class="
+"\"alert-link\">Cliquez ici pour les voir</a>."
+
+#: apps/notifications/models.py:193
+msgid "Send mail on new notification"
+msgstr "Envoyer un mail à la réception d'une notification"
+
+#: apps/notifications/models.py:197
+msgid "Notification user profile"
+msgstr "Profil utilisateur pour les notifications"
+
+#: apps/notifications/models.py:198
+msgid "Notification user profiles"
+msgstr "Profils utilisateurs pour les notifications"
+
+#: apps/notifications/views.py:53
+msgid "Notifications list"
+msgstr "Listes des notifications"
+
+#: apps/notifications/views.py:93
+msgid "Mark all notifications as read"
+msgstr "Marquer toutes les notifications comme lues"
+
+#: apps/notifications/views.py:143
+msgid "Notification details"
+msgstr "Détails de la notification"
+
+#: apps/notifications/views.py:186
+msgid "Your notification preferences has been successfully updated!"
+msgstr "Vos préférences de notification ont été mises à jour avec succès !"
+
+#: apps/notifications/views.py:194
+msgid "My notification preferences"
+msgstr "Mes préférences de notification"

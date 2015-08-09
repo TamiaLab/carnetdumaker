@@ -1,0 +1,22 @@
+{% load i18n %}
+{{ form.media }}
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+		<ul>
+        {% for non_field_error in form.non_field_errors %}
+            <li><p>{{ non_field_error }}</p></li>
+        {% endfor %}
+		</ul>
+    </div>
+{% endif %}
+
+{% for field in form.hidden_fields %}
+    {{ field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    {% include 'bootstrapform/field.html' %}
+{% endfor %}
+
+<p><small><i class="fa fa-asterisk"></i> {% blocktrans %}Mandatory fields{% endblocktrans %}</small></p>

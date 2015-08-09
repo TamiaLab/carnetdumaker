@@ -1,0 +1,433 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/forum/admin.py:76 apps/forum/admin.py:176
+msgid "System information"
+msgstr "Informations systèmes"
+
+#: apps/forum/admin.py:79 apps/forum/admin.py:179
+msgid "Post information"
+msgstr "Informations sur le message"
+
+#: apps/forum/admin.py:84 apps/forum/admin.py:184
+msgid "Date and time"
+msgstr "Date et heure"
+
+#: apps/forum/admin.py:89 apps/forum/admin.py:189
+msgid "Legal stuff"
+msgstr "Informations légales"
+
+#: apps/forum/admin.py:101 apps/forum/admin.py:346
+msgid "ID"
+msgstr "ID"
+
+#: apps/forum/admin.py:116 apps/forum/models.py:434
+msgid "Parent thread"
+msgstr "Topic parent"
+
+#: apps/forum/admin.py:132 apps/forum/admin.py:371 apps/forum/models.py:442
+msgid "Author"
+msgstr "Auteur"
+
+#: apps/forum/admin.py:203
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/forum/admin.py:320
+msgid "Thread information"
+msgstr "Informations sur le topic"
+
+#: apps/forum/admin.py:324
+msgid "Thread status"
+msgstr "Statut du topic"
+
+#: apps/forum/admin.py:331
+msgid "First and last post"
+msgstr "Premier et dernier messages"
+
+#: apps/forum/admin.py:402
+msgid "Edit thread in admin"
+msgstr "Modifier le topic dans l'admin"
+
+#: apps/forum/admin.py:431
+msgid "Edit forum in admin"
+msgstr "Modifier le forum dans l'admin"
+
+#: apps/forum/admin.py:441
+msgid "Close child threads"
+msgstr "Fermer les topics enfants"
+
+#: apps/forum/admin.py:445
+msgid "Close sub-forums recursively"
+msgstr "Fermer récursivement les sous-forums"
+
+#: apps/forum/admin.py:449
+msgid "Set sub-forums as private recursively"
+msgstr "Marquer récursivement comme privé les sous-forums"
+
+#: apps/forum/admin.py:502
+msgid "Forum information"
+msgstr "Informations sur le forum"
+
+#: apps/forum/admin.py:508
+msgid "Forum status"
+msgstr "Statut du forum"
+
+#: apps/forum/admin.py:515
+msgid "Other stuff"
+msgstr "Autres informations"
+
+#: apps/forum/admin.py:529 apps/forum/models.py:60
+msgid "Logo"
+msgstr "Logo"
+
+#: apps/forum/admin.py:563 apps/forum/models.py:739 apps/forum/models.py:781
+#: apps/forum/models.py:823
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/forum/apps.py:15 apps/forum/models.py:97
+msgid "Forum"
+msgstr "Forum"
+
+#: apps/forum/feeds.py:45 apps/forum/feeds.py:88
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/forum/feeds.py:107
+msgid "Latest forum threads"
+msgstr "Derniers topics récents"
+
+#: apps/forum/feeds.py:109
+msgid "Latest forum threads, all forums together"
+msgstr "Derniers topics récents, tous forums confondus"
+
+#: apps/forum/feeds.py:131
+msgid "Latest forum posts"
+msgstr "Derniers messages récents"
+
+#: apps/forum/feeds.py:133
+msgid "Latest forum posts, all threads together"
+msgstr "Derniers messages, tous topics confondus"
+
+#: apps/forum/feeds.py:174 apps/forum/feeds.py:186
+#, python-format
+msgid "Latest forum threads in forum %s"
+msgstr "Derniers topics dans les forum %s"
+
+#: apps/forum/feeds.py:225 apps/forum/feeds.py:237
+#, python-format
+msgid "Latest forum posts in forum %s"
+msgstr "Derniers messages dans le forum %s"
+
+#: apps/forum/feeds.py:280 apps/forum/feeds.py:292
+#, python-format
+msgid "Latest posts in forum thread \"%s\""
+msgstr "Derniers messages dans le topic \"%s\""
+
+#: apps/forum/forms.py:28 apps/forum/models.py:50 apps/forum/models.py:274
+msgid "Title"
+msgstr "Titre"
+
+#: apps/forum/forms.py:30 apps/forum/forms.py:82 apps/forum/forms.py:162
+#: apps/forum/models.py:458
+msgid "Content"
+msgstr "Contenu"
+
+#: apps/forum/forms.py:33 apps/forum/models.py:75 apps/forum/models.py:291
+msgid "Closed"
+msgstr "Fermé"
+
+#: apps/forum/forms.py:37 apps/forum/models.py:294
+msgid "Resolved"
+msgstr "Résolu"
+
+#: apps/forum/forms.py:41 apps/forum/forms.py:165
+msgid "Notify me of new reply"
+msgstr "Me notifier en cas de réponse"
+
+#: apps/forum/forms.py:144
+msgid "I really want to delete this thread"
+msgstr "Je souhaite vraiment supprimer ce topic"
+
+#: apps/forum/forms.py:145 apps/forum/forms.py:263
+msgid "You must check the box to confirm the deletion."
+msgstr "Vous devez cocher cette case pour confirmer la suppression."
+
+#: apps/forum/forms.py:262
+msgid "I really want to delete this post"
+msgstr "Je souhaite vraiment supprimer ce message"
+
+#: apps/forum/models.py:53 apps/forum/models.py:277
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/forum/models.py:56
+msgid "Slug hierarchy"
+msgstr "Hiérarchie de slug"
+
+#: apps/forum/models.py:68
+msgid "Description"
+msgstr "Description"
+
+#: apps/forum/models.py:72
+msgid "Private"
+msgstr "Privé"
+
+#: apps/forum/models.py:81 apps/forum/models.py:283
+msgid "Parent forum"
+msgstr "Forum parent"
+
+#: apps/forum/models.py:86
+msgid "Ordering"
+msgstr "Ordre"
+
+#: apps/forum/models.py:98
+msgid "Forums"
+msgstr "Forums"
+
+#: apps/forum/models.py:285
+msgid "Sticky"
+msgstr "Epinglé"
+
+#: apps/forum/models.py:288
+msgid "Global sticky"
+msgstr "Epinglé partout"
+
+#: apps/forum/models.py:297
+msgid "Locked"
+msgstr "Vérouillé"
+
+#: apps/forum/models.py:302
+msgid "First post"
+msgstr "Premier message"
+
+#: apps/forum/models.py:306
+msgid "Last post"
+msgstr "Dernier message"
+
+#: apps/forum/models.py:308 apps/forum/models.py:467
+msgid "Deletion date"
+msgstr "Date de suppression"
+
+#: apps/forum/models.py:317
+msgid "Forum thread"
+msgstr "Topic sur le forum"
+
+#: apps/forum/models.py:318
+msgid "Forum threads"
+msgstr "Topics sur le forum"
+
+#: apps/forum/models.py:415 apps/forum/models.py:596
+msgid "is deleted"
+msgstr "est supprimé"
+
+#: apps/forum/models.py:444
+msgid "Publication date"
+msgstr "Date de publication"
+
+#: apps/forum/models.py:447
+msgid "Last modification date"
+msgstr "Date de dernière modification"
+
+#: apps/forum/models.py:452
+msgid "Last modification by"
+msgstr "Dernière modification par"
+
+#: apps/forum/models.py:460
+msgid "Content (raw HTML)"
+msgstr "Contenu (HTML brut)"
+
+#: apps/forum/models.py:462
+msgid "Author IP address"
+msgstr "Adresse IP de l'auteur"
+
+#: apps/forum/models.py:476
+msgid "Forum post"
+msgstr "Message du forum"
+
+#: apps/forum/models.py:477
+msgid "Forum posts"
+msgstr "Messages du forum"
+
+#: apps/forum/models.py:673 apps/forum/models.py:745
+msgid "Related forum"
+msgstr "Forum lié"
+
+#: apps/forum/models.py:679 apps/forum/models.py:714
+msgid "Subscriber"
+msgstr "Abonné"
+
+#: apps/forum/models.py:681 apps/forum/models.py:716 apps/forum/models.py:749
+#: apps/forum/models.py:791
+msgid "Active"
+msgstr "Actif"
+
+#: apps/forum/models.py:688
+msgid "Forum subscription"
+msgstr "Abonnement à un forum"
+
+#: apps/forum/models.py:689
+msgid "Forum subscriptions"
+msgstr "Abonnements aux forums"
+
+#: apps/forum/models.py:708
+msgid "Related thread"
+msgstr "Topic lié"
+
+#: apps/forum/models.py:723
+msgid "Forum thread subscription"
+msgstr "Abonnement à un topic"
+
+#: apps/forum/models.py:724
+msgid "Forum thread subscriptions"
+msgstr "Abonnements aux topics"
+
+#: apps/forum/models.py:747 apps/forum/models.py:789
+msgid "Last read date"
+msgstr "Date de dernière lecture"
+
+#: apps/forum/models.py:756
+msgid "Read forum tracker"
+msgstr "Marqueur de forum lu"
+
+#: apps/forum/models.py:757
+msgid "Read forum trackers"
+msgstr "Marqueur de forums lus"
+
+#: apps/forum/models.py:787
+msgid "Related forum thread"
+msgstr "Topic lié"
+
+#: apps/forum/models.py:798
+msgid "Read forum thread tracker"
+msgstr "Marqueur de topic lu"
+
+#: apps/forum/models.py:799
+msgid "Read forum thread trackers"
+msgstr "Marqueur de topics lus"
+
+#: apps/forum/models.py:825
+msgid "Notify me of new reply by default"
+msgstr "Me notifier en cas de réponse par défaut"
+
+#: apps/forum/models.py:828
+msgid "Last post date"
+msgstr "Dernière date de publication d'un message"
+
+#: apps/forum/models.py:834
+msgid "Forum user profile"
+msgstr "Profil utilisateur du forum"
+
+#: apps/forum/models.py:835
+msgid "Forum user profiles"
+msgstr "Profils utilisateurs du forum"
+
+#: apps/forum/views.py:57
+msgid "Forum home page"
+msgstr "Accueil du forum"
+
+#: apps/forum/views.py:107
+#, python-format
+msgid "Forum %s"
+msgstr "Forum %s"
+
+#: apps/forum/views.py:160
+msgid "Mark all threads as read"
+msgstr "Marquer tous les topics comme lus"
+
+#: apps/forum/views.py:199
+msgid "Forum subscribe"
+msgstr "Suivre le forum"
+
+#: apps/forum/views.py:237
+msgid "Forum unsubscribe"
+msgstr "Ne plus suivre le forum"
+
+#: apps/forum/views.py:278
+msgid "Forum closed"
+msgstr "Forum fermé"
+
+#: apps/forum/views.py:320
+msgid "Create a new topic"
+msgstr "Ouvrir un nouveau topic"
+
+#: apps/forum/views.py:382
+#, python-format
+msgid "Thread %s"
+msgstr "Topic %s"
+
+#: apps/forum/views.py:431
+msgid "Forum thread subscribe"
+msgstr "Suivre le topic"
+
+#: apps/forum/views.py:476
+msgid "Forum thread unsubscribe"
+msgstr "Ne plus suivre le topic"
+
+#: apps/forum/views.py:529
+msgid "Edit thread"
+msgstr "Modifier le topic"
+
+#: apps/forum/views.py:584
+msgid "Delete thread"
+msgstr "Supprimer le topic"
+
+#: apps/forum/views.py:627 apps/forum/views.py:730
+msgid "Thread closed"
+msgstr "Topic fermé"
+
+#: apps/forum/views.py:666
+msgid "Reply to thread"
+msgstr "Répondre au topic"
+
+#: apps/forum/views.py:775
+msgid "Reply to post"
+msgstr "Répondre au message"
+
+#: apps/forum/views.py:843
+msgid "Edit post"
+msgstr "Modifier le message"
+
+#: apps/forum/views.py:908
+msgid "Delete post"
+msgstr "Supprimer le message"
+
+#: apps/forum/views.py:938
+msgid "My forum threads list"
+msgstr "Mes topics"
+
+#: apps/forum/views.py:969
+msgid "My forum posts list"
+msgstr "Mes messages"
+
+#: apps/forum/views.py:999
+msgid "My forum subscriptions list"
+msgstr "Mes forums suivis"
+
+#: apps/forum/views.py:1031
+msgid "My forum thread subscriptions list"
+msgstr "Mes topics suivis"
+
+#: apps/forum/views.py:1074
+msgid "Your forum preferences has been successfully updated!"
+msgstr "Vos préférences du forum ont été mises à jour avec succès !"
+
+#: apps/forum/views.py:1082
+msgid "My forum preferences"
+msgstr "Mes préférences du forum"

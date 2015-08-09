@@ -1,0 +1,238 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/privatemsg/admin.py:87 apps/privatemsg/models.py:43
+msgid "Message"
+msgstr "Message"
+
+#: apps/privatemsg/admin.py:92
+msgid "Recipient and sender"
+msgstr "Destinataire et expéditeur"
+
+#: apps/privatemsg/admin.py:96
+msgid "Date and time"
+msgstr "Date et heure"
+
+#: apps/privatemsg/admin.py:116 apps/privatemsg/forms.py:41
+#: apps/privatemsg/models.py:55
+msgid "Recipient"
+msgstr "Destinataire"
+
+#: apps/privatemsg/admin.py:130 apps/privatemsg/models.py:50
+msgid "Sender"
+msgstr "Expéditeur"
+
+#: apps/privatemsg/admin.py:168 apps/privatemsg/models.py:314
+#: apps/privatemsg/models.py:366
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/privatemsg/apps.py:15 apps/privatemsg/models.py:98
+msgid "Private messages"
+msgstr "Messages privés"
+
+#: apps/privatemsg/forms.py:38 apps/privatemsg/forms.py:98
+#: apps/privatemsg/models.py:38 apps/privatemsg/models.py:160
+msgid "Subject"
+msgstr "Sujet"
+
+#: apps/privatemsg/forms.py:44 apps/privatemsg/forms.py:101
+msgid "Body"
+msgstr "Corps du message"
+
+#: apps/privatemsg/forms.py:58
+msgid "You can send a private message to only one recipient."
+msgstr "Vous ne pouvez envoyer un message qu'à un seul destinataire."
+
+#: apps/privatemsg/forms.py:64
+#, python-format
+msgid "Unknown recipient \"%(username)s\"."
+msgstr "Destinataire inconnu \"%(username)s\"."
+
+#: apps/privatemsg/forms.py:67
+msgid "The recipient has closed his acccount."
+msgstr "Le destinataire a cloturé son compte."
+
+#: apps/privatemsg/forms.py:70 apps/privatemsg/forms.py:123
+msgid "The recipient does not accept private messages."
+msgstr "Le destinataire n'accèpte pas les messages privés."
+
+#: apps/privatemsg/forms.py:73 apps/privatemsg/forms.py:126
+msgid "The recipient does not accept private messages from you."
+msgstr "Le destinataire n'accèpte pas les messages privés de votre part."
+
+#: apps/privatemsg/models.py:45
+msgid "Message (raw HTML)"
+msgstr "Message (HTML brut)"
+
+#: apps/privatemsg/models.py:60
+msgid "Parent message"
+msgstr "Message parent"
+
+#: apps/privatemsg/models.py:66
+msgid "Sent at"
+msgstr "Envoyé à"
+
+#: apps/privatemsg/models.py:70
+msgid "Read at"
+msgstr "Lu à"
+
+#: apps/privatemsg/models.py:76
+msgid "Sender deleted at"
+msgstr "Supprimé par l'expéditeur à"
+
+#: apps/privatemsg/models.py:82
+msgid "Recipient deleted at"
+msgstr "Supprimé par le destinataire à"
+
+#: apps/privatemsg/models.py:88
+msgid "Sender permanently deleted"
+msgstr "Définitivement supprimé par l'expéditeur à"
+
+#: apps/privatemsg/models.py:91
+msgid "Recipient permanently deleted"
+msgstr "Définitivement supprimé par le destinataire à"
+
+#: apps/privatemsg/models.py:97
+msgid "Private message"
+msgstr "Message privé"
+
+#: apps/privatemsg/models.py:159
+msgid "(no subject)"
+msgstr "(pas de sujet)"
+
+#: apps/privatemsg/models.py:168
+msgid "Unread"
+msgstr "Non lu"
+
+#: apps/privatemsg/models.py:176
+msgid "Deleted at recipient side"
+msgstr "Supprimé par le destinataire"
+
+#: apps/privatemsg/models.py:184
+msgid "Deleted at sender side"
+msgstr "Supprimé par l'expéditeur"
+
+#: apps/privatemsg/models.py:295
+#, python-format
+msgid ""
+"You have %(count)d unread private messages <a href=\"%(link)s\" class="
+"\"alert-link\">Click here to see them</a>."
+msgstr ""
+"Vous avez %(count)d messages privés non lus <a href=\"%(link)s\" class="
+"\"alert-link\">Cliquer ici pour les voir</a>."
+
+#: apps/privatemsg/models.py:316
+msgid "Notify me of new private message"
+msgstr "Me notifier en cas de nouveau message privé"
+
+#: apps/privatemsg/models.py:319
+msgid "Accept incoming private message"
+msgstr "Accepter les messages privés entrants"
+
+#: apps/privatemsg/models.py:322
+msgid "Last sent private msg date"
+msgstr "Date d'envoi du dernier message privé"
+
+#: apps/privatemsg/models.py:328
+msgid "Private messages user profile"
+msgstr "Profil utiilsateur pour les messages privés"
+
+#: apps/privatemsg/models.py:329
+msgid "Private messages user profiles"
+msgstr "Profils utilisateur pour les messages privés"
+
+#: apps/privatemsg/models.py:371 apps/privatemsg/models.py:382
+msgid "Blocked user"
+msgstr "Utilisateur bloqué"
+
+#: apps/privatemsg/models.py:373
+msgid "Last block date"
+msgstr "Dernière date de blocage"
+
+#: apps/privatemsg/models.py:375
+msgid "Active"
+msgstr "Actif"
+
+#: apps/privatemsg/models.py:383
+msgid "Blocked users"
+msgstr "Utilisateurs bloqués"
+
+#: apps/privatemsg/views.py:61
+msgid "Private messages inbox"
+msgstr "Boite de réception des message privés"
+
+#: apps/privatemsg/views.py:99
+msgid "Mark all private messages has read"
+msgstr "Marquer tout les messages comme lus"
+
+#: apps/privatemsg/views.py:128
+msgid "Private messages outbox"
+msgstr "Boite d'envoi des messages privés"
+
+#: apps/privatemsg/views.py:158
+msgid "Private messages trash"
+msgstr "Corbeille des messages privés"
+
+#: apps/privatemsg/views.py:196
+msgid "Clean the trash"
+msgstr "Vider la corbeille"
+
+#: apps/privatemsg/views.py:251
+msgid "New private message"
+msgstr "Nouveau message privé"
+
+#: apps/privatemsg/views.py:306
+msgid "Private message details"
+msgstr "Détails du message privé"
+
+#: apps/privatemsg/views.py:370
+msgid "Reply to private message"
+msgstr "Répondre au message privé"
+
+#: apps/privatemsg/views.py:413
+msgid "Your private message preferences has been successfully updated!"
+msgstr "Vos préférences de messagerie privé ont été mises à jour avec succès !"
+
+#: apps/privatemsg/views.py:421
+msgid "My private message preferences"
+msgstr "Mes préférences de messagerie privé"
+
+#: apps/privatemsg/views.py:463
+msgid "Delete message"
+msgstr "Supprimer le message"
+
+#: apps/privatemsg/views.py:506
+msgid "Permanently delete message"
+msgstr "Supprimer définivement le message"
+
+#: apps/privatemsg/views.py:568
+msgid "Un-delete message"
+msgstr "Restaurer le message"
+
+#: apps/privatemsg/views.py:599
+msgid "Blocked users list"
+msgstr "Liste des utilisateurs bloqués"
+
+#: apps/privatemsg/views.py:649
+msgid "Block user"
+msgstr "Bloquer l'utilisateur"
+
+#: apps/privatemsg/views.py:696
+msgid "Unblock user"
+msgstr "Débloquer l'utilisateur"
