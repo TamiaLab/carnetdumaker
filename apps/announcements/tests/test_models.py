@@ -216,6 +216,23 @@ class AnnouncementTestCase(TestCase):
         self.assertEqual(announcement.author, author)
         self.assertTrue(announcement.can_see_preview(author))
 
+    def test_can_see_preview_anonymous(self):
+        """
+        Test the ``can_see_preview()`` method with a random user (not author, nor authorized to see preview).
+        """
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        user = get_user_model().objects.create_user(username='anonuser',
+                                                      password='anonuser',
+                                                      email='anon.user@example.com')
+        announcement = Announcement.objects.create(title='Test 1',
+                                                   slug='test-1',
+                                                   author=author,
+                                                   content='Hello World!')
+        self.assertEqual(announcement.author, author)
+        self.assertFalse(announcement.can_see_preview(user))
+
     def test_can_see_preview_with_authorized_user(self):
         """
         Test the ``can_see_preview()`` method with an authorized user.
