@@ -41,7 +41,7 @@ class ArticleManager(models.Manager):
 
     def published_per_month(self):
         """
-        Return a sorted array of tuples like ``(year, (month, count))``. This tuple is a summary of all published
+        Return a sorted array of tuples like ``(year, ((month, count),))``. This tuple is a summary of all published
         articles by month and year.
         WARNING: DATABASE DEPENDENT CODE HERE!
         """
