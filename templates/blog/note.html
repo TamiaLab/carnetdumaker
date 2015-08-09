@@ -1,0 +1,10 @@
+{% if note.title %}
+<div class="panel panel-{{ note.type }}">
+    <div class="panel-heading">{{ note.title }}</div>
+    <div class="panel-body">{{ note.description_html|safe }}</div>
+</div>
+{% else %}
+<div class="{% if note.type == "primary" %}alert alert-info{% else %}alert alert-{{ note.type }}{% endif %}">
+    {{ note.description_html|safe }}
+</div>
+{% endif %}

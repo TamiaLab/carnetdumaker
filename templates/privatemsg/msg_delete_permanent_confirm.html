@@ -1,0 +1,18 @@
+{% extends "privatemsg/base_msgdetail.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ message.get_delete_permanent_url }}">Supprimer définitement le message</a></li>{% endblock %}
+
+{% block title %}Supprimer définitement le message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Supprimer définitivement le message</h1>
+
+    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+    <p>Cette action est irréversible.</p>
+
+    <form method="post" action="{{ message.get_delete_permanent_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Supprimer définitivement le message" />
+    </form>
+{% endblock %}

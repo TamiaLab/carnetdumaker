@@ -1,0 +1,47 @@
+{% extends "announcements/base_announcements.html" %}
+{% load accounts tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></li>{% endblock %}
+
+{% block title %}{{ announcement.title }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_type %}article{% endblock %}
+{% block opengraph_title %}{{ announcement.title }}{% endblock %}
+{% block opengraph_description %}{{ announcement.get_content_without_html|truncatewords:200 }}{% endblock %}
+{% block opengraph_image %}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ announcement.get_absolute_url }}{% endblock %}
+{% block twitter_creator %}{% if announcement.author.user_profile.twitter_name %}@{{ announcement.author.user_profile.twitter_name }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block extra_opengraph %}
+    {% if announcement.author.user_profile.facebook_url %}
+        <meta property="article:author" content="{{ announcement.author.user_profile.facebook_url }}" />
+    {% elif APP.FACEBOOK_URL %}
+        <meta property="article:author" content="{{ APP.FACEBOOK_URL }}" />
+    {% endif %}
+    <meta property="article:published_time" content="{{ announcement.pub_date|date:"c" }}" />
+    <meta property="article:modified_time" content="{{ announcement.last_content_modification_date|date:"c" }}" />
+{% endblock %}
+
+{% block content %}
+    <h1>{{ announcement.title }}</h1>
+    <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ announcement.pub_date|datetime_html }}</p>
+    {% if announcement.has_been_modified_after_publication %}
+        <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
+    {% endif %}
+
+    {% if not announcement.is_published %}
+        {% if announcement.pub_date %}
+            <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas encore en ligne ! La publication de l'annonce est programmé pour le {{ announcement.pub_date|datetime_html }}</p>
+        {% else %}
+            <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas en ligne ! Ceci est une simple prévisualisation de l'annonce.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="well">
+        {{ announcement.content_html|safe }}
+    </div>
+
+    {% if user.is_staff %}
+        <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>
+    {% endif %}
+{% endblock %}

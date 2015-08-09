@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:faq' %}">Foire aux questions</a></li>{% endblock %}
+
+{% block title %}Foire aux questions | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Foire aux questions</h1>
+
+    <p>TODO</p>
+{% endblock %}

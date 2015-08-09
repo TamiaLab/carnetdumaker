@@ -1,0 +1,10 @@
+Un nouveau ticket de bug vient d'être créé !
+
+Ticket #{{ issue.id }} ({{ issue.title }})
+Auteur : {{ issue.submitter.username }}
+
+Aperçu du ticket :
+{{ issue.get_description_without_html }}
+
+Accéder au détail du ticket : {{ protocol }}://{{ domain }}{{ issue.get_absolute_url }}
+Ne plus recevoir de notification à chaque nouveau ticket de bug : {{ protocol }}://{{ domain }}{% url "bugtracker:myaccount" %}

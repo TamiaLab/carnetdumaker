@@ -1,0 +1,42 @@
+{% extends "imageattachments/base_images.html" %}
+{% load tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ image.get_absolute_url }}">Image "{{ image.title }}"</a></li>{% endblock %}
+
+{% block title %}Image "{{ image.title }}" | {{ block.super }}{% endblock %}
+
+{% block twitter_card %}summary_large_image{% endblock %}
+{% block opengraph_title %}Image "{{ image.title }}"{% endblock %}
+{% block opengraph_description %}{{ image.get_description_without_html|truncatewords:200 }}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ image.get_absolute_url }}{% endblock %}
+{% block opengraph_image %}{{ image.img_large.url }}{% endblock %}
+
+{% block content %}
+    <h1>Détail de l'image "{{ image.title }}"</h1>
+
+    <img src="{{ image.img_large.url }}" width="image.img_large_width" height="image.img_large_height" alt="{{ image.title }}" class="center-block" />
+    {% if user.is_staff %}
+        <p class="text-center"><a href="{% url 'admin:blog_articleimageattachment_change' image.pk %}"><i class="fa fa-terminal"></i> Modifier l'image dans l'interface d'administration</a></p>
+    {% endif %}
+
+    <h2>Fichiers</h2>
+    <p><i class="fa fa-external-link"></i> <a href="{{ image.img_original.url }}">Original ({{ image.img_original_width }} x {{ image.img_original_height }} pixels)</a></p>
+    <p><i class="fa fa-external-link"></i> <a href="{{ image.img_small.url }}">Petite taille ({{ image.img_small_width }} x {{ image.img_small_height }} pixels)</a></p>
+    <p><i class="fa fa-external-link"></i> <a href="{{ image.img_medium.url }}">Moyenne taille ({{ image.img_medium_width }} x {{ image.img_medium_height }} pixels)</a></p>
+    <p><i class="fa fa-external-link"></i> <a href="{{ image.img_large.url }}">Grande taille ({{ image.img_large_width }} x {{ image.img_large_height }} pixels)</a></p>
+
+    <h2>Information sur l'image</h2>
+    <p><i class="fa fa-calendar"></i> Date de mise en ligne : {{ image.pub_date|date_html }}</p>
+    <p><i class="fa fa-info-circle"></i> Légende : {% if image.legend %}<i class="fa fa-quote-left"></i> {{ image.legend }} <i class="fa fa-quote-right"></i>{% else %}pas de légende{% endif %}</p>
+    {% if image.description %}<p><i class="fa fa-file-text-o"></i> Description :</p>
+        <div class="well">
+            {{ image.description_html|safe }}
+        </div>
+    {% else %}
+        <p><i class="fa fa-file-text-o"></i> Description : pas de description</p>
+    {% endif %}
+
+    <h2>Information de licence</h2>
+    {% include "licenses/license.html" with license=image.license %}
+{% endblock %}

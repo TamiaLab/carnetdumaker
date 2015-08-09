@@ -1,0 +1,30 @@
+{% extends "bugtracker/base_bugtracker.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ comment.get_report_url }}">Signaler un commentaire</a></li>{% endblock %}
+
+{% block title %}Signaler un commentaire | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Signaler un commentaire</h1>
+
+    <p>Veuillez confirmer le signalement du commentaire ci-dessous.</p>
+    <p class="text-warning">Merci de ne signaler que des commentaires réellement inadéquat.
+    De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+
+    <div class="well">
+        {% include "bugtracker/issue_comment.html" with report_disabled=True %}
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler le commentaire</div>
+        <div class="panel-body">
+            <form method="post" action="{{ comment.get_report_url }}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Signaler le commentaire" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

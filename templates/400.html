@@ -1,0 +1,13 @@
+{% extends 'base_error.html' %}
+
+{% block title %}Requête incorrecte | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Requête incorrecte</h1>
+
+    <p>Votre navigateur web nous a transmis une requête incompréhensible. Nous ne pouvons en déterminer la raison.</p>
+    <p>Essayez de recharger la page ou d'utiliser un autre navigateur.
+        Si jamais le problème se produit avec plusieurs navigateurs différents, merci de contacter l'administrateur du site.</p>
+
+    <p>Merci de votre compréhension.</p>
+{% endblock %}

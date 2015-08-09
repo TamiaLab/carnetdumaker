@@ -1,0 +1,3719 @@
+[
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@0-mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@0815.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@0clickemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@0wnd.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@0wnd.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@10minutemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@123-m.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@126.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@139.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@163.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@1pad.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@20minutemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@20mm.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@21cn.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@2prong.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@33mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@3d-painting.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@4warding.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@60minutemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@6paq.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@7days-printing.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@7tags.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@99experts.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@9ox.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@a-bc.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@acentri.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@advantimo.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@advertfast.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@agedmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@aichyna.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ak.mintemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@amilegit.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ano-mail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@anonbox.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@anonymbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@antichef.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@antispam.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@appixie.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@armyspy.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@baxomale.ht.cx"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@beefmilk.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@berahe.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bi-dating.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bigmir.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bigstring.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@binkmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bio-muesli.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bitmessage.ch"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bk.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@blackbox.trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bloatbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bobmail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bodhi.lawlita.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bofthew.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bookee.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@boxformail.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@brefmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@brennendesreich.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@broadbandninja.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bsnow.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bspamfree.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@buffemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bugmenot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bumpymail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@bund.us"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@burnthespam.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@c2.hu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cash.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cashette.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@casualdx.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ccxt.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ce.mintemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cellurl.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@chammy.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@chcb.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cheatmail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@chogmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@chong-mail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@clixser.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@consumerriot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cool.fr.nf"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@correo.blogos.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@corsa-tuning.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cosmorph.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@courriel.fr.nf"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@courrieltemporaire.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@crapmail.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@curryworld.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cust.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@cuvox.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dacoolest.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@daintly.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dandikmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dayrep.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dbunker.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dcemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@deadaddress.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@deagot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dealja.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@deo-vindice"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@despam.it"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@devnullmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dfgh.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@digitalsanctuary.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dingbone.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@discardmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@disposableaddress.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@disposableinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dispose.it"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@disposeamail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@disposemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dispostable.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dm.w3internet.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dodgeit.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dodgit.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@domain141.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@domozmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dontreg.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dontsendmespam.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@drdrb.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@droplar.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dudmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dump-email.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dumpyemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@dunflimblag.mailexpire.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@duskmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@e-mail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@e4ward.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@easy-trash-mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@easytrashmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@eco.wretch.twbbs.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@einrot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@einrot.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@email-jetable.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@email60.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailgo.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailias.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailinfive.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailjetable.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emaillime.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailmiser.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailtemporario.com.br"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailsensei.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailtemporar.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailtemporario.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailthe.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailtmp.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@emailwarden.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ephemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@europe.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@example.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@explodemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@eyepaste.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fakeinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fakeinformation.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fakemail.fr"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fanaticars.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fantasymail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fastacura.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fatflap.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@faza.ru "
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fdfdsfds.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fightallspam.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@filzmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@find-love.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fizmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fleckens.hu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@flyspam.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@for-fun.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@foteret.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fr33mail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@frapmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freefreemail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freenet.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freestuffo1.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freestuffo2.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freestuffo3.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@freestuffo4.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@friendlymail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fromru.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fuckingduh.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@fudgerub.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@garliclife.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gawab.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@get1mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@get2mail.fr"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@getairmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@getmails.eu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@getonemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@girlsundertheinfluence.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gishpuppy.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@goemailgo.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gold2world.biz"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gotmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gotti.otherinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@grandmasmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@great-host.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@grifon.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@grr.la"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gsrv.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@guerillamail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@guerrillamail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@guerrillamailblock.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@gustr.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hacccc.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@haltospam.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@herp.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hidzz.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hochsitze.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hotpop.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hulapla.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@hushmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ieatspam.eu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ieatspam.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@iespana.es"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ihateyoualot.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@imails.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@inboxclean.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@incognitomail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@imgof.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@inbox.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@instant-mail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ipoo.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@irish2me.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@isuisse.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@jetable.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@jnxjn.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@jourrapide.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@jsrsolutions.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@junk.trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@junk1e.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@kasmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@kaspop.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@klassmaster.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@klzlk.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@korsun.pp.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@kulturbetrieb.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@kurzepost.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lavabit.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@letthemeatspam.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lhsdv.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lifebyfood.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@link2mail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@list.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@litedrop.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lookugly.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lopl.co.cc"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lr78.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@lroid.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@m4ilweb.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@maboard.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail-filter.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail-gratuit.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail-temporaire.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail.by"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail.mezimages.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail114.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail15.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail15.fr"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail333.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mail4trash.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailbidon.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailbucket.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailcatch.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@maileater.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailexpire.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailguard.me"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailhazard.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailin8r.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailinator.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailinator2.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailincubator.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailismagic.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailme.lv"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailmetrash.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailmoat.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailnator.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailnesia.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailnull.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailquack.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailscrap.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailtemporaire.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailtemporaire.fr"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mailzilla.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@makemetheking.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@manybrain.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@masterhost.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mbx.cc"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mega.zik.dj"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@meltmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mierdamail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@migumail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mintemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mobileninja.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@moburl.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@moncourrier.fr.nf"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@monemail.fr.nf"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@monmail.fr.nf"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@moyareklama.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@msk.su"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mt2009.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mt2014.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@muuh.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mx0.wwwnew.eu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mycleaninbox.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@myemailboxy.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mymail-in.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mypacks.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mypartyclip.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mytempemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@mytrashmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@myxost.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ne-quid-nimis.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nepwk.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nervmich.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nervtmich.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@neverbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nice-4u.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nil-admirari.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@no-spam.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nobulk.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@noclickemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nogmailspam.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nomail.xl.cx"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nomail2me.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nospam.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nospam4.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nospamfor.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nospamthanks.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@notmailinator.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nowhere.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nowmymail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@nwldx.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@objectmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@obobbo.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@octivian.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@one.it"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@onewaymail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ordinaryamerican.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@otherinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@owlpic.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@paplease.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pcusers.otherinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pepbot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pisem.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pochta.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@poczta.onet.pl"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@politikerclub.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pookmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@porn.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pornoroxx.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@portsaid.cc"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@prescrip.pl"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@privy-mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@proxymail.eu"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@prtnx.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@punkass.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@putthisinyourspamdatabase.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@pwrby.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@qlfg.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@qq.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@quickinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rambler.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rcpt.at"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@recode.me"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@recursor.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@regbypass.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rhyta.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rmqkr.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@royal.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rppkn.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@rtrtr.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@s0ny.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@safe-mail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@safetymail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@safetypost.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sales.trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sandelf.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@saynotospams.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@schafmail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@selfdestructingmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sendspamhere.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sharklasers.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@shiftmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@shit.trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@shitmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@shitware.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@shortmail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sibmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sinnlos-mail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@siteposter.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@skeefmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@skim.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@slopsbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@smeh.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@smellfear.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@snakemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sneakemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@snkmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sofort-mail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@sogetthis.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@soodonims.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spam.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spam4.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamarrest.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamavert.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spambob.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spambox.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamcannon.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamcero.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamcorptastic.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamday.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spameater.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamex.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamfree.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamfree24.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamgourmet.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamh0le.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamherelots.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamhereplease.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamhole.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamify.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spaminator.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamkill.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spaml.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spammotel.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamobox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamsalad.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamspot.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamthis.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamthisplease.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spamtroll.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@speed.1s.fr"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spikio.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@spoofmail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@squizzy.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@startkeys.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@stinkefinger.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@stuffmail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@supergreatmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@superrito.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@superstachel.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@suremail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tagyourself.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@talkinator.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tapchicuoihoi.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@teewars.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tele-vision.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@teleworm.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@teleworm.us"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@temp.emeraldwebmail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempalias.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempe-mail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@TempEMail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempemail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempinbox.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempinbox.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempmail.it"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempmaildemo.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempomail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@temporaryemail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@temporaryinbox.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tempthe.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@thailaaa.org.ua"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@thanksnospam.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@thankyou2010.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@thecannabishunter.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@thisisnotmyrealemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@throwawayemailaddress.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tilien.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tittbit.in"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tmailinator.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tormail.org"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tradedoubling.co.uk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tradermail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trash-amil.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trash-mail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trash2009.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trash2010.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trash2011.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trashmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trashmailer.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trashymail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trbvm.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tut.by"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@tyldd.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@uggsrock.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ukr.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@umail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@uroid.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@users.1go.dk"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@veryrealemail.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@vidchart.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@vomoto.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@vubby.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@vxaz.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@webemail.me"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@webm4il.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@weg-werf-email.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wegwerf-email-addressen.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wegwerf-emails.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wegwerfadresse.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wegwerfemail.de"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wegwerfmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@weibo.10086.cn"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wh4f.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@whatiaas.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@whyspam.me"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@willhackforfood.biz"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@willselfdestruct.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@winemaven.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wronghead.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@wuzupmail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@x.trillianpro.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@xoxy.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@xyzfree.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yandex.ru"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yeah.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yogamaven.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yopmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@ypmail.*"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yufz.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@yuurok.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@za.com"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@zippymail.info"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@zoemail.net"
+        }
+    },
+    {
+        "pk": null,
+        "model": "registration.bannedemail",
+        "fields": {
+            "email": "*@zomg.info"
+        }
+    }
+]

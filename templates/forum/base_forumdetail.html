@@ -1,0 +1,15 @@
+{% extends "forum/base_forum.html" %}
+{% load forum %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Topics récents dans le forum {{ forum.title }} (flux RSS)" href="{{ forum.get_latest_threads_rss_feed_url }}">
+    <link rel="alternate" type="application/atom+xml" title="Topics récents dans le forum {{ forum.title }} (flux Atom)" href="{{ forum.get_latest_threads_atom_feed_url }}">
+    <link rel="alternate" type="application/rss+xml" title="Posts récents dans le forum {{ forum.title }} (flux RSS)" href="{{ forum.get_latest_posts_rss_feed_url }}">
+    <link rel="alternate" type="application/atom+xml" title="Posts récents dans le forum {{ forum.title }} (flux Atom)" href="{{ forum.get_latest_posts_atom_feed_url }}">
+{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+    {% for parent_forum in forum.get_ancestors %}
+        <li><a href="{{ parent_forum.get_absolute_url }}">{{ parent_forum.title|capfirst }}</a></li>
+    {% endfor %}
+    <li><a href="{{ forum.get_absolute_url }}">{{ forum.title|capfirst }}</a></li>{% endblock %}

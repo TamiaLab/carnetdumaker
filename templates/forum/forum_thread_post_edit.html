@@ -1,0 +1,21 @@
+{% extends "forum/base_threaddetail.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ post.get_edit_url }}">Modifier le message</a></li>{% endblock %}
+
+{% block title %}Modifier le message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Editer le message</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{{ post.get_edit_url }}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

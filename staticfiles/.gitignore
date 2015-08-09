@@ -1,0 +1,4 @@
+# Ignore all files in the /staticfiles directory (except this .gitignore file)
+# This is required by the django "collectstatic" command.
+*
+!.gitignore

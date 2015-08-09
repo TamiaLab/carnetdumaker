@@ -1,0 +1,7 @@
+<p>Bonjour {{ user.username }},</p>
+
+<p>Une demande de modération pour un contenu du site {{ site_name }} vient d'être effectuée par {{ reporter.username }}.</p>
+
+<p>La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}</p>
+
+<p><a href="{{ protocol }}://{{ domain }}{% url "admin:contentreport_contentreport_change" report.pk %}">Voir la demande de modération dans le panel d'administration</a></p>

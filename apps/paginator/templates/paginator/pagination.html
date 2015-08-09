@@ -1,0 +1,23 @@
+{% load i18n %}{% trans "Next page" as NEXT_PAGE %}{% trans "Previous page" as PREVIOUS_PAGE %}<nav class="text-center">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            {% with previous_page_number=page_obj.previous_page_number %}
+                {% if previous_page_number == 1 %}
+                    <li><a href="?{{ get_params }}" rel="prev" aria-label="{{ PREVIOUS_PAGE }}"><span aria-hidden="true">&laquo;</span></a></li>
+                {% else %}
+                    <li><a href="?page={{ previous_page_number }}{{ get_params_union }}" rel="prev" aria-label="{{ PREVIOUS_PAGE }}"><span aria-hidden="true">&laquo;</span></a></li>
+                {% endif %}
+            {% endwith %}
+        {% else %}
+            <li class="disabled"><a href="#" aria-label="{{ PREVIOUS_PAGE }}"><span aria-hidden="true">&laquo;</span></a></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+            <li {% if page_obj.number == i %}class="active"{% endif %}>{% if i == 1 %}<a href="?{{ get_params }}">{% else %}<a href="?page={{ i }}{{ get_params_union }}">{% endif %}{{ i }}</a></li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}{{ get_params_union }}" rel="next" aria-label="{{ NEXT_PAGE }}"><span aria-hidden="true">&raquo;</span></a></li>
+        {% else %}
+            <li class="disabled"><a href="#" aria-label="{{ NEXT_PAGE }}"><span aria-hidden="true">&raquo;</span></a></li>
+        {% endif %}
+    </ul>
+</nav>

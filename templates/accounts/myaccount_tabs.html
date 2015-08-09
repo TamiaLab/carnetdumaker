@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+    <li{% if active_tab == "accounts" %} class="active"{% endif %}><a href="{% url 'myaccount:index' %}"><i class="fa fa-user"></i> Compte utilisateur</a></li>
+    <li{% if active_tab == "bugtracker" %} class="active"{% endif %}><a href="{% url 'bugtracker:myaccount' %}"><i class="fa fa-bug"></i> Gestionnaire de bugs</a></li>
+    <li{% if active_tab == "notifications" %} class="active"{% endif %}><a href="{% url 'notifications:myaccount' %}"><i class="fa fa-bell"></i> Notifications</a></li>
+    <li{% if active_tab == "privatemsg" %} class="active"{% endif %}><a href="{% url 'privatemsg:myaccount' %}"><i class="fa fa-envelope"></i> Messages privés</a></li>
+    <li{% if active_tab == "forum" %} class="active"{% endif %}><a href="{% url 'forum:myaccount' %}"><i class="fa fa-comments"></i> Forum</a></li>
+</ul>
+<p><!-- Spacer --></p>

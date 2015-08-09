@@ -1,0 +1,28 @@
+{% extends "accounts/base_myaccount.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'myaccount:email_change' %}">Modification de l'adresse email</a></li>{% endblock %}
+
+{% block title %}Modification de l'adresse email | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-envelope"></i> Modification de l'adresse email</h1>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{% url 'myaccount:email_change' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="control-label">Adresse actuelle</label>
+                    <p class="form-control-static">{{ user.email }}</p>
+                </div>
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Modifier l'adresse email" />
+            </form>
+        </div>
+    </div>
+
+    <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
+{% endblock %}

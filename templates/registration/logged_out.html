@@ -1,0 +1,12 @@
+{% extends "registration/base_authentication.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'auth:logout' %}">Deconnexion</a></li>{% endblock %}
+
+{% block content %}
+    <h1>Deconnexion réussie !</h1>
+
+    <p>Vous êtes maintenant déconnecté du site.</p>
+
+    <p><a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a></p>
+{% endblock %}

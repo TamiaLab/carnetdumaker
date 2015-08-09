@@ -1,0 +1,21 @@
+{% extends "forum/base_myaccount.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url "forum:myposts_list" %}">Mes posts</a></li>{% endblock %}
+
+{% block title %}Mes posts | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <p><a href="{% url 'bugtracker:myaccount' %}"><i class="fa fa-arrow-left"></i> Retour au préférences</a></p>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-comments"></i> Mes posts</h1>
+        </div>
+        <div class="panel-body">
+            {% include "forum/posts.html" %}
+        </div>
+    </div>
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

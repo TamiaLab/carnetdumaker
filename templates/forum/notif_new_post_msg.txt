@@ -1,0 +1,12 @@
+Un nouveau message a été posté sur un des topics que vous suivez !
+
+Message de {{ post.author.username }}
+
+"""
+{{ post.get_content_without_html }}
+"""
+
+Posté dans le topic "{{ thread.title }}"
+
+Accéder au nouveau message : {{ protocol }}://{{ domain }}{{ post.get_absolute_url_simple }}
+Ne plus recevoir de notification par rapport à ce topic : {{ protocol }}://{{ domain }}{{ thread.get_unsubscribe_url }}

@@ -1,0 +1,14 @@
+{% extends "registration/base_registration.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="#">Activation du compte impossible</a></li>{% endblock %}
+
+{% block content %}
+    <h1>Activation du compte impossible</h1>
+
+    <p>Votre compte n'a pas pu être activé car le lien de validation est incorrect ou a expiré.</p>
+    <p>Vérifiez que le lien est correct (erreur de copier coller par exemple), ou à défaut, recommencez le processus d'inscription.</p>
+    <p>En cas de probléme, n'hésitez pas à contacter l'administrateur du site.</p>
+
+    <p><a href="{% url 'registration:registration_register' %}">Cliquez ici pour revenir au formulaire d'inscription.</a></p>
+{% endblock %}

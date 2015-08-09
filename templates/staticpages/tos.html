@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation</a></li>{% endblock %}
+
+{% block title %}Conditions générales d'utilisation | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Conditions générales d'utilisation</h1>
+
+    <p>TODO</p>
+{% endblock %}

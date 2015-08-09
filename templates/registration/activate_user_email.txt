@@ -1,0 +1,16 @@
+Bonjour {{ user.username }},
+
+Une demande d'inscription sur {{ site_name }} a été effectuée via votre adresse mail {{ email }}.
+
+Si vous êtes à l'origine de cette demande, merci de cliquer sur le lien ci-dessous pour finaliser votre inscription :
+{{ protocol }}://{{ domain }}{% url 'registration:registration_activate' uidb64=uid activation_key=activation_key %}
+
+Attention : le lien ci-dessus n'est valable que pendant {{ activation_timeout_days }} jours.
+
+Si vous n'êtes pas à l'origine de cette demande, vous pouvez tout simplement ignorer ce mail.
+Votre adresse mail sera supprimée de nos bases de données d'ici {{ activation_timeout_days }} jours si vous n'activez pas votre compte.
+
+Cordialement,
+L'équipe de {{ site_name }}
+
+{% include "email_legal_footer.txt" %}

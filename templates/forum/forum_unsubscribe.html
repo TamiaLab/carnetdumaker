@@ -1,0 +1,17 @@
+{% extends "forum/base_forumdetail.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ forum.get_unsubscribe_url }}">Ne plus suivre le forum</a></li>{% endblock %}
+
+{% block title %}Ne plus suivre le forum | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Ne plus suivre le forum</h1>
+
+    <p>Merci de confirmer votre volonté de ne plus suivre le forum "{{ forum.title }}" en cliquant sur le bouton ci-dessous.</p>
+
+    <form method="post" action="{{ forum.get_unsubscribe_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Ne plus suivre le forum" />
+    </form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "privatemsg/base_privatemsg_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:myaccount' %}">Mes préférences de messages privés</a></li>{% endblock %}
+
+{% block pre_content %}
+    {% include "accounts/myaccount_tabs.html" with active_tab="privatemsg" %}
+{% endblock %}

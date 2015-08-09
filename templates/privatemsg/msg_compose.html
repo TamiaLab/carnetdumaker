@@ -1,0 +1,32 @@
+{% extends "privatemsg/base_privatemsg.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:compose' %}">Nouveau message privé</a></li>{% endblock %}
+
+{% block title %}Nouveau message privé | {{ block.super }}{% endblock %}
+
+{% block menu %}
+    {% include "privatemsg/menu.html" with active="compose" %}
+{% endblock %}
+
+{% block content %}
+    <h1>Ecrire un nouveau message privé</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if is_flooding %}
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                    <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages privés.</p>
+                </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'privatemsg:compose' %}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Envoyer le message" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

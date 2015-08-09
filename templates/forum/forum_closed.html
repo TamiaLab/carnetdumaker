@@ -1,0 +1,10 @@
+{% extends "forum/base_forumdetail.html" %}
+
+{% block title %}Forum fermé | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Forum fermé</h1>
+
+    <p>Ce forum est fermé. Il n'est pas possible de créer de nouveau topic sur ce forum.</p>
+    <p><a href="{{ forum.get_absolute_url }}">Retour au forum</a></p>
+{% endblock %}

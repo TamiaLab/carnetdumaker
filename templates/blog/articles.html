@@ -1,0 +1,27 @@
+{% load accounts tools %}
+{% for article in articles %}
+    <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+    {% if article.featured %} <small><i class="fa fa-thumb-tack"></i> Article en vedette</small>{% endif %}</h3>
+    <div class="media">
+        {% if article.thumbnail_img %}
+            <a href="{{ article.get_absolute_url }}" class="pull-left">
+                <img src="{{ article.thumbnail_img.url }}" alt="{{ article.title }}" class="img-responsive margin10 img-thumbnail">
+            </a>
+        {% endif %}
+        <div class="media-body">
+            <p>{% if article.description %}
+                    {{ article.description }}
+                {% else %}
+                    {{ article.get_content_without_html|truncatewords:200 }}
+            {% endif %}</p>
+            <p><a class="btn btn-default" role="button" href="{{ article.get_absolute_url }}">Lire la suite</a></p>
+        </div>
+    </div>
+    <p><!-- Spacer --></p>
+    <p><i class="fa fa-user"></i> par {{ article.author|user_profile_link }} |
+    <i class="fa fa-calendar"></i> {{ article.pub_date|date_html }} |
+    <i class="fa fa-folder-open"></i> Catégories :{% for category in article.categories.all %} <a href="{{ category.get_absolute_url }}"><span class="label label-info">{{ category.name }}</span></a>{% endfor %} |
+    <i class="fa fa-tags"></i> Tags :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}</p>
+{% empty %}
+    <p>Aucun article à afficher <i class="fa fa-frown-o"></i></p>
+{% endfor %}

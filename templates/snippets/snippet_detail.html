@@ -1,0 +1,45 @@
+{% extends "snippets/base_snippets.html" %}
+{% load accounts tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></li>{% endblock %}
+
+{% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_title %}{{ snippet.title }}{% endblock %}
+{% block opengraph_description %}{{ snippet.description }}{% endblock %}
+{% block opengraph_image %}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ snippet.get_absolute_url }}{% endblock %}
+
+{% block head_extra %}
+    <style>
+        {{ snippet.css_for_display|safe }}
+    </style>
+{% endblock head_extra %}
+
+{% block content %}
+    <h1>{{ snippet.title }}</h1>
+
+    <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}</p>
+    {% if snippet.last_modification_date != snippet.creation_date %}
+        <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippet.last_modification_date|datetime_html }}</p>
+    {% endif %}
+    <p><i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}</p>
+
+    {% if not snippet.public_listing %}
+        <p class="text-warning"><i class="fa fa-exclamation-triangle"></i> Cet extrait de code n'est pas public. Seule les personnes possédant le lien vers l'extrait peuvent le voir.</p>
+    {% endif %}
+
+    <p><i class="fa fa-pencil-square-o"></i> Description :</p>
+    <div class="weel">
+        {{ snippet.description }}
+    </div>
+
+    {{ snippet.html_for_display|safe }}
+
+    <p><a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a> | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a></p>
+
+    {% if user.is_staff %}
+        <p class="text-right"><a href="{% url 'admin:snippets_codesnippet_change' snippet.pk %}"><i class="fa fa-terminal"></i> Modifier l'extrait de code dans l'interface d'administration</a></p>
+    {% endif %}
+{% endblock %}

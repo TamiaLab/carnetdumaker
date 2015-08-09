@@ -1,0 +1,17 @@
+{% extends "blog/base_tag.html" %}
+
+{% block title %}Liste des mots clefs | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Liste des mots clefs</h1>
+
+    {% if user.is_staff %}
+        <p><a href="{% url 'admin:blog_articletag_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un mot clef</a></p>
+    {% endif %}
+
+    <p>{% for tag in tags %}
+        <span class="label label-default"><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> </span>
+    {% empty %}
+        Aucun mots clefs à afficher <i class="fa fa-frown-o"></i>
+    {% endfor %}</p>
+{% endblock %}

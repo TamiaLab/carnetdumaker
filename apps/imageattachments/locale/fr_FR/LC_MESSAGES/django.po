@@ -1,0 +1,152 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/imageattachments/admin.py:21
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/imageattachments/admin.py:68
+msgid "Title and slug"
+msgstr "Titre et slug"
+
+#: apps/imageattachments/admin.py:72
+msgid "Legend, description and license"
+msgstr "Légende, description et licence"
+
+#: apps/imageattachments/admin.py:77
+msgid "Image (original)"
+msgstr "Image (original)"
+
+#: apps/imageattachments/admin.py:81
+msgid "Image (small thumbnail)"
+msgstr "Image (petite miniature)"
+
+#: apps/imageattachments/admin.py:85
+msgid "Image (medium thumbnail)"
+msgstr "Image (moyenne miniature)"
+
+#: apps/imageattachments/admin.py:89
+msgid "Image (large thumbnail)"
+msgstr "Image (grande miniature)"
+
+#: apps/imageattachments/admin.py:93
+msgid "Date and time"
+msgstr "Date et heure"
+
+#: apps/imageattachments/admin.py:104
+msgid "Image"
+msgstr "Image"
+
+#: apps/imageattachments/admin.py:131 apps/imageattachments/admin.py:141
+#: apps/imageattachments/admin.py:151 apps/imageattachments/admin.py:161
+msgid "HTML integration code"
+msgstr "Code d'intégration HTML"
+
+#: apps/imageattachments/apps.py:15 apps/imageattachments/models.py:112
+#: apps/imageattachments/views.py:35
+msgid "Image attachments"
+msgstr "Images jointes"
+
+#: apps/imageattachments/models.py:45
+msgid "Title"
+msgstr "Titre"
+
+#: apps/imageattachments/models.py:48
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/imageattachments/models.py:52
+msgid "Publication date"
+msgstr "Date de publication"
+
+#: apps/imageattachments/models.py:56
+msgid "Legend"
+msgstr "Légende"
+
+#: apps/imageattachments/models.py:61
+msgid "Description"
+msgstr "Description"
+
+#: apps/imageattachments/models.py:65
+msgid "Description (raw HTML)"
+msgstr "Description (HTML brut)"
+
+#: apps/imageattachments/models.py:69
+msgid "License"
+msgstr "Licence"
+
+#: apps/imageattachments/models.py:74
+msgid "Image (small size)"
+msgstr "Image (petite taille)"
+
+#: apps/imageattachments/models.py:80
+msgid "Image height (small size, in pixels)"
+msgstr "Hauteur de l'image (petite taille, en pixels)"
+
+#: apps/imageattachments/models.py:81
+msgid "Image width (small size, in pixels)"
+msgstr "Largeur de l'image (petite taille, en pixels)"
+
+#: apps/imageattachments/models.py:83
+msgid "Image (medium size)"
+msgstr "Image (moyenne taille)"
+
+#: apps/imageattachments/models.py:89
+msgid "Image height (medium size, in pixels)"
+msgstr "Hauteur de l'image (taille moyenne, en pixels)"
+
+#: apps/imageattachments/models.py:90
+msgid "Image width (medium size, in pixels)"
+msgstr "Largeur de l'image (taille moyenne, en pixels)"
+
+#: apps/imageattachments/models.py:92
+msgid "Image (large size)"
+msgstr "Image (grande taille)"
+
+#: apps/imageattachments/models.py:98
+msgid "Image height (large size, in pixels)"
+msgstr "Hauteur de l'image (grande taille, en pixels)"
+
+#: apps/imageattachments/models.py:99
+msgid "Image width (large size, in pixels)"
+msgstr "Largeur de l'image (grande taille, en pixels)"
+
+#: apps/imageattachments/models.py:101
+msgid "Image (original size)"
+msgstr "Image (taille d'origine)"
+
+#: apps/imageattachments/models.py:105
+msgid "Image height (original size, in pixels)"
+msgstr "Hauteur de l'image (taille d'origine, en pixels)"
+
+#: apps/imageattachments/models.py:106
+msgid "Image width (original size, in pixels)"
+msgstr "Largeur de l'image (taille d'origine, en pixels)"
+
+#: apps/imageattachments/models.py:111
+msgid "Image attachment"
+msgstr "Image jointe"
+
+#: apps/imageattachments/templates/imageattachments/admin_img_integration_code.html:5
+msgid "license"
+msgstr "licence"
+
+#: apps/imageattachments/views.py:61
+#, python-format
+msgid "Image %s"
+msgstr "Image %s"

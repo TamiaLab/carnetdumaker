@@ -1,0 +1,4 @@
+{% extends "privatemsg/base_myaccount.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:blocked_users' %}">Utilisateurs bloqués</a></li>{% endblock %}

@@ -1,0 +1,10 @@
+# .coverage settings file
+[run]
+branch = True
+source = apps
+
+[report]
+omit =
+    */tests/*
+    */tests.py
+    */migrations/*

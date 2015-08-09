@@ -1,0 +1,24 @@
+{% load accounts tools %}
+<p><a id="#post-{{ post.id }}" href="{{ post.get_absolute_url_simple }}">#{{ post.id }}</a> |
+<i class="fa fa-user"></i> par {{ post.author|user_profile_link }} |
+<i class="fa fa-calendar"></i> <time datetime="{{ post.pub_date|date:"d-m-Y" }} {{ post.pub_date|time:"H:i" }}">{{ post.pub_date|date }}</time></p>
+
+<div class="well">
+    {{ post.content_html|safe }}
+
+    {% if post.last_modification_date != post.pub_date %}
+        <p><em>Derniére modification le {{ post.last_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
+    {% endif %}
+
+    {% with attachments=post.attachments.all %}
+        {% if attachments %}
+            <p><strong>Fichiers joints</strong></p>
+            <ul>
+            {% for attachment in attachments %}
+                <li><a href="{{ attachment.file.url }}">{{ attachment.filename }} ({{ attachment.get_size_display }})</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+{% if not report_disabled %}<p class="pull-right"><a href="{{ post.get_report_url }}"><i class="fa fa-bullhorn"></i> Signaler ce message</a></p>{% endif %}

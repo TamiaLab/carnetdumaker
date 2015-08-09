@@ -1,0 +1,9 @@
+{% extends "forum/base_forumdetail.html" %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Posts récents dans le topic {{ thread.title }} (flux RSS)" href="{{ thread.get_latest_posts_rss_feed_url }}">
+    <link rel="alternate" type="application/atom+xml" title="Posts récents dans le topic {{ thread.title }} (flux Atom)" href="{{ thread.get_latest_posts_atom_feed_url }}">
+{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ thread.get_absolute_url }}">Topic "{{ thread.title }}"</a></li>{% endblock %}

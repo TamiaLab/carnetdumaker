@@ -1,0 +1,7 @@
+<strong>Messagerie privés</strong>
+<ul class="nav nav-pills nav-stacked">
+    <li class="{% if active == "compose" %}active{% endif %}"><a href="{% url "privatemsg:compose" %}">Nouveau message</a></li>
+    <li class="{% if active == "inbox" %}active{% endif %}"><a href="{% url "privatemsg:inbox" %}">Boite de réception{% if messages_count %} <span class="badge">{{ messages_count }}</span>{% endif %}</a></li>
+    <li class="{% if active == "outbox" %}active{% endif %}"><a href="{% url "privatemsg:outbox" %}">Messages envoyés</a></li>
+    <li class="{% if active == "trash" %}active{% endif %}"><a href="{% url "privatemsg:trash" %}">Corbeille</a></li>
+</ul>

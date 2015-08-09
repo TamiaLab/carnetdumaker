@@ -1,0 +1,11 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'bugtracker:index' %}">Bug tracker</a></li>{% endblock %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Tickets récents (flux RSS)" href="{% url "bugtracker:latest_issues_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Tickets récents (flux Atom)" href="{% url "bugtracker:latest_issues_atom" %}">
+    <link rel="alternate" type="application/rss+xml" title="Commentaires récents (flux RSS)" href="{% url "bugtracker:latest_issue_comments_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Commentaires récents (flux Atom)" href="{% url "bugtracker:latest_issue_comments_atom" %}">
+{% endblock %}

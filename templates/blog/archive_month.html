@@ -1,0 +1,21 @@
+{% extends "blog/base_archive.html" %}
+{% load blog %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Articles de {{ month|month_name }} {{ year }} (flux RSS)" href="{% url "blog:articles_archive_month_rss" year=year month=month|month_format %}">
+    <link rel="alternate" type="application/atom+xml" title="Articles de {{ month|month_name }} {{ year }} (flux Atom)" href="{% url "blog:articles_archive_month_atom" year=year month=month|month_format %}">
+{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'blog:archive_month' year=year month=month|month_format %}">Archive de {{ month|month_name }} {{ year }}</a></li>{% endblock %}
+
+{% block title %}Archive de {{ month|month_name }} {{ year }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Archive de {{ month|month_name }} {{ year }}</h1>
+    <p><a href="{% url "blog:articles_archive_month_rss" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux RSS des articles de {{ month|month_name }} {{ year }}</a> (<a href="{% url "blog:articles_archive_month_atom" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+    {% include "blog/articles.html" %}
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

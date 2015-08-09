@@ -1,0 +1,8 @@
+Une demande de modération pour un message du forum vient d'être effectuée par {{ reporter.username }}.
+
+La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}
+La demande de modération porte sur le post #{{ post.id }} du topic "{{ post.parent_thread.title }}"
+
+Le post problématique (ID {{ post.id }}, écrit par {{ post.author }} le {{ post.pub_date|date }}) est le suivant :
+
+{{ post.get_content_without_html }}

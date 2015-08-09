@@ -1,0 +1,14 @@
+{% extends 'base_error.html' %}
+
+{% block title %}Page indisponible | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Page indisponible</h1>
+
+    <p>La page que vous avez demandée est actuellement indisponible pour diverses raisons techniques inattendues.</p>
+    <p>Si vous lisez ces lignes, il y a fort à parier que l'administrateur du site est en train de râler derrière son écran en s'arrachant les cheveux.</p>
+    <p>Veuillez essayer de recharger la page dans quelques minutes. Nous faisons tout notre possible pour résoudre le problème au plus vite.</p>
+    <p>Si jamais ce message continuait à s'afficher, essayez de vider le cache de votre navigateur ou de jeter un oeil aux réseaux sociaux pour vérifier qu'aucune opération de maintenance n'est en cours.</p>
+
+    <p>Merci de votre compréhension.</p>
+{% endblock %}

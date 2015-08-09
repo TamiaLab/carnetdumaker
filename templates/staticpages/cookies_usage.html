@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:cookies_usage' %}">Informations sur les cookies</a></li>{% endblock %}
+
+{% block title %}Informations sur les cookies | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Informations sur les cookies</h1>
+
+    <p>TODO</p>
+{% endblock %}

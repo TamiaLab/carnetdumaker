@@ -1,0 +1,8 @@
+{% extends "bugtracker/base_bugtracker.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'bugtracker:myaccount' %}">Mes préférences du gestionnaire de bugs</a></li>{% endblock %}
+
+{% block pre_content %}
+    {% include "accounts/myaccount_tabs.html" with active_tab="bugtracker" %}
+{% endblock %}

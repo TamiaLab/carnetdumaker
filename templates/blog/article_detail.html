@@ -1,0 +1,175 @@
+{% extends "blog/base_blog.html" %}
+{% load accounts tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>{% endblock %}
+
+{% block title %}{{ article.title }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_type %}article{% endblock %}
+{% block opengraph_title %}{{ article.title }}{% endblock %}
+{% block opengraph_description %}{% if article.description %}{{ article.description }}{% else %}{{ article.get_content_without_html|truncatewords:200 }}{% endif %}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ article.get_absolute_url }}{% endblock %}
+{% block opengraph_image %}{% if article.heading_img %}{{ article.heading_img.url }}{% elif article.thumbnail_img %}{{ article.thumbnail_img.url }}{% endif %}{% endblock %}
+{% block twitter_creator %}{% if article.author.user_profile.twitter_name %}@{{ article.author.user_profile.twitter_name }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block extra_opengraph %}
+    {% if article.author.user_profile.facebook_url %}
+        <meta property="article:author" content="{{ article.author.user_profile.facebook_url }}" />
+    {% elif APP.FACEBOOK_URL %}
+        <meta property="article:author" content="{{ APP.FACEBOOK_URL }}" />
+    {% endif %}
+    <meta property="article:published_time" content="{{ article.pub_date|date:"c" }}" />
+    <meta property="article:modified_time" content="{{ article.last_content_modification_date|date:"c" }}" />
+{% endblock %}
+
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    {% if article.subtitle %}<h2><small>{{ article.subtitle }}</small></h2>{% endif %}
+
+    {% if article.is_gone %}
+        <p class="text-warning"><i class="fa fa-warning"></i> Cet article n'est plus disponible publiquement.</p>
+    {% elif not article.is_published %}
+        {% if announcement.pub_date %}
+            <p class="text-warning"><i class="fa fa-warning"></i> Cet article n'est pas encore en ligne ! La publication est programmé pour le {{ article.pub_date|datetime_html }}</p>
+        {% else %}
+            <p class="text-warning"><i class="fa fa-warning"></i> Cet article n'est pas en ligne ! Ceci est une simple prévisualisation de l'article.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if article.heading_img %}
+        <img src="{{ article.heading_img.url }}" alt="Image d'entête" class="img-responsive" />
+    {% endif %}
+
+    <p><i class="fa fa-user"></i> par {{ article.author|user_profile_link }} |
+    <i class="fa fa-calendar"></i> {{ article.pub_date|date_html }} |
+    <i class="fa fa-copyright"></i> Licence {% if article.license %}<a href="{{ article.license.get_absolute_url }}">{{ article.license.name }}</a>{% else %}(voir pied de page){% endif %}</p>
+    <p><i class="fa fa-folder-open"></i> Catégories :{% for category in article.categories.all %} <a href="{{ category.get_absolute_url }}"><span class="label label-info">{{ category.name }}</span></a>{% endfor %} |
+    <i class="fa fa-tags"></i> Tags :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}
+    {% if article.featured %} | <i class="fa fa-thumb-tack"></i> Article en vedette{% endif %}</p>
+
+    {% if article.has_been_modified_after_publication %}
+        <p><i class="fa fa-pencil-square-o"></i>Cet article a été modifié pour la dernière fois le {{ article.last_content_modification_date|datetime_html }}</p>
+    {% endif %}
+    {% if article.expiration_date %}
+        <p><i class="fa fa-bomb"></i> Cet article s'auto détruira le {{ article.expiration_date|datetime_html }}</p>
+    {% endif %}
+    {% if user.is_staff %}
+        <p><a href="{% url 'admin:blog_article_change' article.pk %}"><i class="fa fa-terminal"></i> Modifier l'article dans l'interface d'administration</a></p>
+    {% endif %}
+
+    {% with head_notes=article.head_notes.all %}
+        {% if head_notes %}
+            <div class="panel-group">
+            {% for head_note in head_notes %}
+                {% include "blog/note.html" with note=head_note %}
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <hr>
+
+    {% if article.description %}
+        <p><strong>{{ article.description }}</strong></p>
+        <br>
+    {% endif %}
+
+    {% if article.require_membership_for_reading %}
+        {# TODO Handle membership here #}
+        {{ article.content_html|truncatewords_html:200|safe }}
+        {# TODO Add message for non-membership here #}
+    {% else %}
+        {{ article.content_html|safe }}
+    {% endif %}
+
+    {% with foot_notes=article.foot_notes.all %}
+        {% if foot_notes %}
+            <div class="panel-group">
+                {% for foot_note in foot_notes %}
+                    {% include "blog/note.html" with note=foot_note %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with img_attachments=article.img_attachments.all %}
+        {% if article.display_img_gallery and img_attachments %}
+            <h3>Gallerie d'images</h3>
+            <div class="row">
+                {% for image in img_attachments %}
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumbnail with-caption">
+                        <a href="{{ image.get_absolute_url }}">
+                            <img src="{{ image.img_small.url }}" width="image.img_small_width" height="image.img_small_height" alt="{{ image.title }}" class="center-block" />
+                        </a>
+                    {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block post_content %}
+    <div class="row">
+        {% with follow_up_articles=article.follow_up_articles.all %}
+            {% if follow_up_articles %}
+                <div class="col-md-6">
+                    <h3>Articles suivants</h3>
+                    <ul>
+                        {% for next_part in follow_up_articles %}
+                            <li><a href="{{ next_part.get_absolute_url }}">{{ next_part.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% with follow_up_of=article.follow_up_of.all %}
+            {% if follow_up_of %}
+                <div class="col-md-6">
+                    <h3>Articles précédents</h3>
+                    <ul>
+                        {% for previous_part in follow_up_of %}
+                            <li><a href="{{ previous_part.get_absolute_url }}">{{ previous_part.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% with related_articles=article.related_articles.all %}
+            {% if related_articles %}
+                <div class="col-md-6">
+                    <h3>Articles en relation avec celui-ci</h3>
+                    <ul>
+                        {% for related_article in related_articles %}
+                            <li><a href="{{ related_article.get_absolute_url }}">{{ related_article.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% with related_articles=article.related_articles_reverse.all %}
+            {% if related_articles %}
+                <div class="col-md-6">
+                    <h3>Articles pouvant vous intéresser</h3>
+                    <ul>
+                        {% for related_article in related_articles %}
+                            <li><a href="{{ related_article.get_absolute_url }}">{{ related_article.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <hr>
+
+    <div class="row">
+        {% if article.related_forum_thread %}
+            <p class="text-center"><i class="fa fa-comments"></i> <a href="{{ article.related_forum_thread.get_absolute_url }}">Cliquez ici pour accéder aux commentaires de l'article.</a></p>
+        {% else %}
+            <p class="text-center"><i class="fa fa-comments"></i> Cet article n'a pas de topic dédié sur le forum pour les commentaires. Rendez vous <a href="{% url "forum:index" %}">sur le forum</a> pour en discuter librement.</p>
+        {% endif %}
+    </div>
+{% endblock %}

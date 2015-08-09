@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head lang="fr">
+        <meta charset="UTF-8">
+        <title>Nouvelle notification | {{ site_name }}</title>
+    </head>
+    <body>
+    <p>Bonjour {{ recipient.username }},</p>
+
+    <p>Vous avez reçu une notification sur {{ site_name }} !</p>
+    <p>Un aperçu notification en question se trouve ci-dessous.</p>
+    <hr>
+
+    <p>Titre : {{ notification.title }}</p>
+    <p>Message :</p>
+    {{ notification.message_html|safe }}
+    <hr>
+
+    <p>En cas de probléme d'affichage, vous pouvez <a href="{{ protocol }}://{{ domain }}{{ notification.get_absolute_url }}">voir la notification en ligne</a> sur le site.</p>
+
+    <p>Cordialement,</p>
+    <p>L'équipe de {{ site_name }}</p>
+
+    <p>PS Ceci est un mail automatique, merci de ne pas y répondre.</p>
+    <p>Si vous ne souhaitez plus recevoir vos notifications par mail à l'avenir, rendez-vous dans <a href="{{ protocol }}://{{ domain }}{% url 'myaccount:index' %}">vos options de comptes</a> pour désactiver l'envoi automatique de mail à la réception d'une notification.</p>
+
+    {% include "email_legal_footer.html" %}
+    </body>
+</html>

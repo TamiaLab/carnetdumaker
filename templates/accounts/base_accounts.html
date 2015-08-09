@@ -1,0 +1,4 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'accounts:index' %}">Liste des membres</a></li>{% endblock %}

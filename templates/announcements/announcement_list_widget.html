@@ -1,0 +1,17 @@
+{% load accounts tools %}{% if announcements %}
+<div class="panel-group">
+    {% for announcement in announcements %}
+        <div class="panel panel-{{ announcement.type }}">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-bullhorn"></i> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></h1>
+            </div>
+            <div class="panel-body">
+                {{ announcement.content_html|safe }}
+            </div>
+            <div class="panel-footer">
+                <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

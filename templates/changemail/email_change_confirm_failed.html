@@ -1,0 +1,19 @@
+{% extends "accounts/base_myaccount.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="#">Modification de l'adresse email impossible</a></li>{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-envelope"></i> Modification de l'adresse email impossible</h1>
+        </div>
+        <div class="panel-body">
+            <p>Votre adresse email n'a pas pu être modifiée car le lien de confirmation est incorrect ou a expiré.</p>
+            <p>Vérifiez que le lien est correct (erreur de copier coller par exemple), ou à défaut, recommencez le processus de modification.</p>
+            <p>En cas de probléme, n'hésitez pas à contacter l'administrateur du site.</p>
+        </div>
+    </div>
+
+    <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
+{% endblock %}

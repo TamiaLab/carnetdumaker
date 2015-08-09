@@ -1,0 +1,17 @@
+{% extends "forum/base_forumdetail.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ forum.get_mark_all_threads_as_read_url }}">Marquer tous les topics comme lus</a></li>{% endblock %}
+
+{% block title %}Marquer tout les topics comme lus | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Marquer tous les topics comme lus</h1>
+
+    <p>Etes-vous sûr de vouloir faire cela ?</p>
+
+    <form method="post" action="{{ forum.get_mark_all_threads_as_read_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Marquer tout les topics comme lus"/>
+    </form>
+{% endblock %}

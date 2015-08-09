@@ -1,0 +1,113 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@tamialab.fr>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/announcements/admin.py:62
+msgid "Title and slug"
+msgstr "Titre et slug"
+
+#: apps/announcements/admin.py:66 apps/announcements/models.py:73
+msgid "Content"
+msgstr "Contenu"
+
+#: apps/announcements/admin.py:72
+msgid "Date and time"
+msgstr "Date et heure"
+
+#: apps/announcements/admin.py:85 apps/announcements/models.py:46
+msgid "Author"
+msgstr "Auteur"
+
+#: apps/announcements/admin.py:97
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/announcements/apps.py:15 apps/announcements/models.py:81
+msgid "Announcements"
+msgstr "Annonces"
+
+#: apps/announcements/constants.py:14
+msgid "Default"
+msgstr "Défaut"
+
+#: apps/announcements/constants.py:15
+msgid "Success"
+msgstr "Succès"
+
+#: apps/announcements/constants.py:16
+msgid "Information"
+msgstr "Information"
+
+#: apps/announcements/constants.py:17
+msgid "Warning"
+msgstr "Avertissement"
+
+#: apps/announcements/constants.py:18
+msgid "Danger"
+msgstr "Danger"
+
+#: apps/announcements/feeds.py:19 apps/announcements/feeds.py:21
+msgid "Latest announcements"
+msgstr "Dernières annonces"
+
+#: apps/announcements/feeds.py:48
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/announcements/models.py:36
+msgid "Title"
+msgstr "Titre"
+
+#: apps/announcements/models.py:39
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/announcements/models.py:48
+msgid "Creation date"
+msgstr "Date de création"
+
+#: apps/announcements/models.py:52
+msgid "Last content modification date"
+msgstr "Date de dernière modification du contenu"
+
+#: apps/announcements/models.py:59
+msgid "Publication date"
+msgstr "Date de publication"
+
+#: apps/announcements/models.py:65
+msgid "Type"
+msgstr "Type"
+
+#: apps/announcements/models.py:70
+msgid "Broadcast all over the site"
+msgstr "Diffuser sur l'ensemble du site"
+
+#: apps/announcements/models.py:75
+msgid "Content (raw HTML)"
+msgstr "Contenu (HTML brut)"
+
+#: apps/announcements/models.py:80
+msgid "Announcement"
+msgstr "Annonce"
+
+#: apps/announcements/models.py:126
+msgid "Published"
+msgstr "Publié"
+
+#: apps/announcements/views.py:36
+msgid "Announcements list"
+msgstr "Liste des annonces"

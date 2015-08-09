@@ -1,0 +1,5 @@
+# Ignore all files in the /uploads directory (except this .gitignore file)
+# This is necessary because the /uploads directory is filed with crap during debug.
+*
+!.gitignore
+!fixtures/

@@ -1,0 +1,26 @@
+{% load forum %}
+{% for post in posts %}
+    <div class="clearfix">
+        {% include "forum/post.html" %}
+        {% if controls and user.is_authenticated %}
+            <p class="pull-left">
+            {% if user|can_edit:post %}
+                {% if post.is_first_post %}
+                    <a href="{{ thread.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                {% else %}
+                    <a href="{{ post.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                {% endif %}
+            {% endif %}
+            {% if user|can_delete:post %}
+                {% if post.is_first_post %}
+                    <a href="{{ thread.get_delete_url }}"><i class="fa fa-trash"></i> Supprimer</a>
+                {% else %}
+                    <a href="{{ post.get_delete_url }}"><i class="fa fa-trash"></i> Supprimer</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{ post.get_reply_url }}"><i class="fa fa-reply"></i> Répondre</a>
+            </p>
+        {% endif %}
+    </div>
+    <hr>
+{% endfor %}

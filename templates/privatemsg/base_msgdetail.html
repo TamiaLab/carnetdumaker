@@ -1,0 +1,11 @@
+{% extends "privatemsg/base_privatemsg.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    {% if is_sender %}
+        <li><a href="{% url 'privatemsg:outbox' %}">Mes messages privés envoyés</a></li>
+    {% endif %}
+    <li><a href="{{ message.get_absolute_url }}">{{ message.get_subject_display }}</a></li>{% endblock %}
+
+{% block menu %}
+    {% include "privatemsg/menu.html" with active="" %}
+{% endblock %}

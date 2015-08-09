@@ -1,0 +1,9 @@
+<p>Vous avez recu un nouveau message privé de {{ message.sender.username }}.</p>
+
+<p>Titre du message : {{ message.get_subject_display }}</p>
+
+<p>Aperçu du message :<p>
+<blockquote>{{ message.body_html|safe }}</blockquote>
+
+<p><a href="{{ protocol }}://{{ domain }}{{ message.get_absolute_url }}">Voir les détails du message en ligne.</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{% url "privatemsg:myaccount" %}">Ne plus recevoir de notification à chaque nouveau message privé.</a></p>

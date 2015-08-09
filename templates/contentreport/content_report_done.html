@@ -1,0 +1,14 @@
+{% extends "contentreport/base_report.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'contentreport:content_report_done' %}">Merci de votre aide</a></li>{% endblock %}
+
+{% block title %}Merci de votre aide | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Merci de votre aide</h1>
+
+    <p>L'équipe du site va traiter votre signalement au plus vite. Merci de votre aide.</p>
+
+    <p><a href="{% url "home:index" %}">Revenir sur la page d'accueil</a></p>
+{% endblock %}

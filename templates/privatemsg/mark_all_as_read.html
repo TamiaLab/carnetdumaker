@@ -1,0 +1,17 @@
+{% extends "privatemsg/base_inbox.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:inbox_mark_all_as_read' %}">Marquer tous les messages comme lus</a></li>{% endblock %}
+
+{% block title %}Marquer tous les messages comme lus | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Marquer tous les messages comme lus</h1>
+
+    <p>Etes-vous sûr de vouloir faire cela ?</p>
+
+    <form method="post" action="{% url 'privatemsg:inbox_mark_all_as_read' %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Marquer tous les messages comme lus"/>
+    </form>
+{% endblock %}

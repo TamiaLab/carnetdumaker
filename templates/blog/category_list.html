@@ -1,0 +1,20 @@
+{% extends "blog/base_category.html" %}
+{% load mptt_tags %}
+
+{% block title %}Liste des catégories | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Liste des catégories</h1>
+
+    <ul>{% recursetree categories %}
+        <li>
+            <a href="{{ node.get_absolute_url }}">{{ node.name|capfirst }}</a><br/>
+            <p>{{ node.description }}</p>
+            {% if not node.is_leaf_node %}
+                <ul>
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}</ul>
+{% endblock %}

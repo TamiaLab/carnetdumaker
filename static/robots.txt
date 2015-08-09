@@ -1,0 +1,20 @@
+#
+# Only robots should read this file. So, what are you doing here dude!?
+# Take a look at the main page and enjoy some electronic stuff instead of reading this boring text file!
+#
+
+# Disallow GET-parametrized url for everyone
+User-agent: *
+Disallow: /*?*
+
+# Allow google image bot
+User-agent: Googlebot-Image
+Allow: /static/images/
+Allow: /uploads/
+
+# No Thanks.
+User-agent: ia_archiver
+Disallow: /
+
+# Sitemap (index file)
+Sitemap: http://www.carnetdumaker.net/sitemap.xml

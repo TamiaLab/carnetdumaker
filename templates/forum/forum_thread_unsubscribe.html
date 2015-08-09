@@ -1,0 +1,17 @@
+{% extends "forum/base_threaddetail.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ thread.get_unsubscribe_url }}">Ne plus suivre le topic</a></li>{% endblock %}
+
+{% block title %}Ne plus suivre le topic | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Ne plus suivre le topic</h1>
+
+    <p>Merci de confirmer votre volonté de ne plus suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+
+    <form method="post" action="{{ thread.get_unsubscribe_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Ne plus suivre le topic" />
+    </form>
+{% endblock %}

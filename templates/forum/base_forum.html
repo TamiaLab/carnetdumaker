@@ -1,0 +1,11 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'forum:index' %}">Forum</a></li>{% endblock %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Topics récents (flux RSS)" href="{% url "forum:latest_forum_threads_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Topics récents (flux Atom)" href="{% url "forum:latest_forum_threads_atom" %}">
+    <link rel="alternate" type="application/rss+xml" title="Posts récents (flux RSS)" href="{% url "forum:latest_forum_thread_posts_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Posts récents (flux Atom)" href="{% url "forum:latest_forum_thread_posts_atom" %}">
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:contact_us' %}">Nous contacter</a></li>{% endblock %}
+
+{% block title %}Nous contacter | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Nous contacter</h1>
+
+    <p>TODO</p>
+{% endblock %}

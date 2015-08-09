@@ -1,0 +1,24 @@
+{% extends "registration/base_registration.html" %}
+{% load bootstrapform %}
+
+{% block content %}
+    <h1>Inscription</h1>
+
+    {% if save_failed %}
+        <p class="error">Une erreur s'est produite lors de l'enregistrement du formulaire. Veuillez réessayer d'envoyer le formulaire.</p>
+    {% endif %}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{% url 'registration:registration_register' %}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit"  class="btn btn-primary center-block" value="Inscription" />
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <p>Vous avez déja un compte ? <a href="{% url 'auth:login' %}">Cliquez ici pour vous connecter</a>.</p>
+    <p>Vous avez oubliez votre mot de passe ? <a href="{% url 'auth:password_reset' %}">Cliquez ici pour le réinitialiser</a>.</p>
+{% endblock %}

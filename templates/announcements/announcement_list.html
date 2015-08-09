@@ -1,0 +1,35 @@
+{% extends "announcements/base_announcements.html" %}
+{% load accounts tools %}
+
+{% block title %}Liste des annonces | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Liste des annonces</h1>
+    <p><a href="{% url "announcements:latest_announcements_rss" %}"><i class="fa fa-rss"></i> Flux RSS des annonces récentes</a> (<a href="{% url "announcements:latest_announcements_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+    {% if user.is_staff %}
+        <p><a href="{% url 'admin:announcements_announcement_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ecrire une nouvelle annonce</a></p>
+    {% endif %}
+
+    {% for announcement in announcements %}
+        <div class="panel panel-{{ announcement.type }}">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-bullhorn"></i> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></h1>
+            </div>
+            <div class="panel-body">
+                {{ announcement.content_html|safe }}
+
+                {% if user.is_staff %}
+                    <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>
+                {% endif %}
+            </div>
+            <div class="panel-footer">
+                <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">Aucune annonce à afficher pour le moment !</p>
+    {% endfor %}
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

@@ -1,0 +1,30 @@
+[
+    {
+        "fields": {
+            "username": "admin"
+        },
+        "model": "registration.bannedusername",
+        "pk": null
+    },
+    {
+        "fields": {
+            "username": "webmaster"
+        },
+        "model": "registration.bannedusername",
+        "pk": null
+    },
+    {
+        "fields": {
+            "username": "skywodd"
+        },
+        "model": "registration.bannedusername",
+        "pk": null
+    },
+    {
+        "fields": {
+            "username": "skywood"
+        },
+        "model": "registration.bannedusername",
+        "pk": null
+    }
+]

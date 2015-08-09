@@ -1,0 +1,4 @@
+{% extends "blog/base_blog.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'blog:tag_list' %}">Liste des mots clefs</a></li>{% endblock %}

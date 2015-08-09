@@ -1,0 +1,290 @@
+[
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Comptes utilisateur",
+            "internal_name": "accounts",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire d'annonces",
+            "internal_name": "announcements",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Systéme anti-spam",
+            "internal_name": "antispam",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Badges utilisateur",
+            "internal_name": "badges",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Blog/Articles",
+            "internal_name": "blog",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Générateur de formulaires",
+            "internal_name": "bootstrapform",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire de bugs",
+            "internal_name": "bugtracker",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Assistant de changement d'adresse email",
+            "internal_name": "changemail",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Formulaire de contact",
+            "internal_name": "contactform",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Outil de signalement de contenu",
+            "internal_name": "contentreport",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Champs de formulaire pour les pays",
+            "internal_name": "countries",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Verroux exclusifs",
+            "internal_name": "dbmutex",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Fichiers joints",
+            "internal_name": "fileattachments",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire de déconnexion forcée",
+            "internal_name": "forcelogout",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Forum",
+            "internal_name": "forum",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Champ de formulaire pour le genre",
+            "internal_name": "gender",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Pages d'accueil du site",
+            "internal_name": "home",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Images jointes",
+            "internal_name": "imageattachments",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Licences",
+            "internal_name": "licenses",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Moniteur de connexion",
+            "internal_name": "loginwatcher",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "File d'attente d'email",
+            "internal_name": "mailqueue",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Champ de formulaire d'envoi multi-fichier",
+            "internal_name": "multiupload",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire de notifications",
+            "internal_name": "notifications",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Pagination",
+            "internal_name": "paginator",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire de messages privés",
+            "internal_name": "privatemsg",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Module d'inscription",
+            "internal_name": "registration",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Boutique",
+            "internal_name": "shop",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire d'extraits de code",
+            "internal_name": "snippets",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Pages statiques",
+            "internal_name": "staticpages",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Gestionnaire de zone de temps",
+            "internal_name": "timezones",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Outils divers",
+            "internal_name": "tools",
+            "description": ""
+        }
+    },
+    {
+        "pk": null,
+        "model": "bugtracker.appcomponent",
+        "fields": {
+            "name": "Moteur de rendu textuel",
+            "internal_name": "txtrender",
+            "description": ""
+        }
+    }
+]

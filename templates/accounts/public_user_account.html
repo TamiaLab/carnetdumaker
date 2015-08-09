@@ -1,0 +1,104 @@
+{% extends "accounts/base_accounts.html" %}
+{% load static from staticfiles %}{% load tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ public_user_profile.get_absolute_url }}">Profil de {{ public_user.username }}</a></li>{% endblock %}
+
+{% block title %}Profil de {{ public_user.username }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_type %}profile{% endblock %}
+{% block opengraph_title %}Profil de {{ public_user.username }}{% endblock %}
+{% block opengraph_description %}Profil de {{ public_user.username }} sur le site {{ SITE.DOMAIN }}.{% endblock %}
+{% block opengraph_image %}{% if public_user_profile.avatar %}{{ public_user_profile.avatar.url }}{% else %}{% static 'images/no_avatar.png' %}{% endif %}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ public_user_profile.get_absolute_url }}{% endblock %}
+{% block twitter_creator %}{% if public_user_profile.twitter_name %}@{{ public_user_profile.twitter_name }}{% endif %}{% endblock %}
+{% block extra_opengraph %}<meta property="profile:username" content="{{ public_user.username }}" />
+    {% if public_user_profile.first_last_names_public %}
+        {% if public_user.last_name %}<meta property="profile:last_name" content="{{ public_user.last_name }}" />{% endif %}
+        {% if public_user.first_name %}<meta property="profile:first_name" content="{{ public_user.first_name }}" />{% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-user"></i> Profil de {{ public_user.username }}</h1>
+        </div>
+        <div class="panel-body">
+            {% if public_user.is_active %}
+                {% if public_user_profile.avatar %}
+                    <img src="{{ public_user_profile.avatar.url }}" class="img-rounded center-block" alt="Photo de profil">
+                {% else %}
+                    <img src="{% static 'images/no_avatar.png' %}" class="img-rounded center-block" alt="Pas de photo de profil">
+                {% endif %}
+                <p class="text-center">
+                    {{ public_user.username }}<br />
+                    {% if public_user.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring"></i> Membre du staff</span>{% endif %}
+                    {% if public_user_profile.is_online %}<span class="label label-success"><i class="fa fa-check"></i> En ligne</span>{% endif %}
+                </p>
+                <hr>
+
+                {% if public_user_profile.first_last_names_public %}
+                    {% if public_user.last_name %}<p><i class="fa fa-user"></i> Nom : {{ public_user.last_name }}</p>{% endif %}
+                    {% if public_user.first_name %}<p><i class="fa fa-user"></i> Prénom : {{ public_user.first_name }}</p>{% endif %}
+                {% endif %}
+                <p><i class="fa fa-home"></i> Pays : {{ public_user_profile.get_country_display }}</p>
+                <p><i class="fa fa-comment"></i> Langue : {{ public_user_profile.get_preferred_language_display }}</p>
+                <p><i class="fa fa-venus-mars"></i> Sexe : {{ public_user_profile.get_gender_display }}</p>
+                {% if public_user_profile.company %}<p><i class="fa fa-building"></i> Entreprise : {{ public_user_profile.company }}</p>{% endif %}
+                {% if public_user_profile.location %}<p><i class="fa fa-map-marker"></i> Location géographique : {{ public_user_profile.location }}</p>{% endif %}
+                {% if public_user_profile.biography %}
+                    <p><i class="fa fa-book"></i> Biographie :</p>
+                    <div class="well">
+                        {{ public_user_profile.biography_html|safe }}
+                    </div>
+                {% endif %}
+                {% if public_user_profile.signature %}
+                    <p><i class="fa fa-pencil"></i> Signature :</p>
+                    <div class="well">
+                        {{ public_user_profile.signature_html|safe }}
+                    </div>
+                {% endif %}
+                <hr>
+
+                {% if public_user_profile.email_public %}<p><i class="fa fa-at"></i> <a href="mailto:{{ public_user.email }}">Adresse email</a></p>{% endif %}
+                {% if public_user_profile.website_name and public_user_profile.website_url %}
+                    <p><i class="fa fa-globe"></i> Site web : <a href="{{ public_user_profile.website_url }}">{{ public_user_profile.website_name }}</a></p>
+                {% elif public_user_profile.website_url %}
+                    <p><i class="fa fa-globe"></i> <a href="{{ public_user_profile.website_url }}">Site web</a></p>
+                {% endif %}
+                {% if public_user_profile.jabber_name %}<p><a href="{{ public_user_profile.get_jabber_url }}"><i class="fa fa-weixin"></i> Compte Jabber</a></p>{% endif %}
+                {% if public_user_profile.skype_name %}<p><a href="{{ public_user_profile.get_skype_url }}"><i class="fa fa-skype"></i> Compte Skype</a></p>{% endif %}
+                {% if public_user_profile.twitter_name %}<p><a href="{{ public_user_profile.get_twitter_url }}"><i class="fa fa-twitter"></i> Compte Twitter</a></p>{% endif %}
+                {% if public_user_profile.facebook_url %}<p><a href="{{ public_user_profile.facebook_url }}"><i class="fa fa-facebook-official"></i> Compte Facebook</a></p>{% endif %}
+                {% if public_user_profile.googleplus_url %}<p><a href="{{ public_user_profile.googleplus_url }}"><i class="fa fa-google-plus"></i> Compte Google+</a></p>{% endif %}
+                {% if public_user_profile.youtube_url %}<p><a href="{{ public_user_profile.youtube_url }}"><i class="fa fa-youtube"></i> Chaine Youtube</a></p>{% endif %}
+                <p><a href="{% url 'privatemsg:compose_to' recipient=public_user.username %}"><i class="fa fa-envelope"></i> Envoyer un MP</a></p>
+                <hr>
+
+                <p><i class="fa fa-user-plus"></i> Date d'inscription : {{ public_user.date_joined|datetime_html }}</p>
+                <p><i class="fa fa-key"></i> Date de derniére connexion : {% if public_user.last_login %}{{ public_user.last_login|datetime_html }}{% else %}jamais{% endif %}</p>
+                <p><i class="fa fa-pencil-square-o"></i> Date de derniére modification du profil : {{ public_user_profile.last_modification_date|date_html }}</p>
+
+                {% if user == public_user %}
+                    <p class="text-right"><a href="{% url 'myaccount:index' %}"><i class="fa fa-pencil-square-o"></i> Modifier mon profil</a></p>
+                {% endif %}
+
+            {% else %}
+                <p><i class="fa fa-user-times"></i> Ce compte utilisateur a été désactivé, son profil public n'est plus disponible.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if user.is_staff %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-cogs"></i> Options d'administration</h1>
+            </div>
+            <div class="panel-body">
+                <p><a href="{% url 'admin:auth_user_change' public_user.pk %}"><i class="fa fa-terminal"></i> Voir le compte utilisateur dans l'interface d'administration</a></p>
+                <p><a href="{% url 'admin:accounts_userprofile_change' public_user_profile.pk %}"><i class="fa fa-terminal"></i> Voir le profil utilisateur dans l'interface d'administration</a></p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

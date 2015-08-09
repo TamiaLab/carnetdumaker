@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:legal_notices' %}">Mentions légales</a></li>{% endblock %}
+
+{% block title %}Mentions légales | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Mentions légales</h1>
+
+    <p>TODO</p>
+{% endblock %}

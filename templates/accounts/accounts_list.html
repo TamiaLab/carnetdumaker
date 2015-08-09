@@ -1,0 +1,47 @@
+{% extends "accounts/base_accounts.html" %}
+{% load accounts tools %}
+
+{% block title %}Liste des membres | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Liste des membres</h1>
+
+    <table class="table table-striped table-condensed table-responsive">
+        <thead>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Date d'inscription</th>
+            <th>Date de derniére connexion</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for account in accounts %}
+            <tr>
+                <td>{{ account|user_profile_link }}
+                    {% if account.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring" title="Membre du staff"></i> Membre du staff</span>{% endif %}
+                    {% if account.user_profile.is_online %}<span class="label label-success"><i class="fa fa-check" title="En ligne"></i> En ligne</span>{% endif %}</td>
+                <td>{{ account.date_joined|date_html }}</td>
+                <td>{% if account.last_login %}{{ account.last_login|date_html }}{% endif %}</td>
+                <td>{% with public_user_profile=account.user_profile %}
+                    {% if public_user_profile.website_url %}<a href="{{ public_user_profile.website_url }}" title="Site web"><i class="fa fa-globe"></i></a>{% endif %}
+                    {% if public_user_profile.jabber_name %}<a href="{{ public_user_profile.get_jabber_url }}" title="Jabber"><i class="fa fa-weixin"></i></a>{% endif %}
+                    {% if public_user_profile.skype_name %}<a href="{{ public_user_profile.get_skype_url }}" title="Skype"><i class="fa fa-skype"></i></a>{% endif %}
+                    {% if public_user_profile.twitter_name %}<a href="{{ public_user_profile.get_twitter_url }}" title="Twitter"><i class="fa fa-twitter"></i></a>{% endif %}
+                    {% if public_user_profile.facebook_url %}<a href="{{ public_user_profile.facebook_url }}" title="Facebook"><i class="fa fa-facebook-official"></i></a>{% endif %}
+                    {% if public_user_profile.googleplus_url %}<a href="{{ public_user_profile.googleplus_url }}" title="Google+"><i class="fa fa-google-plus"></i></a>{% endif %}
+                    {% if public_user_profile.youtube_url %}<a href="{{ public_user_profile.youtube_url }}" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
+                    {% if public_user_profile.email_public %}<a href="mailto:{{ account.email }}" title="Adresse email"><i class="fa fa-at"></i></a>{% endif %}
+                    <a href="{% url 'privatemsg:compose_to' recipient=account.username %}" title="message privé"><i class="fa fa-envelope"></i></a>
+                {% endwith %}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">Il n'y a aucun utilisateur à afficher <i class="fa fa-frown-o"></i></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

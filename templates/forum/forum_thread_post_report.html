@@ -1,0 +1,35 @@
+{% extends "forum/base_threaddetail.html" %}
+{% load bootstrapform accounts %}
+
+{% block breadcrumb %}{{ block.super }}
+    {% for parent_forum in post.parent_thread.parent_forum.get_ancestors %}
+        <li><a href="{{ parent_forum.get_absolute_url }}">{{ parent_forum.title|capfirst }}</a></li>
+    {% endfor %}
+    <li><a href="{{ post.parent_thread.parent_forum.get_absolute_url }}">{{ post.parent_thread.parent_forum.title|capfirst }}</a></li>
+    <li><a href="{{ post.parent_thread.get_absolute_url }}">Topic "{{ post.parent_thread.title }}"</a></li>
+    <li><a href="{{ post.get_report_url }}">Signaler un message</a></li>{% endblock %}
+
+{% block title %}Signaler un message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Signaler un message</h1>
+
+    <p>Veuillez confirmer le signalement du message ci-dessous.</p>
+    <p class="text-warning">Merci de ne signaler que des messages réellement inadéquat.
+    De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+
+    <div class="well">
+        {% include "forum/post.html" with report_disabled=True %}
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler le message</div>
+        <div class="panel-body">
+            <form method="post" action="{{ post.get_report_url }}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Signaler le message" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "privatemsg/base_inbox.html" %}
+{% load accounts tools %}
+
+{% block title %}Mes messages privés | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Mes messages privés</h1>
+
+    <div class="clearfix">
+        <p class="pull-left">Filtrage des messages : {% if filter_by == 'all' %}<ins>aucun</ins>{% else %}<a href="{% url 'privatemsg:inbox' %}">aucun</a>{% endif %} |
+         {% if filter_by == 'unread' %}<ins>non lus</ins>{% else %}<a href="{% url 'privatemsg:inbox_unread' %}">non lus</a>{% endif %} |
+         {% if filter_by == 'read' %}<ins>lus</ins>{% else %}<a href="{% url 'privatemsg:inbox_read' %}">lus</a>{% endif %}</p>
+
+        <p class="pull-right"><a href="{% url 'privatemsg:inbox_mark_all_as_read' %}"><i class="fa fa-trash"></i> Marquer tous les messages comme lus</a></p>
+    </div>
+
+    <table class="table table-striped table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Sujet</th>
+                <th>Expéditeur</th>
+                <th>Date d'envoi</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in private_messages %}
+            <tr>
+                <td>{% if message.unread %}<i class="fa fa-asterisk"></i>{% endif %}</td>
+                <td><a href="{{ message.get_absolute_url }}">{% if message.unread %}<strong>{% endif %}{{ message.get_subject_display }}{% if message.unread %}</strong>{% endif %}</a></td>
+                <td>{% if message.unread %}<strong>{% endif %}{{ message.sender|user_profile_link }}{% if message.unread %}</strong>{% endif %}</td>
+                <td>{% if message.unread %}<strong>{% endif %}{{ message.sent_at|date_html }}{% if message.unread %}</strong>{% endif %}</td>
+                <td>{% if message.parent_msg %}<i class="fa fa-reply" title="Réponse à un précédent message"></i>{% endif %}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center"><i class="fa fa-envelope-o"></i> Aucun message à afficher !</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

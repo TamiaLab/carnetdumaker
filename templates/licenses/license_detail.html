@@ -1,0 +1,31 @@
+{% extends "licenses/base_license.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ license.get_absolute_url }}">Licence {{ license.name }}</a></li>{% endblock %}
+
+{% block title %}Licence {{ license.name }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Licence {{ license.name }}</h1>
+
+    {% if license.logo %}
+        <img src="{{ license.logo.url }}" alt="logo licence {{ license.name }}" class="center-block" />
+    {% endif %}
+
+    <p><i class="fa fa-file-text-o"></i> Description :</p>
+    <div class="well">
+        {{ license.description_html|safe }}
+    </div>
+    {% if license.source_url %}
+        <p><i class="fa fa-external-link"></i>Lien source : <a href="{{ license.source_url }}">cliquez ici</a></p>
+    {% endif %}
+
+    {% if user.is_staff %}
+        <p><a href="{% url 'admin:licenses_license_change' license.pk %}"><i class="fa fa-terminal"></i> Modifier la licence dans l'interface d'administration</a></p>
+    {% endif %}
+
+    {% if license.usage %}
+        <h2>Informations légales</h2>
+        <pre>{{ license.usage }}</pre>
+    {% endif %}
+{% endblock %}

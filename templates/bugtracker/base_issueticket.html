@@ -1,0 +1,4 @@
+{% extends "bugtracker/base_bugtracker.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'bugtracker:issues_list' %}">Liste des tickets</a></li>{% endblock %}

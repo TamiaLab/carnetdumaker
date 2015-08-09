@@ -1,0 +1,9 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'announcements:index' %}">Annonces</a></li>{% endblock %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Annonces récentes (flux RSS)" href="{% url "announcements:latest_announcements_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Annonces récentes (flux Atom)" href="{% url "announcements:latest_announcements_atom" %}">
+{% endblock %}

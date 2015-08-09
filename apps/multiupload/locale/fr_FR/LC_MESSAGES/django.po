@@ -1,0 +1,66 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/multiupload/apps.py:15
+msgid "Multi-upload form field"
+msgstr "Champ de formulaire multi-fichiers"
+
+#: apps/multiupload/fields.py:56
+#, python-format
+msgid ""
+"Ensure that at least %(min_num)s files are uploaded (received %(num_files)s)."
+msgstr ""
+"Assurez-vous qu'au moins %(min_num)s fichiers sont envoyés (reçu "
+"%(num_files)s fichier(s))."
+
+#: apps/multiupload/fields.py:59
+#, python-format
+msgid ""
+"Ensure that at most %(max_num)s files are uploaded (received %(num_files)s)."
+msgstr ""
+"Assurez-vous qu'au plus %(max_num)s fichiers sont envoyés (reçu "
+"%(num_files)s fichier(s))."
+
+#: apps/multiupload/fields.py:66
+#, python-format
+msgid ""
+"File \"%(uploaded_file_name)s\" exceeded maximum upload size %(max_size)s."
+msgstr ""
+"Le fichier \"%(uploaded_file_name)s\" excède la taille maximum de "
+"%(max_size)s. "
+
+#: apps/multiupload/fields.py:71
+#, python-format
+msgid "Total files size exceeded maximum upload size %(total_max_size)s."
+msgstr ""
+"La taille totale des fichiers excède la taille maximum de %(total_max_size)s."
+
+#: apps/multiupload/fields.py:78
+#, python-format
+msgid "%dB"
+msgstr "%do"
+
+#: apps/multiupload/fields.py:80
+#, python-format
+msgid "%dKB"
+msgstr "%dKo"
+
+#: apps/multiupload/fields.py:82
+#, python-format
+msgid "%.2fMB"
+msgstr "%.2fMo"

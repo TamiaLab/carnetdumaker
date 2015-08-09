@@ -1,0 +1,17 @@
+{% extends "forum/base_threaddetail.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ thread.get_subscribe_url }}">Suivre le topic</a></li>{% endblock %}
+
+{% block title %}Suivre le topic | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Suivre le topic</h1>
+
+    <p>Merci de confirmer votre volonté de suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+
+    <form method="post" action="{{ thread.get_subscribe_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Suivre le topic" />
+    </form>
+{% endblock %}

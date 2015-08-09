@@ -1,0 +1,23 @@
+{% extends "notifications/base_notifications.html" %}
+{% load tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ notification.get_absolute_url }}">{{ notification.title }}</a></li>{% endblock %}
+
+{% block title %}{{ notification.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>{{ notification.title }}</h1>
+
+    <p><i class="fa fa-calendar"></i> Reçu le {{ notification.notification_date|datetime_html }}</p>
+    <hr>
+
+    <div class="well">
+        {{ notification.message_html|safe }}
+    </div>
+
+    <form method="post" action="{{ notification.get_absolute_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" name="mark_unread" value="Marquer comme non lue" />
+    </form>
+{% endblock %}

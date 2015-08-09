@@ -1,0 +1,16 @@
+{% extends "blog/base_archive.html" %}
+{% load blog %}
+
+{% block title %}Les archives | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Les archives</h1>
+
+    <ul>{% for year, months in archive_calendar %}
+        <li><a href="{% url 'blog:archive_year' year=year %}">Année {{ year }}</a>
+            <ul>{% for month, count in months %}
+                <li><a href="{% url 'blog:archive_month' year=year month=month|month_format %}">{{ month|month_name|capfirst }} ({{ count }} publication{{ count|pluralize }})</a></li>
+            {% endfor %}</ul>
+        </li>
+    {% endfor %}</ul>
+{% endblock %}

@@ -1,0 +1,7 @@
+<p>Un nouveau topic a été créé sur un des forums que vous suivez !</p>
+
+<p>Topic "{{ thread.title }}",</p>
+<p>Posté dans le forum "{{ forum.title }}"</p>
+
+<p><a href="{{ protocol }}://{{ domain }}{{ thread.get_absolute_url }}">Accéder au nouveau topic</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{{ forum.get_unsubscribe_url }}">Ne plus recevoir de notification par rapport à ce forum</a></p>

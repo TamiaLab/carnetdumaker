@@ -1,0 +1,13 @@
+{% extends "registration/base_registration.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'registration:registration_complete' %}">Inscription terminée</a></li>{% endblock %}
+
+{% block content %}
+    <h1>Inscription terminée</h1>
+
+    <p>Votre inscription est maintenant terminée ! Bienvenue sur le site !</p>
+    <p>Il ne vous reste plus qu'à vous connecter pour profiter pleinement du site.</p>
+
+    <p><a href="{% url 'auth:login' %}">Cliquez ici pour vous connecter.</a></p>
+{% endblock %}

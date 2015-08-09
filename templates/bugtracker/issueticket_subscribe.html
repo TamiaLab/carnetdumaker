@@ -1,0 +1,18 @@
+{% extends "bugtracker/base_issueticket.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ issue.get_absolute_url }}">Ticket #{{ issue.id }}</a></li>
+    <li><a href="{{ issue.get_subscribe_url }}">Suivre le ticket</a></li>{% endblock %}
+
+{% block title %}Suivre le ticket | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Suivre le ticket</h1>
+
+    <p>Merci de confirmer votre volonté de suivre le ticket de bug en cliquant sur le bouton ci-dessous.</p>
+
+    <form method="post" action="{{ issue.get_subscribe_url }}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Suivre le ticket" />
+    </form>
+{% endblock %}

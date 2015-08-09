@@ -1,0 +1,22 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:index' %}">Pages statiques</a></li>{% endblock %}
+
+{% block title %}Pages statiques | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Pages statiques</h1>
+
+    <ul>
+        <li><a href="{% url 'staticpages:about_us' %}"><i class="fa fa-users"></i> Qui sommes-nous ?</a></li>
+        <li><a href="{% url 'staticpages:why_this_site' %}"><i class="fa fa-rocket"></i> Pourquoi ce site ?</a></li>
+        <li><a href="{% url 'staticpages:our_commitments' %}"><i class="fa fa-smile-o"></i> Nos engagements</a></li>
+        <li><a href="{% url 'staticpages:faq' %}"><i class="fa fa-comments"></i> Foire aux questions</a></li>
+        <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation</a></li>
+        <li><a href="{% url 'staticpages:contact_us' %}"><i class="fa fa-envelope-o"></i> Nous contacter</a></li>
+        <li><a href="{% url 'staticpages:legal_notices' %}"><i class="fa fa-gavel"></i> Mentions légales</a></li>
+        <li><a href="{% url 'staticpages:cookies_usage' %}"><i class="fa fa-eye-slash"></i> Utilisation des cookies</a></li>
+        <li><a href="{% url 'staticpages:human_sitemap' %}"><i class="fa fa-sitemap"></i> Plan du site</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "forum/base_threaddetail.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ post.get_delete_url }}">Supprimer le message</a></li>{% endblock %}
+
+{% block title %}Supprimer le message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Supprimer le message</h1>
+
+    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{{ post.get_delete_url }}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-danger center-block" value="Supprimer le message" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

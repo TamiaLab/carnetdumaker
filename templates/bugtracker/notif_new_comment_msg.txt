@@ -1,0 +1,10 @@
+Un nouveau commentaire vient d'être posté sur un des tickets que vous suivez !
+
+Ticket parent : #{{ issue.id }} ({{ issue.title }})
+
+Auteur du commentaire : {{ comment.author.username }}
+Aperçu du commentaire :
+{{ comment.get_body_without_html }}
+
+Accéder au détail du commentaire : {{ protocol }}://{{ domain }}{{ comment.get_absolute_url }}
+Ne plus recevoir de notification par rapport à ce ticket : {{ protocol }}://{{ domain }}{{ issue.get_unsubscribe_url }}

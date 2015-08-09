@@ -1,0 +1,31 @@
+{% extends "forum/base_myaccount.html" %}
+{% load bootstrapform %}
+
+{% block title %}Mes préférences du forum | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-comments"></i> Mes préférences du forum</h1>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{% url 'forum:myaccount' %}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-wrench"></i> Options avancées</h1>
+        </div>
+        <div class="panel-body">
+            <p><i class="fa fa-comments"></i> <a href="{% url "forum:mythreads_list" %}">Mes topics</a></p>
+            <p><i class="fa fa-comments-o"></i> <a href="{% url "forum:myposts_list" %}">Mes posts</a></p>
+            <p><i class="fa fa-comments"></i> <a href="{% url "forum:myforumsubscribtions_list" %}">Mes forums suivis</a></p>
+            <p><i class="fa fa-comments-o"></i> <a href="{% url "forum:mythreadsubscribtions_list" %}">Mes topics suivis</a></p>
+        </div>
+    </div>
+{% endblock %}

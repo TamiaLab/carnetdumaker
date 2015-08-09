@@ -1,0 +1,110 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "email": "admin@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": true,
+      "is_staff": true,
+      "user_permissions": [],
+      "last_name": "Sysadmin",
+      "last_login": "2015-08-04T11:25:06.478Z",
+      "first_name": "John",
+      "is_active": true,
+      "date_joined": "2015-08-03T15:08:43.654Z",
+      "username": "admin",
+      "password": "sha1$06dO8E89VwuD$b641738ec2890ea0e2de3c11d67c72f59238c8b2"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "email": "staff@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": false,
+      "is_staff": true,
+      "user_permissions": [],
+      "last_name": "Staffer",
+      "last_login": "2015-08-05T11:25:06.478Z",
+      "first_name": "Marc",
+      "is_active": true,
+      "date_joined": "2015-08-04T15:08:43.654Z",
+      "username": "staff",
+      "password": "sha1$CKyeSbREaF0H$de9a67aad644267369dc7af665e8b7e799d1f675"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "email": "user@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": false,
+      "is_staff": false,
+      "user_permissions": [],
+      "last_name": "User",
+      "last_login": "2015-08-05T15:15:13.552Z",
+      "first_name": "Cecile",
+      "is_active": true,
+      "date_joined": "2015-08-05T15:14:25.314Z",
+      "username": "user",
+      "password": "sha1$HSpD0pXgXRCW$bd82c9a9d15521e92eda346b66d36ee01594abd4"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "email": "inactive@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": false,
+      "is_staff": false,
+      "user_permissions": [],
+      "last_name": "Inactive",
+      "last_login": "2015-08-05T15:15:13.552Z",
+      "first_name": "Kevin",
+      "is_active": false,
+      "date_joined": "2015-08-05T15:14:25.314Z",
+      "username": "inactive",
+      "password": "sha1$Ia7WvyJCUXwb$5cf8efc6c6ceeee0d2c45306f8926ed12888a80d"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "email": "geo@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": false,
+      "is_staff": false,
+      "user_permissions": [],
+      "last_name": "Bugger",
+      "last_login": "2015-08-05T15:15:13.552Z",
+      "first_name": "Géo",
+      "is_active": false,
+      "date_joined": "2015-08-05T15:14:25.314Z",
+      "username": "géo",
+      "password": "sha1$kwo3UqQn2mTG$a851cb27b396770b3ff5d969094ac9115277c57c"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "email": "HaX0r@carnetdumaker.dev",
+      "groups": [],
+      "is_superuser": false,
+      "is_staff": false,
+      "user_permissions": [],
+      "last_name": "Pirate",
+      "last_login": "2015-08-05T15:15:13.552Z",
+      "first_name": "Jean",
+      "is_active": false,
+      "date_joined": "2015-08-05T15:14:25.314Z",
+      "username": "HaX0r",
+      "password": "sha1$H5E20g381XzJ$2c95b5ea7e006a65c2160a434560ef3ef19f4d85"
+    }
+  }
+]

@@ -1,0 +1,18 @@
+{% extends "privatemsg/base_trashbox.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}">Vider la corbeille</a></li>{% endblock %}
+
+{% block title %}Vider la corbeille | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Vider la corbeille</h1>
+
+    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+    <p>Cette action est irréversible.</p>
+
+    <form method="post" action="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Vider la corbeille" />
+    </form>
+{% endblock %}

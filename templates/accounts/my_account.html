@@ -1,0 +1,44 @@
+{% extends "accounts/base_myaccount.html" %}
+{% load static from staticfiles %}{% load bootstrapform %}
+
+{% block title %}Mon compte | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-user"></i> Mes informations personnelles</h1>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{% url 'myaccount:index' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="control-label">Avatar</label>
+                    <p class="form-control-static">{% if user.user_profile.avatar %}
+                        <img src="{{ user.user_profile.avatar.url }}" class="img-rounded" />
+                    {% else %}
+                        <img src="{% static "images/no_avatar.png" %}" class="img-rounded" />
+                    {% endif %}</p>
+                </div>
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-wrench"></i> Options avancées</h1>
+        </div>
+        <div class="panel-body">
+            <p><i class="fa fa-globe"></i> <a href="{% url 'accounts:user_profile' username=user.username %}">Voir mon profil public</a>.</p>
+            <p><i class="fa fa-key"></i> <a href="{% url 'myaccount:password_change' %}">Modifier mon mot de passe</a></p>
+            <p><i class="fa fa-at"></i> <a href="{% url 'myaccount:email_change' %}">Modifier mon adresse email</a></p>
+            <p><i class="fa fa-info-circle"></i> Si vous souhaitez cloturer votre compte utilisateur, merci de contacter l'administrateur du site via le lien de contact en bas de page.</p>
+        </div>
+    </div>
+
+    <p class="text-center"><i class="fa fa-info-circle"></i> Conformément à la loi "informatique et libertés" du 6 janvier 1978 modifiée,
+        vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent.
+        Si vous souhaitez exercer ce droit et obtenir communication des informations vous concernant,
+        veuillez vous adresser à l'administrateur du site via le lien de contact disponible en bas de page.</p>
+{% endblock %}

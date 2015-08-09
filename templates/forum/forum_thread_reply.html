@@ -1,0 +1,31 @@
+{% extends "forum/base_threaddetail.html" %}
+{% load bootstrapform forum %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ thread.get_reply_url }}">Nouveau message</a></li>{% endblock %}
+
+{% block title %}Nouveau message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Nouveau message</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if is_flooding %}
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                    <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
+                </div>
+            {% endif %}
+            <form method="post" action="{{ thread.get_reply_url }}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Nouveau message" />
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Derniers messages</h2>
+    {% include "forum/posts.html" with posts=latest_posts %}
+{% endblock %}

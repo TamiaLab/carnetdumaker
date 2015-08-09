@@ -1,0 +1,13 @@
+{% extends 'base_error.html' %}
+
+{% block title %}Accès interdit | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Accès interdit</h1>
+
+    <p>Vous n'avez pas accès à la ressource demandée ou vous n'avez pas les droits nécessaires pour effectuer l'action demandée.</p>
+    <p>Si vous n'êtes pas connecté, essayez de vous connecter avant de recharger cette page.</p>
+    <p>Si vous n'avez toujours pas les droits d'accès à cette page une fois connecté, et que cela vous semble anormal, merci de contacter l'administrateur du site.</p>
+
+    <p>Merci de votre compréhension.</p>
+{% endblock %}

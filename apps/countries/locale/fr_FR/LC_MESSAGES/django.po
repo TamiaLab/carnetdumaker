@@ -1,0 +1,25 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/countries/apps.py:15
+msgid "Countries"
+msgstr "Pays"
+
+#: apps/countries/fields.py:17
+msgid "A country name object"
+msgstr "Un object contenant le nom d'un pays"

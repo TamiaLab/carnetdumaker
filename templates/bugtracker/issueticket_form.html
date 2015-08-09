@@ -1,0 +1,27 @@
+{% extends "bugtracker/base_bugtracker.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'bugtracker:issue_create' %}">Ouvrir un nouveau ticket</a></li>{% endblock %}
+
+{% block title %}Ouvrir un nouveau ticket | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Ouvrir un nouveau ticket</h1>
+
+    <div class="well">
+        <p class="text-warning">Merci de ne pas ouvrir un nouveau ticket sans avoir fait préalablement une recherche parmi les tickets existants.
+        De plus, merci de ne pas ouvrir un ticket si cela ne concerne pas le site en lui même.
+        Pour tout autre problème, merci d'utiliser le forum ou le formulaire de contact.</p>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{% url 'bugtracker:issue_create' %}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Créer le ticket" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

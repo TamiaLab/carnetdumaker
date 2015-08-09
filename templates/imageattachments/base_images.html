@@ -1,0 +1,4 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'imageattachments:index' %}">Gallerie des images</a></li>{% endblock %}

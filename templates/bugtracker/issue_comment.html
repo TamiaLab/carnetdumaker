@@ -1,0 +1,17 @@
+{% load accounts tools %}<div class="media">
+    <div class="media-body clearfix">
+        <h4 class="media-heading"><a id="#comment-{{ comment.id }}" href="{{ comment.get_absolute_url_simple }}">#{{ comment.id }}</a> {{ comment.author|user_profile_link }} <small><i>{{ comment.pub_date|date_html }}</i></small></h4>
+        {% if not report_disabled %}<p class="pull-right"><a href="{{ comment.get_report_url }}"><i class="fa fa-bullhorn"></i> Signaler ce commentaire</a></p>{% endif %}
+        {% with changes=comment.changes.all %}
+            {% if changes %}
+                <p><strong>Modifications effectuées</strong></p>
+                <ul>
+                {% for change in changes %}
+                    <li>{{ change.field_name }} : {% if change.old_value %}{{ change.old_value }}{% else %}non spécifié{% endif %} -> {% if change.new_value %}{{ change.new_value }}{% else %}non spécifié{% endif %}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <blockquote>{{ comment.body_html|safe }}</blockquote>
+    </div>
+</div>

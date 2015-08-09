@@ -1,0 +1,10 @@
+[
+    {
+        "fields": {
+            "domain": "www.carnetdumaker.dev:8000",
+            "name": "carnetdumaker.dev"
+        },
+        "model": "sites.site",
+        "pk": 1
+    }
+]

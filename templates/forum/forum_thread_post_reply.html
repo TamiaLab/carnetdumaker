@@ -1,0 +1,31 @@
+{% extends "forum/base_threaddetail.html" %}
+{% load bootstrapform forum accounts %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ related_post.get_reply_url }}">Répondre au message</a></li>{% endblock %}
+
+{% block title %}Répondre au message | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Répondre au message</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if is_flooding %}
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                    <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
+                </div>
+            {% endif %}
+            <form method="post" action="{{ related_post.get_reply_url }}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Répondre au message" />
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Message d'origine</h2>
+    {% include "forum/post.html" with post=related_post %}
+{% endblock %}

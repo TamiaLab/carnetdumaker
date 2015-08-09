@@ -1,0 +1,12 @@
+{% extends "staticpages/base_staticpages.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:why_this_site' %}">Pourquoi ce site ?</a></li>{% endblock %}
+
+{% block title %}Pourquoi ce site ? | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Pourquoi ce site ?</h1>
+
+    <p>TODO</p>
+{% endblock %}

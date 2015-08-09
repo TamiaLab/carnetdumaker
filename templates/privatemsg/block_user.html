@@ -1,0 +1,23 @@
+{% extends "privatemsg/base_privatemsg_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url "privatemsg:block_user" username=blocked_user.username %}">Bloquer l'utilisateur "{{ blocked_user.username }}"</a></li>{% endblock %}
+
+{% block title %}Bloquer l'utilisateur "{{ blocked_user.username }}" | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Bloquer l'utilisateur "{{ blocked_user.username }}"</h1>
+
+    {% if trying_self_block %}
+        <div class="alert alert-danger">
+            <p>Vous ne pouvez pas vous bloquer vous même !</p>
+        </div>
+    {% else %}
+        <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+
+        <form method="post" action="{% url "privatemsg:block_user" username=blocked_user.username %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Bloquer l'utilisateur" />
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title"><i class="fa fa-cogs"></i> Options de filtrage</h2>
+    </div>
+    <div class="panel-body">
+        <form action="" method="GET">
+            <div class="form-group">
+                <label for="sortby" class="control-label col-xs-2">Trier par :</label>
+                <div class="col-xs-10">
+                    <select class="form-control" id="sortby" name="sortby">
+                        <option value="pubdate" {% if sort_sortby == "pubdate" %}selected{% endif %}>date de création</option>
+                        <option value="moddate" {% if sort_sortby == "moddate" %}selected{% endif %}>date de modification</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sortfrom" class="control-label col-xs-2">Trier du :</label>
+                <div class="col-xs-10">
+                    <select class="form-control" id="sortfrom" name="sortfrom">
+                        <option value="recent" {% if sort_sortfrom == "recent" %}selected{% endif %}>plus récent au plus ancien</option>
+                        <option value="old" {% if sort_sortfrom == "old" %}selected{% endif %}>plus ancien au plus récent</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="control-label col-xs-2">Statut :</label>
+                <div class="col-xs-10">
+                    <select class="form-control" id="status" name="status">
+                        <option value="" {% if sort_status == "" %}selected{% endif %}>Tous</option>
+                        <option value="BUGTRACKER_STATUS.OPEN" {% if sort_status == "BUGTRACKER_STATUS.OPEN" %}selected{% endif %}>Ouvert</option>
+                        <option value="BUGTRACKER_STATUS.NEED_DETAILS" {% if sort_status == "BUGTRACKER_STATUS.NEED_DETAILS" %}selected{% endif %}>Besoin de détails</option>
+                        <option value="BUGTRACKER_STATUS.CONFIRMED" {% if sort_status == "BUGTRACKER_STATUS.CONFIRMED" %}selected{% endif %}>Confirmé</option>
+                        <option value="BUGTRACKER_STATUS.WORKING_ON" {% if sort_status == "BUGTRACKER_STATUS.WORKING_ON" %}selected{% endif %}>En cours</option>
+                        <option value="BUGTRACKER_STATUS.DEFERRED" {% if sort_status == "BUGTRACKER_STATUS.DEFERRED" %}selected{% endif %}>Plus tard</option>
+                        <option value="BUGTRACKER_STATUS.DUPLICATE" {% if sort_status == "BUGTRACKER_STATUS.DUPLICATE" %}selected{% endif %}>Duplicata</option>
+                        <option value="BUGTRACKER_STATUS.WONT_FIX" {% if sort_status == "BUGTRACKER_STATUS.WONT_FIX" %}selected{% endif %}>Ne sera pas fixé</option>
+                        <option value="BUGTRACKER_STATUS.CLOSED" {% if sort_status == "BUGTRACKER_STATUS.CLOSED" %}selected{% endif %}>Fermé</option>
+                        <option value="BUGTRACKER_STATUS.FIXED" {% if sort_status == "BUGTRACKER_STATUS.FIXED" %}selected{% endif %}>Fixé</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="priority" class="control-label col-xs-2">Priorité :</label>
+                <div class="col-xs-10">
+                    <select class="form-control" id="priority" name="priority">
+                        <option value="" {% if sort_priority == "" %}selected{% endif %}>Toutes</option>
+                        <option value="BUGTRACKER_PRIORITY.GODZILLA" {% if sort_priority == "BUGTRACKER_PRIORITY.GODZILLA" %}selected{% endif %}>Godzilla</option>
+                        <option value="BUGTRACKER_PRIORITY.CRITICAL" {% if sort_priority == "BUGTRACKER_PRIORITY.CRITICAL" %}selected{% endif %}>Critique</option>
+                        <option value="BUGTRACKER_PRIORITY.MAJOR" {% if sort_priority == "BUGTRACKER_PRIORITY.MAJOR" %}selected{% endif %}>Majeur</option>
+                        <option value="BUGTRACKER_PRIORITY.MINOR" {% if sort_priority == "BUGTRACKER_PRIORITY.MINOR" %}selected{% endif %}>Mineur</option>
+                        <option value="BUGTRACKER_PRIORITY.TRIVIAL" {% if sort_priority == "BUGTRACKER_PRIORITY.TRIVIAL" %}selected{% endif %}>Trivial</option>
+                        <option value="BUGTRACKER_PRIORITY.NEED_REVIEW" {% if sort_priority == "BUGTRACKER_PRIORITY.NEED_REVIEW" %}selected{% endif %}>A réfléchir</option>
+                        <option value="BUGTRACKER_PRIORITY.FEATURE" {% if sort_priority == "BUGTRACKER_PRIORITY.FEATURE" %}selected{% endif %}>Ajout de fonctionnalité</option>
+                        <option value="BUGTRACKER_PRIORITY.WISHLIST" {% if sort_priority == "BUGTRACKER_PRIORITY.WISHLIST" %}selected{% endif %}>Souhait</option>
+                        <option value="BUGTRACKER_PRIORITY.INVALID" {% if sort_priority == "BUGTRACKER_PRIORITY.INVALID" %}selected{% endif %}>Ticket invalide</option>
+                        <option value="BUGTRACKER_PRIORITY.NOT_MY_FAULT" {% if sort_priority == "BUGTRACKER_PRIORITY.NOT_MY_FAULT" %}selected{% endif %}>C'pas ma faute</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="difficulty" class="control-label col-xs-2">Difficulté :</label>
+                <div class="col-xs-10">
+                    <select class="form-control" id="difficulty" name="difficulty">
+                        <option value="" {% if sort_difficulty == "" %}selected{% endif %}>Toutes</option>
+                        <option value="BUGTRACKER_DIFFICULTY.DESIGN_ERRORS" {% if sort_difficulty == "BUGTRACKER_DIFFICULTY.DESIGN_ERRORS" %}selected{% endif %}>Erreur de conception</option>
+                        <option value="BUGTRACKER_DIFFICULTY.IMPORTANT" {% if sort_difficulty == "BUGTRACKER_DIFFICULTY.IMPORTANT" %}selected{% endif %}>Importante</option>
+                        <option value="BUGTRACKER_DIFFICULTY.NORMAL" {% if sort_difficulty == "BUGTRACKER_DIFFICULTY.NORMAL" %}selected{% endif %}>Normale</option>
+                        <option value="BUGTRACKER_DIFFICULTY.LOW_IMPACT" {% if sort_difficulty == "BUGTRACKER_DIFFICULTY.LOW_IMPACT" %}selected{% endif %}>Faible</option>
+                        <option value="BUGTRACKER_DIFFICULTY.OPTIONAL" {% if sort_difficulty == "BUGTRACKER_DIFFICULTY.OPTIONAL" %}selected{% endif %}>Optionnel, à voir si temps libre</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Filtrer" />
+        </form>
+    </div>
+</div>

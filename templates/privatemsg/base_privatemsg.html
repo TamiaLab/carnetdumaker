@@ -1,0 +1,4 @@
+{% extends "base_sidebar.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'privatemsg:inbox' %}">Mes messages privés</a></li>{% endblock %}

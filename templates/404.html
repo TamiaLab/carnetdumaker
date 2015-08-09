@@ -1,0 +1,14 @@
+{% extends 'base_error.html' %}
+
+{% block title %}Page introuvable | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Page introuvable</h1>
+
+    <p>La page que vous avez demandé n'a pas pu être trouvée.</p>
+    <p>Veuillez vérifier que l'URL est correctement saisie et qu'aucune erreur de copier/coller ne soit venue gâcher la fête.</p>
+    <p>Si l'URL est correcte, mais que cette page d'erreur continue de s'afficher, il se peut que la page en question n'existe plus.
+        Essayez d'utiliser le formulaire de recherche pour voir si celle-ci n'a pas été déplacée.</p>
+
+    <p>Merci de votre compréhension.</p>
+{% endblock %}

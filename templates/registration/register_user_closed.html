@@ -1,0 +1,12 @@
+{% extends "registration/base_registration.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'registration:registration_closed' %}">Inscription impossible</a></li>{% endblock %}
+
+{% block content %}
+    <h1>Inscription impossible</h1>
+
+    <p>Les inscriptions sont temporairement désactivées. Merci de réessayer plus tard.</p>
+
+    <a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a>
+{% endblock %}

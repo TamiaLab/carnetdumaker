@@ -1,0 +1,22 @@
+{% extends "bugtracker/base_issueticket.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ issue.get_absolute_url }}">Ticket #{{ issue.id }}</a></li>
+    <li><a href="{{ issue.get_edit_url }}">Editer le ticket</a></li>{% endblock %}
+
+{% block title %}Editer le ticket | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Editer le ticket</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{{ issue.get_edit_url }}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

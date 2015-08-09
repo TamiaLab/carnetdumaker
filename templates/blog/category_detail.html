@@ -1,0 +1,55 @@
+{% extends "blog/base_category.html" %}
+{% load blog %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Articles dans la catégorie {{ category.name }} (flux RSS)" href="{{ category.get_latest_articles_rss_feed_url }}">
+    <link rel="alternate" type="application/atom+xml" title="Articles dans la catégorie {{ category.name }} (flux Atom)" href="{{ category.get_latest_articles_atom_feed_url }}">
+{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+    {% for parent_category in category.get_ancestors %}
+        <li><a href="{{ parent_category.get_absolute_url }}">{{ parent_category.name|capfirst }}</a></li>
+    {% endfor %}
+    <li><a href="{{ category.get_absolute_url }}">{{ category.name|capfirst }}</a></li>{% endblock %}
+
+{% block title %}Catégorie "{{ category.name }}" | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Catégorie "{{ category.name }}"</h1>
+
+    {% if category.logo %}
+        <img src="{{ category.logo.url }}" alt="logo catégorie {{ category.name }}" class="center-block" />
+    {% endif %}
+
+    {% if category.description %}
+        <p><strong>{{ category.description }}</strong></p>
+    {% endif %}
+
+    {% if category.parent %}
+        <p><i class="fa fa-sitemap"></i> Catégorie parente : <a href="{{ category.parent.get_absolute_url }}">{{ category.parent.name|capfirst }}</a></p>
+    {% endif %}
+
+    {% with child_categories=category.get_children %}
+        {% if child_categories %}
+            <p><i class="fa fa-sitemap"></i> Catégories filles :</p>
+            <ul>
+            {% for child_category in child_categories %}
+                <li><a href="{{ child_category.get_absolute_url }}">{{ child_category.name|capfirst }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if user.is_staff %}
+        <p><a href="{% url 'admin:blog_articlecategory_change' category.pk %}"><i class="fa fa-terminal"></i> Modifier la catégorie dans l'interface d'administration</a></p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Articles dans cette catégorie</h2>
+    <p><a href="{{ category.get_latest_articles_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles dans cette catégorie</a> (<a href="{{ category.get_latest_articles_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+    {% include "blog/articles.html" with articles=related_articles %}
+
+    {% include "paginator/pagination.html" %}
+{% endblock %}

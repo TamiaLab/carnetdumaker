@@ -1,0 +1,109 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/snippets/admin.py:60 apps/snippets/models.py:43
+msgid "Title"
+msgstr "Titre"
+
+#: apps/snippets/admin.py:63
+msgid "Metadata"
+msgstr "Métadonnées"
+
+#: apps/snippets/admin.py:71 apps/snippets/models.py:65
+msgid "Source code"
+msgstr "Code source"
+
+#: apps/snippets/admin.py:75
+msgid "Display options"
+msgstr "Options d'affichage"
+
+#: apps/snippets/admin.py:88 apps/snippets/models.py:49
+msgid "Author"
+msgstr "Auteur"
+
+#: apps/snippets/admin.py:100
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/snippets/apps.py:15 apps/snippets/models.py:100
+msgid "Code snippets"
+msgstr "Extraits de code"
+
+#: apps/snippets/feeds.py:19 apps/snippets/feeds.py:21
+msgid "Latest code snippets"
+msgstr "Derniers extraits de code"
+
+#: apps/snippets/feeds.py:48
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: apps/snippets/models.py:51
+msgid "Filename"
+msgstr "Nom de fichier"
+
+#: apps/snippets/models.py:54
+msgid "Code language"
+msgstr "Langage de programmation"
+
+#: apps/snippets/models.py:60
+msgid "Public listing"
+msgstr "Listé publiquement"
+
+#: apps/snippets/models.py:63
+msgid "Description"
+msgstr "Description"
+
+#: apps/snippets/models.py:67
+msgid "HTML for display"
+msgstr "HTML pour affichage"
+
+#: apps/snippets/models.py:71
+msgid "CSS for display"
+msgstr "CSS pour affichage"
+
+#: apps/snippets/models.py:75
+msgid "Display line numbers"
+msgstr "Afficher les numéros de lignes"
+
+#: apps/snippets/models.py:78
+msgid "Highlight lines"
+msgstr "Lignes en surbrillance"
+
+#: apps/snippets/models.py:79
+msgid "Enter line numbers separated by comma."
+msgstr "Entrer les numéros de lignes séparés par des virgules"
+
+#: apps/snippets/models.py:84
+msgid "Tabulation size in space"
+msgstr "Taille d'une tabulation en espaces"
+
+#: apps/snippets/models.py:87
+msgid "Creation date"
+msgstr "Date de création"
+
+#: apps/snippets/models.py:90
+msgid "Last modification date"
+msgstr "Date de dernière modification"
+
+#: apps/snippets/models.py:99
+msgid "Code snippet"
+msgstr "Extrait de code"
+
+#: apps/snippets/views.py:36
+msgid "Code snippets list"
+msgstr "Liste des extraits de code"

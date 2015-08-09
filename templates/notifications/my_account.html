@@ -1,0 +1,26 @@
+{% extends "notifications/base_notifications.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'notifications:myaccount' %}">Mes préférences de notifications</a></li>{% endblock %}
+
+{% block title %}Mes préférences de notifications | {{ block.super }}{% endblock %}
+
+{% block pre_content %}
+    {% include "accounts/myaccount_tabs.html" with active_tab="notifications" %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title"><i class="fa fa-bell"></i> Mes préférences de notifications</h1>
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{% url 'notifications:myaccount' %}">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block center-block" value="Enregistrer les modifications" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

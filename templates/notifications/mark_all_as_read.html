@@ -1,0 +1,17 @@
+{% extends "notifications/base_notifications.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'notifications:mark_all_as_read' %}">Marquer toutes les notifications comme lues</a></li>{% endblock %}
+
+{% block title %}Marquer toutes les notifications comme lues | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Marquer toutes les notifications comme lues</h1>
+
+    <p>Etes-vous sûr de vouloir faire cela ?</p>
+
+    <form method="post" action="{% url 'notifications:mark_all_as_read' %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Marquer toutes les notifications comme lues"/>
+    </form>
+{% endblock %}

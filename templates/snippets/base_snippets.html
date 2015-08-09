@@ -1,0 +1,9 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'snippets:index' %}">Extraits de code</a></li>{% endblock %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Extraits de code récentes (flux RSS)" href="{% url "snippets:latest_snippets_rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Extraits de code récentes (flux Atom)" href="{% url "snippets:latest_snippets_atom" %}">
+{% endblock %}

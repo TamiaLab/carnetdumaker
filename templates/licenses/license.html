@@ -1,0 +1,5 @@
+{% if license %}
+    <p><i class="fa fa-external-link"></i> <a href="{{ license.get_absolute_url }}">Licence {{ license.name }}</a></p>
+{% else %}
+    <p>Licence par défaut du site. Voir les informations en pied de page.</p>
+{% endif %}

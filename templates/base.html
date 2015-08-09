@@ -1,0 +1,274 @@
+{% load static from staticfiles %}{% load privatemsg notifications announcements %}<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="fr"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="fr"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="fr"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr"> <!--<![endif]-->
+<head>
+
+    <!-- HTML meta -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>{% block title %}{{ APP.TITLE }}{% endblock %}</title>
+
+    <!-- Standard meta -->
+    <meta name="author" content="{{ APP.AUTHOR }}">
+    <meta name="copyright" content="&copy; {{ APP.COPYRIGHT }}" />
+    <meta name="description" content="{% block description %}{{ APP.DESCRIPTION }}{% endblock %}" />
+
+    <!-- Analytics verification codes -->
+    <meta name="google-site-verification" content="{{ APP.GOOGLE_SITE_VERIFICATION_CODE }}" />
+    <meta property="twitter:account_id" content="{{ APP.TWITTER_ACCOUNT_ID }}" />
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static "images/apple-touch-icon.png" %}">
+    <link rel="icon" sizes="192x192" href="{% static "images/icon-touch.png" %}">
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+    <meta name="msapplication-TileColor" content="#113228">
+    <meta name="msapplication-TileImage" content="{% static "images/tile.png" %}">
+
+    <!-- RSS link -->
+    {% block feeds %}{% endblock %}
+
+    <!-- OpenGraph and Twitter cards -->
+    {% block opengraph %}
+        <meta property="og:type" content="{% block opengraph_type %}website{% endblock %}">
+        <meta property="og:title" content="{% block opengraph_title %}{{ APP.TITLE }}{% endblock %}">
+        <meta property="og:description" content="{% block opengraph_description %}{{ APP.DESCRIPTION }}{% endblock %}" />
+        <meta property="og:image" content="{% block opengraph_image %}{% static "images/tile.png" %}{% endblock %}">
+        <meta property="og:url" content="{% block opengraph_url %}{{ SITE.PROTO }}://{{ SITE.DOMAIN }}/{% endblock %}">
+        <meta property="og:site_name" content="{{ APP.SHORT_TITLE }}">
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="{% block twitter_card %}summary{% endblock %}">
+        <meta name="twitter:site" content="@{{ APP.TWITTER_USERNAME }}">
+        <meta name="twitter:creator" content="{% block twitter_creator %}@{{ APP.TWITTER_USERNAME }}{% endblock %}">
+        <!-- Twitter cards: title truncate after 70 chars, 200 chars for description -->
+        <!-- Twitter cards: minimum image size: 120x120px for summary, 280x150px for summary_large_image and photo -->
+        <!-- Type photo require og:image:width and og:image:height for better cropping -->
+        {% block extra_opengraph %}{% endblock %}
+    {% endblock %}
+
+    <!-- Extra head -->
+    {% block head_extra %}{% endblock head_extra %}
+
+    <!-- Canonical URL -->
+    {% if canonical_url %}
+        <link rel="canonical" href="{{ canonical_url }}" />
+    {% endif %}
+
+    <!-- Bootstrap -->
+    {% if debug %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    {% endif %}
+    <style>
+        body {
+            /*padding-top: 70px;*/
+            padding-top: 160px;
+            padding-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+
+    <!-- Modernizr -->
+    <script src="{% static "js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+    <script src="{% static "js/vendor/jquery-1.11.3.min.js" %}"></script>
+</head>
+
+<body>
+    <!-- No support for IE versions before IE8 -->
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar-collapse-1">
+                    <span class="sr-only">Ouvrir le menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- TODO Add logo in the a tag above -->
+                <a class="navbar-brand" href="{% url 'home:index' %}">Carnet du maker</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="header-navbar-collapse-1">
+                <!-- Left navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'blog:index' %}">Blog</a></li>
+                    <li><a href="{% url 'forum:index' %}">Forum</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Communauté <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'accounts:index' %}"><i class="fa fa-users"></i> Liste des membres</a></li>
+                            <li><a href="{% url 'announcements:index' %}"><i class="fa fa-bullhorn"></i> Annonces & news</a></li>
+                            <li><a href="{% url 'bugtracker:index' %}"><i class="fa fa-bug"></i> Gestionnaire de bugs</a></li>
+                            <li><a href="{% url 'imageattachments:index' %}"><i class="fa fa-bug"></i> Gallerie d'images</a></li>
+                            <li><a href="{% url 'snippets:index' %}"><i class="fa fa-bug"></i> Extraits de code</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Right navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                    {% if user.is_authenticated %}
+                        {% notifications_count as notifications_count %}
+                        {% inbox_count as messages_count %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> {{ user.username }}{% if notifications_count %} <span class="badge"><i class="fa fa-bell"></i> {{ notifications_count }}</span>{% endif %}{% if messages_count %} <span class="badge"><i class="fa fa-envelope"></i> {{ messages_count }}</span>{% endif %} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'myaccount:index' %}"><i class="fa fa-pencil-square-o"></i> Mon compte</a></li>
+                            <li><a href="{% url 'notifications:index' %}"><i class="fa fa-bell"></i> Mes notifications{% if notifications_count %} <span class="badge">{{ notifications_count }}</span>{% endif %}</a></li>
+                            <li><a href="{% url 'privatemsg:inbox' %}"><i class="fa fa-envelope"></i> Mes messages privés{% if messages_count %} <span class="badge">{{ messages_count }}</span>{% endif %}</a></li>
+                            <li class="divider"></li>
+                            {% if user.is_staff %}
+                                <li><a href="{% url 'admin:index' %}"><i class="fa fa-terminal"></i> Site d'administration</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'auth:logout' %}"><i class="fa fa-times"></i> Déconnexion</a></li>
+                        </ul>
+                    {% else %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Connexion <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'auth:login' %}"><i class="fa fa-lock"></i> Connexion</a></li>
+                            <li><a href="{% url 'registration:registration_register' %}"><i class="fa fa-user-plus"></i> Inscription</a></li>
+                        </ul>
+                    {% endif %}
+                    </li>
+				</ul>
+            </div>
+
+            <!-- Beta-stage alert -->
+            <div class="alert alert-warning" role="alert" id="beta-alert">
+                {# TODO REMOVE THIS AFTER STABLE RELEASE #}
+                <p><i class="fa fa-exclamation-triangle"></i> Site en beta test !
+                    Merci de rapporter tout bug sur le <a href="{% url 'bugtracker:index' %}">gestionnaire de bug</a> du site.
+                    Bonne lecture !</p>
+            </div>
+        </div>
+    </nav>
+    {% block extra_navbar %}{% endblock %}
+
+    <!-- Page content -->
+    <div class="container container-narrow">
+
+        <!-- Quick fix for beta -->
+        {# TODO REMOVE THIS AFTER STABLE RELEASE #}
+        <div class="visible-xs-block" style="padding-top: 30px;"></div>
+
+        <!-- Breadcrumb -->
+        <div class="row">
+            <ul class="breadcrumb">
+                {% block breadcrumb %}<li><a href="{% url 'home:index' %}">Accueil</a></li>{% endblock %}
+            </ul>
+        </div>
+
+        <!-- Global announcements -->
+        <div class="row">
+            {% global_announcements %}
+        </div>
+
+        <!-- Flash messages -->
+        {% if messages %}<div class="row">
+            <div class="flash-messages">
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                    {% endif %}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>{% endif %}
+
+        <!-- Extra before content -->
+        <div class="row">
+            {% block pre_content %}{% endblock %}
+        </div>
+
+        <!-- Content -->
+        <div class="row">
+            {% block body %}{% endblock %}
+        </div>
+
+        <!-- Extra after content -->
+        <div class="row">
+            {% block post_content %}{% endblock %}
+        </div>
+
+        <!-- Back to top button -->
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Revenir en haut de page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+        <!-- Footer -->
+        <hr>
+        <footer>
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'staticpages:about_us' %}"><i class="fa fa-users"></i> Qui sommes-nous ?</a></li>
+                        <li><a href="{% url 'staticpages:why_this_site' %}"><i class="fa fa-rocket"></i> Pourquoi ce site ?</a></li>
+                        <li><a href="{% url 'staticpages:our_commitments' %}"><i class="fa fa-smile-o"></i> Nos engagements</a></li>
+                        <li><a href="{% url 'staticpages:faq' %}"><i class="fa fa-comments"></i> Foire aux questions</a></li>
+                        <li><a href="{% url 'staticpages:tos' %}"><i class="fa fa-university"></i> Conditions générales d'utilisation</a></li>
+                        <li><a href="{% url 'staticpages:human_sitemap' %}"><i class="fa fa-sitemap"></i> Plan du site</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'staticpages:contact_us' %}"><i class="fa fa-envelope-o"></i> Nous contacter</a></li>
+                        <li><a href="{% url 'staticpages:legal_notices' %}"><i class="fa fa-gavel"></i> Mentions légales</a></li>
+                        <li><a href="{% url 'staticpages:cookies_usage' %}"><i class="fa fa-eye-slash"></i> Utilisation des cookies</a></li>
+                        {% block extra_footer_links %}{% endblock %}
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        <li><a href="https://twitter.com/carnetdumaker"><i class="fa fa-twitter"></i> @CarnetDuMaker</a></li>
+                        <li><a href="https://plus.google.com/102700422941341090773/about"><i class="fa fa-google-plus"></i> +CarnetDuMaker</a></li>
+                        <li><a href="#"><i class="fa fa-facebook-official"></i> Page CarnetDuMaker</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCAafmzWNcunTWO5d5cli2yw"><i class="fa fa-youtube"></i> Chaine CarnetDuMaker</a></li>
+                        <li><a href="https://github.com/TamiaLab"><i class="fa fa-github"></i> Github TamiaLab</a></li>
+                        <li><a href="#"><i class="fa fa-birthday-cake"></i> The cake is a lie</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row center-block">
+                <p class="text-center">&copy; <a href="http://tamialab.fr">TamiaLab</a> 2015</p>
+                <p class="text-center">Les codes sources présent sur Carnet du Maker sont la plupart du temps publiés sous <a href="http://www.gnu.org/licenses/gpl-3.0.fr.html">licence GPLv3</a>.
+                Mais, sauf mention contraire, tous les éléments du site (textes, images, codes sources, etc.), exception faites des contenus publiés sur le forum, sont la propriété exclusive de TamiaLab.
+                Toute reproduction totale ou partielle, sans autorisation préalable de l'auteur et de TamiaLab, sera succeptible d'entrainer des poursuites judiciaires.</p>
+                <!-- <p class="text-center">Motifs décoratifs réalisés par <a href="http://subtlepatterns.com/">Subtle Patterns</a> sous licence CC BY-SA 3.0.</p> -->
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/vendor/jquery.backstretch.min.js" %}"></script>
+    <script>
+        // Attach Backstrech to the body's background image
+        //$.backstretch("path/to/image.jpg", {fade: "normal"});
+    </script>
+    <script src="{% static "js/main.js" %}"></script>
+
+    <!-- Extra scripts -->
+    {% block script_extra %}{% endblock script_extra %}
+</body>
+</html>

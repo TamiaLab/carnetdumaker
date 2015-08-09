@@ -1,0 +1,28 @@
+{% extends "forum/base_forumdetail.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ forum.get_create_thread_url }}">Ouvrir un nouveau topic</a></li>{% endblock %}
+
+{% block title %}Ouvrir un nouveau topic | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>Ouvrir un nouveau topic</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if is_flooding %}
+                <div class="alert alert-danger">
+                    <ul>
+                        <li><p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p></li>
+                    </ul>
+                </div>
+            {% endif %}
+            <form method="post" action="{{ forum.get_create_thread_url }}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|bootstrapform }}
+                <input type="submit" class="btn btn-primary center-block" value="Créer le topic" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

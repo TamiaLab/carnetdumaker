@@ -1,0 +1,10 @@
+<p>Un nouveau message a été posté sur un des topics que vous suivez !</p>
+
+<p>Message de {{ post.author.username }}</p>
+
+<blockquote>{{ post.content_html|safe }}</blockquote>
+
+<p>Posté dans le topic "{{ thread.title }}"</p>
+
+<p><a href="{{ protocol }}://{{ domain }}{{ post.get_absolute_url_simple }}">Accéder au nouveau message.</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{{ thread.get_unsubscribe_url }}">Ne plus recevoir de notification par rapport à ce topic.</a></p>
