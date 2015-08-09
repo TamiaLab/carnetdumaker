@@ -337,6 +337,8 @@ class Article(ModelDiffMixin, models.Model):
         Return ``True`` if the user need membership to read the article, ``False`` otherwise.
         """
         now = timezone.now()
+        if self.membership_required_expiration_date is None:
+            return self.membership_required
         return self.membership_required and now <= self.membership_required_expiration_date
     require_membership_for_reading.boolean = True
     require_membership_for_reading.short_description = _('Require membership for reading')
