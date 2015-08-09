@@ -262,7 +262,7 @@ class Article(ModelDiffMixin, models.Model):
         # Fix last content modification date if necessary
         if self.last_content_modification_date is not None \
                 and self.pub_date is not None \
-                and self.last_content_modification_date < self.pub_date:
+                and self.last_content_modification_date <= self.pub_date:
             self.last_content_modification_date = None
         elif self.pub_date is None:
             self.last_content_modification_date = None
