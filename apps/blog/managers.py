@@ -53,23 +53,25 @@ class ArticleManager(models.Manager):
 
         # Get the raw archives stats as tuple (year, month, count)
         archives = self.published().extra({'year': "EXTRACT(YEAR FROM pub_date)",
-                                       'month': "EXTRACT(MONTH FROM pub_date)"}) \
-            .values_list('year', 'month').annotate(count=Count('id'))
+                                           'month': "EXTRACT(MONTH FROM pub_date)"}) \
+            .values_list('year', 'month')
 
         # Turn archives into something useful like a dict {year: {month: count}}
         archive_calendar = {}
-        for year, month, count in archives:
+        for year, month in archives:
 
             # Fix float value (need int)
             year = int(year)
             month = int(month)
-            count = int(count)
 
             # Store value
             if year in archive_calendar:
-                archive_calendar[year][month] = count
+                if month in archive_calendar[year]:
+                    archive_calendar[year][month] += 1
+                else:
+                    archive_calendar[year][month] = 1
             else:
-                archive_calendar[year] = {month: count}
+                archive_calendar[year] = {month: 1}
 
         # Sort month of each year
         for year, months in archive_calendar.items():
