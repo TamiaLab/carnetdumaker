@@ -9,7 +9,6 @@ from django.http import Http404, HttpResponsePermanentRedirect
 
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
-
 from .settings import NB_ARTICLES_PER_PAGE
 from .models import (Article,
                      ArticleCategory,
@@ -17,8 +16,8 @@ from .models import (Article,
 
 
 def article_list(request,
-               template_name='blog/article_list.html',
-               extra_context=None):
+                 template_name='blog/article_list.html',
+                 extra_context=None):
     """
     Blog home page view, list all recently published article.
     :param request: The incoming request.
@@ -46,8 +45,8 @@ def article_list(request,
 
 
 def article_detail(request, slug,
-                 template_name='blog/article_detail.html',
-                 extra_context=None):
+                   template_name='blog/article_detail.html',
+                   extra_context=None):
     """
     Detail view for a specific article.
     :param slug: The desired article's slug.
@@ -86,7 +85,7 @@ def article_detail(request, slug,
 
 
 def article_detail_year_month_day(request, slug, year,
-                                month=None, day=None):
+                                  month=None, day=None):
     """
     Year/month/day permalink redirect view for an article.
     :param request: The current request.
@@ -139,8 +138,8 @@ def tag_list(request,
 
 
 def tag_detail(request, slug,
-             template_name='blog/tag_detail.html',
-             extra_context=None):
+               template_name='blog/tag_detail.html',
+               extra_context=None):
     """
     Detail view for a specific tag.
     :param slug: The desired tag's slug.
@@ -196,8 +195,8 @@ def category_list(request,
 
 
 def category_detail(request, hierarchy,
-                  template_name='blog/category_detail.html',
-                  extra_context=None):
+                    template_name='blog/category_detail.html',
+                    extra_context=None):
     """
     Detail view for a specific category.
     :param hierarchy: The desired category's slug(s) hierarchy.
