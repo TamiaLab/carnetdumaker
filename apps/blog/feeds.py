@@ -77,6 +77,7 @@ class LatestArticlesFeed(BaseBlogArticleFeed):
 
     title = _('Latest articles')
     link = reverse_lazy('blog:index')
+    feed_url = reverse_lazy('blog:latest_articles_rss')
     description = _('Latest articles, all categories together')
 
     def items(self):
@@ -93,6 +94,7 @@ class LatestArticlesAtomFeed(LatestArticlesFeed):
     """
 
     feed_type = Atom1Feed
+    feed_url = reverse_lazy('blog:latest_articles_atom')
     subtitle = LatestArticlesFeed.description
 
 
