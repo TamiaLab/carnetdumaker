@@ -16,7 +16,7 @@ from .models import (Article,
                      ArticleTag)
 
 
-def blog_index(request,
+def article_list(request,
                template_name='blog/article_list.html',
                extra_context=None):
     """
@@ -45,7 +45,7 @@ def blog_index(request,
     return TemplateResponse(request, template_name, context)
 
 
-def article_show(request, slug,
+def article_detail(request, slug,
                  template_name='blog/article_detail.html',
                  extra_context=None):
     """
@@ -85,7 +85,7 @@ def article_show(request, slug,
     return TemplateResponse(request, template_name, context)
 
 
-def article_show_year_month_day(request, slug, year,
+def article_detail_year_month_day(request, slug, year,
                                 month=None, day=None):
     """
     Year/month/day permalink redirect view for an article.
@@ -138,7 +138,7 @@ def tag_list(request,
     return TemplateResponse(request, template_name, context)
 
 
-def tag_show(request, slug,
+def tag_detail(request, slug,
              template_name='blog/tag_detail.html',
              extra_context=None):
     """
@@ -195,7 +195,7 @@ def category_list(request,
     return TemplateResponse(request, template_name, context)
 
 
-def category_show(request, hierarchy,
+def category_detail(request, hierarchy,
                   template_name='blog/category_detail.html',
                   extra_context=None):
     """
