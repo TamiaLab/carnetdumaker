@@ -135,6 +135,13 @@ class LatestArticlesForCategoryFeed(BaseBlogArticleFeed):
         """
         return obj.get_absolute_url()
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles RSS feed for this category.
+        :param obj: The feed object.
+        """
+        return obj.get_latest_articles_rss_feed_url()
+
     def description(self, obj):
         """
         Return the description of the category.
@@ -158,6 +165,13 @@ class LatestArticlesForCategoryAtomFeed(LatestArticlesForCategoryFeed):
 
     feed_type = Atom1Feed
     subtitle = LatestArticlesForCategoryFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles ATOM feed for this category.
+        :param obj: The feed object.
+        """
+        return obj.get_latest_articles_atom_feed_url()
 
 
 class LatestArticlesForLicenseFeed(BaseBlogArticleFeed):
