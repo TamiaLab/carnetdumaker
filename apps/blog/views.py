@@ -69,7 +69,7 @@ def article_detail(request, slug,
             context = {
                 'title': _('Article lost in cyberspace'),
             }
-            return TemplateResponse(request, '410.html', context)
+            return TemplateResponse(request, '410.html', context, status=410)
         if not article_obj.is_published():
             raise Http404()
 
