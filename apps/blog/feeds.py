@@ -67,7 +67,9 @@ class BaseBlogArticleFeed(Feed):
         Return the list of categories of the article.
         :param item: The current feed item.
         """
-        return [c.name for c in item.categories.all()].extend([t.name for t in item.tags.all()])
+        cat_names = [c.name for c in item.categories.all()]
+        tag_names = [t.name for t in item.tags.all()]
+        return cat_names + tag_names
 
 
 class LatestArticlesFeed(BaseBlogArticleFeed):
