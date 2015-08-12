@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 # File attachments upload directory name
-FILE_ATTACHMENTS_UPLOAD_DIR_NAME = getattr(settings, 'FILE_ATTACHMENTS_UPLOAD_DIR_NAME', 'FILE_ATTACHMENTS')
+FILE_ATTACHMENTS_UPLOAD_DIR_NAME = getattr(settings, 'FILE_ATTACHMENTS_UPLOAD_DIR_NAME', 'file_attachments')
 
 # File attachments max file count (default 4 files)
 FILE_ATTACHMENTS_MAX_FILE_COUNT = getattr(settings, 'FILE_ATTACHMENTS_MAX_FILE_COUNT', 4)
