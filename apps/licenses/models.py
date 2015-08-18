@@ -12,6 +12,8 @@ from apps.txtrender.fields import RenderTextField
 from apps.txtrender.utils import render_html, strip_html
 from apps.txtrender.signals import render_engine_changed
 
+from .settings import LICENSE_LOGO_UPLOAD_DIR_NAME
+
 
 class License(models.Model):
     """
@@ -34,7 +36,7 @@ class License(models.Model):
                             unique=True)
 
     logo = models.ImageField(_('Logo'),
-                             upload_to='licenses_logo',
+                             upload_to=LICENSE_LOGO_UPLOAD_DIR_NAME,
                              default=None,
                              blank=True,
                              null=True)
