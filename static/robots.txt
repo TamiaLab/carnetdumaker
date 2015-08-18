@@ -17,4 +17,4 @@ User-agent: ia_archiver
 Disallow: /
 
 # Sitemap (index file)
-Sitemap: http://www.carnetdumaker.net/sitemap.xml
+Sitemap: https://www.carnetdumaker.net/sitemap.xml
