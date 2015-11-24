@@ -26,7 +26,7 @@ setup(
     license='GPLv3',
     description='www.carnetdumaker.net website implemented with Django framework and Python 3.4',
     long_description=README,
-    url='https://github.com/skywodd/carnetdumaker',
+    url='https://github.com/TamiaLab/carnetdumaker',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
