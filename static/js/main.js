@@ -27,3 +27,25 @@ $(document).ready(function () {
         }
     });
 });
+
+$(".spoiler").each(function(index) {
+	var t = $(this);
+	t.hide();
+	var l = $('<div><input type="button" value="Voir le texte caché"></div>');
+	l.insertBefore($(this));
+	l.click(function() {
+		t.show();
+		$(this).hide();
+	});
+});
+
+$(".ispoiler").each(function(index) {
+	var t = $(this);
+	t.hide();
+	var l = $('<input type="button" value="Voir le texte caché">');
+	l.insertBefore($(this));
+	l.click(function() {
+		t.show();
+		$(this).hide();
+	});
+});
