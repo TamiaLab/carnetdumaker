@@ -7,8 +7,6 @@ This is the source code of the <https://www.carnetdumaker.net/> website.
 
 Made using the Python language and the Django framework.
 
-**The code is currently NOT suitable for production. Some applications need more testing and check.**
-
 ### Local installation
 
 To run locally, you can do the usual:
@@ -41,7 +39,7 @@ The source code of the project is released under the AGPLv3 license.
 You can do whatever the AGPLv3 license allow you to do, BUT:
 - Some vendor files in the ``/static`` directory are under various licenses. Check vendor websites for more information.
 - All templates files in the ``/templates`` and media resources (images, logo, etc) are under copyright and **NOT** under the terms of the AGPLv3 license.
-- Some templates files include legal informations from the TamiaLab organisation. You are **NOT** allowed to use them for any derived works.
+- Some templates files include legal information from the TamiaLab organisation. You are **NOT** allowed to use them for any derived works.
 
 Any derived works published under the legal terms of the TamiaLab organisation will be considered as impersonation and immediately taken down.
 
@@ -60,13 +58,3 @@ Please send us an email through the site, open an issue, or submit a pull reques
 
 Note: pull requests will not be merged, but instead cloned and commited by the project staff (with a thank comment to the original submitter).
 If you want to see your pull request merged, we need a signed copyleft agreement from you.
-
-### Why Python, why not PHP? 
-
-Why use toilet paper when you can use sandpaper?
-
-Joke apart, the website is pretty big bonned (who said "fat" in the back !). To keep performances high we need something powerful,
-efficient and hightly maintenable. PHP does not allow this, but Django does.
-
-Making all this stuff could have be done in PHP, yep, but Python is far more powerful for this kid of stuff.
-And to be fair, I really hate PHP. Maybe someday they will implement unicode is the core PHP processor ? Yea, I'm trolling, or maybe not.
