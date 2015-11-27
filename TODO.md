@@ -2,15 +2,14 @@
 
 ## ASAP
 
-- More testing code
-- Code check (included .po files)
+- More testing of code
+- Code review (included .po files)
 
-- The HTML rendering code is more than broken. A complete rework is required. 
+- The current HTML rendering code is more than broken. Need to be replaced with the new PySkCode engine.
 
 ## Text rendering engine
 
-- Filter HTMl class
-- Support smiley and entities replacement
+- Support smiley and cosmetics replacement
 - Return extra information (headers hierarchy, footnotes, etc) as JSON
 
 ## Mailing
@@ -70,6 +69,8 @@
 - Badge app
 - Membership app
 - Shop app
+- Billing app
+- Payment app
 
 - Idea submission with vote app
 - Blog article in progress with planning and status app (mini project management app)
