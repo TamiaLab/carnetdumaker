@@ -20,7 +20,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 # Setup config
 setup(
     name='carnetdumaker',
-    version='0.1',
+    version='0.1.1',
     packages=['carnetdumaker', 'apps'],
     include_package_data=True,
     license='GPLv3',
