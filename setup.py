@@ -7,7 +7,7 @@ import os
 
 from pip.req import parse_requirements
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 # Dump readme content as text
@@ -17,11 +17,14 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 # Allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
+# TODO Include package data of module in apps
+
 # Setup config
 setup(
     name='carnetdumaker',
     version='0.1.1',
-    packages=['carnetdumaker', 'apps'],
+    packages=find_packages(),
+    scripts=['manage.py', 'manage_prod.py'],
     include_package_data=True,
     license='AGPLv3',
     description='www.carnetdumaker.net website implemented with Django framework and Python 3.4',
