@@ -1,0 +1,13 @@
+include LICENSE
+include AUTHORS
+include README.md
+include compilemessages.sh
+include secrets-example.json
+
+recursive-include docs *
+recursive-include fixtures *
+recursive-include locale *
+recursive-include static *
+recursive-include staticfiles *
+recursive-include templates *
+recursive-include uploads *
