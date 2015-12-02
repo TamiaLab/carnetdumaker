@@ -38,6 +38,10 @@ urlpatterns = patterns('',
     url(r'^forum/', include('apps.forum.urls', namespace='forum')),
     url(r'^boutique/', include('apps.shop.urls', namespace='shop')),
 
+    # Paid membership and billing
+    # TODO url(r'^abonnements/', include('apps.membership.urls', namespace='membership')),
+    # TODO url(r'^factures/', include('apps.billing.urls', namespace='billing')),
+
     # Image attachments
     url(r'^images/', include('apps.imageattachments.urls', namespace='imageattachments')),
 
@@ -66,6 +70,9 @@ urlpatterns = patterns('',
     # code snippets
     url(r'^snippets/', include('apps.snippets.urls', namespace='snippets')),
 
+    # User badges
+    # TODO url(r'^badges/', include('apps.badges.urls', namespace='badges')),
+
     # Static pages
     url(r'^pages/', include('apps.staticpages.urls', namespace='staticpages')),
 
@@ -77,6 +84,9 @@ urlpatterns = patterns('',
 
     # Text rendering preview
     url(r'^api/texte/', include('apps.txtrender.urls', namespace='txtrender')),
+
+    # Instant Payment Notification callback hook listener(s)
+    # TODO url(r'^api/ipn/', include('apps.payments.urls', namespace='payments')),
 
     # Admin pages
     url(r'^admin/', include(admin.site.urls)),
