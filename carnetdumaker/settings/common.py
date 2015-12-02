@@ -57,7 +57,7 @@ WSGI_APPLICATION = 'carnetdumaker.wsgi.dev.application'
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-FIXTURE_DIRS
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'fixtures'),
-    ]
+]
 
 # List of authentication backend
 # See https://docs.djangoproject.com/fr/1.8/ref/settings/#authentication-backends
@@ -77,10 +77,10 @@ LANGUAGE_CODE = 'fr'
 
 # A tuple of all available languages.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#languages
-LANGUAGES = (
+LANGUAGES = [
     ('fr', _('French')),
     ('en', _('English')),
-)
+]
 
 # Set to true to enable string language translation
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#use-i18n
@@ -224,7 +224,7 @@ INSTALLED_APPS = [
     'apps.timezones',
     'apps.tools',
     'apps.txtrender',
-    ]
+]
 
 # List of all middleware that are enabled in this Django installation
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#middleware-classes
@@ -242,7 +242,7 @@ MIDDLEWARE_CLASSES = [
 
     'apps.forcelogout.middleware.ForceLogoutMiddleware',  # For forcing logout of specific users
     'apps.accounts.middleware.LastActivityDateUpdateMiddleware',  # For last login date update
-    ]
+]
 
 #endregion
 
@@ -315,7 +315,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    ]
+]
 
 #endregion
 
@@ -328,7 +328,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            ],
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': False,
@@ -347,11 +347,11 @@ TEMPLATES = [
                 'carnetdumaker.context_processors.app_constants',
                 'apps.bugtracker.context_processors.bugtracker',
                 'apps.gender.context_processors.gender',
-                ],
+            ],
             'string_if_invalid': '!-%s-!',
-            },
         },
-    ]
+    },
+]
 
 #endregion
 
@@ -423,14 +423,19 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
-        "simple": {"format": "[%(name)s] %(levelname)s: %(message)s"},
-        "full": {"format": "%(asctime)s [%(name)s] %(levelname)s: %(message)s", "datefmt": "%d-%m-%Y %H:%M:%S"},
+        "simple": {
+            "format": "[%(name)s] %(levelname)s: %(message)s",
         },
+        "full": {
+            "format": "%(asctime)s [%(name)s] %(levelname)s: %(message)s",
+            "datefmt": "%d-%m-%Y %H:%M:%S",
+        },
+    },
     "filters": {
         "require_debug_false": {
             "()": "django.utils.log.RequireDebugFalse",
-            },
         },
+    },
     "handlers": {
         "mail_admins": {
             "level": "ERROR",
@@ -441,15 +446,15 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
-            },
         },
+    },
     "loggers": {
         "django.request": {
             "handlers": ["mail_admins", "console"],
             "level": "DEBUG",
             "propagate": False,
-            },
-        }
+        },
+    }
 }
 
 #endregion
