@@ -73,7 +73,11 @@
     <link rel="stylesheet" href="{% static "css/main.css" %}">
 
     <!-- Font-awesome -->
-    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    {% if debug %}
+        <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    {% endif %}
 
     <!-- Modernizr -->
     <script src="{% static "js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
