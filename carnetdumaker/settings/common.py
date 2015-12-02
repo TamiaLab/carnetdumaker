@@ -13,7 +13,7 @@ import json  # For secret configuration file parsing
 
 from django.utils.translation import ugettext_lazy as _
 
-# IMPORTANT NOTE: DO NOT USE TUPPLE, USE ARRAY, otherwise dev/prod settings overload will break
+# IMPORTANT NOTE: DO NOT USE TUPLE, USE ARRAY, otherwise dev/prod settings overload will break
 
 #region ----- Root directory path setting
 
