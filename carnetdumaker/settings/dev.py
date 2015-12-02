@@ -52,6 +52,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'somewhere',
+        'KEY_PREFIX': CACHE_KEY_PREFIX,
     }
 }
 

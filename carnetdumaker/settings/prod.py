@@ -43,6 +43,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
         'LOCATION': SECRETS.get('MEMCACHED_HOST', '127.0.0.1:11211'),
+        'KEY_PREFIX': CACHE_KEY_PREFIX,
         'BINARY': True,
     }
 }

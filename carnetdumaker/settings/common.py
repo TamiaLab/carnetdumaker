@@ -124,6 +124,11 @@ IGNORABLE_404_URLS = []
 
 #region ----- Cache settings
 
+# Key prefix for all cache key
+# Declared here once, then use in concrete settings
+# See https://docs.djangoproject.com/fr/1.9/ref/settings/#std:setting-CACHES-KEY_PREFIX
+CACHE_KEY_PREFIX = 'cdm1'
+
 # The cache backend alias to use for the per-site cache
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#std:setting-CACHE_MIDDLEWARE_ALIAS
 CACHE_MIDDLEWARE_ALIAS = 'default'
