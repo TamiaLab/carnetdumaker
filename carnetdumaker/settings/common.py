@@ -209,6 +209,7 @@ INSTALLED_APPS = [
     'apps.contentreport',
     'apps.countries',
     'apps.dbmutex',
+    'apps.donottrack',
     'apps.fileattachments',
     'apps.forcelogout',
     'apps.forum',
@@ -247,6 +248,7 @@ MIDDLEWARE_CLASSES = [
 
     'apps.forcelogout.middleware.ForceLogoutMiddleware',  # For forcing logout of specific users
     'apps.accounts.middleware.LastActivityDateUpdateMiddleware',  # For last login date update
+    'apps.donottrack.middleware.DoNotTrackMiddleware',  # For DoNotTrack support
 ]
 
 #endregion
@@ -352,6 +354,7 @@ TEMPLATES = [
                 'carnetdumaker.context_processors.app_constants',
                 'apps.bugtracker.context_processors.bugtracker',
                 'apps.gender.context_processors.gender',
+                'apps.donottrack.context_processors.do_not_track',
             ],
             'string_if_invalid': '!-%s-!',
         },
