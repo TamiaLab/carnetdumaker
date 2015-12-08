@@ -25,5 +25,6 @@ urlpatterns = (
     }, name='password_change_done'),
 
     # Email change
+    # FIXME Move to root urlconf if possible (to avoid useless dependency)
     url(r'^modification-adresse-email/', include('apps.changemail.urls')),
 )
