@@ -27,9 +27,9 @@ def user_profile_link(user, autoescape=True):
         escaper = conditional_escape
     else:
         escaper = lambda x: x
-    user_username = escaper(user.username)
-    user_profile_url = reverse('accounts:user_profile', kwargs={'username': user_username})
     if user.is_active:
+        user_username = escaper(user.username)
+        user_profile_url = reverse('accounts:user_profile', kwargs={'username': user_username})
         result = '<a href="{url}">{username}</a>'.format(url=force_text(user_profile_url), username=user_username)
         return mark_safe(result)
     else:
