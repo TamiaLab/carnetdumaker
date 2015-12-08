@@ -1,5 +1,5 @@
 """
-Test suite for the models of the user accounts app.
+Tests suite for the models of the user accounts app.
 """
 
 import pytz
@@ -16,7 +16,7 @@ from django.utils import timezone, translation
 from apps.timezones import TIMEZONE_SESSION_KEY
 from apps.gender.constants import GENDER_UNKNOWN
 
-from ..models import UserProfile, get_online_users_queryset
+from ..models import UserProfile
 from ..settings import (DEFAULT_USER_TIMEZONE,
                         DEFAULT_USER_COUNTRY,
                         ONLINE_USER_TIME_WINDOW_SECONDS)
@@ -25,7 +25,7 @@ from ..signals import user_profile_updated
 
 class UserProfileTestCase(TestCase):
     """
-    Test case for the ``UserProfile`` data model.
+    Tests case for the ``UserProfile`` data model.
     """
 
     def _get_anon_profile(self):
@@ -87,71 +87,71 @@ class UserProfileTestCase(TestCase):
 
     def test_str_method(self):
         """
-        Test __str__ result for other tests.
+        Test ``__str__`` result for other tests.
         """
         p = self._get_anon_profile()
         self.assertEqual('Profile of "%s"' % p.user.username, str(p))
 
     def test_get_absolute_url_method(self):
         """
-        Test get_absolute_url method with a valid username.
+        Test ``get_absolute_url`` method with a valid username.
         """
         p = self._get_anon_profile()
         excepted_url = reverse('accounts:user_profile', kwargs={'username': p.user.username})
         self.assertEqual(excepted_url, p.get_absolute_url())
 
-    def test_website_url(self):
+    def test_cleanup_website_url(self):
         """
-        Test website_url and website_name fields with valid values.
+        Test cleanup of ``website_url`` and ``website_name`` fields with valid values.
         """
         p = self._get_anon_profile()
         p.website_url = 'http://example.com/'
         p.website_name = 'example'
-        p.save()
+        p.cleanup_website_fields()
         self.assertEqual('http://example.com/', p.website_url)
         self.assertEqual('example', p.website_name)
 
-    def test_website_url_https(self):
+    def test_cleanup_website_url_https(self):
         """
-        Test website_url and website_name fields with valid values (HTTPS link).
+        Test cleanup of ``website_url`` and ``website_name`` fields with valid values (HTTPS link).
         """
         p = self._get_anon_profile()
         p.website_url = 'https://example.com/'
         p.website_name = 'example'
-        p.save()
+        p.cleanup_website_fields()
         self.assertEqual('https://example.com/', p.website_url)
         self.assertEqual('example', p.website_name)
 
-    def test_website_url_xss(self):
+    def test_cleanup_website_url_xss(self):
         """
-        Test website_url and website_name fields with invalid values (XSS attempt).
+        Test cleanup of ``website_url`` and ``website_name`` fields with invalid values (XSS attempt).
         """
         p = self._get_anon_profile()
         p.website_url = 'javascript:alert("XSS")'
         p.website_name = 'Powned'
-        p.save()
+        p.cleanup_website_fields()
         self.assertEqual('http://javascript:alert("XSS")', p.website_url)
         self.assertEqual('Powned', p.website_name)
 
     def test_cleanup_website_name_when_no_url(self):
         """
-        Test website_name auto cleaning when no website_url set.
+        Test cleanup of ``website_name`` when ``website_url`` is not set.
         """
         p = self._get_anon_profile()
         p.website_url = ''
         p.website_name = 'something'
-        p.save()
+        p.cleanup_website_fields()
         self.assertEqual('', p.website_url)
         self.assertEqual('', p.website_name)
 
     def test_auto_website_name_when_no_name(self):
         """
-        Test website_name auto setup when no website_name set.
+        Test auto set of ``website_name`` when not set but ``website_url`` is set.
         """
         p = self._get_anon_profile()
         p.website_url = 'http://example.com/'
         p.website_name = ''
-        p.save()
+        p.cleanup_website_fields()
         self.assertEqual('http://example.com/', p.website_url)
         self.assertEqual('http://example.com/', p.website_name)
 
@@ -163,7 +163,6 @@ class UserProfileTestCase(TestCase):
         p.jabber_name = 'jabberuser'
         p.skype_name = 'skypeuser'
         p.twitter_name = 'twitteruser'
-        p.save()
         self.assertEqual('xmpp:jabberuser', p.get_jabber_url())
         self.assertEqual('skype:skypeuser?call', p.get_skype_url())
         self.assertEqual('https://twitter.com/twitteruser', p.get_twitter_url())
@@ -174,9 +173,22 @@ class UserProfileTestCase(TestCase):
         """
         p = self._get_anon_profile()
         p.twitter_name = '@twitteruser'
-        p.save()
+        p.cleanup_twitter_nickname()
         self.assertEqual('twitteruser', p.twitter_name)
         self.assertEqual('https://twitter.com/twitteruser', p.get_twitter_url())
+
+    def test_cleanup_social_links(self):
+        """
+        Test auto cleanup of social links.
+        """
+        p = self._get_anon_profile()
+        p.facebook_url = 'www.youtube.com/c/USERNAME'
+        p.googleplus_url = 'plus.google.com/+USERNAME/PAGE'
+        p.youtube_url = 'www.facebook.com/PAGENAME'
+        p.cleanup_social_links()
+        self.assertEqual('https://www.youtube.com/c/USERNAME', p.facebook_url)
+        self.assertEqual('https://plus.google.com/+USERNAME/PAGE', p.googleplus_url)
+        self.assertEqual('https://www.facebook.com/PAGENAME', p.youtube_url)
 
     def test_facebook_valid_urls(self):
         """
@@ -460,7 +472,10 @@ class UserProfileTestCase(TestCase):
         p.last_activity_date = now
         self.assertFalse(p.is_online())
 
-    def test_get_online_users_queryset(self):
+    def test_get_online_users_accounts(self):
+        """
+        Test the manager method ``get_online_users_accounts``.
+        """
 
         # Create some test users
         user1 = get_user_model().objects.create_user(username='johndoe',
@@ -494,8 +509,8 @@ class UserProfileTestCase(TestCase):
         user3_profile.save()
 
         # Get the list of online user
-        online_users = get_online_users_queryset().all()
-        online_users = [user.id for user in online_users]
+        online_users = UserProfile.objects.get_online_users_accounts().all()
+        online_users = [user.user_id for user in online_users]
 
         # Check result
         self.assertEqual(len(online_users), 1)
@@ -521,6 +536,9 @@ class UserProfileTestCase(TestCase):
         self.assertEqual(received_user_profile, p)
 
     def test_get_subscribers_for_newsletter(self):
+        """
+        Test the manager method ``get_subscribers_for_newsletter``.
+        """
 
         # Create some test users
         user1 = get_user_model().objects.create_user(username='johndoe',
@@ -552,3 +570,35 @@ class UserProfileTestCase(TestCase):
         self.assertEqual(len(subscribers), 2)
         self.assertIn(user1_profile.user_id, subscribers)
         self.assertIn(user2_profile.user_id, subscribers)
+
+    def test_get_active_users_accounts(self):
+        """
+        Test the manager method ``get_active_users_accounts``.
+        """
+
+        # Create some test users
+        user1 = get_user_model().objects.create_user(username='johndoe',
+                                                     password='illpassword',
+                                                     email='john.doe@example.com')
+        user2 = get_user_model().objects.create_user(username='johndoe2',
+                                                     password='illpassword',
+                                                     email='john.doe2@example.com')
+        user3 = get_user_model().objects.create_user(username='johndoe3',
+                                                     password='illpassword',
+                                                     email='john.doe3@example.com')
+
+        # Populate user profile for three of them
+        user1_profile = user1.user_profile
+        user2_profile = user2.user_profile
+        user2.is_active = False
+        user2.save()
+        user3_profile = user3.user_profile
+
+        # Get the list of active users
+        active_users = UserProfile.objects.get_active_users_accounts()
+        active_users = [user.user_id for user in active_users]
+
+        # Check result
+        self.assertEqual(len(active_users), 2)
+        self.assertIn(user1_profile.user_id, active_users)
+        self.assertIn(user3_profile.user_id, active_users)
