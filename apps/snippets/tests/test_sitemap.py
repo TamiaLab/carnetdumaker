@@ -40,7 +40,7 @@ class CodeSnippetSitemapTestCase(TestCase):
                                    source_code='print("Hello World!")\n')
 
         # Test the resulting sitemap content
-        sitemap = CodeSnippetSitemap()
+        sitemap = CodeSnippetsSitemap()
         items = sitemap.items()
         self.assertQuerysetEqual(items, ['<CodeSnippet: Code 3>',
                                          '<CodeSnippet: Code 2>',
@@ -66,7 +66,7 @@ class CodeSnippetSitemapTestCase(TestCase):
         self.assertIsNotNone(snippet.creation_date)
 
         # Test the result of the method
-        sitemap = CodeSnippetSitemap()
+        sitemap = CodeSnippetsSitemap()
         self.assertEqual(sitemap.lastmod(snippet), snippet.last_modification_date)
 
     def test_lastmod_no_modification(self):
@@ -87,5 +87,5 @@ class CodeSnippetSitemapTestCase(TestCase):
         self.assertIsNotNone(snippet.creation_date)
 
         # Test the result of the method
-        sitemap = CodeSnippetSitemap()
+        sitemap = CodeSnippetsSitemap()
         self.assertEqual(sitemap.lastmod(snippet), snippet.creation_date)
