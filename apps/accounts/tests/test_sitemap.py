@@ -1,5 +1,5 @@
 """
-Test suite for the sitemap of the user accounts app.
+Tests suite for the sitemap of the user accounts app.
 """
 
 from django.test import TestCase
@@ -10,7 +10,7 @@ from ..sitemap import AccountsSitemap
 
 class AccountsSitemapTestCase(TestCase):
     """
-    Test case for the ``AccountsSitemap`` class.
+    Tests case for the ``AccountsSitemap`` class.
     """
 
     def test_sitemap_generation(self):
@@ -31,13 +31,21 @@ class AccountsSitemapTestCase(TestCase):
         j3.is_active = False
         j3.save()
 
+        # Init user accounts
+        self.assertIsNotNone(j1)
+        self.assertIsNotNone(j1.user_profile)
+        self.assertIsNotNone(j2)
+        self.assertIsNotNone(j2.user_profile)
+        self.assertIsNotNone(j3)
+        self.assertIsNotNone(j3.user_profile)
+
         # Test the resulting sitemap content
         sitemap = AccountsSitemap()
         items = sitemap.items()
         self.assertEqual(len(items), 2)
-        self.assertIn(j1, items)
-        self.assertIn(j2, items)
-        self.assertNotIn(j3, items)
+        self.assertIn(j1.user_profile, items)
+        self.assertIn(j2.user_profile, items)
+        self.assertNotIn(j3.user_profile, items)
 
     def test_sitemap_location(self):
         """
@@ -46,8 +54,11 @@ class AccountsSitemapTestCase(TestCase):
         j1 = get_user_model().objects.create_user(username='johndoe',
                                                   password='illpassword',
                                                   email='john.doe@example.com')
+        self.assertIsNotNone(j1)
+        self.assertIsNotNone(j1.user_profile)
+
         sitemap = AccountsSitemap()
-        result = sitemap.location(j1)
+        result = sitemap.location(j1.user_profile)
         self.assertEqual(j1.user_profile.get_absolute_url(), result)
 
     def test_sitemap_lastmod(self):
@@ -57,6 +68,9 @@ class AccountsSitemapTestCase(TestCase):
         j1 = get_user_model().objects.create_user(username='johndoe',
                                                   password='illpassword',
                                                   email='john.doe@example.com')
+        self.assertIsNotNone(j1)
+        self.assertIsNotNone(j1.user_profile)
+
         sitemap = AccountsSitemap()
-        result = sitemap.lastmod(j1)
+        result = sitemap.lastmod(j1.user_profile)
         self.assertEqual(j1.user_profile.last_modification_date, result)
