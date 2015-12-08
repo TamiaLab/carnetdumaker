@@ -22,18 +22,18 @@ register = template.Library()
 def user_profile_link(user, autoescape=True):
     """
     Return a link (safe text) to the given user profile if active.
-    If the user is not active, return the string Anonymous, translate in the current user language.
+    If the user is not active, return the string "Anonymous", translated in the current user language.
+    If the user is ``None``, return an empty string to avoid template error at runtime.
     :param user: The user to generate the link for.
     :param autoescape: Boolean flag from the Django template engine.
     """
     if user is None:
         return ''
-    if autoescape:
-        escaper = conditional_escape
-    else:
-        escaper = lambda x: x
     if user.is_active:
-        user_username = escaper(user.username)
+        if autoescape:
+            user_username = conditional_escape(user.username)
+        else:
+            user_username = user.username
         user_profile_url = reverse('accounts:user_profile', kwargs={'username': user_username})
         result = '<a href="{url}">{username}</a>'.format(url=force_text(user_profile_url), username=user_username)
         return mark_safe(result)
