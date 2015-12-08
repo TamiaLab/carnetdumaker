@@ -3,7 +3,8 @@ Sitemap for the user accounts app.
 """
 
 from django.contrib.sitemaps import Sitemap
-from django.contrib.auth import get_user_model
+
+from .models import UserProfile
 
 
 class AccountsSitemap(Sitemap):
@@ -16,10 +17,10 @@ class AccountsSitemap(Sitemap):
 
     def items(self):
         """
-        Return all active users.
-        :return: All active users.
+        Return all active user accounts.
+        :return: All active user accounts.
         """
-        return get_user_model().objects.select_related('user_profile').filter(is_active=True)
+        return UserProfile.objects.get_active_users_accounts()
 
     def location(self, obj):
         """
@@ -27,7 +28,7 @@ class AccountsSitemap(Sitemap):
         :param obj: The user object.
         :return: The permalink to the user account.
         """
-        return obj.user_profile.get_absolute_url()
+        return obj.get_absolute_url()
 
     def lastmod(self, obj):
         """
@@ -35,4 +36,4 @@ class AccountsSitemap(Sitemap):
         :param obj: The user object.
         :return: The last modification date of the given user account.
         """
-        return obj.user_profile.last_modification_date
+        return obj.last_modification_date
