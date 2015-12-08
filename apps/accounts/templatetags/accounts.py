@@ -18,7 +18,7 @@ from ..settings import (DEFAULT_MAX_NB_USER_IN_LATEST_CREATED_ACCOUNTS_LIST,
 register = template.Library()
 
 
-@register.filter(is_safe=True, needs_autoescape=True)
+@register.filter(needs_autoescape=True)
 def user_profile_link(user, autoescape=True):
     """
     Return a link (safe text) to the given user profile if active.
