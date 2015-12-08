@@ -1,47 +1,68 @@
 """
-Test suite for the middleware of the user accounts app.
+Tests suite for the middleware of the user accounts app.
 """
 
-from unittest import mock
+from unittest.mock import MagicMock, patch
 
+from django.test import TestCase
 from django.utils import timezone
-from django.test import SimpleTestCase
+from django.contrib.auth import get_user_model
 
 from ..middleware import LastActivityDateUpdateMiddleware
 
 
-class LastActivityDateUpdateMiddlewareTestCase(SimpleTestCase):
+class LastActivityDateUpdateMiddlewareTestCase(TestCase):
     """
-    Test case for the ``LastActivityDateUpdateMiddleware`` middleware.
+    Tests case for the ``LastActivityDateUpdateMiddleware`` middleware.
     """
 
-    def test_last_activity_middleware(self):
+    def test_last_activity_middleware_no_user_profile_yet(self):
         """
-        Test if the LastActivityDateUpdateMiddleware is working.
+        Test if the LastActivityDateUpdateMiddleware is working when the user profile does not exist.
         """
+        user = get_user_model().objects.create_user(username='johndoe',
+                                                    password='illpassword',
+                                                    email='johndoe@example.com')
         now = timezone.now()
         mw = LastActivityDateUpdateMiddleware()
-        request = mock.MagicMock()
-        request.user.is_authenticated = mock.MagicMock(return_value=True)
-        request.user.user_profile.last_activity_date = mock.MagicMock(return_value=None)
-        request.user.user_profile.save = mock.MagicMock(return_value=None)
-        request.user.user_profile.save_no_rendering = mock.MagicMock(return_value=None)
-        with mock.patch('django.utils.timezone.now') as mock_now:
+        request = MagicMock(user=user)
+
+        with patch('django.utils.timezone.now') as mock_now:
             mock_now.return_value = now
             result = mw.process_request(request)
-            request.user.is_authenticated.assert_called_once_with()
-            self.assertEqual(request.user.user_profile.last_activity_date, now)
-            self.assertEqual(request.user.user_profile.save.call_count, 0)
-            request.user.user_profile.save_no_rendering.assert_called_with(update_fields=('last_activity_date',))
             self.assertIsNone(result)
+
+        self.assertEqual(user.user_profile.last_activity_date, now)
+
+    def test_last_activity_middleware_user_profile_exist(self):
+        """
+        Test if the LastActivityDateUpdateMiddleware is working when the user profile already exist.
+        """
+        user = get_user_model().objects.create_user(username='johndoe',
+                                                    password='illpassword',
+                                                    email='johndoe@example.com')
+        self.assertIsNotNone(user.user_profile)
+        now = timezone.now()
+        mw = LastActivityDateUpdateMiddleware()
+        request = MagicMock(user=user)
+
+        with patch('django.utils.timezone.now') as mock_now:
+            mock_now.return_value = now
+            result = mw.process_request(request)
+            self.assertIsNone(result)
+
+        user.user_profile.refresh_from_db()
+        self.assertEqual(user.user_profile.last_activity_date, now)
 
     def test_last_activity_middleware_user_not_auth(self):
         """
-        Test if the LastActivityDateUpdateMiddleware is working when the current user is not authenticated.
+        Test if the ``LastActivityDateUpdateMiddleware`` middleware is working when
+        the current user is not authenticated.
         """
         mw = LastActivityDateUpdateMiddleware()
-        request = mock.MagicMock()
-        request.user.is_authenticated = mock.MagicMock(return_value=True)
-        request.user.user_profile = mock.MagicMock(return_value=None)
+        request = MagicMock()
+
+        request.user.is_authenticated = MagicMock(return_value=False)
+        request.user.user_profile = MagicMock(return_value=None)
         result = mw.process_request(request)
         self.assertIsNone(result)
