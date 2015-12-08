@@ -13,10 +13,10 @@ from .settings import NO_AVATAR_STATIC_URL
 
 class UserProfileAdmin(admin.ModelAdmin):
     """
-    Admin page for the UserProfile model.
+    Admin page for the ``UserProfile`` model.
     """
 
-    list_select_related = ('user',)
+    list_select_related = ('user', )
 
     list_display = ('avatar_img',
                     'user_username',
