@@ -4,7 +4,7 @@ URLCONF for the user accounts app (part 1/2).
 
 from django.conf.urls import url
 
-from apps.accounts import views
+from . import views
 
 
 # User accounts URL patterns configuration
