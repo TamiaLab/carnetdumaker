@@ -222,7 +222,7 @@ class UserProfile(models.Model):
             ('allow_raw_link_in_biography', 'Allow raw link (without forcing nofollow) in biography'),
             ('allow_raw_link_in_signature', 'Allow raw link (without forcing nofollow) in signature'),
         )
-        ordering = ('user__username',)
+        ordering = ('-user__is_staff', 'user__username')
 
     def __str__(self):
         return 'Profile of "%s"' % self.user.username

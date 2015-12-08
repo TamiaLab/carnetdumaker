@@ -16,6 +16,7 @@ from django.template.response import TemplateResponse
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
 
+from .models import UserProfile
 from .settings import NB_ACCOUNTS_PER_PAGE
 from .forms import UserProfileModificationForm
 
@@ -24,7 +25,7 @@ def accounts_list(request,
                   template_name='accounts/accounts_list.html',
                   extra_context=None):
     """
-    Accounts page view, display all registered user as a paginated list.
+    Accounts page view, display all registered user accounts as a paginated list.
     :param request: The current request.
     :param template_name: The template name to be used.
     :param extra_context: Any extra context for the template.
@@ -32,13 +33,10 @@ def accounts_list(request,
     """
 
     # Accounts listing
-    user_list = get_user_model().objects \
-        .select_related('user_profile') \
-        .filter(is_active=True) \
-        .order_by('-is_staff', 'username')
+    user_account_list = UserProfile.objects.get_active_users_accounts().select_related('user')
 
     # Accounts list pagination
-    paginator, page = paginate(user_list, request, NB_ACCOUNTS_PER_PAGE)
+    paginator, page = paginate(user_account_list, request, NB_ACCOUNTS_PER_PAGE)
 
     # Render the template
     context = {

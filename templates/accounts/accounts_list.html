@@ -18,22 +18,22 @@
         <tbody>
         {% for account in accounts %}
             <tr>
-                <td>{{ account|user_profile_link }}
-                    {% if account.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring" title="Membre du staff"></i> Membre du staff</span>{% endif %}
-                    {% if account.user_profile.is_online %}<span class="label label-success"><i class="fa fa-check" title="En ligne"></i> En ligne</span>{% endif %}</td>
-                <td>{{ account.date_joined|date_html }}</td>
-                <td>{% if account.last_login %}{{ account.last_login|date_html }}{% endif %}</td>
-                <td>{% with public_user_profile=account.user_profile %}
-                    {% if public_user_profile.website_url %}<a href="{{ public_user_profile.website_url }}" title="Site web"><i class="fa fa-globe"></i></a>{% endif %}
-                    {% if public_user_profile.jabber_name %}<a href="{{ public_user_profile.get_jabber_url }}" title="Jabber"><i class="fa fa-weixin"></i></a>{% endif %}
-                    {% if public_user_profile.skype_name %}<a href="{{ public_user_profile.get_skype_url }}" title="Skype"><i class="fa fa-skype"></i></a>{% endif %}
-                    {% if public_user_profile.twitter_name %}<a href="{{ public_user_profile.get_twitter_url }}" title="Twitter"><i class="fa fa-twitter"></i></a>{% endif %}
-                    {% if public_user_profile.facebook_url %}<a href="{{ public_user_profile.facebook_url }}" title="Facebook"><i class="fa fa-facebook-official"></i></a>{% endif %}
-                    {% if public_user_profile.googleplus_url %}<a href="{{ public_user_profile.googleplus_url }}" title="Google+"><i class="fa fa-google-plus"></i></a>{% endif %}
-                    {% if public_user_profile.youtube_url %}<a href="{{ public_user_profile.youtube_url }}" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
-                    {% if public_user_profile.email_public %}<a href="mailto:{{ account.email }}" title="Adresse email"><i class="fa fa-at"></i></a>{% endif %}
-                    <a href="{% url 'privatemsg:compose_to' recipient=account.username %}" title="message privé"><i class="fa fa-envelope"></i></a>
-                {% endwith %}</td>
+                <td>{{ account.user|user_profile_link }}
+                    {% if account.user.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring" title="Membre du staff"></i> Membre du staff</span>{% endif %}
+                    {% if account.is_online %}<span class="label label-success"><i class="fa fa-check" title="En ligne"></i> En ligne</span>{% endif %}</td>
+                <td>{{ account.user.date_joined|date_html }}</td>
+                <td>{% if account.user.last_login %}{{ account.user.last_login|date_html }}{% endif %}</td>
+                <td>
+                    {% if account.website_url %}<a href="{{ account.website_url }}" title="Site web"><i class="fa fa-globe"></i></a>{% endif %}
+                    {% if account.jabber_name %}<a href="{{ account.get_jabber_url }}" title="Jabber"><i class="fa fa-weixin"></i></a>{% endif %}
+                    {% if account.skype_name %}<a href="{{ account.get_skype_url }}" title="Skype"><i class="fa fa-skype"></i></a>{% endif %}
+                    {% if account.twitter_name %}<a href="{{ account.get_twitter_url }}" title="Twitter"><i class="fa fa-twitter"></i></a>{% endif %}
+                    {% if account.facebook_url %}<a href="{{ account.facebook_url }}" title="Facebook"><i class="fa fa-facebook-official"></i></a>{% endif %}
+                    {% if account.googleplus_url %}<a href="{{ account.googleplus_url }}" title="Google+"><i class="fa fa-google-plus"></i></a>{% endif %}
+                    {% if account.youtube_url %}<a href="{{ account.youtube_url }}" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
+                    {% if account.email_public %}<a href="mailto:{{ account.user.email }}" title="Adresse email"><i class="fa fa-at"></i></a>{% endif %}
+                    <a href="{% url 'privatemsg:compose_to' recipient=account.user.username %}" title="message privé"><i class="fa fa-envelope"></i></a>
+                </td>
             </tr>
         {% empty %}
             <tr>
