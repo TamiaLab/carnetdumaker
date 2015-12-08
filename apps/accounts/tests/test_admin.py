@@ -1,5 +1,5 @@
 """
-Test suite for the admin views of the user accounts app.
+Tests suite for the admin views of the user accounts app.
 """
 
 from django.test import TestCase, Client
@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 
 class UserProfileAdminTestCase(TestCase):
     """
-    Test suite for the admin views.
+    Tests case for the admin views.
     """
 
     def setUp(self):
