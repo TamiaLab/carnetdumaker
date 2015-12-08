@@ -77,6 +77,7 @@ class UserProfileModificationForm(forms.ModelForm):
         if avatar:
             dimensions = get_image_dimensions(avatar)
             if not dimensions:
+                # FIXME Dead code? ImageField seem to raise invalid_image error if dimension cannot be determined.
                 raise forms.ValidationError(_('Cannot get image\'s dimensions. Please upload a valid image file.'),
                                             code='avatar_garbage')
             w, h = dimensions
