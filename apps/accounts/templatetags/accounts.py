@@ -68,4 +68,4 @@ def get_latest_online_user_accounts(max_nb_user=DEFAULT_MAX_NB_USER_IN_LATEST_ON
     :param max_nb_user: The maximum number of user accounts to be returned.
     """
     return UserProfile.objects.get_online_users_accounts().select_related('user') \
-               .order_by('-last_modification_date')[:max_nb_user]
+               .order_by('-last_activity_date')[:max_nb_user]
