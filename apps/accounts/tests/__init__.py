@@ -1,3 +1,3 @@
 """
-Test cases for the user accounts app.
+Tests cases for the user accounts app.
 """
