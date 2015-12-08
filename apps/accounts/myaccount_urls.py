@@ -2,7 +2,7 @@
 URLCONF for the user accounts app (part 2/2).
 """
 
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 from . import views
@@ -23,8 +23,4 @@ urlpatterns = (
     url(r'^modification-mot-de-passe/ok/$', auth_views.password_change_done, {
         'template_name': 'accounts/password_change_done.html'
     }, name='password_change_done'),
-
-    # Email change
-    # FIXME Move to root urlconf if possible (to avoid useless dependency)
-    url(r'^modification-adresse-email/', include('apps.changemail.urls')),
 )

@@ -50,6 +50,7 @@ urlpatterns = patterns('',
 
     # My account
     url(r'^mon-compte/', include('apps.accounts.myaccount_urls', namespace='myaccount')),
+    url(r'^mon-compte/modification-adresse-email/', include('apps.changemail.urls', namespace='myaccountmail')),
 
     # User login and registration
     url(r'^authentification/', include('apps.registration.auth_urls', namespace='auth')),
