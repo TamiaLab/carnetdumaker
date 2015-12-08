@@ -9,7 +9,6 @@ from django.db import models
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.core.urlresolvers import reverse_lazy as reverse
-from django.contrib.auth import get_user_model
 from django.contrib.auth.signals import user_logged_in
 from django.utils import (timezone,
                           translation)
@@ -59,9 +58,8 @@ class UserProfile(models.Model):
     - User's country and last login IP address (for legal purposes),
     - User's privacy preferences (first/last names public, email public, search by email allowed, online status public),
     - User's newsletter preference (accept or deny),
-    - User's personal information (gender, location, company, biography and signature - HTML is
-    allowed in biography and signature),
-    - User's social links (website, skype, twitter, facebook, google+, youtube),
+    - User's personal information (gender, location, company, biography and signature),
+    - User's social links (website, jabber, skype, twitter, facebook, google+, youtube),
     - a modification date (for SEO and feeds),
     - a last activity date for online users tracking.
     """
@@ -128,12 +126,14 @@ class UserProfile(models.Model):
 
     biography_html = models.TextField(_('Biography (raw HTML)'),
                                       default='',
+                                      editable=False,
                                       blank=True)
 
     signature = RenderTextField(_('Signature'))
 
     signature_html = models.TextField(_('Signature (raw HTML)'),
                                       default='',
+                                      editable=False,
                                       blank=True)
 
     website_name = models.CharField(_('Website name'),
@@ -218,12 +218,7 @@ class UserProfile(models.Model):
         verbose_name = _('User profile')
         verbose_name_plural = _('User profiles')
         permissions = (
-            # TODO?
-            # Permission allow class attr in signature/biography
-            # Permission allow list tags in signature/biography
-            # Permission allow link tag in signature/biography
-            # Permission allow image tag in signature/biography
-            # Permission allow block tags (code, pre, quote) in signature/biography
+            # TODO Add fine grained permissions for allowed tags in biography and signature fields
             ('allow_raw_link_in_biography', 'Allow raw link (without forcing nofollow) in biography'),
             ('allow_raw_link_in_signature', 'Allow raw link (without forcing nofollow) in signature'),
         )
@@ -234,14 +229,57 @@ class UserProfile(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Save the user's profile. Clear website name if website url is empty.
-        Also render the biography and signature HTML versions of the source text.
+        Save the user's profile. Cleanup website fields, Twitter nickname and social links.
+        Also render the biography and signature HTML versions of the source text and emit the
+        ``user_profile_updated`` signal.
         :param args: Positional arguments for super()
         :param kwargs: Keyword arguments for super()
         """
 
         # Render HTML
         self.render_text()
+
+        # Cleanup website fields
+        self.cleanup_website_fields()
+
+        # Cleanup Twitter nickname
+        self.cleanup_twitter_nickname()
+
+        # Cleanup social links
+        self.cleanup_social_links()
+
+        # Save the model
+        super(UserProfile, self).save(*args, **kwargs)
+
+        # Emit the profile updated signal
+        user_profile_updated.send(sender=self.__class__, user_profile=self)
+
+    def save_no_rendering(self, *args, **kwargs):
+        """
+        Save the user's profile without doing any text rendering or fields cleanup.
+        This method just call the parent ``save`` method and emit the ``user_profile_updated`` signal.
+        :param args: Positional arguments for super()
+        :param kwargs: Keyword arguments for super()
+        """
+
+        # Save the model
+        super(UserProfile, self).save(*args, **kwargs)
+
+        # Emit the profile updated signal
+        user_profile_updated.send(sender=self.__class__, user_profile=self)
+
+    def get_absolute_url(self):
+        """
+        Return the permalink for this user's profile.
+        """
+        return reverse('accounts:user_profile', kwargs={'username': self.user.username})
+
+    def cleanup_website_fields(self):
+        """
+        Cleanup website name and URL in-place.
+        Remove website name without an URL. Handle website URL without a name. Avoid XSS in URL by forcing the URL to
+        start with ``http://`` or ``https://``.
+        """
 
         # Handle erroneous website data
         if self.website_name and not self.website_url:
@@ -252,65 +290,64 @@ class UserProfile(models.Model):
             self.website_name = self.website_url
 
         # Avoid XSS in website url
-        if self.website_url and not self.website_url.startswith('http'):
-            self.website_url = '%s%s' % ('http://', self.website_url)
+        if self.website_url \
+                and not self.website_url.startswith('http://') \
+                and not self.website_url.startswith('https://'):
+            self.website_url = 'http://' + self.website_url
+
+    def cleanup_twitter_nickname(self):
+        """
+        Cleanup Twitter nickname in-place.
+        """
 
         # Remove AT sign before the Twitter username if exist
         if self.twitter_name.startswith('@'):
             self.twitter_name = self.twitter_name[1:]
 
+    def cleanup_social_links(self):
+        """
+        Cleanup social URLs in-place.
+        """
+
         # Avoid social URLs without scheme
-        if self.facebook_url and not self.facebook_url.startswith('http'):
-            self.facebook_url = '%s%s' % ('https://', self.facebook_url)
-        if self.googleplus_url and not self.googleplus_url.startswith('http'):
-            self.googleplus_url = '%s%s' % ('https://', self.googleplus_url)
-        if self.youtube_url and not self.youtube_url.startswith('http'):
-            self.youtube_url = '%s%s' % ('https://', self.youtube_url)
+        if self.facebook_url \
+                and not self.facebook_url.startswith('http://') \
+                and not self.facebook_url.startswith('https://'):
+            self.facebook_url = 'https://' + self.facebook_url
 
-        # Save the model
-        super(UserProfile, self).save(*args, **kwargs)
+        if self.googleplus_url \
+                and not self.googleplus_url.startswith('http://') \
+                and not self.googleplus_url.startswith('https://'):
+            self.googleplus_url = 'https://' + self.googleplus_url
 
-        # Emit the profile updated signal
-        user_profile_updated.send(sender=self.__class__, user_profile=self)
-
-    def save_no_rendering(self, *args, **kwargs):
-        """
-        Save the model without doing any text rendering or so.
-        :param args: For super.save()
-        :param kwargs: For super.save()
-        :return: None
-        """
-
-        # Save the model
-        super(UserProfile, self).save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        """
-        Return the permalink for this user's profile.
-        """
-        return reverse('accounts:user_profile', kwargs={'username': self.user.username})
+        if self.youtube_url \
+                and not self.youtube_url.startswith('http://') \
+                and not self.youtube_url.startswith('https://'):
+            self.youtube_url = 'https://' + self.youtube_url
 
     def render_text(self, save=False):
         """
-        Render the biography and signature. Save the model only if ``save`` is True.
-        :param save: Set to True to save the model after rendering (default is False).
+        Render the biography and signature HTML versions from the source text.
+        Save the model (in fact, save only the ``biography_html`` and ``signature_html`` fields) if ``save`` is True.
+        :param save: Set to True to save the model after text rendering (default is False).
         """
 
         # Render HTML
+        # TODO move each permission get into a dedicated method
         force_nofollow_in_biography = not self.user.has_perm('accounts.allow_raw_link_in_biography')
-        self.biography_html = render_html(self.biography, force_nofollow=force_nofollow_in_biography)
         force_nofollow_in_signature = not self.user.has_perm('accounts.allow_raw_link_in_signature')
+        self.biography_html = render_html(self.biography, force_nofollow=force_nofollow_in_biography)
         self.signature_html = render_html(self.signature, force_nofollow=force_nofollow_in_signature)
-        # TODO filter more tag in signature (like h1, h2, h3, etc, ...)
+        # TODO Deploy SkCode rendering engine
 
         # Save if required
         if save:
-            # Avoid infinite loop by calling directly super.save
-            super(UserProfile, self).save(update_fields=('biography_html', 'signature_html'))
+            self.save_no_rendering(update_fields=('biography_html', 'signature_html'))
 
     def is_online(self):
         """
         Return ``True`` if the user is online and don't hide this information.
+        The "is online" time window is set by the ``ONLINE_USER_TIME_WINDOW_SECONDS`` settings.
         """
         if self.last_activity_date is None:
             return False
@@ -340,7 +377,7 @@ class UserProfile(models.Model):
 
 def _redo_profile_text_rendering(sender, **kwargs):
     """
-    Redo text rendering of all user profile.
+    Redo text rendering of all user profiles.
     :param sender: Not used.
     :param kwargs: Not used.
     """
@@ -350,13 +387,11 @@ def _redo_profile_text_rendering(sender, **kwargs):
 render_engine_changed.connect(_redo_profile_text_rendering)
 
 
-def _set_preferred_language_and_timezone(sender, user, request, **kwargs):
+def set_preferred_language_and_timezone(user, request):
     """
-    Set preferred language and timezone upon login.
-    :param sender: Not used.
-    :param user: Just logged in User instance.
-    :param request: The current request object.
-    :param kwargs: Not used.
+    Set the preferred language and timezone of the current user session.
+    :param user: The currently logged-in user.
+    :param request: The current request instance.
     """
     user_profile = user.user_profile
 
@@ -371,30 +406,40 @@ def _set_preferred_language_and_timezone(sender, user, request, **kwargs):
     request.session[translation.LANGUAGE_SESSION_KEY] = user_language
     request.LANGUAGE_CODE = translation.get_language()
 
+
+def _set_preferred_language_and_timezone(sender, user, request, **kwargs):
+    """
+    Set the preferred language and timezone upon login.
+    :param sender: Not used.
+    :param user: The currently logged-in user.
+    :param request: The current request instance.
+    :param kwargs: Not used.
+    """
+    set_preferred_language_and_timezone(user, request)
+
 user_logged_in.connect(_set_preferred_language_and_timezone)
 
 
-def _store_current_ip_address(sender, user, request, **kwargs):
+def store_current_ip_address(user, request):
     """
     Store the current IP address of the user.
-    :param sender: Not used.
-    :param user: Just logged in User instance.
-    :param request: The current request object.
-    :param kwargs: Not used.
+    :param user: The currently logged-in user.
+    :param request: The current request instance.
     """
     ip_address = get_client_ip_address(request)
     user_profile = user.user_profile
     user_profile.last_login_ip_address = ip_address
     user_profile.save_no_rendering(update_fields=('last_login_ip_address',))
 
+
+def _store_current_ip_address(sender, user, request, **kwargs):
+    """
+    Store the current IP address of the user upon login.
+    :param sender: Not used.
+    :param user: The currently logged-in user.
+    :param request: The current request instance.
+    :param kwargs: Not used.
+    """
+    store_current_ip_address(user, request)
+
 user_logged_in.connect(_store_current_ip_address)
-
-
-def get_online_users_queryset():
-    """
-    Return a queryset of all currently online users.
-    """
-    offline_threshold = timezone.now() - datetime.timedelta(seconds=ONLINE_USER_TIME_WINDOW_SECONDS)
-    return get_user_model().objects.filter(user_profile__online_status_public=True,
-                                           user_profile__last_activity_date__isnull=False,
-                                           user_profile__last_activity_date__gt=offline_threshold)
