@@ -36,3 +36,18 @@ NO_AVATAR_STATIC_URL = getattr(settings, 'NO_AVATAR_STATIC_URL', 'images/no_avat
 
 # Number of seconds after the last activity timestamp during which the user is considered online (default 15 minutes)
 ONLINE_USER_TIME_WINDOW_SECONDS = getattr(settings, 'ONLINE_USER_TIME_WINDOW_SECONDS', 15 * 60)
+
+# Default maximum number of user accounts to be listed by the ``get_latest_created_user_accounts`` template tag.
+DEFAULT_MAX_NB_USER_IN_LATEST_CREATED_ACCOUNTS_LIST = getattr(settings,
+                                                              'DEFAULT_MAX_NB_USER_IN_LATEST_CREATED_ACCOUNTS_LIST',
+                                                              10)
+
+# Default maximum number of user accounts to be listed by the ``get_latest_modified_user_accounts`` template tag.
+DEFAULT_MAX_NB_USER_IN_LATEST_MODIFIED_ACCOUNTS_LIST = getattr(settings,
+                                                               'DEFAULT_MAX_NB_USER_IN_LATEST_MODIFIED_ACCOUNTS_LIST',
+                                                               10)
+
+# Default maximum number of user accounts to be listed by the ``get_latest_online_user_accounts`` template tag.
+DEFAULT_MAX_NB_USER_IN_LATEST_ONLINE_ACCOUNTS_LIST = getattr(settings,
+                                                             'DEFAULT_MAX_NB_USER_IN_LATEST_ONLINE_ACCOUNTS_LIST',
+                                                             10)

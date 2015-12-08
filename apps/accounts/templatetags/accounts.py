@@ -9,6 +9,11 @@ from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
+from ..models import UserProfile
+from ..settings import (DEFAULT_MAX_NB_USER_IN_LATEST_CREATED_ACCOUNTS_LIST,
+                        DEFAULT_MAX_NB_USER_IN_LATEST_MODIFIED_ACCOUNTS_LIST,
+                        DEFAULT_MAX_NB_USER_IN_LATEST_ONLINE_ACCOUNTS_LIST)
+
 
 register = template.Library()
 
@@ -34,3 +39,33 @@ def user_profile_link(user, autoescape=True):
         return mark_safe(result)
     else:
         return _('Anonymous')
+
+
+@register.assignment_tag
+def get_latest_created_user_accounts(max_nb_user=DEFAULT_MAX_NB_USER_IN_LATEST_CREATED_ACCOUNTS_LIST):
+    """
+    Return a queryset of the N latest created user accounts.
+    :param max_nb_user: The maximum number of user accounts to be returned.
+    """
+    return UserProfile.objects.get_active_users_accounts().select_related('user') \
+               .order_by('-user__date_joined')[:max_nb_user]
+
+
+@register.assignment_tag
+def get_latest_modified_user_accounts(max_nb_user=DEFAULT_MAX_NB_USER_IN_LATEST_MODIFIED_ACCOUNTS_LIST):
+    """
+    Return a queryset of the N latest modified user accounts.
+    :param max_nb_user: The maximum number of user accounts to be returned.
+    """
+    return UserProfile.objects.select_related('user') \
+               .order_by('-last_modification_date')[:max_nb_user]
+
+
+@register.assignment_tag
+def get_latest_online_user_accounts(max_nb_user=DEFAULT_MAX_NB_USER_IN_LATEST_ONLINE_ACCOUNTS_LIST):
+    """
+    Return a queryset of the N latest online user accounts.
+    :param max_nb_user: The maximum number of user accounts to be returned.
+    """
+    return UserProfile.objects.get_online_users_accounts().select_related('user') \
+               .order_by('-last_modification_date')[:max_nb_user]
