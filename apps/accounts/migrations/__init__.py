@@ -1,3 +1,3 @@
 """
-Migrations for the accounts app.
+Migrations for the user accounts app.
 """
