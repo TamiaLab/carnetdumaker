@@ -24,7 +24,7 @@ urlpatterns = (
     url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/$', views.tag_detail, name='tag_detail'),
 
     # Recent announcements feeds for a specific tag
-    url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/$', feeds.LatestAnnouncementsForTagFeed,
+    url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/$', feeds.LatestAnnouncementsForTagFeed(),
         name='latest_tag_announcements_rss'),
     url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/atom/$', feeds.LatestAnnouncementsForTagAtomFeed(),
         name='latest_tag_announcements_atom'),
