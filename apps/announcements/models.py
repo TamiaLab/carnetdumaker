@@ -6,7 +6,6 @@ from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from apps.tools.utils import unique_slug
@@ -15,7 +14,8 @@ from apps.txtrender.fields import RenderTextField
 from apps.txtrender.utils import render_html, strip_html
 from apps.txtrender.signals import render_engine_changed
 
-from .managers import AnnouncementManager
+from .managers import (AnnouncementManager,
+                       AnnouncementTwitterCrossPublicationManager)
 from .constants import (ANNOUNCEMENTS_TYPE_CHOICES,
                         ANNOUNCEMENTS_TYPE_DEFAULT)
 
@@ -27,15 +27,17 @@ class Announcement(ModelDiffMixin, models.Model):
     - a title,
     - a slug (unique and indexed),
     - an author,
-    - a publication date,
+    - a creation, last content modification and publication date,
     - a type,
     - a "site wide" flag, used to determine if the announcement should be displayed on the front page.
     - some text (source and HTML version).
+    Announcements made by a specific user are available using the reverse relation ``authored_announcements``.
     """
 
     title = models.CharField(_('Title'),
                              max_length=255)
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255,
                             unique=True)
@@ -74,12 +76,25 @@ class Announcement(ModelDiffMixin, models.Model):
 
     content_html = models.TextField(_('Content (raw HTML)'))
 
+    content_text = models.TextField(_('Content (raw text)'))
+
+    tags = models.ManyToManyField('AnnouncementTag',
+                                  related_name='announcements',
+                                  verbose_name=_('Announcement\'s tags'),
+                                  blank=True)
+
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = AnnouncementManager()
 
     class Meta:
         verbose_name = _('Announcement')
         verbose_name_plural = _('Announcements')
-        permissions = (('can_see_preview', 'Can see any announcements in preview'),)
+        permissions = (
+            # TODO Add fine grained permissions for allowed tags in content field
+            ('can_see_preview', 'Can see any announcements in preview'),
+        )
         get_latest_by = 'pub_date'
         ordering = ('-pub_date',)
 
@@ -94,26 +109,40 @@ class Announcement(ModelDiffMixin, models.Model):
 
     def save(self, *args, **kwargs):
         """
-        All article saving logic happen here.
+        Save the announcement, fix non-unique slug, fix/update last content modification date and render the text.
         :param args: For super()
         :param kwargs: For super()
         """
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(Announcement, self, self.slug, 'slug', self.title)
 
         # Fix the modification date if necessary
-        changed_fields = self.changed_fields
-        if 'title' in changed_fields or 'content' in changed_fields:
-            self.last_content_modification_date = timezone.now()
-        if self.pub_date and self.last_content_modification_date \
-                and self.last_content_modification_date < self.pub_date:
-            self.last_content_modification_date = self.pub_date
+        if self.pub_date:
+            changed_fields = self.changed_fields
+            if self.pk and 'title' in changed_fields or 'content' in changed_fields:
+                self.last_content_modification_date = timezone.now()
+
+            if self.last_content_modification_date \
+                    and self.last_content_modification_date <= self.pub_date:
+                self.last_content_modification_date = None
+        else:
+            self.last_content_modification_date = None
 
         # Render the content
         self.render_text()
 
         # Save the model
+        super(Announcement, self).save(*args, **kwargs)
+
+    def save_no_rendering(self, *args, **kwargs):
+        """
+        Save the announcement without doing any text rendering or fields cleanup.
+        This method just call the parent ``save`` method.
+        :param args: For super()
+        :param kwargs: For super()
+        """
         super(Announcement, self).save(*args, **kwargs)
 
     def is_published(self):
@@ -127,7 +156,7 @@ class Announcement(ModelDiffMixin, models.Model):
 
     def can_see_preview(self, user):
         """
-        Return True if the given user can see this article in preview mode.
+        Return True if the given user can see this announcement in preview mode.
         :param user: The user to be checked for permission
         """
         return user == self.author or user.has_perm('announcements.can_see_preview')
@@ -146,19 +175,15 @@ class Announcement(ModelDiffMixin, models.Model):
         """
 
         # Render HTML
+        # TODO move each permission get into a dedicated method
         self.content_html = render_html(self.content, force_nofollow=False)
+        # TODO Deploy text version rendering
+        self.content_text = 'TODO'
+        # TODO Deploy SkCode rendering engine
 
         # Save if required
         if save:
-            # Avoid infinite loop by calling directly super.save
-            super(Announcement, self).save(update_fields=('content_html',))
-
-    @cached_property
-    def get_content_without_html(self):
-        """
-        Return the announcement's text without any HTML tag nor entities.
-        """
-        return strip_html(self.content_html)
+            self.save_no_rendering(update_fields=('content_html',))
 
 
 def _redo_announcements_text_rendering(sender, **kwargs):
@@ -170,5 +195,94 @@ def _redo_announcements_text_rendering(sender, **kwargs):
     for announcement in Announcement.objects.all():
         announcement.render_text(save=True)
 
-
 render_engine_changed.connect(_redo_announcements_text_rendering)
+
+
+class AnnouncementTag(models.Model):
+    """
+    Announcement tag data model.
+    An announcement's tag is made of:
+    - a slug (unique and indexed in database),
+    - a name (human readable).
+    """
+
+    # FIXME AutoSlugField
+    slug = models.SlugField(_('Slug'),
+                            max_length=255,
+                            unique=True)
+
+    name = models.CharField(_('Name'),
+                            max_length=255)
+
+    class Meta:
+        verbose_name = _('Announcement tag')
+        verbose_name_plural = _('Announcement tags')
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        """
+        Return the permalink to this announcement's tag.
+        """
+        return reverse('announcements:tag_detail', kwargs={'slug': self.slug})
+
+    def get_latest_announcements_rss_feed_url(self):
+        """
+        Return the permalink to "latest announcements" RSS feed for this tag.
+        """
+        return reverse('announcements:latest_tag_announcements_rss', kwargs={'slug': self.slug})
+
+    def get_latest_announcements_atom_feed_url(self):
+        """
+        Return the permalink to "latest announcements" Atom feed for this tag.
+        """
+        return reverse('announcements:latest_tag_announcements_atom', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        """
+        Save the model
+        :param args: For super()
+        :param kwargs: For super()
+        """
+
+        # Avoid duplicate slug
+        # FIXME AutoSlugField
+        self.slug = unique_slug(AnnouncementTag, self, self.slug, 'slug', self.name)
+
+        # Save the tag
+        super(AnnouncementTag, self).save(*args, **kwargs)
+
+
+class AnnouncementTwitterCrossPublication(models.Model):
+    """
+    Cross-publication marker for the Twitter platform.
+    This simple model store three information:
+    - the cross-published announcement,
+    - the tweet ID of the cross-publication (for history in case of problem),
+    - the date of cross-publication.
+    """
+
+    announcement = models.ForeignKey('Announcement',
+                                     db_index=True,  # Database optimization
+                                     related_name='twitter_pubs',
+                                     verbose_name=_('Announcement'))
+
+    tweet_id = models.CharField(_('Tweet ID'),
+                                db_index=True,  # Database optimization
+                                max_length=255)
+
+    pub_date = models.DateTimeField(_('Creation date'),
+                                    auto_now_add=True,
+                                    db_index=True)  # Database optimization
+
+    objects = AnnouncementTwitterCrossPublicationManager()
+
+    class Meta:
+        verbose_name = _('Twitter cross-publication')
+        verbose_name_plural = _('Twitter cross-publications')
+        get_latest_by = 'pub_date'
+        ordering = ('-pub_date', )
+
+    def __str__(self):
+        return '%s -> %s' % (self.announcement, self.tweet_id)
