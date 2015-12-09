@@ -141,7 +141,7 @@ class AnnouncementTagAdmin(admin.ModelAdmin):
         :param request: The current request.
         """
         return super(AnnouncementTagAdmin, self).get_queryset(request) \
-            .annotate(use_count=Count('articles'))
+            .annotate(use_count=Count('announcements'))
 
 
 class AnnouncementTwitterCrossPublicationAdmin(admin.ModelAdmin):
