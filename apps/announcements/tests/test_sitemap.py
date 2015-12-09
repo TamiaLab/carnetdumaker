@@ -8,8 +8,10 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from ..models import Announcement
-from ..sitemap import AnnouncementsSitemap
+from ..models import (Announcement,
+                      AnnouncementTag)
+from ..sitemap import (AnnouncementsSitemap,
+                       AnnouncementTagsSitemap)
 
 
 class AnnouncementsSitemapTestCase(TestCase):
@@ -105,3 +107,28 @@ class AnnouncementsSitemapTestCase(TestCase):
         # Test the result of the method
         sitemap = AnnouncementsSitemap()
         self.assertEqual(sitemap.lastmod(announcement), announcement.pub_date)
+
+
+class AnnouncementTagsSitemapTestCase(TestCase):
+    """
+    Tests suite for the ``AnnouncementTagsSitemap`` class.
+    """
+
+    def test_sitemap_items(self):
+        """
+        Test the ``items`` method of the sitemap.
+        """
+
+        # Create some test fixtures
+        tag1 = AnnouncementTag.objects.create(name='Tag 1', slug='tag-1')
+        tag2 = AnnouncementTag.objects.create(name='Tag 2', slug='tag-2')
+        tag3 = AnnouncementTag.objects.create(name='Tag 3', slug='tag-3')
+        self.assertIsNotNone(tag1)
+        self.assertIsNotNone(tag2)
+        self.assertIsNotNone(tag3)
+
+        # Test the resulting sitemap content
+        sitemap = AnnouncementTagsSitemap()
+        items = list(sitemap.items())
+        self.assertEqual(3, len(items))
+        self.assertEqual(items, [tag1, tag2, tag3])
