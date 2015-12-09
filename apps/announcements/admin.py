@@ -189,7 +189,7 @@ class AnnouncementTwitterCrossPublicationAdmin(admin.ModelAdmin):
         :return: HTML <a> link to the given object on Twitter.
         """
         return format_html('<a href="https://twitter.com/redirect/status/{0}" class="link">{1}</a>',
-                       str(obj.tweet_id),
+                       obj.tweet_id,
                        _('View announcement on Twitter'))
     view_announcement_on_twitter.short_description = ''
     view_announcement_on_twitter.allow_tags = True
