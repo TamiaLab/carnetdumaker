@@ -119,16 +119,7 @@ class Announcement(ModelDiffMixin, models.Model):
         self.slug = unique_slug(Announcement, self, self.slug, 'slug', self.title)
 
         # Fix the modification date if necessary
-        if self.pub_date:
-            changed_fields = self.changed_fields
-            if self.pk and 'title' in changed_fields or 'content' in changed_fields:
-                self.last_content_modification_date = timezone.now()
-
-            if self.last_content_modification_date \
-                    and self.last_content_modification_date <= self.pub_date:
-                self.last_content_modification_date = None
-        else:
-            self.last_content_modification_date = None
+        self.fix_last_content_modification_date()
 
         # Render the content
         self.render_text()
@@ -144,6 +135,21 @@ class Announcement(ModelDiffMixin, models.Model):
         :param kwargs: For super()
         """
         super(Announcement, self).save(*args, **kwargs)
+
+    def fix_last_content_modification_date(self):
+        """
+        Fix the ``last_content_modification_date`` field according to ``pub_date`` and other fields.
+        """
+        if self.pub_date:
+            changed_fields = self.changed_fields
+            if self.pk and 'title' in changed_fields or 'content' in changed_fields:
+                self.last_content_modification_date = timezone.now()
+
+            if self.last_content_modification_date \
+                    and self.last_content_modification_date <= self.pub_date:
+                self.last_content_modification_date = None
+        else:
+            self.last_content_modification_date = None
 
     def is_published(self):
         """
