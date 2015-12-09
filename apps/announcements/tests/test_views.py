@@ -9,12 +9,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from ..models import Announcement
+from ..models import (Announcement,
+                      AnnouncementTag)
 
 
 class AnnouncementViewsTestCase(TestCase):
     """
-    Test suite for the views.
+    Tests case for the views.
     """
 
     def setUp(self):
@@ -46,6 +47,11 @@ class AnnouncementViewsTestCase(TestCase):
                                                                             author=author,
                                                                             content='Hello World!',
                                                                             pub_date=future_now)
+        self.tag = AnnouncementTag.objects.create(name='Test tag', slug='test-tag')
+        self.tag2 = AnnouncementTag.objects.create(name='Test tag 2', slug='test-tag-2')
+        self.announcement_unpublished.tags.add(self.tag)
+        self.announcement_published.tags.add(self.tag)
+        self.announcement_published_in_future.tags.add(self.tag)
 
     def test_announcement_list_view_available(self):
         """
@@ -114,7 +120,7 @@ class AnnouncementViewsTestCase(TestCase):
 
     def test_latest_announcements_rss_feed_available(self):
         """
-        Test the availability of the "latest announcements rss feed view.
+        Test the availability of the "latest announcements" rss feed view.
         """
         client = Client()
         response = client.get(reverse('announcements:latest_announcements_rss'))
@@ -122,8 +128,48 @@ class AnnouncementViewsTestCase(TestCase):
 
     def test_latest_announcements_atom_feed_available(self):
         """
-        Test the availability of the "latest announcements atom feed" view.
+        Test the availability of the "latest announcements" atom feed" view.
         """
         client = Client()
         response = client.get(reverse('announcements:latest_announcements_atom'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_announcement_tag_list_view_available(self):
+        """
+        Test the availability of the "announcement tag list" view.
+        """
+        client = Client()
+        response = client.get(reverse('announcements:tag_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'announcements/tag_list.html')
+        self.assertIn('tags', response.context)
+        self.assertEqual(str(response.context['tags']), str([self.tag, self.tag2]))
+
+    def test_announcement_tag_detail_view_available(self):
+        """
+        Test the availability of the "announcement tag detail" view.
+        """
+        client = Client()
+        response = client.get(reverse('announcements:tag_detail', kwargs={'slug': self.tag.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'announcements/tag_detail.html')
+        self.assertIn('tag', response.context)
+        self.assertEqual(response.context['tag'], self.tag)
+        self.assertIn('related_announcements', response.context)
+        self.assertQuerysetEqual(response.context['related_announcements'], ['<Announcement: Test 3>'])
+
+    def test_latest_tag_announcements_rss_feed_available(self):
+        """
+        Test the availability of the "latest announcements for tag" rss feed view.
+        """
+        client = Client()
+        response = client.get(reverse('announcements:latest_tag_announcements_rss', kwargs={'slug': self.tag.slug}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_latest_tag_announcements_atom_feed_available(self):
+        """
+        Test the availability of the "latest announcements for tag" atom feed" view.
+        """
+        client = Client()
+        response = client.get(reverse('announcements:latest_tag_announcements_atom', kwargs={'slug': self.tag.slug}))
         self.assertEqual(response.status_code, 200)
