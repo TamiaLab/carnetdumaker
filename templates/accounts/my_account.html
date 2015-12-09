@@ -32,7 +32,7 @@
         <div class="panel-body">
             <p><i class="fa fa-globe"></i> <a href="{% url 'accounts:user_profile' username=user.username %}">Voir mon profil public</a>.</p>
             <p><i class="fa fa-key"></i> <a href="{% url 'myaccount:password_change' %}">Modifier mon mot de passe</a></p>
-            <p><i class="fa fa-at"></i> <a href="{% url 'myaccount:email_change' %}">Modifier mon adresse email</a></p>
+            <p><i class="fa fa-at"></i> <a href="{% url 'myaccountmail:email_change' %}">Modifier mon adresse email</a></p>
             <p><i class="fa fa-info-circle"></i> Si vous souhaitez cloturer votre compte utilisateur, merci de contacter l'administrateur du site via le lien de contact en bas de page.</p>
         </div>
     </div>
