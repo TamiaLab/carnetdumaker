@@ -2,6 +2,8 @@
 Utilities for the announcements app.
 """
 
+from apps.twitter.utils import publish_link_on_twitter
+
 
 def publish_announcement_on_twitter(announcement):
     """
@@ -9,6 +11,4 @@ def publish_announcement_on_twitter(announcement):
     :param announcement: The announcement to be published.
     :return: The tweet ID on success, False on error.
     """
-    # TODO send message
-    # return publish_link_on_twitter(announcement.title, announcement.get_absolute_url())
-    return False
+    return publish_link_on_twitter(announcement.title, announcement.get_absolute_url())
