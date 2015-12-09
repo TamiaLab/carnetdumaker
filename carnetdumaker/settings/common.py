@@ -289,6 +289,9 @@ FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#media-root
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
+# Debug variant for tests
+DEBUG_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'tests')
+
 # URL that handles the media served from MEDIA_ROOT.
 # It must end in a slash if set to a non-empty value.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#media-url
