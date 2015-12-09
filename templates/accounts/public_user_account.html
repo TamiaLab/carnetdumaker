@@ -61,6 +61,7 @@
                 {% endif %}
                 <hr>
 
+                <p><i class="fa fa-paper-plane"></i> Informations de contact :</p>
                 {% if public_user_profile.email_public %}<p><i class="fa fa-at"></i> <a href="mailto:{{ public_user.email }}">Adresse email</a></p>{% endif %}
                 {% if public_user_profile.website_name and public_user_profile.website_url %}
                     <p><i class="fa fa-globe"></i> Site web : <a href="{{ public_user_profile.website_url }}">{{ public_user_profile.website_name }}</a></p>
@@ -76,8 +77,8 @@
                 <p><a href="{% url 'privatemsg:compose_to' recipient=public_user.username %}"><i class="fa fa-envelope"></i> Envoyer un MP</a></p>
                 <hr>
 
-                <p><i class="fa fa-user-plus"></i> Date d'inscription : {{ public_user.date_joined|datetime_html }}</p>
-                <p><i class="fa fa-key"></i> Date de derniére connexion : {% if public_user.last_login %}{{ public_user.last_login|datetime_html }}{% else %}jamais{% endif %}</p>
+                <p><i class="fa fa-user-plus"></i> Date d'inscription : {{ public_user.date_joined|date_html }}</p>
+                <p><i class="fa fa-key"></i> Date de derniére connexion : {% if public_user.last_login %}{{ public_user.last_login|date_html }}{% else %}jamais{% endif %}</p>
                 <p><i class="fa fa-pencil-square-o"></i> Date de derniére modification du profil : {{ public_user_profile.last_modification_date|date_html }}</p>
 
                 {% if user == public_user %}
