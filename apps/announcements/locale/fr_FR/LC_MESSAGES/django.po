@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -16,27 +16,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/announcements/admin.py:62
-msgid "Title and slug"
-msgstr "Titre et slug"
-
-#: apps/announcements/admin.py:66 apps/announcements/models.py:73
-msgid "Content"
-msgstr "Contenu"
-
-#: apps/announcements/admin.py:72
-msgid "Date and time"
-msgstr "Date et heure"
-
-#: apps/announcements/admin.py:85 apps/announcements/models.py:46
-msgid "Author"
-msgstr "Auteur"
-
-#: apps/announcements/admin.py:97
+#: apps/announcements/admin.py:24
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/announcements/apps.py:15 apps/announcements/models.py:81
+#: apps/announcements/admin.py:78
+msgid "Title and slug"
+msgstr "Titre et slug"
+
+#: apps/announcements/admin.py:82 apps/announcements/models.py:75
+msgid "Content"
+msgstr "Contenu"
+
+#: apps/announcements/admin.py:89
+msgid "Date and time"
+msgstr "Date et heure"
+
+#: apps/announcements/admin.py:105 apps/announcements/models.py:48
+msgid "Author"
+msgstr "Auteur"
+
+#: apps/announcements/admin.py:136
+msgid "Use count"
+msgstr "Nombre d'utilisations"
+
+#: apps/announcements/admin.py:179
+msgid "View announcement on site"
+msgstr "Voir l'annonce sur le site"
+
+#: apps/announcements/admin.py:191
+msgid "View announcement on Twitter"
+msgstr "Voir l'annonce sur Twitter"
+
+#: apps/announcements/apps.py:15 apps/announcements/models.py:93
 msgid "Announcements"
 msgstr "Annonces"
 
@@ -60,54 +72,108 @@ msgstr "Avertissement"
 msgid "Danger"
 msgstr "Danger"
 
-#: apps/announcements/feeds.py:19 apps/announcements/feeds.py:21
-msgid "Latest announcements"
-msgstr "Dernières annonces"
-
-#: apps/announcements/feeds.py:48
+#: apps/announcements/feeds.py:45 apps/announcements/tests/test_feeds.py:176
+#: apps/announcements/tests/test_feeds.py:501
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: apps/announcements/models.py:36
+#: apps/announcements/feeds.py:74 apps/announcements/feeds.py:77
+#: apps/announcements/tests/test_feeds.py:33
+#: apps/announcements/tests/test_feeds.py:36
+msgid "Latest announcements"
+msgstr "Dernières annonces"
+
+#: apps/announcements/feeds.py:123 apps/announcements/feeds.py:144
+#: apps/announcements/tests/test_feeds.py:317
+#: apps/announcements/tests/test_feeds.py:353
+msgid "Latest announcements with tag \"%s\""
+msgstr "Dernières annonces avec le tag \"%s\""
+
+#: apps/announcements/models.py:37
 msgid "Title"
 msgstr "Titre"
 
-#: apps/announcements/models.py:39
+#: apps/announcements/models.py:41 apps/announcements/models.py:216
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/announcements/models.py:48
+#: apps/announcements/models.py:50 apps/announcements/models.py:281
 msgid "Creation date"
 msgstr "Date de création"
 
-#: apps/announcements/models.py:52
+#: apps/announcements/models.py:54
 msgid "Last content modification date"
 msgstr "Date de dernière modification du contenu"
 
-#: apps/announcements/models.py:59
+#: apps/announcements/models.py:61
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: apps/announcements/models.py:65
+#: apps/announcements/models.py:67
 msgid "Type"
 msgstr "Type"
 
-#: apps/announcements/models.py:70
+#: apps/announcements/models.py:72
 msgid "Broadcast all over the site"
 msgstr "Diffuser sur l'ensemble du site"
 
-#: apps/announcements/models.py:75
+#: apps/announcements/models.py:77
 msgid "Content (raw HTML)"
 msgstr "Contenu (HTML brut)"
 
-#: apps/announcements/models.py:80
+#: apps/announcements/models.py:79
+msgid "Content (raw text)"
+msgstr "Contenu (texte brut)"
+
+#: apps/announcements/models.py:83
+msgid "Announcement's tags"
+msgstr "Mots clefs"
+
+#: apps/announcements/models.py:86
+msgid "Last modification date"
+msgstr "Date de dernière modification"
+
+#: apps/announcements/models.py:92 apps/announcements/models.py:275
 msgid "Announcement"
 msgstr "Annonce"
 
-#: apps/announcements/models.py:126
+#: apps/announcements/models.py:161
 msgid "Published"
 msgstr "Publié"
 
-#: apps/announcements/views.py:36
+#: apps/announcements/models.py:220
+msgid "Name"
+msgstr "Nom"
+
+#: apps/announcements/models.py:224
+msgid "Announcement tag"
+msgstr "Mot clef"
+
+#: apps/announcements/models.py:225
+msgid "Announcement tags"
+msgstr "Mots clefs"
+
+#: apps/announcements/models.py:277
+msgid "Tweet ID"
+msgstr "ID tweet"
+
+#: apps/announcements/models.py:288
+msgid "Twitter cross-publication"
+msgstr "Cross-publication sur Twitter"
+
+#: apps/announcements/models.py:289
+msgid "Twitter cross-publications"
+msgstr "Cross-publications sur Twitter"
+
+#: apps/announcements/views.py:38
 msgid "Announcements list"
 msgstr "Liste des annonces"
+
+#: apps/announcements/views.py:95
+msgid "Tags list"
+msgstr "Liste des mots clefs"
+
+#: apps/announcements/views.py:126
+#, python-format
+msgid "Tag %s"
+msgstr "Mot clef %s"
