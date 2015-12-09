@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -61,7 +61,7 @@ msgstr "Modifier l'utilisateur brut"
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/accounts/apps.py:15 apps/accounts/models.py:217
+#: apps/accounts/apps.py:15 apps/accounts/models.py:219
 msgid "User profiles"
 msgstr "Profils utilisateur"
 
@@ -73,13 +73,13 @@ msgstr "Prénom"
 msgid "Last name"
 msgstr "Nom de famille"
 
-#: apps/accounts/forms.py:80
+#: apps/accounts/forms.py:81
 msgid "Cannot get image's dimensions. Please upload a valid image file."
 msgstr ""
 "Impossible d'obtenir les dimensions de l'image. Merci de téléverser un "
 "fichier image valide."
 
-#: apps/accounts/forms.py:84
+#: apps/accounts/forms.py:85
 #, python-format
 msgid ""
 "Uploaded avatar's image is too small. Minimum dimensions are %(minh)dx"
@@ -88,7 +88,7 @@ msgstr ""
 "L'image envoyée est trop petite. Les dimensions minimum sont de %(minh)dx"
 "%(minw)d pixels."
 
-#: apps/accounts/forms.py:90
+#: apps/accounts/forms.py:91
 #, python-format
 msgid ""
 "Uploaded avatar's image is too big. Maximum dimensions are %(maxh)dx%(maxw)d "
@@ -153,43 +153,43 @@ msgstr "Biographie"
 msgid "Biography (raw HTML)"
 msgstr "Biographie (HTML brut)"
 
-#: apps/accounts/models.py:131
+#: apps/accounts/models.py:132
 msgid "Signature"
 msgstr "Signature"
 
-#: apps/accounts/models.py:133
+#: apps/accounts/models.py:134
 msgid "Signature (raw HTML)"
 msgstr "Signature (HTML brut)"
 
-#: apps/accounts/models.py:137
+#: apps/accounts/models.py:139
 msgid "Website name"
 msgstr "Nom du site web"
 
-#: apps/accounts/models.py:138
+#: apps/accounts/models.py:140
 msgid "The website URL will be used if empty."
 msgstr "L'URL du site web sera utilisée si non spécifié"
 
-#: apps/accounts/models.py:143
+#: apps/accounts/models.py:145
 msgid "Website url"
 msgstr "URL du site web"
 
-#: apps/accounts/models.py:147
+#: apps/accounts/models.py:149
 msgid "Jabber nickname"
 msgstr "Nom d'utilisateur Jabber"
 
-#: apps/accounts/models.py:152
+#: apps/accounts/models.py:154
 msgid "Skype nickname"
 msgstr "Nom d'utilisateur Skype"
 
-#: apps/accounts/models.py:157
+#: apps/accounts/models.py:159
 msgid "Twitter nickname"
 msgstr "Nom d'utilisateur Twitter"
 
-#: apps/accounts/models.py:162
+#: apps/accounts/models.py:164
 msgid "Facebook URL"
 msgstr "URL page/profil Facebook"
 
-#: apps/accounts/models.py:169
+#: apps/accounts/models.py:171
 msgid ""
 "Please enter a valid Facebook page or profile URL. Examples: https://www."
 "facebook.com/MyPage, https://www.facebook.com/pages/MyPage/123456."
@@ -197,11 +197,11 @@ msgstr ""
 "Merci de saisir une URL de page/profil Facebook valide. Exemples : https://"
 "www.facebook.com/MaPage, https://www.facebook.com/pages/MaPage/123456."
 
-#: apps/accounts/models.py:175
+#: apps/accounts/models.py:177
 msgid "Google+ URL"
 msgstr "URL page/profil Google+"
 
-#: apps/accounts/models.py:182
+#: apps/accounts/models.py:184
 msgid ""
 "Please enter a valid Google+ page or profile URL. Examples: https://plus."
 "google.com/+MyPage, https://plus.google.com/1234536789, https://plus.google."
@@ -211,11 +211,11 @@ msgstr ""
 "plus.google.com/+MaPage, https://plus.google.com/1234536789, https://plus."
 "google.com/u/0/+MaPage, https://plus.google.com/u/0/123456789."
 
-#: apps/accounts/models.py:190
+#: apps/accounts/models.py:192
 msgid "Youtube URL"
 msgstr "URL chaine/profil Youtube"
 
-#: apps/accounts/models.py:197
+#: apps/accounts/models.py:199
 msgid ""
 "Please enter a valid Youtube channel or profile URL. Examples: https://www."
 "youtube.com/c/MySuperChannel, https://www.youtube.com/user/MySuperChannel, "
@@ -225,40 +225,40 @@ msgstr ""
 "www.youtube.com/c/MaSuperChaine, https://www.youtube.com/user/MaSuperChaine, "
 "https://www.youtube.com/channel/0123456789."
 
-#: apps/accounts/models.py:204
+#: apps/accounts/models.py:206
 msgid "Last modification date"
 msgstr "Dernière date de modification"
 
-#: apps/accounts/models.py:207
+#: apps/accounts/models.py:209
 msgid "Last activity date"
 msgstr "Date de dernière activité"
 
-#: apps/accounts/models.py:216
+#: apps/accounts/models.py:218
 msgid "User profile"
 msgstr "Profil utilisateur"
 
-#: apps/accounts/models.py:306
+#: apps/accounts/models.py:356
 msgid "Is online"
 msgstr "Est en ligne"
 
-#: apps/accounts/templatetags/accounts.py:36
-#: apps/accounts/tests/test_templatetags.py:48
+#: apps/accounts/templatetags/accounts.py:41
+#: apps/accounts/tests/test_templatetags.py:78
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: apps/accounts/views.py:45
+#: apps/accounts/views.py:43
 msgid "Members list"
 msgstr "Liste des membres"
 
-#: apps/accounts/views.py:78
+#: apps/accounts/views.py:76
 #, python-format
 msgid "Public profile of %s"
 msgstr "Profil public de %s"
 
-#: apps/accounts/views.py:119
+#: apps/accounts/views.py:117
 msgid "Your profile information has been successfully updated!"
 msgstr "Vos informations de profil ont été mise à jour avec succès !"
 
-#: apps/accounts/views.py:127
+#: apps/accounts/views.py:125
 msgid "My account"
 msgstr "Mon compte"
