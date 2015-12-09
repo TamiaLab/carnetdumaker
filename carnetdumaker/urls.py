@@ -9,7 +9,8 @@ from django.contrib import admin
 from django.contrib.sitemaps import views as sitemaps_views
 
 from apps.accounts.sitemap import AccountsSitemap
-from apps.announcements.sitemap import AnnouncementsSitemap
+from apps.announcements.sitemap import (AnnouncementsSitemap,
+                                        AnnouncementTagsSitemap)
 from apps.blog.sitemap import (ArticlesSitemap,
                                ArticleTagsSitemap,
                                ArticleCategoriesSitemap)
@@ -97,6 +98,7 @@ urlpatterns = patterns('',
 sitemaps = {
     'accounts': AccountsSitemap,
     'announcements': AnnouncementsSitemap,
+    'announcement_tas': AnnouncementTagsSitemap,
     'blog_articles': ArticlesSitemap,
     'blog_tags': ArticleTagsSitemap,
     'blog_categories': ArticleCategoriesSitemap,
