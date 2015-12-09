@@ -12,6 +12,8 @@ class AnnouncementManager(models.Manager):
     """
     Manager class for the ``Announcement`` data model.
     """
+    
+    use_for_related_fields = True
 
     def published(self):
         """
