@@ -175,7 +175,7 @@ class AnnouncementTwitterCrossPublicationAdmin(admin.ModelAdmin):
         :return: HTML <a> link to the given object on the site.
         """
         return format_html('<a href="{0}" class="link">{1}</a>',
-                       obj.get_absolute_url(),
+                       obj.announcement.get_absolute_url(),
                        _('View announcement on site'))
     view_announcement_on_site.short_description = ''
     view_announcement_on_site.allow_tags = True
