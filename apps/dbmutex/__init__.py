@@ -5,7 +5,8 @@ This reusable Django application provide low-level API for locking multiple para
  using mutex stored in the database.
 """
 
-default_app_config = 'apps.dbmutex.apps.DatabaseMutexConfig'
-
 # Friendly import
 from .engine import MutexLock
+from .exceptions import Error, LockError, UnlockError, AlreadyLockedError, NoLockError, LockTimeoutError
+
+default_app_config = 'apps.dbmutex.apps.DatabaseMutexConfig'
