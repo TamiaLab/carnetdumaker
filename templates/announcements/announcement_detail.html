@@ -28,6 +28,11 @@
     {% if announcement.has_been_modified_after_publication %}
         <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
     {% endif %}
+    {% with announcement_tags=announcement.tags.all %}
+        {% if announcement_tags %}
+            <p><i class="fa fa-tags"></i> Mots clefs :{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}</p>
+        {% endif %}
+    {% endwith %}
 
     {% if not announcement.is_published %}
         {% if announcement.pub_date %}
@@ -37,9 +42,9 @@
         {% endif %}
     {% endif %}
 
-    <div class="well">
-        {{ announcement.content_html|safe }}
-    </div>
+    <hr>
+
+    {{ announcement.content_html|safe }}
 
     {% if user.is_staff %}
         <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>

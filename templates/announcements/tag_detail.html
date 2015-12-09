@@ -1,17 +1,25 @@
-{% extends "announcements/base_announcements.html" %}
+{% extends "announcements/base_tag.html" %}
 {% load accounts tools %}
 
-{% block title %}Liste des annonces | {{ block.super }}{% endblock %}
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Annonces liés au tag {{ tag.name }} (flux RSS)" href="{{ tag.get_latest_announcements_rss_feed_url }}">
+    <link rel="alternate" type="application/atom+xml" title="Annonces liés au tag {{ tag.name }} (flux Atom)" href="{{ tag.get_latest_announcements_atom_feed_url }}">
+{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ tag.get_absolute_url }}">Mot clef "{{ tag.name }}"</a></li>{% endblock %}
+
+{% block title %}Mot clef "{{ tag.name }}" | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Liste des annonces</h1>
-    <p><a href="{% url "announcements:latest_announcements_rss" %}"><i class="fa fa-rss"></i> Flux RSS des annonces récentes</a> (<a href="{% url "announcements:latest_announcements_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+    <h1>Annonces portant le mot clef "{{ tag.name }}"</h1>
+    <p><a href="{{ tag.get_latest_announcements_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{{ tag.get_latest_announcements_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
     {% if user.is_staff %}
-        <p><a href="{% url 'admin:announcements_announcement_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ecrire une nouvelle annonce</a></p>
+        <p><a href="{% url 'admin:announcements_announcementtag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
     {% endif %}
 
-    {% for announcement in announcements %}
+    {% for announcement in related_announcements %}
         <div class="panel panel-{{ announcement.type }}">
             <div class="panel-heading">
                 <h1 class="panel-title"><i class="fa fa-bullhorn"></i> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></h1>
@@ -27,7 +35,7 @@
                 <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}
                 {% with announcement_tags=announcement.tags.all %}
                     {% if announcement_tags %}
-                        | <i class="fa fa-tags"></i> Mots clefs :{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}
+                        | <i class="fa fa-tags"></i>{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}
                     {% endif %}
                 {% endwith %}
                 </p>
