@@ -10,3 +10,4 @@ git+https://github.com/TamiaLab/PySkCode.git
 pylibmc==1.5.0
 pytz==2015.7
 six==1.10.0
+python-twitter==2.2
