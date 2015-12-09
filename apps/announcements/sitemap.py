@@ -4,7 +4,8 @@ Sitemap for the announcements app.
 
 from django.contrib.sitemaps import Sitemap
 
-from .models import Announcement
+from .models import (Announcement,
+                     AnnouncementTag)
 
 
 class AnnouncementsSitemap(Sitemap):
@@ -17,8 +18,8 @@ class AnnouncementsSitemap(Sitemap):
 
     def items(self):
         """
-        Return all the published announcements.
-        :return: All the published announcements.
+        Return all published announcements.
+        :return: All published announcements.
         """
         return Announcement.objects.published()
 
@@ -29,3 +30,19 @@ class AnnouncementsSitemap(Sitemap):
         :return: The last modification date of the given announcement.
         """
         return obj.last_content_modification_date or obj.pub_date
+
+
+class AnnouncementTagsSitemap(Sitemap):
+    """
+    Sitemap for the announcement tags.
+    """
+
+    changefreq = 'weekly'
+    priority = 0.1
+
+    def items(self):
+        """
+        Return all announcement tags.
+        :return: All announcement tags.
+        """
+        return AnnouncementTag.objects.all()
