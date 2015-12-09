@@ -19,8 +19,8 @@
         {% for account in accounts %}
             <tr>
                 <td>{{ account.user|user_profile_link }}
-                    {% if account.user.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring" title="Membre du staff"></i> Membre du staff</span>{% endif %}
-                    {% if account.is_online %}<span class="label label-success"><i class="fa fa-check" title="En ligne"></i> En ligne</span>{% endif %}</td>
+                    {% if account.user.is_staff %}&nbsp;<span class="label label-primary"><i class="fa fa-life-ring" title="Membre du staff"></i> Membre du staff</span>{% endif %}
+                    {% if account.is_online %}&nbsp;<span class="label label-success"><i class="fa fa-check" title="En ligne"></i> En ligne</span>{% endif %}</td>
                 <td>{{ account.user.date_joined|date_html }}</td>
                 <td>{% if account.user.last_login %}{{ account.user.last_login|date_html }}{% endif %}</td>
                 <td>
