@@ -4,7 +4,9 @@ Management command to cross-publish announcements on Twitter.
 
 from django.core.management.base import NoArgsCommand
 
-from apps.dbmutex import MutexLock,AlreadyLockedError, LockTimeoutError
+from apps.dbmutex import (MutexLock,
+                          AlreadyLockedError,
+                          LockTimeoutError)
 
 from ...models import AnnouncementTwitterCrossPublication
 
