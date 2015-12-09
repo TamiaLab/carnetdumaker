@@ -3,6 +3,7 @@ Tests suite for the models of the announcements app.
 """
 
 from datetime import timedelta
+from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
@@ -11,7 +12,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
-from ..models import Announcement
+from ..models import (Announcement,
+                      AnnouncementTag,
+                      AnnouncementTwitterCrossPublication)
 from ..constants import ANNOUNCEMENTS_TYPE_DEFAULT
 
 
@@ -44,17 +47,18 @@ class AnnouncementTestCase(TestCase):
         self.assertIsNone(announcement.pub_date)
         self.assertEqual(announcement.type, ANNOUNCEMENTS_TYPE_DEFAULT)
         self.assertFalse(announcement.site_wide)
+        self.assertTrue(Announcement.objects.use_for_related_fields)
 
     def test_str_method(self):
         """
-        Test __str__ result for other tests.
+        Test ``__str__`` result for other tests.
         """
         announcement = self._get_announcement()
         self.assertEqual(announcement.title, str(announcement))
 
     def test_get_absolute_url_method(self):
         """
-        Test get_absolute_url method with a valid announcement.
+        Test ``get_absolute_url`` method with a valid announcement.
         """
         announcement = self._get_announcement()
         excepted_url = reverse('announcements:announcement_detail', kwargs={'slug': announcement.slug})
@@ -65,6 +69,7 @@ class AnnouncementTestCase(TestCase):
         Test if the object is flagged has "changed" when the content text is altered (should).
         """
         announcement = self._get_announcement()
+        announcement.pub_date = timezone.now()
         self.assertFalse(announcement.has_been_modified_after_publication())
         announcement.content = 'New content'
         announcement.save()
@@ -75,6 +80,7 @@ class AnnouncementTestCase(TestCase):
         Test if the object is flagged has "changed" when the title is altered (should).
         """
         announcement = self._get_announcement()
+        announcement.pub_date = timezone.now()
         self.assertFalse(announcement.has_been_modified_after_publication())
         announcement.title = 'New title'
         announcement.save()
@@ -89,6 +95,7 @@ class AnnouncementTestCase(TestCase):
                                                           password='jonhsmith',
                                                           email='jonh.smith@example.com')
         announcement = self._get_announcement()
+        announcement.pub_date = timezone.now()
         self.assertFalse(announcement.has_been_modified_after_publication())
         announcement.slug = 'new-slug'
         announcement.save()
@@ -111,16 +118,27 @@ class AnnouncementTestCase(TestCase):
 
     def test_fix_last_content_modification_on_publish(self):
         """
-        Test if the ``last_content_modification_date`` is fixed when before than the ``pub_date``.
+        Test if the ``last_content_modification_date`` is fixed when before the ``pub_date``.
         """
         announcement = self._get_announcement()
         now = timezone.now()
         announcement.pub_date = now
         announcement.last_content_modification_date = now - timedelta(seconds=1)
         announcement.save()
-        self.assertEqual(announcement.last_content_modification_date, announcement.pub_date)
+        self.assertIsNone(announcement.last_content_modification_date)
 
-    def test_no_fix_last_content_modification_on_publish_future(self):
+    def test_fix_last_content_modification_on_publish_2(self):
+        """
+        Test if the ``last_content_modification_date`` is fixed when at ``pub_date``.
+        """
+        announcement = self._get_announcement()
+        now = timezone.now()
+        announcement.pub_date = now
+        announcement.last_content_modification_date = now
+        announcement.save()
+        self.assertIsNone(announcement.last_content_modification_date)
+
+    def test_no_fix_last_content_modification_on_future_modification(self):
         """
         Test if the ``last_content_modification_date`` is NOT fixed when after than the ``pub_date``.
         """
@@ -131,6 +149,17 @@ class AnnouncementTestCase(TestCase):
         announcement.last_content_modification_date = future_now
         announcement.save()
         self.assertEqual(announcement.last_content_modification_date, future_now)
+
+    def test_fix_last_content_modification_not_published(self):
+        """
+        Test if the ``last_content_modification_date`` is fixed when ``pub_date`` is not set.
+        """
+        announcement = self._get_announcement()
+        now = timezone.now()
+        announcement.pub_date = None
+        announcement.last_content_modification_date = now
+        announcement.save()
+        self.assertIsNone(announcement.last_content_modification_date)
 
     def test_slug_conflict_resolution(self):
         """
@@ -349,3 +378,210 @@ class AnnouncementTestCase(TestCase):
                                                                 '<Announcement: Test 3>',
                                                                 '<Announcement: Test 2>',
                                                                 '<Announcement: Test 1>'])
+
+
+class AnnouncementTagTestCase(TestCase):
+    """
+    Tests suite for the ``AnnouncementTag`` data model.
+    """
+
+    def test_str_method(self):
+        """
+        Test ``__str__`` result for other tests.
+        """
+        tag = AnnouncementTag.objects.create(name='test', slug='test')
+        self.assertEqual(tag.name, str(tag))
+
+    def test_get_absolute_url_method(self):
+        """
+        Test ``get_absolute_url`` method with a valid announcement.
+        """
+        tag = AnnouncementTag.objects.create(name='test', slug='test')
+        excepted_url = reverse('announcements:tag_detail', kwargs={'slug': tag.slug})
+        self.assertEqual(excepted_url, tag.get_absolute_url())
+
+    def test_get_latest_announcements_rss_feed_url_method(self):
+        """
+        Test ``get_latest_announcements_rss_feed_url`` method with a valid announcement.
+        """
+        tag = AnnouncementTag.objects.create(name='test', slug='test')
+        excepted_url = reverse('announcements:latest_tag_announcements_rss', kwargs={'slug': tag.slug})
+        self.assertEqual(excepted_url, tag.get_latest_announcements_rss_feed_url())
+
+    def test_get_latest_announcements_atom_feed_url_method(self):
+        """
+        Test ``get_latest_announcements_atom_feed_url`` method with a valid announcement.
+        """
+        tag = AnnouncementTag.objects.create(name='test', slug='test')
+        excepted_url = reverse('announcements:latest_tag_announcements_atom', kwargs={'slug': tag.slug})
+        self.assertEqual(excepted_url, tag.get_latest_announcements_atom_feed_url())
+
+
+class AnnouncementTwitterCrossPublicationTestCase(TestCase):
+    """
+    Tests suite for the ``AnnouncementTwitterCrossPublication`` data model.
+    """
+
+    def test_str_method(self):
+        """
+        Test ``__str__`` result for other tests.
+        """
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        announcement = Announcement.objects.create(title='Test 1',
+                                                   slug='test-1',
+                                                   author=author,
+                                                   content='Hello World!')
+        tweet = AnnouncementTwitterCrossPublication.objects.create(announcement=announcement,
+                                                                   tweet_id='0123456789')
+        self.assertEqual('%s -> %s' % (announcement, '0123456789'), str(tweet))
+
+    def test_publish_pending_announcements(self):
+        """
+        Test the ``publish_pending_announcements`` method of the manager.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        announcement_unpublished = Announcement.objects.create(title='Test 1',
+                                                               slug='test-1',
+                                                               author=author,
+                                                               content='Hello World!',
+                                                               pub_date=None)
+        announcement_published = Announcement.objects.create(title='Test 2',
+                                                             slug='test-2',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=now)
+        announcement_published_in_future = Announcement.objects.create(title='Test 3',
+                                                                       slug='test-3',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=future_now)
+        announcement_published_site_wide = Announcement.objects.create(title='Test 4',
+                                                                       slug='test-4',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=now,
+                                                                       site_wide=True)
+        self.assertIsNotNone(announcement_unpublished)
+        self.assertIsNotNone(announcement_published)
+        self.assertIsNotNone(announcement_published_in_future)
+        self.assertIsNotNone(announcement_published_site_wide)
+
+        with patch('apps.announcements.managers.publish_announcement_on_twitter') as mock:
+            mock.return_value = '0123456789'
+            AnnouncementTwitterCrossPublication.objects.publish_pending_announcements()
+
+        self.assertEqual(2, mock.call_count)
+        mock.assert_any_call(announcement_published)
+        mock.assert_any_call(announcement_published_site_wide)
+
+        tweets = AnnouncementTwitterCrossPublication.objects.all()
+        self.assertQuerysetEqual(tweets, ['<AnnouncementTwitterCrossPublication: Test 2 -> 0123456789>',
+                                          '<AnnouncementTwitterCrossPublication: Test 4 -> 0123456789>'])
+
+    def test_publish_pending_announcements_error(self):
+        """
+        Test the ``publish_pending_announcements`` method of the manager when the Twitter api fail.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        announcement_unpublished = Announcement.objects.create(title='Test 1',
+                                                               slug='test-1',
+                                                               author=author,
+                                                               content='Hello World!',
+                                                               pub_date=None)
+        announcement_published = Announcement.objects.create(title='Test 2',
+                                                             slug='test-2',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=now)
+        announcement_published_in_future = Announcement.objects.create(title='Test 3',
+                                                                       slug='test-3',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=future_now)
+        announcement_published_site_wide = Announcement.objects.create(title='Test 4',
+                                                                       slug='test-4',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=now,
+                                                                       site_wide=True)
+        self.assertIsNotNone(announcement_unpublished)
+        self.assertIsNotNone(announcement_published)
+        self.assertIsNotNone(announcement_published_in_future)
+        self.assertIsNotNone(announcement_published_site_wide)
+
+        with patch('apps.announcements.managers.publish_announcement_on_twitter') as mock:
+            mock.return_value = False
+            AnnouncementTwitterCrossPublication.objects.publish_pending_announcements()
+
+        self.assertEqual(2, mock.call_count)
+        mock.assert_any_call(announcement_published)
+        mock.assert_any_call(announcement_published_site_wide)
+
+        tweets = AnnouncementTwitterCrossPublication.objects.all()
+        self.assertQuerysetEqual(tweets, [])
+
+    def test_publish_pending_announcements_with_already_posted(self):
+        """
+        Test the ``publish_pending_announcements`` method of the manager when some announcements are already posted.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        announcement_unpublished = Announcement.objects.create(title='Test 1',
+                                                               slug='test-1',
+                                                               author=author,
+                                                               content='Hello World!',
+                                                               pub_date=None)
+        announcement_published = Announcement.objects.create(title='Test 2',
+                                                             slug='test-2',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=now)
+        announcement_published_in_future = Announcement.objects.create(title='Test 3',
+                                                                       slug='test-3',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=future_now)
+        announcement_published_site_wide = Announcement.objects.create(title='Test 4',
+                                                                       slug='test-4',
+                                                                       author=author,
+                                                                       content='Hello World!',
+                                                                       pub_date=now,
+                                                                       site_wide=True)
+        self.assertIsNotNone(announcement_unpublished)
+        self.assertIsNotNone(announcement_published)
+        self.assertIsNotNone(announcement_published_in_future)
+        self.assertIsNotNone(announcement_published_site_wide)
+
+        AnnouncementTwitterCrossPublication.objects.create(announcement=announcement_published_site_wide,
+                                                           tweet_id='0123456789')
+
+        with patch('apps.announcements.managers.publish_announcement_on_twitter') as mock:
+            mock.return_value = '0123456789'
+            AnnouncementTwitterCrossPublication.objects.publish_pending_announcements()
+
+        self.assertEqual(1, mock.call_count)
+        mock.assert_any_call(announcement_published)
+
+        tweets = AnnouncementTwitterCrossPublication.objects.all()
+        print(tweets)
+        self.assertQuerysetEqual(tweets, ['<AnnouncementTwitterCrossPublication: Test 2 -> 0123456789>',
+                                          '<AnnouncementTwitterCrossPublication: Test 4 -> 0123456789>'])
