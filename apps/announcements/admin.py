@@ -119,8 +119,6 @@ class AnnouncementTagAdmin(admin.ModelAdmin):
     search_fields = ('name',
                      'slug')
 
-    raw_id_fields = ('author', )
-
     readonly_fields = ('tag_use_count', )
 
     prepopulated_fields = {'slug': ('name', )}
