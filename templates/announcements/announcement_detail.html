@@ -8,7 +8,7 @@
 
 {% block opengraph_type %}article{% endblock %}
 {% block opengraph_title %}{{ announcement.title }}{% endblock %}
-{% block opengraph_description %}{{ announcement.get_content_without_html|truncatewords:200 }}{% endblock %}
+{% block opengraph_description %}{{ announcement.content_text|truncatewords:200 }}{% endblock %}
 {% block opengraph_image %}{% endblock %}
 {% block opengraph_url %}{{ block.super }}{{ announcement.get_absolute_url }}{% endblock %}
 {% block twitter_creator %}{% if announcement.author.user_profile.twitter_name %}@{{ announcement.author.user_profile.twitter_name }}{% else %}{{ block.super }}{% endif %}{% endblock %}
