@@ -1,5 +1,5 @@
 """
-Test suite for the gender app.
+Tests suite for the gender app.
 """
 
 from django.test import SimpleTestCase
