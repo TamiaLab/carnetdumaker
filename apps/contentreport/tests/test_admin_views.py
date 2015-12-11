@@ -1,5 +1,5 @@
 """
-Test suite for the admin views of the content report app.
+Tests suite for the admin views of the content report app.
 """
 
 from django.test import TestCase, Client
@@ -11,7 +11,7 @@ from ..models import ContentReport
 
 class ContentReportAdminViewsTestCase(TestCase):
     """
-    Test suite for the admin views.
+    Tests suite for the admin views.
     """
 
     def setUp(self):

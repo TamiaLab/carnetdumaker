@@ -1,5 +1,5 @@
 """
-Test suite for the views of the content report app.
+Tests suite for the views of the content report app.
 """
 
 from django.test import TestCase, Client
@@ -11,7 +11,7 @@ from ..models import ContentReport
 
 class ContentReportViewsTestCase(TestCase):
     """
-    Test suite for the views.
+    Tests suite for the views.
     """
 
     def setUp(self):
