@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -72,6 +72,6 @@ msgstr "Signalement de contenu"
 msgid "Content reports"
 msgstr "Signalements de contenus"
 
-#: apps/contentreport/views.py:85
+#: apps/contentreport/views.py:84
 msgid "Content report done"
 msgstr "Signalement du contenu effectué"
