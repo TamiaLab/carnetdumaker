@@ -37,6 +37,10 @@ class AntiSpamMixinTestCase(SimpleTestCase):
         """
         Test if the form handle missing fields without exception.
         """
+        data = {}
+        form = TestForm(data)
+        self.assertFalse(form.is_valid())
+
         data = {
             'timestamp': ''
         }
@@ -60,7 +64,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': 'some text',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test honeypot field
@@ -86,7 +90,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': 'some text',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test honeypot field
@@ -110,7 +114,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
@@ -131,7 +135,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
@@ -157,7 +161,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
@@ -180,7 +184,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
@@ -201,7 +205,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
@@ -227,7 +231,7 @@ class AntiSpamMixinTestCase(SimpleTestCase):
 
             data = {
                 'comment': '',
-                'timestamp': AntispamHoneypotFormMixin._generate_timestamp()
+                'timestamp': TestForm()._generate_timestamp()
             }
 
         # Test timestamp validation
