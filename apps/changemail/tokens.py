@@ -16,18 +16,23 @@ class EmailChangeTokenGenerator(object):
     """
     Strategy object used to generate and check tokens for the change email mechanism.
     """
+
     key_salt = "apps.changemail.tokens.EmailChangeTokenGenerator"
 
     def make_token(self, user):
         """
         Returns a token that can be used once to do an email change for the given user.
+        :param user: The user which request the token.
         """
         return self._make_token_with_timestamp(user, self._num_days(self._today()))
 
     def check_token(self, user, token):
         """
         Check that an email change token is correct for a given user.
+        :param user: The user which request the token.
+        :param token: The token to be checked.
         """
+
         # Parse the token
         try:
             ts_b36, hash = token.split("-")
