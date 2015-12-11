@@ -1,5 +1,5 @@
 """
-Test suite for the countries app.
+Tests suite for the countries app.
 """
 
 from django.db import models
