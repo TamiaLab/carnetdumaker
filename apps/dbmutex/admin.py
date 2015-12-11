@@ -16,9 +16,9 @@ class DbMutexLockAdmin(admin.ModelAdmin):
                     'creation_date',
                     'expired')
 
-    list_filter = ('creation_date',)
+    list_filter = ('creation_date', )
 
-    search_fields = ('mutex_name',)
+    search_fields = ('mutex_name', )
 
 
 admin.site.register(DbMutexLock, DbMutexLockAdmin)
