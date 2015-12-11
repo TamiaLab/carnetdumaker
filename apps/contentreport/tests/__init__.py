@@ -1,3 +1,3 @@
 """
-Test suite for the content report app.
+Tests suites for the content report app.
 """
