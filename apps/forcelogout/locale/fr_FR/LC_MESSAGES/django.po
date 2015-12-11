@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/forcelogout/admin.py:29 apps/forcelogout/models.py:35
+#: apps/forcelogout/admin.py:29 apps/forcelogout/models.py:36
 msgid "Logout order"
 msgstr "Ordre de déconnexion"
 
@@ -32,14 +32,14 @@ msgstr "Déconnexion forcée"
 msgid "Your session has expired."
 msgstr "Votre session a expiré."
 
-#: apps/forcelogout/models.py:28
+#: apps/forcelogout/models.py:29
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps/forcelogout/models.py:30
+#: apps/forcelogout/models.py:31
 msgid "Logout order date"
 msgstr "Date de l'ordre de déconnexion"
 
-#: apps/forcelogout/models.py:36
+#: apps/forcelogout/models.py:37
 msgid "Logout orders"
 msgstr "Ordres de déconnexion"
