@@ -9,7 +9,9 @@ from django.utils import timezone
 
 from .models import DbMutexLock
 from .settings import MUTEX_LOCK_EXPIRATION_DELAY_SEC
-from .exceptions import AlreadyLockedError, NoLockError, LockTimeoutError
+from .exceptions import (AlreadyLockedError,
+                         NoLockError,
+                         LockTimeoutError)
 
 
 class MutexLock(object):
@@ -21,7 +23,7 @@ class MutexLock(object):
         """
         This context manager can be used in the following way:
         .. code-block:: python
-            from apps.dbmutex import MutexLock
+            from apps.dbmutex import MutexLock, AlreadyLockedError, LockTimeoutError
 
             # Lock a critical section of code
             try:
