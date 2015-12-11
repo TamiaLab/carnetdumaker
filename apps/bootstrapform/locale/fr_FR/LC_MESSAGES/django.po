@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -24,6 +24,6 @@ msgstr "Formulaires Bootstrap"
 msgid "Mandatory field"
 msgstr "Champ obligatoire"
 
-#: apps/bootstrapform/templates/bootstrapform/form.html:21
+#: apps/bootstrapform/templates/bootstrapform/form.html:22
 msgid "Mandatory fields"
 msgstr "Champs obligatoires"
