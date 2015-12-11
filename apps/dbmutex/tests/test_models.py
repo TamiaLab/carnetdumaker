@@ -22,7 +22,7 @@ class DatabaseMutexTestCase(TestCase):
         Test the ``__str__`` method of the ``DbMutexLock`` class.
         """
         mutex = DbMutexLock.objects.create(mutex_name='test')
-        self.assertEqual("Mutex %s" % mutex.mutex_name, str(mutex))
+        self.assertEqual(mutex.mutex_name, str(mutex))
 
     def test_expired_method(self):
         """
@@ -53,4 +53,4 @@ class DatabaseMutexTestCase(TestCase):
 
         # Test the ordering
         queryset = DbMutexLock.objects.all()
-        self.assertQuerysetEqual(queryset, ['<DbMutexLock: Mutex test2>', '<DbMutexLock: Mutex test1>'])
+        self.assertQuerysetEqual(queryset, ['<DbMutexLock: test2>', '<DbMutexLock: test1>'])

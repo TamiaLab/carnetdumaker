@@ -33,7 +33,7 @@ class DbMutexLock(models.Model):
         ordering = ('-creation_date', 'mutex_name')
 
     def __str__(self):
-        return "Mutex %s" % self.mutex_name
+        return self.mutex_name
 
     def expired(self):
         """
