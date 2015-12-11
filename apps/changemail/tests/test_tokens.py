@@ -1,5 +1,5 @@
 """
-Test suite for the token generators of the change email app.
+Tests suite for the token generators of the change email app.
 """
 
 from datetime import date, timedelta
@@ -26,7 +26,7 @@ class FixedEmailChangeTokenGenerator(EmailChangeTokenGenerator):
 
 class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
     """
-    Test suite for the ``EmailChangeTokenGenerator`` class.
+    Tests case for the ``EmailChangeTokenGenerator`` class.
     """
 
     def test_make_token_not_none(self):
