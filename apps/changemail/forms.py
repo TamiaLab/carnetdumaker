@@ -19,6 +19,9 @@ class EmailChangeForm(forms.Form):
     A form that lets a user change set their email address without entering the one.
     """
 
+    # Set to True to ignore errors during maling
+    send_mail_fail_silently = True
+
     new_email1 = forms.EmailField(label=_("New email address"),
                                   max_length=254)
 
@@ -63,7 +66,7 @@ class EmailChangeForm(forms.Form):
             email_message.attach_alternative(html_email, 'text/html')
 
         # Send the email
-        email_message.send(fail_silently=True)
+        email_message.send(fail_silently=self.send_mail_fail_silently)
 
     def save(self,
              request,
