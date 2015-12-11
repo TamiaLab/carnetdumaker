@@ -1,11 +1,12 @@
 """
-Custom template tags for the bootstrap form app.
+Custom template tags for the bootstrap forms app.
 """
 
 from django import forms
 from django.template import Context
 from django.template.loader import get_template
 from django import template
+
 
 register = template.Library()
 
