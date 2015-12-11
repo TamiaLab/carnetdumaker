@@ -2,7 +2,7 @@
 {% load bootstrapform %}
 
 {% block breadcrumb %}{{ block.super }}
-    <li><a href="{% url 'myaccount:email_change' %}">Modification de l'adresse email</a></li>{% endblock %}
+    <li><a href="{% url 'myaccountmail:email_change' %}">Modification de l'adresse email</a></li>{% endblock %}
 
 {% block title %}Modification de l'adresse email | {{ block.super }}{% endblock %}
 
@@ -12,7 +12,7 @@
             <h1 class="panel-title"><i class="fa fa-envelope"></i> Modification de l'adresse email</h1>
         </div>
         <div class="panel-body">
-            <form method="post" action="{% url 'myaccount:email_change' %}">
+            <form method="post" action="{% url 'myaccountmail:email_change' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label class="control-label">Adresse actuelle</label>

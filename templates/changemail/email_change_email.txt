@@ -3,7 +3,7 @@ Bonjour {{ user.username }},
 Une demande de changement d'adresse email sur {{ site_name }} a été effectuée via votre adresse mail {{ email }}.
 
 Si vous êtes à l'origine de cette demande, merci de cliquer sur le lien ci-dessous pour finaliser la modification :
-{{ protocol }}://{{ domain }}{% url 'myaccount:email_change_confirm' uidb64=uid token=token addressb64=addressb64 %}
+{{ protocol }}://{{ domain }}{% url 'myaccountmail:email_change_confirm' uidb64=uid token=token addressb64=addressb64 %}
 
 Attention : le lien ci-dessus n'est valable que pendant {{ confirmation_timeout_days }} jours.
 
