@@ -19,6 +19,8 @@ class AntispamHoneypotFormMixin(object):
     Form mixin for adding anti-spam capabilities to any forms using an honeypot field and some clever tricks.
     """
 
+    timestamp_signer_salt = 'saltisforpussybetterstartsniffingpepper'
+
     def __init__(self, *args, **kwargs):
         super(AntispamHoneypotFormMixin, self).__init__(*args, **kwargs)
 
@@ -55,17 +57,15 @@ class AntispamHoneypotFormMixin(object):
                                             code='timestamp_failed')
         return cleaned_data
 
-    @staticmethod
-    def _generate_timestamp():
+    def _generate_timestamp(self):
         """
         Generate a new signed timestamp.
         """
-        signer = Signer(salt='saltisforpussybetterstartsniffingpepper')
+        signer = Signer(salt=self.timestamp_signer_salt)
         timestamp = baseconv.base62.encode(int(time.time()))
         return signer.sign(timestamp)
 
-    @staticmethod
-    def _is_timestamp_valid(timestamp):
+    def _is_timestamp_valid(self, timestamp):
         """
         Check if the given timestamp is valid.
         :param timestamp: The timestamp to be checked.
@@ -73,7 +73,7 @@ class AntispamHoneypotFormMixin(object):
         """
         if DISABLE_ANTISPAM_VERIFICATION:
             return True
-        signer = Signer(salt='saltisforpussybetterstartsniffingpepper')
+        signer = Signer(salt=self.timestamp_signer_salt)
         try:
             timestamp = signer.unsign(timestamp)
         except BadSignature:
