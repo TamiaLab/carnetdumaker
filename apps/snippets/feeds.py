@@ -39,7 +39,7 @@ class LatestCodeSnippetsFeed(Feed):
         Return the HTML of the code snippet.
         :param item: The current feed item.
         """
-        return '<style>\n%s\n</style>\n%s' % (item.css_for_display, item.html_for_display)
+        return '<p>%s</p>\n<style>\n%s\n</style>\n%s' % (item.description, item.css_for_display, item.html_for_display)
 
     def item_author_name(self, item):
         """
