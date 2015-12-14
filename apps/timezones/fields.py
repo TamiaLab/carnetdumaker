@@ -17,14 +17,14 @@ class TimeZoneFieldBase(models.Field):
     """
     Provides database store for pytz timezone objects.
     Valid inputs are:
-    - any instance of pytz.tzinfo.DstTzInfo or pytz.tzinfo.StaticTzInfo
-    - the pytz.UTC singleton
+    - any instance of ``pytz.tzinfo.DstTzInfo`` or ``pytz.tzinfo.StaticTzInfo``
+    - the ``pytz.UTC`` singleton
     - any string that validates against pytz.common_timezones.
     - None and the empty string both represent 'no timezone'
     Valid outputs:
     - None
-    - instances of pytz.tzinfo.DstTzInfo and pytz.tzinfo.StaticTzInfo
-    - the pytz.UTC singleton
+    - instances of ``pytz.tzinfo.DstTzInfo`` and ``pytz.tzinfo.StaticTzInfo``
+    - the ``pytz.UTC`` singleton
     """
 
     description = _('A pytz timezone object')
@@ -36,7 +36,7 @@ class TimeZoneFieldBase(models.Field):
             'max_length': self.MAX_LENGTH,
             'choices': COMMON_TIMEZONE_CHOICES,
             'null': True,
-            }
+        }
         parent_kwargs.update(kwargs)
         super(TimeZoneFieldBase, self).__init__(*args, **parent_kwargs)
 
