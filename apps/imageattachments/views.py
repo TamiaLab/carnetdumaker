@@ -25,7 +25,7 @@ def image_attachment_list(request,
     """
 
     # Retrieve all published image attachments
-    published_images = ImageAttachment.objects.published().select_related('license')
+    published_images = ImageAttachment.objects.published_public().select_related('license')
 
     # Images list pagination
     paginator, page = paginate(published_images, request, NB_IMG_ATTACHMENTS_PER_PAGE)
@@ -54,7 +54,8 @@ def image_attachment_detail(request, slug,
     """
 
     # Retrieve the image
-    image_obj = get_object_or_404(ImageAttachment.objects.published().select_related('license'), slug=slug)
+    manager = ImageAttachment.objects.published().select_related('license')
+    image_obj = get_object_or_404(manager, slug=slug)
 
     # Render the template
     context = {
