@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -44,11 +44,12 @@ msgstr "Voir sur le site"
 msgid "Code snippets"
 msgstr "Extraits de code"
 
-#: apps/snippets/feeds.py:19 apps/snippets/feeds.py:21
+#: apps/snippets/feeds.py:19 apps/snippets/feeds.py:22
+#: apps/snippets/tests/test_feeds.py:28 apps/snippets/tests/test_feeds.py:31
 msgid "Latest code snippets"
 msgstr "Derniers extraits de code"
 
-#: apps/snippets/feeds.py:48
+#: apps/snippets/feeds.py:49 apps/snippets/tests/test_feeds.py:164
 msgid "Anonymous"
 msgstr "Anonyme"
 
