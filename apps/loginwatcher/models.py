@@ -50,10 +50,17 @@ class LogEvent(models.Model):
         verbose_name = _('Log event')
         verbose_name_plural = _('Log events')
         get_latest_by = 'event_date'
-        ordering = ('-event_date',)
+        ordering = ('-event_date', )
 
     def __str__(self):
-        return "[%s] %s %s from %s" % (self.event_date, self.type, self.username, self.ip_address)
+        type_map = {
+            LOG_EVENT_LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+            LOG_EVENT_LOGIN_FAILED: 'LOGIN_FAILED',
+            LOG_EVENT_LOGOUT: 'LOGOUT',
+        }
+        return "[%s] %s %s from %s" % (self.event_date.isoformat(' '),
+                                       type_map[self.type],
+                                       self.username, self.ip_address)
 
 
 def _handle_user_login_success(sender, request, user, **kwargs):
