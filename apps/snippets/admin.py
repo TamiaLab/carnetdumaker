@@ -27,7 +27,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
             kwargs['initial'] = request.user.id
         return super(CodeSnippetAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    list_select_related = ('author',)
+    list_select_related = ('author', )
 
     list_display = ('filename',
                     'title',
@@ -35,7 +35,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
                     'code_language',
                     'creation_date',
                     'last_modification_date',
-                    'view_issue_on_site')
+                    'view_on_site')
 
     list_display_links = ('filename',
                           'title')
@@ -51,14 +51,14 @@ class CodeSnippetAdmin(admin.ModelAdmin):
                      'code_language',
                      'source_code')
 
-    raw_id_fields = ('author',)
+    raw_id_fields = ('author', )
 
     readonly_fields = ('creation_date',
                        'last_modification_date')
 
     fieldsets = (
         (_('Title'), {
-            'fields': ('title',)
+            'fields': ('title', )
         }),
         (_('Metadata'), {
             'fields': ('author',
@@ -89,7 +89,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
     author_username_link.admin_order_field = 'author__username'
     author_username_link.allow_tags = True
 
-    def view_issue_on_site(self, obj):
+    def view_on_site(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
@@ -98,8 +98,8 @@ class CodeSnippetAdmin(admin.ModelAdmin):
         return format_html('<a href="{0}" class="link">{1}</a>',
                            obj.get_absolute_url(),
                            _('View on site'))
-    view_issue_on_site.short_description = ''
-    view_issue_on_site.allow_tags = True
+    view_on_site.short_description = ''
+    view_on_site.allow_tags = True
 
 
 admin.site.register(CodeSnippet, CodeSnippetAdmin)
