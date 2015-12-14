@@ -1,3 +1,3 @@
 """
-Test suite for the licenses app.
+Tests suites for the licenses app.
 """
