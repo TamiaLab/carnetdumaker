@@ -1,3 +1,3 @@
 """
-Test cases for the timezones app.
+Tests cases for the timezones app.
 """
