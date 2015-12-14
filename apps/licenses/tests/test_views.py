@@ -4,10 +4,13 @@ Tests suite for the views of the licenses app.
 
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
+from django.conf import settings
+from django.test.utils import override_settings
 
 from ..models import License
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class LicenseViewsTestCase(TestCase):
     """
     Tests suite for the views.

@@ -4,10 +4,13 @@ Tests suite for the models of the licenses app.
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.conf import settings
+from django.test.utils import override_settings
 
 from ..models import License
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class LicenseTestCase(TestCase):
     """
     Tests case for the ``License`` data model.
@@ -18,10 +21,9 @@ class LicenseTestCase(TestCase):
         Create a new license.
         :return: The newly created license.
         """
-        license = License.objects.create(name='Test 1',
-                                         slug='test-1',
-                                         description='Hello World!')
-        return license
+        return License.objects.create(name='Test 1',
+                                      slug='test-1',
+                                      description='Hello World!')
 
     def test_default_values(self):
         """

@@ -3,11 +3,14 @@ Tests suite for the sitemap of the licenses app.
 """
 
 from django.test import TestCase
+from django.conf import settings
+from django.test.utils import override_settings
 
 from ..models import License
 from ..sitemap import LicensesSitemap
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class LicensesSitemapTestCase(TestCase):
     """
     Tests suite for the ``LicensesSitemap`` class.
