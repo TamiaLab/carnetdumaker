@@ -16,7 +16,12 @@ class ImageAttachmentManager(models.Manager):
     def published(self):
         """
         Return a queryset with all currently published image attachments.
-        :return: A queryset with all currently published image attachments.
         """
         now = timezone.now()
         return self.filter(pub_date__lte=now)
+
+    def published_public(self):
+        """
+        Return a queryset with all currently published and publicly listed image attachments.
+        """
+        return self.published().filter(public_listing=True)
