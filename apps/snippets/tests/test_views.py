@@ -11,7 +11,7 @@ from ..models import CodeSnippet
 
 class SnippetsViewsTestCase(TestCase):
     """
-    Test suite for the views.
+    Tests suite for the views.
     """
 
     def setUp(self):
