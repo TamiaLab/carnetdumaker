@@ -83,40 +83,52 @@ class CodeSnippetModelTestCase(TestCase):
         Test if the ``last_modification_date`` change after the title is modified.
         """
         snippet = self._get_snippet()
-        self.assertIsNone(snippet.last_modification_date)
+        before_date = snippet.last_modification_date
+        self.assertIsNone(before_date)
         snippet.title = 'New title'
         snippet.save()
-        self.assertIsNotNone(snippet.last_modification_date)
+        after_date = snippet.last_modification_date
+        self.assertIsNotNone(after_date)
+        self.assertNotEqual(after_date, before_date)
 
     def test_last_modification_date_change_after_filename_change(self):
         """
         Test if the ``last_modification_date`` change after the filename is modified.
         """
         snippet = self._get_snippet()
-        self.assertIsNone(snippet.last_modification_date)
+        before_date = snippet.last_modification_date
+        self.assertIsNone(before_date)
         snippet.filename = 'new_filename.py'
         snippet.save()
-        self.assertIsNotNone(snippet.last_modification_date)
+        after_date = snippet.last_modification_date
+        self.assertIsNotNone(after_date)
+        self.assertNotEqual(after_date, before_date)
 
     def test_last_modification_date_change_after_description_change(self):
         """
         Test if the ``last_modification_date`` change after the description is modified.
         """
         snippet = self._get_snippet()
-        self.assertIsNone(snippet.last_modification_date)
+        before_date = snippet.last_modification_date
+        self.assertIsNone(before_date)
         snippet.description = 'New description'
         snippet.save()
-        self.assertIsNotNone(snippet.last_modification_date)
+        after_date = snippet.last_modification_date
+        self.assertIsNotNone(after_date)
+        self.assertNotEqual(after_date, before_date)
 
     def test_last_modification_date_change_after_source_code_change(self):
         """
         Test if the ``last_modification_date`` change after the source code is modified.
         """
         snippet = self._get_snippet()
-        self.assertIsNone(snippet.last_modification_date)
+        before_date = snippet.last_modification_date
+        self.assertIsNone(before_date)
         snippet.source_code = 'print("New source code");'
         snippet.save()
-        self.assertIsNotNone(snippet.last_modification_date)
+        after_date = snippet.last_modification_date
+        self.assertIsNotNone(after_date)
+        self.assertNotEqual(after_date, before_date)
 
     def test_last_modification_date_not_change_after_other_change(self):
         """
