@@ -42,4 +42,5 @@ def datetime_html(datetime):
         # Translators: This is used to make a sentence like "June 12 2015 AT 8:30 AM"
         'at_str': _('at'),
     }
-    return mark_safe('<time datetime="%(date_iso)s %(time_iso)s">%(date_locale)s %(at_str)s %(time_locale)s</time>' % context)
+    return mark_safe('<time datetime="%(date_iso)s %(time_iso)s">'
+                     '%(date_locale)s %(at_str)s %(time_locale)s</time>' % context)
