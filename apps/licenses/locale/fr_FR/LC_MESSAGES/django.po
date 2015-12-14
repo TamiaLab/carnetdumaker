@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -20,59 +20,59 @@ msgstr ""
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/licenses/admin.py:47
+#: apps/licenses/admin.py:48
 msgid "Name and slug"
 msgstr "Nom et slug"
 
-#: apps/licenses/admin.py:51
+#: apps/licenses/admin.py:52
 msgid "Iconography"
 msgstr "Iconographie"
 
-#: apps/licenses/admin.py:55
+#: apps/licenses/admin.py:56
 msgid "License text"
 msgstr "Texte de la licence"
 
-#: apps/licenses/admin.py:60
+#: apps/licenses/admin.py:61
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: apps/licenses/admin.py:71 apps/licenses/models.py:36
+#: apps/licenses/admin.py:72 apps/licenses/models.py:38
 msgid "Logo"
 msgstr "Logo"
 
-#: apps/licenses/apps.py:15 apps/licenses/models.py:59
+#: apps/licenses/apps.py:15 apps/licenses/models.py:61
 msgid "Licenses"
 msgstr "Licences"
 
-#: apps/licenses/models.py:29
-msgid "Slug"
-msgstr "Slug"
-
-#: apps/licenses/models.py:33
+#: apps/licenses/models.py:30
 msgid "Name"
 msgstr "Nom"
 
-#: apps/licenses/models.py:42
+#: apps/licenses/models.py:34
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/licenses/models.py:44
 msgid "Description"
 msgstr "Description"
 
-#: apps/licenses/models.py:44
+#: apps/licenses/models.py:46
 msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
-#: apps/licenses/models.py:46
+#: apps/licenses/models.py:48
 msgid "Usage"
 msgstr "Consignes d'utilisation"
 
-#: apps/licenses/models.py:50
+#: apps/licenses/models.py:52
 msgid "Source URL"
 msgstr "URL source"
 
-#: apps/licenses/models.py:54
+#: apps/licenses/models.py:56
 msgid "Last modification date"
 msgstr "Date de derniére modification"
 
-#: apps/licenses/models.py:58
+#: apps/licenses/models.py:60
 msgid "License"
 msgstr "Licence"
 
