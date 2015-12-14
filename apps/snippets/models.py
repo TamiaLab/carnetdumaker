@@ -60,6 +60,8 @@ class CodeSnippet(ModelDiffMixin, models.Model):
     public_listing = models.BooleanField(_('Public listing'),
                                          default=True)
 
+    # TODO Add license field (FK) with acording admin forms, views, feeds
+
     description = models.TextField(_('Description'))
 
     source_code = models.TextField(_('Source code'))
@@ -99,7 +101,7 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         verbose_name = _('Code snippet')
         verbose_name_plural = _('Code snippets')
         get_latest_by = 'creation_date'
-        ordering = ('-creation_date',)
+        ordering = ('-creation_date', )
 
     def __str__(self):
         return self.title
