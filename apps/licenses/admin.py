@@ -9,19 +9,6 @@ from django.utils.translation import ugettext_lazy as _
 from .models import License
 
 
-def view_issue_on_site(obj):
-    """
-    Simple "view on site" inline callback.
-    :param obj: Current database object.
-    :return: HTML <a> link to the given object.
-    """
-    return format_html('<a href="{0}" class="link">{1}</a>',
-                       obj.get_absolute_url(),
-                       _('View on site'))
-view_issue_on_site.short_description = ''
-view_issue_on_site.allow_tags = True
-
-
 class LicenseAdmin(admin.ModelAdmin):
     """
     Admin form for the ``License`` data model.
@@ -29,7 +16,7 @@ class LicenseAdmin(admin.ModelAdmin):
 
     list_display = ('logo_img',
                     'name',
-                    view_issue_on_site)
+                    'view_on_site')
 
     list_display_links = ('logo_img',
                           'name')
@@ -39,7 +26,7 @@ class LicenseAdmin(admin.ModelAdmin):
                      'usage',
                      'source_url')
 
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name', )}
 
     readonly_fields = ('logo_img',
                        'last_modification_date')
@@ -71,6 +58,18 @@ class LicenseAdmin(admin.ModelAdmin):
         return '<img src="%s" />' % obj.logo.url if obj.logo else ''
     logo_img.short_description = _('Logo')
     logo_img.allow_tags = True
+
+    def view_on_site(self, obj):
+        """
+        Simple "view on site" inline callback.
+        :param obj: Current database object.
+        :return: HTML <a> link to the given object.
+        """
+        return format_html('<a href="{0}" class="link">{1}</a>',
+                           obj.get_absolute_url(),
+                           _('View on site'))
+    view_on_site.short_description = ''
+    view_on_site.allow_tags = True
 
 
 admin.site.register(License, LicenseAdmin)
