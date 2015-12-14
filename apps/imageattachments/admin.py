@@ -96,7 +96,7 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
     small_img.short_description = _('Image')
     small_img.allow_tags = True
 
-    def view_on_site(obj):
+    def view_on_site(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
