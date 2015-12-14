@@ -5,7 +5,7 @@ Data models for the image attachments app.
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.utils.functional import cached_property
+from django.core.files.uploadedfile import UploadedFile
 
 from apps.licenses.models import License
 from apps.tools.utils import unique_slug
@@ -46,6 +46,7 @@ class ImageAttachment(models.Model):
     title = models.CharField(_('Title'),
                              max_length=255)
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255,
                             unique=True)
@@ -59,11 +60,14 @@ class ImageAttachment(models.Model):
                               default='',
                               blank=True)
 
+    # FIXME Deploy Skcode engine
     description = RenderTextField(_('Description'),
                                    default='',
                                    blank=True)
 
     description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
 
     license = models.ForeignKey(License,
                                 related_name='img_attachments',
@@ -71,6 +75,9 @@ class ImageAttachment(models.Model):
                                 default=None,
                                 blank=True,
                                 null=True)
+
+    public_listing = models.BooleanField(_('Public listing'),
+                                         default=True)
 
     img_small = ThumbnailImageField(_('Image (small size)'),
                                     upload_to=IMG_ATTACHMENT_UPLOAD_DIR_NAME + '/small',
@@ -112,7 +119,8 @@ class ImageAttachment(models.Model):
         verbose_name = _('Image attachment')
         verbose_name_plural = _('Image attachments')
         get_latest_by = 'pub_date'
-        ordering = ('-pub_date',)
+        ordering = ('-pub_date', )
+        # FIXME Skcode perms here
 
     def __str__(self):
         return self.title
@@ -131,13 +139,22 @@ class ImageAttachment(models.Model):
         """
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(ImageAttachment, self, self.slug, 'slug', self.title)
 
         # Render description text
         self.render_description()
 
         # Make the thumbnail versions
-        from django.core.files.uploadedfile import UploadedFile
+        self.make_thumbnails()
+
+        # Save the attachment object
+        super(ImageAttachment, self).save(*args, **kwargs)
+
+    def make_thumbnails(self):
+        """
+        Make all thumbnails versions of the original image on upload.
+        """
         if self.img_original and (isinstance(self.img_original.file, UploadedFile)
                                   or not self.img_small
                                   or not self.img_medium
@@ -150,28 +167,19 @@ class ImageAttachment(models.Model):
             self.img_medium.save(original_name, original_content, save=False)
             self.img_large.save(original_name, original_content, save=False)
 
-        # Save the attachment object
-        super(ImageAttachment, self).save(*args, **kwargs)
-
     def render_description(self, save=False):
         """
         Render the description. Save the model only if ``save`` is True.
         """
 
         # Render the description text
+        # FIXME Deploy Skcode engine
         self.description_html = render_html(self.description, force_nofollow=False)
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(ImageAttachment, self).save(update_fields=('description_html',))
-
-    @cached_property
-    def get_description_without_html(self):
-        """
-        Return the image attachment's description text without any HTML tag nor entities.
-        """
-        return strip_html(self.description_html)
+            super(ImageAttachment, self).save(update_fields=('description_html', ))
 
 
 def _redo_image_attachments_text_rendering(sender, **kwargs):
@@ -182,6 +190,5 @@ def _redo_image_attachments_text_rendering(sender, **kwargs):
     """
     for image in ImageAttachment.objects.all():
         image.render_description(save=True)
-
 
 render_engine_changed.connect(_redo_image_attachments_text_rendering)
