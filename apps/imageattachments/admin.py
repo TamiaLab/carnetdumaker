@@ -10,29 +10,19 @@ from django.template import loader
 from .models import ImageAttachment
 
 
-def view_issue_on_site(obj):
-    """
-    Simple "view on site" inline callback.
-    :param obj: Current database object.
-    :return: HTML <a> link to the given object.
-    """
-    return format_html('<a href="{0}" class="link">{1}</a>',
-                       obj.get_absolute_url(),
-                       _('View on site'))
-view_issue_on_site.short_description = ''
-view_issue_on_site.allow_tags = True
-
-
 class ImageAttachmentAdmin(admin.ModelAdmin):
     """
     Admin form for the ``ImageAttachment`` data model.
     """
 
+    integration_code_template_name = 'imageattachments/admin_img_integration_code.html'
+
     list_display = ('small_img',
                     'title',
                     'pub_date',
                     'legend',
-                    view_issue_on_site)
+                    'public_listing',
+                    'view_on_site')
 
     list_display_links = ('small_img',
                           'title')
@@ -43,7 +33,8 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
                      'description',
                      'img_original')
 
-    list_filter = ('pub_date',)
+    list_filter = ('pub_date',
+                   'public_listing')
 
     readonly_fields = ('pub_date',
                        'img_original_height',
@@ -62,12 +53,13 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
                        'img_large_width',
                        'img_large_int_code')
 
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('title', )}
 
     fieldsets = (
         (_('Title and slug'), {
             'fields': ('title',
-                       'slug')
+                       'slug',
+                       'public_listing')
         }),
         (_('Legend, description and license'), {
             'fields': ('legend',
@@ -91,7 +83,7 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
                        'img_large_int_code')
         }),
         (_('Date and time'), {
-            'fields': ('pub_date',)
+            'fields': ('pub_date', )
         }),
     )
 
@@ -104,8 +96,19 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
     small_img.short_description = _('Image')
     small_img.allow_tags = True
 
-    @staticmethod
-    def img_int_code(obj, img, height, width):
+    def view_on_site(obj):
+        """
+        Simple "view on site" inline callback.
+        :param obj: Current database object.
+        :return: HTML <a> link to the given object.
+        """
+        return format_html('<a href="{0}" class="link">{1}</a>',
+                           obj.get_absolute_url(),
+                           _('View on site'))
+    view_on_site.short_description = ''
+    view_on_site.allow_tags = True
+
+    def img_int_code(self, obj, img, height, width):
         """
         Helper to generated image integration code.
         :param obj: Current model object.
@@ -119,7 +122,7 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
             'height': height,
             'width': width
         }
-        return loader.render_to_string('imageattachments/admin_img_integration_code.html', context)
+        return loader.render_to_string(self.integration_code_template_name, context)
 
     def img_small_int_code(self, obj):
         """
