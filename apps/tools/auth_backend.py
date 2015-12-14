@@ -1,5 +1,5 @@
 """
-Dual Username/Email based authentication backend for django.contrib.auth.
+Dual Username/Email based authentication backends for django.contrib.auth.
 """
 
 from django.contrib.auth.backends import ModelBackend

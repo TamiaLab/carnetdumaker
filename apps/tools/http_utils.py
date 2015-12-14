@@ -1,7 +1,5 @@
 """
-HTTP shortcut to reload a page using a HTTP 302 moved temporally with
-Location header set to the current page (using the Referrer header, or
-"/" by default if HTTP_REFERER not available)
+HTTP utilities.
 """
 
 from django.http import HttpResponse
