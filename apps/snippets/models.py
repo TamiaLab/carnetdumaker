@@ -134,10 +134,10 @@ class CodeSnippet(ModelDiffMixin, models.Model):
 
         # Fix last modification date if necessary
         changed_fields = self.changed_fields
-        if 'title' in changed_fields or \
-                'filename' in changed_fields or \
-                'description' in changed_fields or \
-                'source_code' in changed_fields:
+        if self.pk and ('title' in changed_fields or
+                                'filename' in changed_fields or
+                                'description' in changed_fields or
+                                'source_code' in changed_fields):
             self.last_modification_date = timezone.now()
 
         # Render the HTML version of the source code
