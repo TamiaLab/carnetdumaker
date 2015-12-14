@@ -8,7 +8,7 @@
 
 {% block twitter_card %}summary_large_image{% endblock %}
 {% block opengraph_title %}Image "{{ image.title }}"{% endblock %}
-{% block opengraph_description %}{{ image.get_description_without_html|truncatewords:200 }}{% endblock %}
+{% block opengraph_description %}{{ image.description_text|truncatewords:200 }}{% endblock %}
 {% block opengraph_url %}{{ block.super }}{{ image.get_absolute_url }}{% endblock %}
 {% block opengraph_image %}{{ image.img_large.url }}{% endblock %}
 
