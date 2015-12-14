@@ -33,4 +33,11 @@ class StaticPagesSitemapTestCase(SimpleTestCase):
         Test the ``location`` method of the sitemap.
         """
         sitemap = StaticPagesSitemap()
-        self.assertEqual(sitemap.location('about_us'), reverse('staticpages:about_us'))
+        self.assertEqual(sitemap.location('why_this_site'), reverse('staticpages:why_this_site'))
+        self.assertEqual(sitemap.location('contact_us'), reverse('staticpages:contact_us'))
+        self.assertEqual(sitemap.location('cookies_usage'), reverse('staticpages:cookies_usage'))
+        self.assertEqual(sitemap.location('legal_notices'), reverse('staticpages:legal_notices'))
+        self.assertEqual(sitemap.location('faq'), reverse('staticpages:faq'))
+        self.assertEqual(sitemap.location('our_commitments'), reverse('staticpages:our_commitments'))
+        self.assertEqual(sitemap.location('human_sitemap'), reverse('staticpages:human_sitemap'))
+        self.assertEqual(sitemap.location('tos'), reverse('staticpages:tos'))
