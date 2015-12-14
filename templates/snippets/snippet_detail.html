@@ -21,7 +21,7 @@
     <h1>{{ snippet.title }}</h1>
 
     <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}</p>
-    {% if snippet.last_modification_date != snippet.creation_date %}
+    {% if snippet.has_been_modified %}
         <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippet.last_modification_date|datetime_html }}</p>
     {% endif %}
     <p><i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}</p>
