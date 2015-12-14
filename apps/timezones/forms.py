@@ -35,6 +35,6 @@ class TimezoneFormField(forms.TypedChoiceField):
             'coerce': coerce_to_pytz,
             'choices': PRETTY_TIMEZONE_CHOICES,
             'empty_value': None,
-            }
+        }
         defaults.update(kwargs)
         super(TimezoneFormField, self).__init__(*args, **defaults)
