@@ -28,7 +28,20 @@ class LogEventModelTestCase(TestCase):
 
     def test_str_method(self):
         event = self._get_event()
-        excepted_str = "[%s] %s %s from %s" % (event.event_date, event.type, event.username, event.ip_address)
+
+        event.type = LOG_EVENT_LOGIN_SUCCESS
+        excepted_str = "[%s] LOGIN_SUCCESS %s from %s" % (event.event_date.isoformat(' '),
+                                                          event.username, event.ip_address)
+        self.assertEqual(excepted_str, str(event))
+
+        event.type = LOG_EVENT_LOGIN_FAILED
+        excepted_str = "[%s] LOGIN_FAILED %s from %s" % (event.event_date.isoformat(' '),
+                                                         event.username, event.ip_address)
+        self.assertEqual(excepted_str, str(event))
+
+        event.type = LOG_EVENT_LOGOUT
+        excepted_str = "[%s] LOGOUT %s from %s" % (event.event_date.isoformat(' '),
+                                                   event.username, event.ip_address)
         self.assertEqual(excepted_str, str(event))
 
     def test_ordering(self):
