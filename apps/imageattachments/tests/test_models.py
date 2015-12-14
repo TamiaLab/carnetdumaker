@@ -2,6 +2,7 @@
 Tests suite for the models of the image attachments app.
 """
 
+import os
 from datetime import timedelta
 from unittest.mock import patch
 
@@ -9,10 +10,13 @@ from django.test import TestCase
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.conf import settings
+from django.test.utils import override_settings
 
 from ..models import ImageAttachment
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ImageAttachmentTestCase(TestCase):
     """
     Tests case for the ``ImageAttachment`` data model.
@@ -125,7 +129,7 @@ class ImageAttachmentTestCase(TestCase):
         prev_img_small_url = image.img_small.url
         prev_img_medium_url = image.img_medium.url
         prev_img_large_url = image.img_large.url
-        with open('./uploads/fixtures/mea.jpg', 'rb') as f:
+        with open(os.path.join(settings.DEBUG_MEDIA_ROOT, 'fixtures/mea.jpg'), 'rb') as f:
             content = f.read()
         new_image = SimpleUploadedFile(name='mea.jpg', content=content, content_type='image/jpeg')
         image.img_original = new_image
@@ -154,3 +158,21 @@ class ImageAttachmentTestCase(TestCase):
         # Test the result
         queryset = ImageAttachment.objects.published()
         self.assertQuerysetEqual(queryset, ['<ImageAttachment: Test 2>'])
+
+    def test_published_public(self):
+        """
+        Test the ordering of image attachment object.
+        """
+        ImageAttachment.objects.create(title='Test 1',
+                                       slug='test-1',
+                                       img_original='fixtures/beautifulfrog.jpg')
+        ImageAttachment.objects.create(title='Test 2',
+                                       slug='test-2',
+                                       img_original='fixtures/beautifulfrog.jpg',
+                                       public_listing=False)
+        ImageAttachment.objects.create(title='Test 3',
+                                       slug='test-3',
+                                       img_original='fixtures/beautifulfrog.jpg')
+        queryset = ImageAttachment.objects.published_public()
+        self.assertQuerysetEqual(queryset, ['<ImageAttachment: Test 3>',
+                                            '<ImageAttachment: Test 1>'])

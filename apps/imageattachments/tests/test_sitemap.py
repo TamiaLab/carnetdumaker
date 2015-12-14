@@ -6,8 +6,11 @@ from django.test import TestCase
 
 from ..models import ImageAttachment
 from ..sitemap import ImageAttachmentsSitemap
+from django.conf import settings
+from django.test.utils import override_settings
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ImageAttachmentsSitemapTestCase(TestCase):
     """
     Tests suite for the ``ImageAttachmentsSitemap`` class.
@@ -24,7 +27,8 @@ class ImageAttachmentsSitemapTestCase(TestCase):
                                        img_original='fixtures/mea.jpg')
         ImageAttachment.objects.create(title='Test 2',
                                        slug='test-2',
-                                       img_original='fixtures/mea.jpg')
+                                       img_original='fixtures/mea.jpg',
+                                       public_listing=False)
         ImageAttachment.objects.create(title='Test 3',
                                        slug='test-3',
                                        img_original='fixtures/mea.jpg')
