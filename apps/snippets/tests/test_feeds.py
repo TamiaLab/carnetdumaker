@@ -121,7 +121,9 @@ class LatestCodeSnippetsFeedTestCase(TestCase):
         # Test the method
         feed = LatestCodeSnippetsFeed()
         self.assertEqual(feed.item_description(snippet),
-                         '<style>\n%s\n</style>\n%s' % (snippet.css_for_display, snippet.html_for_display))
+                         '<p>%s</p>\n<style>\n%s\n</style>\n%s' % (snippet.description,
+                                                                   snippet.css_for_display,
+                                                                   snippet.html_for_display))
 
     def test_item_author_name(self):
         """
