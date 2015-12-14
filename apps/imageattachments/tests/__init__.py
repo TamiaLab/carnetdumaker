@@ -1,3 +1,3 @@
 """
-Test suite for the image attachments app.
+Tests suites for the image attachments app.
 """
