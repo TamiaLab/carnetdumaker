@@ -20,6 +20,8 @@ class NotificationManager(models.Manager):
     Manager class for the ``Notification`` data model.
     """
 
+    use_for_related_fields = True
+
     def send_notification_to_user(self, request, user,
                                   title_template_name,
                                   message_template_name,
