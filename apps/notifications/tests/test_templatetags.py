@@ -1,5 +1,5 @@
 """
-Test suite for the template tags of the notifications app.
+Tests suite for the template tags of the notifications app.
 """
 
 from django.test import TestCase
@@ -12,7 +12,7 @@ from ..models import Notification
 
 class NotificationsTemplateTagsTestCase(TestCase):
     """
-    Test suite for the views.
+    Tests suite for the views.
     """
 
     def setUp(self):
