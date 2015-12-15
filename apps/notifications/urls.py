@@ -1,5 +1,5 @@
 """
-URLCONF for the notification app.
+URLCONF for the notifications app.
 """
 
 from django.conf.urls import url
