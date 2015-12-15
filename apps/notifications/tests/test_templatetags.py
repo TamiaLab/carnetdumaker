@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from ..models import Notification
 
 
-class NotificationsViewsTestCase(TestCase):
+class NotificationsTemplateTagsTestCase(TestCase):
     """
     Test suite for the views.
     """
