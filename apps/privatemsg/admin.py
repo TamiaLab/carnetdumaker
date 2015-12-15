@@ -137,7 +137,7 @@ class PrivateMessageUserProfileAdmin(admin.ModelAdmin):
     ``PrivateMessageUserProfile`` admin form.
     """
 
-    list_select_related = ('user',)
+    list_select_related = ('user', )
 
     list_display = ('user_username',
                     'notify_on_new_privmsg',
@@ -151,7 +151,7 @@ class PrivateMessageUserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__email',
                      'user__username')
 
-    readonly_fields = ('user_username',)
+    readonly_fields = ('user_username', )
 
     fields = ('user_username',
               'notify_on_new_privmsg',
