@@ -1,5 +1,5 @@
 """
-Views for the notification app.
+Views for the notifications app.
 """
 
 from django.core.urlresolvers import reverse
