@@ -1,10 +1,10 @@
 """
-Management command to cleanup deleted private message database entries.
+Management command to cleanup deleted private message from database.
 """
 
 from django.core.management.base import NoArgsCommand
 
-from apps.privatemsg.models import PrivateMessage
+from ...models import PrivateMessage
 
 
 class Command(NoArgsCommand):
