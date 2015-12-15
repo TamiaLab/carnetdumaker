@@ -40,15 +40,13 @@ class PrivateMessageManager(models.Manager):
             recipient_permanently_deleted=False
         )
 
-    def mark_all_messages_has_read(self, user, now=None):
+    def mark_all_messages_has_read(self, user):
         """
         Mark all private messages of the given user as read.
         :param user: The target user.
-        :param now: For debug purposes.
         :return: The number of messages marked as read.
         """
-        if now is None:
-            now = timezone.now()
+        now = timezone.now()
         return self.filter(recipient=user,
                            read_at__isnull=True,
                            recipient_deleted_at__isnull=True,
