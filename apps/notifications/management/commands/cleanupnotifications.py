@@ -4,7 +4,7 @@ Custom ``manage.py`` command to cleanup old notifications.
 
 from django.core.management.base import NoArgsCommand
 
-from apps.notifications.models import Notification
+from ...models import Notification
 
 
 class Command(NoArgsCommand):
