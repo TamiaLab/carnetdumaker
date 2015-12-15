@@ -91,7 +91,7 @@ def mark_all_as_read(request,
 
     # Handle "mark all as read" feature
     if request.method == "POST":
-        PrivateMessage.objects.mark_all_messages_has_read(request.user)
+        PrivateMessage.objects.mark_all_messages_has_read_for(request.user)
         return HttpResponseRedirect(post_mark_all_read_redirect)
 
     # Render the template

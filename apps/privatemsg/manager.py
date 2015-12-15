@@ -40,7 +40,7 @@ class PrivateMessageManager(models.Manager):
             recipient_permanently_deleted=False
         )
 
-    def mark_all_messages_has_read(self, user):
+    def mark_all_messages_has_read_for(self, user):
         """
         Mark all private messages of the given user as read.
         :param user: The target user.
