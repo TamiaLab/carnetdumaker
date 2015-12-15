@@ -10,6 +10,7 @@ from django.contrib.auth.signals import (user_logged_in,
 
 from apps.tools.http_utils import get_client_ip_address
 
+from .managers import LogEventManager
 from .constants import (LOG_EVENT_CHOICES,
                         LOG_EVENT_LOGIN_SUCCESS,
                         LOG_EVENT_LOGIN_FAILED,
@@ -45,6 +46,8 @@ class LogEvent(models.Model):
                                               editable=False,
                                               blank=True,
                                               null=True)
+
+    objects = LogEventManager()
 
     class Meta:
         verbose_name = _('Log event')

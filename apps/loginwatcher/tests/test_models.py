@@ -2,11 +2,16 @@
 Tests suite for the data models of the log watch app.
 """
 
+from unittest.mock import patch
+from datetime import timedelta
+
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 from ..models import LogEvent
+from ..settings import LOG_EVENT_TTL_TIMEOUT_DAYS
 from ..constants import (LOG_EVENT_LOGIN_SUCCESS,
                          LOG_EVENT_LOGIN_FAILED,
                          LOG_EVENT_LOGOUT)
@@ -127,3 +132,24 @@ class LogEventModelTestCase(TestCase):
         client.logout()
         nb_events = LogEvent.objects.count()
         self.assertEqual(nb_events, 0)
+
+    def test_delete_old_events_method(self):
+        """
+        Test the ``delete_old_events`` method of the manager class.
+        """
+        now = timezone.now()
+        with patch('django.utils.timezone.now') as mock_now:
+            mock_now.return_value = now
+            e1 = LogEvent.objects.create(type=LOG_EVENT_LOGIN_SUCCESS,
+                                         username='johndoe',
+                                         ip_address='10.0.0.56')
+
+        with patch('django.utils.timezone.now') as mock_now:
+            mock_now.return_value = now - timedelta(days=LOG_EVENT_TTL_TIMEOUT_DAYS)
+            e2 = LogEvent.objects.create(type=LOG_EVENT_LOGOUT,
+                                         username='johndoe',
+                                         ip_address='10.0.0.56')
+
+        self.assertEqual(list(LogEvent.objects.all()), [e1, e2])
+        LogEvent.objects.delete_old_events()
+        self.assertEqual(list(LogEvent.objects.all()), [e1])
