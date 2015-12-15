@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -28,7 +28,7 @@ msgstr "Destinataire et expéditeur"
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: apps/privatemsg/admin.py:116 apps/privatemsg/forms.py:41
+#: apps/privatemsg/admin.py:116 apps/privatemsg/forms.py:42
 #: apps/privatemsg/models.py:55
 msgid "Recipient"
 msgstr "Destinataire"
@@ -46,33 +46,33 @@ msgstr "Utilisateur lié"
 msgid "Private messages"
 msgstr "Messages privés"
 
-#: apps/privatemsg/forms.py:38 apps/privatemsg/forms.py:98
+#: apps/privatemsg/forms.py:39 apps/privatemsg/forms.py:97
 #: apps/privatemsg/models.py:38 apps/privatemsg/models.py:160
 msgid "Subject"
 msgstr "Sujet"
 
-#: apps/privatemsg/forms.py:44 apps/privatemsg/forms.py:101
+#: apps/privatemsg/forms.py:44 apps/privatemsg/forms.py:99
 msgid "Body"
 msgstr "Corps du message"
 
-#: apps/privatemsg/forms.py:58
+#: apps/privatemsg/forms.py:57
 msgid "You can send a private message to only one recipient."
 msgstr "Vous ne pouvez envoyer un message qu'à un seul destinataire."
 
-#: apps/privatemsg/forms.py:64
+#: apps/privatemsg/forms.py:63
 #, python-format
 msgid "Unknown recipient \"%(username)s\"."
 msgstr "Destinataire inconnu \"%(username)s\"."
 
-#: apps/privatemsg/forms.py:67
+#: apps/privatemsg/forms.py:66
 msgid "The recipient has closed his acccount."
 msgstr "Le destinataire a cloturé son compte."
 
-#: apps/privatemsg/forms.py:70 apps/privatemsg/forms.py:123
+#: apps/privatemsg/forms.py:69 apps/privatemsg/forms.py:120
 msgid "The recipient does not accept private messages."
 msgstr "Le destinataire n'accèpte pas les messages privés."
 
-#: apps/privatemsg/forms.py:73 apps/privatemsg/forms.py:126
+#: apps/privatemsg/forms.py:72 apps/privatemsg/forms.py:123
 msgid "The recipient does not accept private messages from you."
 msgstr "Le destinataire n'accèpte pas les messages privés de votre part."
 
