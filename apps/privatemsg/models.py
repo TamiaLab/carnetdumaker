@@ -6,8 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.contrib.auth.signals import user_logged_in
@@ -43,6 +43,8 @@ class PrivateMessage(models.Model):
     body = RenderTextField(_('Message'))
 
     body_html = models.TextField(_('Message (raw HTML)'))
+
+    body_text = models.TextField(_('Message (raw text)'))
 
     sender = models.ForeignKey(settings.AUTH_USER_MODEL,
                                db_index=True,  # Database optimization
@@ -98,6 +100,7 @@ class PrivateMessage(models.Model):
         verbose_name_plural = _('Private messages')
         get_latest_by = 'sent_at'
         ordering = ('-sent_at', 'id')
+        # FIXME Skcode perms here
 
     def __str__(self):
         return self.get_subject_display()
@@ -110,17 +113,23 @@ class PrivateMessage(models.Model):
         """
 
         # Avoid erroneous state
-        now = timezone.now()
-        if self.recipient_permanently_deleted and self.recipient_deleted_at is None:
-            self.recipient_deleted_at = now
-        if self.sender_permanently_deleted and self.sender_deleted_at is None:
-            self.sender_deleted_at = now
+        self.fix_deletion_states()
 
         # Render the message's body text
         self.render_body()
 
         # Save the message
         super(PrivateMessage, self).save(*args, **kwargs)
+
+    def fix_deletion_states(self):
+        """
+        Fix ``recipient_deleted_at`` and ``sender_deleted_at`` fields.
+        """
+        now = timezone.now()
+        if self.recipient_permanently_deleted and self.recipient_deleted_at is None:
+            self.recipient_deleted_at = now
+        if self.sender_permanently_deleted and self.sender_deleted_at is None:
+            self.sender_deleted_at = now
 
     def get_absolute_url(self):
         """
@@ -156,7 +165,7 @@ class PrivateMessage(models.Model):
         """
         Return the subject of the message for displaying.
         """
-        return str(self.subject or _('(no subject)'))
+        return force_text(self.subject or _('(no subject)'))
     get_subject_display.short_description = _('Subject')
     get_subject_display.admin_order_field = 'subject'
 
@@ -187,18 +196,21 @@ class PrivateMessage(models.Model):
     def is_recipient(self, user):
         """
         Return ``True`` if the given user is the recipient of this message.
+        :param user: The user to be used for the check.
         """
         return user == self.recipient
 
     def is_sender(self, user):
         """
         Return ``True`` if the given user is the sender of this message.
+        :param user: The user to be used for the check.
         """
         return user == self.sender
 
     def deleted_from_user_side(self, user):
         """
         Returns ``True`` if the user has deleted this message.
+        :param user: The user to be used for the check.
         """
         if user == self.recipient:
             return self.deleted_at_recipient_side()
@@ -209,6 +221,7 @@ class PrivateMessage(models.Model):
     def permanently_deleted_from_user_side(self, user):
         """
         Returns ``True`` if the user has permanently deleted this message.
+        :param user: The user to be used for the check.
         """
         if user == self.recipient:
             return self.recipient_permanently_deleted
@@ -221,6 +234,7 @@ class PrivateMessage(models.Model):
         Delete the message from the given user side.
         Given user should be the recipient or sender for this function to work.
         :param user: The user to delete this message from.
+        :param permanent: Set to True to permanently delete the message.
         """
         if user == self.recipient:
             if self.recipient_deleted_at is None:
@@ -233,7 +247,7 @@ class PrivateMessage(models.Model):
             if not self.sender_permanently_deleted:
                 self.sender_permanently_deleted = permanent
 
-    def undelete_from_user_side(self, user, permanent=False):
+    def undelete_from_user_side(self, user):
         """
         Un-delete the message from the given user side.
         Given user should be the recipient or sender for this function to work.
@@ -249,22 +263,18 @@ class PrivateMessage(models.Model):
     def render_body(self, save=False):
         """
         Render the content. Save the model only if ``save`` is True.
+        :param save: Set to True to save the model after the rendering.
         """
 
         # Render HTML
+        # FIXME Deploy skcode engine
         self.body_html = render_html(self.body)
+        self.body_text = 'TODO'
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(PrivateMessage, self).save(update_fields=('body_html',))
-
-    @cached_property
-    def get_body_without_html(self):
-        """
-        Return the private message's text without any HTML tag nor entities.
-        """
-        return strip_html(self.body_html)
+            super(PrivateMessage, self).save(update_fields=('body_html', ))
 
 
 def _redo_private_messages_text_rendering(sender, **kwargs):
@@ -275,7 +285,6 @@ def _redo_private_messages_text_rendering(sender, **kwargs):
     """
     for message in PrivateMessage.objects.all():
         message.render_body(save=True)
-
 
 render_engine_changed.connect(_redo_private_messages_text_rendering)
 
@@ -296,8 +305,7 @@ def notice_unread_messages_upon_login(sender, user, request, **kwargs):
               '<a href="%(link)s" class="alert-link">Click here to see them</a>.') % {
                 'count': unread_count,
                 'link': reverse('privatemsg:inbox_unread')
-            }))
-
+            }), extra_tags='unread_pvmessages', fail_silently=True)
 
 user_logged_in.connect(notice_unread_messages_upon_login)
 
@@ -331,19 +339,16 @@ class PrivateMessageUserProfile(models.Model):
     def __str__(self):
         return 'Private messages user profile of "%s"' % self.user.username
 
-    def is_flooding(self, now=None):
+    def is_flooding(self):
         """
         Returns ``True`` if the user has post something less than ``NB_SECONDS_BETWEEN_PRIVATE_MSG`` seconds from now.
-        Returns ``False`` if the user has never post something.
-        :param now: For testing purpose only.
+        Returns ``False`` if the user has never post something or posted after the anti-flood time window.
         :return: bool ``True`` if the user is flooding (= trying to post two messages before the
         ``NB_SECONDS_BETWEEN_PRIVATE_MSG`` seconds delay is reached).
         """
         if self.last_sent_private_msg_date is None:
             return False
-        if now is None:
-            now = timezone.now()
-        delta = now - self.last_sent_private_msg_date
+        delta = timezone.now() - self.last_sent_private_msg_date
         return delta.total_seconds() < NB_SECONDS_BETWEEN_PRIVATE_MSG
 
     def rearm_flooding_delay_and_save(self):
@@ -351,13 +356,13 @@ class PrivateMessageUserProfile(models.Model):
         Re-arm the anti flood delay and save the model.
         """
         self.last_sent_private_msg_date = timezone.now()
-        self.save()
+        self.save(update_fields=('last_sent_private_msg_date', ))
 
 
 class BlockedUser(models.Model):
     """
     Blocked user data model.
-    Allow users to disallow other users to sent message to us.
+    Allow users to disallow other users to sent message to him.
     """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -378,7 +383,7 @@ class BlockedUser(models.Model):
     objects = BlockedUserManager()
 
     class Meta:
-        unique_together = (('user', 'blocked_user'),)
+        unique_together = (('user', 'blocked_user'), )
         verbose_name = _('Blocked user')
         verbose_name_plural = _('Blocked users')
         get_latest_by = 'last_block_date'
