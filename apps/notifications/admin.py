@@ -15,7 +15,7 @@ class NotificationAdmin(admin.ModelAdmin):
     Custom admin model for the ``Notification`` model.
     """
 
-    list_select_related = ('recipient',)
+    list_select_related = ('recipient', )
 
     list_display = ('title',
                     'recipient_username_link',
@@ -31,9 +31,9 @@ class NotificationAdmin(admin.ModelAdmin):
                      'message',
                      'dismiss_code')
 
-    raw_id_fields = ('recipient',)
+    raw_id_fields = ('recipient', )
 
-    readonly_fields = ('notification_date',)
+    readonly_fields = ('notification_date', )
 
     def save_model(self, request, obj, form, change):
         """
@@ -64,7 +64,9 @@ class NotificationAdmin(admin.ModelAdmin):
         Return the username of the related notification's recipient as a link to the related user admin edit page.
         :param obj: Current model object.
         """
-        return '<a href="%s">%s</a>' % (reverse('admin:auth_user_change', args=[obj.recipient.pk]), obj.recipient.username)
+        return '<a href="%s">%s</a>' % (reverse('admin:auth_user_change',
+                                                args=[obj.recipient.pk]),
+                                        obj.recipient.username)
     recipient_username_link.short_description = _('Recipient')
     recipient_username_link.admin_order_field = 'recipient__username'
     recipient_username_link.allow_tags = True
@@ -75,7 +77,7 @@ class NotificationsUserProfileAdmin(admin.ModelAdmin):
     ``NotificationsUserProfile`` admin form.
     """
 
-    list_select_related = ('user',)
+    list_select_related = ('user', )
 
     list_display = ('user_username',
                     'send_mail_on_new_notification')
@@ -85,7 +87,7 @@ class NotificationsUserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__email',
                      'user__username')
 
-    readonly_fields = ('user_username',)
+    readonly_fields = ('user_username', )
 
     fields = ('user_username',
               'send_mail_on_new_notification')
@@ -101,5 +103,5 @@ class NotificationsUserProfileAdmin(admin.ModelAdmin):
     user_username.admin_order_field = 'user__username'
 
 
-admin.site.register(NotificationsUserProfile, NotificationsUserProfileAdmin)
 admin.site.register(Notification, NotificationAdmin)
+admin.site.register(NotificationsUserProfile, NotificationsUserProfileAdmin)
