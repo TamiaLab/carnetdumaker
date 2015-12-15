@@ -1,18 +1,18 @@
 """
-Management command to cleanup blocked user database entries.
+Management command to cleanup deleted blocked user entries from database.
 """
 
 from django.core.management.base import NoArgsCommand
 
-from apps.privatemsg.models import BlockedUser
+from ...models import BlockedUser
 
 
 class Command(NoArgsCommand):
     """
-    A management command which deletes any inactive blocked user from the database.
+    A management command which deletes any inactive blocked user entries from the database.
     """
 
-    help = "Delete inactive blocked user from the database"
+    help = "Delete inactive blocked user entries from the database"
 
     def handle_noargs(self, **options):
         """
