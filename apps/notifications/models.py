@@ -65,7 +65,7 @@ class Notification(models.Model):
         verbose_name = _('Notification')
         verbose_name_plural = _('Notifications')
         get_latest_by = 'notification_date'
-        ordering = ('-notification_date',)
+        ordering = ('-notification_date', )
 
     def __str__(self):
         return self.title
@@ -92,6 +92,7 @@ class Notification(models.Model):
         :param kwargs: For super()
         :return: super()
         """
+
         # Save the model
         res = super(Notification, self).save(*args, **kwargs)
 
@@ -173,7 +174,7 @@ def notice_unread_notifications_upon_login(sender, user, request, **kwargs):
               '<a href="%(link)s" class="alert-link">Click here to see them</a>.') % {
                 'count': unread_count,
                 'link': reverse('notifications:notification_unread_list')
-            }))
+            }), extra_tags='unread_notifications', fail_silently=True)
 
 
 user_logged_in.connect(notice_unread_notifications_upon_login)
