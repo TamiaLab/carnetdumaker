@@ -16,4 +16,4 @@ class NotificationsProfileModificationForm(forms.ModelForm):
 
         model = NotificationsUserProfile
 
-        fields = ('send_mail_on_new_notification',)
+        fields = ('send_mail_on_new_notification', )
