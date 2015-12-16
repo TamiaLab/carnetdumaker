@@ -2,6 +2,7 @@
 Objects managers for the registration app.
 """
 
+import re
 import uuid
 
 from django.db import models
@@ -121,7 +122,14 @@ class BannedEmailManager(models.Manager):
         """
         email_username, email_provider = email_address.split('@')
         email_provider_no_tld = email_provider.rsplit('.', 1)[0]
-        return self.filter(Q(email__iexact=email_address) |
-                           Q(email__iexact='%s@*' % email_username) |
-                           Q(email__iexact='*@%s' % email_provider) |
-                           Q(email__iexact='*@%s.*' % email_provider_no_tld)).exists()
+        banned = self.filter(Q(email__iexact=email_address) |
+                             Q(email__iexact='%s@*' % email_username) |
+                             Q(email__iexact='*@%s' % email_provider) |
+                             Q(email__iexact='*@%s.*' % email_provider_no_tld)).exists()
+        if not banned:
+            # Use regex to get ride of Gmail dot trick
+            email_username_no_dot = email_username.replace('.', '')
+            username_re = r'\.?'.join(re.escape(email_username_no_dot))
+            provider_re = re.escape(email_provider)
+            return self.filter(email__iregex=r'^%s@(\*|%s)$' % (username_re, provider_re)).exists()
+        return True

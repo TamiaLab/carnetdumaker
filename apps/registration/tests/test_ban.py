@@ -69,3 +69,86 @@ class BanFeatureTestCase(TestCase):
         """
         self.assertTrue(BannedEmail.objects.is_email_address_banned('toto@providerbannedanytld.com'))
         self.assertTrue(BannedEmail.objects.is_email_address_banned('john.doe@providerbannedanytld.fr'))
+
+    def test_email_ban_google_dot_trick(self):
+        """
+        Test ban by email username with support of the Google dot trick.
+        """
+        ban_list = (
+            'banne.d@example.com',
+            'bann.ed@example.com',
+            'bann.e.d@example.com',
+            'ban.ned@example.com',
+            'ban.ne.d@example.com',
+            'ban.n.ed@example.com',
+            'ban.n.e.d@example.com',
+            'ba.nned@example.com',
+            'ba.nne.d@example.com',
+            'ba.nn.ed@example.com',
+            'ba.nn.e.d@example.com',
+            'ba.n.ned@example.com',
+            'ba.n.ne.d@example.com',
+            'ba.n.n.ed@example.com',
+            'ba.n.n.e.d@example.com',
+            'b.anned@example.com',
+            'b.anne.d@example.com',
+            'b.ann.ed@example.com',
+            'b.ann.e.d@example.com',
+            'b.an.ned@example.com',
+            'b.an.ne.d@example.com',
+            'b.an.n.ed@example.com',
+            'b.an.n.e.d@example.com',
+            'b.a.nned@example.com',
+            'b.a.nne.d@example.com',
+            'b.a.nn.ed@example.com',
+            'b.a.nn.e.d@example.com',
+            'b.a.n.ned@example.com',
+            'b.a.n.ne.d@example.com',
+            'b.a.n.n.ed@example.com',
+            'b.a.n.n.e.d@example.com',
+        )
+        self.assertTrue(BannedEmail.objects.is_email_address_banned('banned@example.com'))
+        for email in ban_list:
+            self.assertTrue(BannedEmail.objects.is_email_address_banned(email), email)
+
+    def test_email_ban_google_dot_trick_any_provider(self):
+        """
+        Test ban by email username with support of the Google dot trick.
+        """
+        BannedEmail.objects.create(email='banned@*')
+        ban_list = (
+            'banne.d@gmail.com',
+            'bann.ed@gmail.com',
+            'bann.e.d@gmail.com',
+            'ban.ned@gmail.com',
+            'ban.ne.d@gmail.com',
+            'ban.n.ed@gmail.com',
+            'ban.n.e.d@gmail.com',
+            'ba.nned@gmail.com',
+            'ba.nne.d@gmail.com',
+            'ba.nn.ed@gmail.com',
+            'ba.nn.e.d@gmail.com',
+            'ba.n.ned@gmail.com',
+            'ba.n.ne.d@gmail.com',
+            'ba.n.n.ed@gmail.com',
+            'ba.n.n.e.d@gmail.com',
+            'b.anned@gmail.com',
+            'b.anne.d@gmail.com',
+            'b.ann.ed@gmail.com',
+            'b.ann.e.d@gmail.com',
+            'b.an.ned@gmail.com',
+            'b.an.ne.d@gmail.com',
+            'b.an.n.ed@gmail.com',
+            'b.an.n.e.d@gmail.com',
+            'b.a.nned@gmail.com',
+            'b.a.nne.d@gmail.com',
+            'b.a.nn.ed@gmail.com',
+            'b.a.nn.e.d@gmail.com',
+            'b.a.n.ned@gmail.com',
+            'b.a.n.ne.d@gmail.com',
+            'b.a.n.n.ed@gmail.com',
+            'b.a.n.n.e.d@gmail.com',
+        )
+        self.assertTrue(BannedEmail.objects.is_email_address_banned('banned@gmail.com'))
+        for email in ban_list:
+            self.assertTrue(BannedEmail.objects.is_email_address_banned(email), email)
