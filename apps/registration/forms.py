@@ -62,6 +62,10 @@ class BaseUserRegistrationForm(forms.Form):
         Validate that the email address is not already in use.
         """
         email = self.cleaned_data['email1']
+        if '+' in email:
+            raise forms.ValidationError(_('Plus sign (+) is not allowed in the email address,'
+                                          ' please chose another one.'),
+                                        code='email_alias_disallowed')
         if BannedEmail.objects.is_email_address_banned(email):
             raise forms.ValidationError(_('This email address or email provider '
                                           'is not allowed, please chose another one.'),
