@@ -290,13 +290,13 @@ def msg_detail(request, pk,
         if request.POST.get(mark_unread_form_submit_name, None):
             if not message.unread():
                 message.read_at = None
-                message.save()
+                message.save(update_fields=('read_at', ))
             return HttpResponseRedirect(post_mark_unread_redirect)
 
     # Mark the message as read
     if message.unread() and message.is_recipient(current_user):
         message.read_at = timezone.now()
-        message.save()
+        message.save(update_fields=('read_at', ))
         msg_just_read = True
     else:
         msg_just_read = False
