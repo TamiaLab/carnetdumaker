@@ -28,7 +28,7 @@ class RegistrationAdmin(admin.ModelAdmin):
                     'last_key_mailing_date',
                     'activation_mail_was_sent_recently')
 
-    raw_id_fields = ('user',)
+    raw_id_fields = ('user', )
 
     search_fields = ('user__email',
                      'user__username',
