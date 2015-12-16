@@ -19,7 +19,8 @@ from .managers import (UserRegistrationManager,
                        BannedUsernameManager,
                        BannedEmailManager)
 from .signals import user_activated
-from .settings import ACCOUNT_ACTIVATION_TIMEOUT_DAYS
+from .settings import (ACCOUNT_ACTIVATION_TIMEOUT_DAYS,
+                       EMAIL_RECENTLY_SENT_TIME_WINDOW_SECONDS)
 
 
 class UserRegistrationProfile(models.Model):
@@ -70,7 +71,7 @@ class UserRegistrationProfile(models.Model):
     def __str__(self):
         return 'Registration profile for "%s"' % self.user.username
 
-    def activation_key_expired(self, now=None):
+    def activation_key_expired(self):
         """
         Determine whether this ``UserRegistrationProfile``'s activation
         key has expired, returning a boolean -- ``True`` if the key
@@ -85,10 +86,8 @@ class UserRegistrationProfile(models.Model):
            activate their account). If the result is less than or
            equal to the current date, the key has expired and this
            method returns ``True``.
-        :param now: Use for testing, if set timezone.now() will not be used.
         """
-        if now is None:  # Allow unittest of the function without being time dependent
-            now = timezone.now()
+        now = timezone.now()
         if not self.last_key_mailing_date:
             return self.activation_key_used
         expiration_date = self.last_key_mailing_date + datetime.timedelta(days=ACCOUNT_ACTIVATION_TIMEOUT_DAYS)
@@ -195,7 +194,7 @@ class UserRegistrationProfile(models.Model):
         """
         if not self.last_key_mailing_date:
             return False
-        timeout = self.last_key_mailing_date + datetime.timedelta(hours=1)
+        timeout = self.last_key_mailing_date + datetime.timedelta(seconds=EMAIL_RECENTLY_SENT_TIME_WINDOW_SECONDS)
         return timezone.now() <= timeout
     activation_mail_was_sent_recently.boolean = True
     activation_mail_was_sent_recently.short_description = _('Mail sent recently')
@@ -210,7 +209,7 @@ class BannedUsername(models.Model):
     username = models.CharField(_('Banned username'),
                                 db_index=True,  # Database optimization
                                 unique=True,
-                                max_length=140)
+                                max_length=32)
 
     objects = BannedUsernameManager()
 
@@ -232,7 +231,7 @@ class BannedEmail(models.Model):
     email = models.CharField(_('Banned email'),
                              db_index=True,  # Database optimization
                              unique=True,
-                             max_length=280)
+                             max_length=254)
 
     objects = BannedEmailManager()
 
