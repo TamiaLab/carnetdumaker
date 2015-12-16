@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
 "PO-Revision-Date: 2015-07-30 11:41+0200\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -98,19 +98,19 @@ msgstr ""
 msgid "An user with that email address already exists."
 msgstr "Un utilisateur avec cette adresse email existe déja."
 
-#: apps/registration/forms.py:85
-msgid "The two password fields didn't match."
-msgstr "Les deux champs de mot de passe ne correspondent pas."
-
-#: apps/registration/forms.py:90
+#: apps/registration/forms.py:82
 msgid "The two email fields didn't match."
 msgstr "Les deux champs d'adresse email ne correspondent pas."
 
-#: apps/registration/forms.py:133
+#: apps/registration/forms.py:94
+msgid "The two password fields didn't match."
+msgstr "Les deux champs de mot de passe ne correspondent pas."
+
+#: apps/registration/forms.py:137
 msgid "You must agree to the terms to register."
 msgstr "Vous devez accepter les CGU pour vous inscrire."
 
-#: apps/registration/forms.py:137
+#: apps/registration/forms.py:141
 #, python-format
 msgid "I have read and agree to the <a href=\"%s\">Terms of Service</a>"
 msgstr ""
