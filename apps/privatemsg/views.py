@@ -333,11 +333,11 @@ def msg_reply(request, parent_pk,
     """
 
     # Get the parent message object
+    current_user = request.user
     query_base = PrivateMessage.objects.select_related('sender', 'recipient', 'parent_msg')
-    parent_message = get_object_or_404(query_base, Q(recipient=request.user) | Q(sender=request.user), pk=parent_pk)
+    parent_message = get_object_or_404(query_base, Q(recipient=current_user) | Q(sender=current_user), pk=parent_pk)
 
     # Useful variables
-    current_user = request.user
     is_flooding = False
 
     # Handle POST requests
