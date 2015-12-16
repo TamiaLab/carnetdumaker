@@ -1,5 +1,5 @@
 """
-Test suite for the forms of the registration app.
+Tests suite for the forms of the registration app.
 """
 
 from django.test import TestCase
@@ -12,7 +12,7 @@ from ..forms import BaseUserRegistrationForm
 
 class BaseUserRegistrationFormTestCase(TestCase):
     """
-    Test suite for the basic user registration form.
+    Tests suite for the basic user registration form.
     """
 
     def setUp(self):
