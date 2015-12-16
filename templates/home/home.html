@@ -1,44 +1,84 @@
 {% extends "home/base_home.html" %}
+{% load tools accounts announcements %}
 
 {% block content %}
-    <h1>Bienvenue sur la version bêta du Carnet du Maker !</h1>
+    <h1 class="text-center">Bienvenue sur le site Carnet du Maker !</h1>
 
-    <p>Comme le qualificatif "bêta" le laisse entendre, cette version est une version <ins>de développement</ins>. Ce n'est donc en aucun cas une version finale du site.
-    De fait, il est possible - et même fort probable - que le site soit inaccessible de temps en temps ou que des bugs apparaissent et disparaissent du jour au lendemain.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3><i class="fa fa-rocket"></i> L'électronique et l'informatique pour tous, mais pas que !</h3>
+                <p>Carnet du Maker est un site de partage et d'échange de connaissances gravitant autours des sujets liés au "Do It Yourself", avec comme spécialité l'informatique et l'électronique.
+                    Tutoriels pratiques, cours théoriques, tests, dossiers, projets sérieux et projets beaucoup moins sérieux, sur Carnet du Maker il y a des articles pour tout les gouts !
+                    Il y a aussi des articles pour tout les niveaux, du parfait débutant aux experts confirmés. Et si vous avez besoin d'un coup de mains pour un projet, le forum et la communauté sont là pour vous aider.
+                </p>
+            </div>
 
-    <p>Le but de cette bêta est de vous présenter une première version du site afin que vous puissiez commenter celle-ci et faire part de vos idées pour l'améliorer.
-    Le but final est d'atteindre petit à petit une version stable sur laquelle il sera possible de travailler les aspects non techniques tels que l'ergonomie,
-    les graphismes et le design dans sa globalité.</p>
+            <div class="col-md-4">
+            	<h3><i class="fa fa-heart"></i> Le site fait par des makers pour des makers</h3>
+                <p>
+                    Carnet du Maker est un site qui se veut proche de ses lecteurs.
+                    Attendez vous à trouvez de subtiles touches d'humours, des projets parfois complétement loufouques et un style d'écriture qui ne laisse personne sur le bord de la route, même quand les choses deviennent techniques.
+                    Ici on apprend en s'amusant, tout en restant sérieux quand il le faut.
+                </p>
+            </div>
 
-    <p>Il vous est ainsi possible, via le <a href="{% url "bugtracker:index" %}">gestionnaire de bug</a>, de rapporter un bug, un défaut ou un manque de fonctionnalité.
-    Ces rapports de bugs seront étudiés en détail par les (enfin le) développeurs du site afin d'apporter les corrections nécessaires.
-    Le site sera régulièrement mis à jour pour refléter les dernières modifications.</p>
-
-    <p>Je remercie par avance toutes les personnes qui prendront le temps de rapporter un bug, même mineur, ou de faire un retour concernant le site.</p>
-
-    <p class="label-warning">N.B. L'aspect visuel actuel du site est purement temporaire.
-    Il s'agit pour le moment d'un design de développement, uniquement conçu pour pouvoir tester les fonctionnalités du site.
-    Le design du site fera l'objet d'une refonte compléte une fois les diverses fonctionnalités stabilisées.
-    Merci donc de ne pas ouvrir de ticket de bug si cela concerne le design du site (décalage d'un élément, bouton mal placé, etc.).
-    Cependant, si cela empêche l'utilisation d'une fonctionnalité du site (un lien cassé ou manquant par exemple), n'hésitez pas à ouvrir un ticket pour que cela soit corrigé au plus vite.</p>
+            <div class="col-md-4">
+            	<h3><i class="fa fa-diamond"></i> Pas de publicité ou de publirédactionnel</h3>
+                <p>
+                    Le site Carnet du Maker est un ovni dans le grand ciel du web. Pourquoi ? Tout simplement parce que nous avons fait le choix de privilégier nos lecteurs plutot que notre compte en banque.
+                    Ici, pas de publicité ou de plubirédactionnel, que du contenu de qualité accessible à tous !
+                    Et si un projet est d'une quelconque façon soutenu par un tier, on vous le dit dés les premiéres lignes.
+                    Le site Carnet du Maker fonctionne sur un modéle "gratuit, payant à la demande". Pour faire simple, la grande majorité du site est gratuit et accessible à tous.
+                    Si vous voulez soutenir le site c'est vous qui décidez, en contreparti de votre soutient, on vous donne accès à plein de fonctionnalités avancées et à certains articles en avant-premiére.
+                    Ce n'est pas le nombres de vues ou une quelconque régie publicitaire qui fait la loi sur ce site, c'est vous !
+                </p>
+            </div>
+        </div>
+    </div>
 
     <hr>
+    {# TODO ajout module recherche #}
 
-    <p>Pour le moment, aucune date n'a été fixée pour la sortie de la version finale du site.
-    Le site passera en version finale quand toutes les fonctionnalités auront été implémentées, les bugs fixés et le design du site revu et corrigé.</p>
+    {# TODO ajout blog #}
 
-    <p>Durant la phase de bêta, je publierai régulièrement des articles de mise à jour concernant le site, mais aussi des articles généralistes (tutoriels, cours, etc.) orienté Arduino et électronique.
-    Les articles du <a href="http://skyduino.wordpress.com">blog Skyduino</a> seront ainsi petit à petit réécrit ici, sur le nouveau site.
-    Je compte sur vos retours pour faire du Carnet du Maker un digne héritier du blog Skyduino.</p>
+    {# TODO ajout forum #}
 
-    <p>En attendant le prochain bug, profitez bien <a href="{% url "blog:index" %}">du blog</a>, <a href="{% url "forum:index" %}">du forum</a> et bien sûr, du <a href="{% url "bugtracker:index" %}">gestionnaire de bug</a>.</p>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2><i class="fa fa-commenting"></i> En direct du site</h2>
 
-    <p class="label-danger">N.B. Je ne peux pas garantir qu'il n'y aura pas de perte de données au fil des changements de version du site durant la phase de bêta-test.
-    Je ferai tout mon possible pour que cela n'arrive pas, mais je ne peux rien garantir. Cela fait partie des aléas inhérents aux versions bêta.<br/>
-    La seule chose que je peux garantir est que les mots de passe stockés en base de données sont lourdement salés et hachés par un algorithme de type PBKDF2-SHA256.
-    De fait, même en cas de vol de la base d'utilisateurs du site, il est théoriquement impossible pour une personne extérieure de retrouver un mot de passe en clair, sauf si celui-ci est (beaucoup) trop simple.
-    Je vous conseille donc d'utiliser un mot de passe fort, différent pour chaque site web et composé d'au moins huit caractères, minuscules, majuscules et chiffres.</p>
+                <h3>Les dernières annonces et actualités</h3>
+                {% recent_announcements_list as recent_announcements %}
+                <ul>{% for announcement in recent_announcements %}
+                    <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a> - par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</li>
+                {% endfor %}</ul>
+            </div>
 
-    <p class="label-info">Concernant l'aspect financier du site, durant la phase de bêta-test, les abonnements et la boutique ne seront pas disponibles.
-    Des choix techniques importants restent à faire concernant ces deux points. Les abonnements et la boutique viendront plus tard, une fois le gros des bugs résolus.</p>
+            <div class="col-md-6">
+                <h2><i class="fa fa-users"></i> En direct de la communauté</h2>
+
+                <h3>Les derniers utilisateurs inscrits</h3>
+                {% get_latest_created_user_accounts as latest_created_user_accounts %}
+                <ul class="list-inline">{% for user_account in latest_created_user_accounts %}
+                    <li>{{ user_account.user|user_profile_link }}</li>
+                {% endfor %}</ul>
+
+            	<h3>Les derniers profils utilisateurs mis à jour</h3>
+                {% get_latest_modified_user_accounts as latest_modified_user_accounts %}
+                <ul class="list-inline">{% for user_account in latest_modified_user_accounts %}
+                    <li>{{ user_account.user|user_profile_link }}</li>
+                {% endfor %}</ul>
+
+                <h3>Les derniers utilisateurs actifs</h3>
+                {% get_latest_online_user_accounts as latest_online_user_accounts %}
+                <ul class="list-inline">{% for user_account in latest_online_user_accounts %}
+                    <li>{{ user_account.user|user_profile_link }}</li>
+                {% endfor %}</ul>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
