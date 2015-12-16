@@ -1,5 +1,5 @@
 """
-Test suite for the views of the registration app.
+Tests suite for the views of the registration app.
 """
 
 from django.test import SimpleTestCase, Client
@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 class RegistrationViewsTestCase(SimpleTestCase):
     """
-    Test suite for the views.
+    Tests suite for the views.
     """
 
     def test_registration_closed_view_available(self):
