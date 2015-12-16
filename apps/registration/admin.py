@@ -26,6 +26,7 @@ class RegistrationAdmin(admin.ModelAdmin):
                     'activation_key_used',
                     'activation_key_expired',
                     'last_key_mailing_date',
+                    'creation_date',
                     'activation_mail_was_sent_recently')
 
     raw_id_fields = ('user', )
@@ -35,7 +36,8 @@ class RegistrationAdmin(admin.ModelAdmin):
                      'activation_key')
 
     list_filter = ('activation_key_used',
-                   'last_key_mailing_date')
+                   'last_key_mailing_date',
+                   'creation_date')
 
     readonly_fields = ('user',
                        'activation_key',
