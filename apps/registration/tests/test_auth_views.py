@@ -1,5 +1,5 @@
 """
-Test suite for the authentication views of the registration app.
+Tests suite for the authentication views of the registration app.
 """
 
 from django.test import SimpleTestCase, Client
@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 class AuthenticationViewsTestCase(SimpleTestCase):
     """
-    Test suite for the authentication views.
+    Tests suite for the authentication views.
     """
 
     def test_auth_index_view_redirection(self):
