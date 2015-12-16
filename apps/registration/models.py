@@ -46,7 +46,7 @@ class UserRegistrationProfile(models.Model):
 
     activation_key = models.CharField(_('Activation key'),
                                       db_index=True,  # Database optimization
-                                      max_length=20)
+                                      max_length=32)
 
     activation_key_used = models.BooleanField(_('Activation key used'),
                                               default=False)
@@ -56,11 +56,16 @@ class UserRegistrationProfile(models.Model):
                                                  blank=True,
                                                  null=True)
 
+    creation_date = models.DateTimeField(_('Registration date'),
+                                         auto_now_add=True)
+
     objects = UserRegistrationManager()
 
     class Meta:
         verbose_name = _('User registration profile')
         verbose_name_plural = _('User registration profiles')
+        get_latest_by = 'creation_date'
+        ordering = ('creation_date', )
 
     def __str__(self):
         return 'Registration profile for "%s"' % self.user.username
@@ -112,13 +117,12 @@ class UserRegistrationProfile(models.Model):
         ``User`` instance. If the user is already activated (multiple call of this function),
         the user is not modified and the ``user_activated`` signal is not sent.
         """
-        # NOTE Possible running race(s) here
         if not self.activation_key_used:
             self.activation_key_used = True
-            self.save()
+            self.save(update_fields=('activation_key_used', ))
         if not self.user.is_active:
             self.user.is_active = True
-            self.user.save()
+            self.user.save(update_fields=('is_active', ))
             user_activated.send(sender=self.__class__, user=self.user)
 
     def send_activation_email(self,
@@ -181,7 +185,7 @@ class UserRegistrationProfile(models.Model):
 
         # Save the current time to avoid sending email too soon if resent needed
         self.last_key_mailing_date = timezone.now()
-        self.save()
+        self.save(update_fields=('last_key_mailing_date', ))
 
     def activation_mail_was_sent_recently(self):
         """
