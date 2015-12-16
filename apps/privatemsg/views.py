@@ -450,11 +450,12 @@ def msg_delete(request, pk,
         post_delete_redirect = resolve_url(post_delete_redirect)
 
     # Get the message
-    message = get_object_or_404(PrivateMessage, Q(recipient=request.user) | Q(sender=request.user), pk=pk)
+    current_user = request.user
+    message = get_object_or_404(PrivateMessage, Q(recipient=current_user) | Q(sender=current_user), pk=pk)
 
     # Handle "delete message" feature
     if request.method == "POST":
-        message.delete_from_user_side(request.user)
+        message.delete_from_user_side(current_user)
         message.save()
         return HttpResponseRedirect(post_delete_redirect)
 
@@ -493,11 +494,12 @@ def msg_delete_permanent(request, pk,
         post_delete_redirect = resolve_url(post_delete_redirect)
 
     # Get the message
-    message = get_object_or_404(PrivateMessage, Q(recipient=request.user) | Q(sender=request.user), pk=pk)
+    current_user = request.user
+    message = get_object_or_404(PrivateMessage, Q(recipient=current_user) | Q(sender=current_user), pk=pk)
 
     # Handle "delete message" feature
     if request.method == "POST":
-        message.delete_from_user_side(request.user, permanent=True)
+        message.delete_from_user_side(current_user, permanent=True)
         message.save()
         return HttpResponseRedirect(post_delete_redirect)
 
@@ -542,10 +544,10 @@ def msg_undelete(request, pk,
         post_undelete_recipient_redirect = resolve_url(post_undelete_recipient_redirect)
 
     # Get the message
-    message = get_object_or_404(PrivateMessage, Q(recipient=request.user) | Q(sender=request.user), pk=pk)
+    current_user = request.user
+    message = get_object_or_404(PrivateMessage, Q(recipient=current_user) | Q(sender=current_user), pk=pk)
 
     # Handle already permanently deleted message
-    current_user = request.user
     if message.permanently_deleted_from_user_side(current_user):
         raise Http404()
 
