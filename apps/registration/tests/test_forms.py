@@ -78,6 +78,24 @@ class BaseUserRegistrationFormTestCase(TestCase):
         self.assertEqual(len(errors['username']), 1)
         self.assertEqual('username_already_exist', errors['username'][0].code)
 
+    def test_email_alias_not_allowed(self):
+        """
+        Test if the form detect email alias address and raise validation error.
+        """
+        data = {
+            'username': 'toto',
+            'email1': 'toto+alias@example.com',
+            'email2': 'toto+alias@example.com',
+            'password1': '0123456789',
+            'password2': '0123456789',
+        }
+        form = BaseUserRegistrationForm(data)
+        self.assertFalse(form.is_valid())
+        errors = form.errors.as_data()
+        self.assertIn('email1', errors)
+        self.assertEqual(len(errors['email1']), 1)
+        self.assertEqual('email_alias_disallowed', errors['email1'][0].code)
+
     def test_email_not_allowed(self):
         """
         Test if the form detect banned email address and raise validation error.
