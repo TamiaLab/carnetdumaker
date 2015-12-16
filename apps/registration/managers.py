@@ -20,9 +20,9 @@ class UserRegistrationManager(models.Manager):
     @staticmethod
     def _generate_new_activation_key():
         """
-        Generate a new (random) activation key of 20 alphanumeric characters.
+        Generate a new (random) activation key of 32 alphanumeric characters.
         """
-        return uuid.uuid4().hex[:20]
+        return uuid.uuid4().hex
 
     def create_inactive_user(self, username, email, password):
         """
