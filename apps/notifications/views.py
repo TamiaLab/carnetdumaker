@@ -131,13 +131,13 @@ def notification_detail(request, pk,
         if request.POST.get(mark_unread_form_submit_name, None):
             if not notification.unread:
                 notification.unread = True
-                notification.save()
+                notification.save(update_fields=('unread', ))
             return HttpResponseRedirect(post_mark_unread_redirect)
 
     # Mark the notification as read
     if notification.unread:
         notification.unread = False
-        notification.save()
+        notification.save(update_fields=('unread', ))
 
     context = {
         'title': _('Notification details'),
