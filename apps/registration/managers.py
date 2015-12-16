@@ -37,7 +37,7 @@ class UserRegistrationManager(models.Manager):
         """
         new_user = get_user_model().objects.create_user(username, email, password)
         new_user.is_active = False
-        new_user.save()
+        new_user.save(update_fields=('is_active', ))
         registration_profile = self._create_profile(new_user)
         user_registered.send(sender=UserRegistrationManager, user=new_user)
         return registration_profile
