@@ -4,7 +4,7 @@ Management command to cleanup expired registration database entries.
 
 from django.core.management.base import NoArgsCommand
 
-from apps.registration.models import UserRegistrationProfile
+from ...models import UserRegistrationProfile
 
 
 class Command(NoArgsCommand):
