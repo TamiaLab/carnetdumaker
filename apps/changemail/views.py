@@ -150,7 +150,7 @@ def change_email_confirm(request, uidb64=None, token=None, addressb64=None,
 
             # Save the new email address
             user.email = address
-            user.save()
+            user.save(update_fields=('email', ))
 
             # Redirect to the done view
             return HttpResponseRedirect(post_confirm_redirect)
