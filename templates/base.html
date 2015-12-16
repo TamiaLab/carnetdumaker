@@ -66,7 +66,7 @@
     <style>
         body {
             /*padding-top: 70px;*/
-            padding-top: 160px;
+            padding-top: 120px;
             padding-bottom: 20px;
         }
     </style>
@@ -151,22 +151,16 @@
             </div>
 
             <!-- Beta-stage alert -->
-            <div class="alert alert-warning" role="alert" id="beta-alert">
-                {# TODO REMOVE THIS AFTER STABLE RELEASE #}
-                <p><i class="fa fa-exclamation-triangle"></i> Site en beta test !
-                    Merci de rapporter tout bug sur le <a href="{% url 'bugtracker:index' %}">gestionnaire de bug</a> du site.
-                    Bonne lecture !</p>
-            </div>
+            <p class="text-center" id="beta-alert"><i class="fa fa-exclamation-triangle"></i> Site en beta !
+                Merci de rapporter tout bug sur le <a href="{% url 'bugtracker:index' %}">gestionnaire de bug</a> du site.
+                Bonne lecture !
+            </p>
         </div>
     </nav>
     {% block extra_navbar %}{% endblock %}
 
     <!-- Page content -->
     <div class="container container-narrow">
-
-        <!-- Quick fix for beta -->
-        {# TODO REMOVE THIS AFTER STABLE RELEASE #}
-        <div class="visible-xs-block" style="padding-top: 30px;"></div>
 
         <!-- Breadcrumb -->
         <div class="row">
