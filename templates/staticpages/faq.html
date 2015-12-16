@@ -8,5 +8,158 @@
 {% block content %}
     <h1>Foire aux questions</h1>
 
-    <p>TODO</p>
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseWhyThisFaq">Pourquoi cette FAQ ?</a>
+                </h4>
+            </div>
+            <div id="collapseWhyThisFaq" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                    <p>Parce que répéter la même chose continuellement devient vite fatigant pour tout le monde.
+                        L'idée est simple : à chaque fois qu'une question en lien direct avec le site est posée, la question et sa réponse sont ajoutées dans cette FAQ.</p>
+
+                    <p>N.B. À chaque fois que quelqu'un pose une question dont la réponse se trouve déjà dans cette FAQ, un mignon petit chaton meurt quelque part sur terre.
+                        C'est un fait scientifique avéré. Prenez donc le temps de lire cette FAQ avant d'envoyer un email à l'administrateur du site. Merci.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseKittenTrueStory">L'histoire des chatons est-elle vraie ?</a>
+                </h4>
+            </div>
+            <div id="collapseKittenTrueStory" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Non. C'est une blague de mauvais gout visant à éviter à l'administrateur du site de recevoir continuellement les mêmes questions par email.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseContactWebmaster">Comment contacter l'administrateur du site ?</a>
+                </h4>
+            </div>
+            <div id="collapseContactWebmaster" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Rien de plus simple, il suffit de se rendre sur la page dédiée : <a href="{% url 'staticpages:contact_us' %}"><i class="fa fa-envelope-o"></i> Nous contacter</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseGuestBlog">Je souhaiterai vous soumettre un de mes articles/projets en guest-blogging. Comment faire ?</a>
+                </h4>
+            </div>
+            <div id="collapseGuestBlog" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>C'est très gentil de votre part et nous vous en remercions, cependant, nous n'acceptons pas le guest blogging (aka "articles invités"), pas pour le moment en tout cas.</p>
+
+                    <p>Le site Carnet du Maker est un site mi-communautaire, mi-professionnel. Ce n'est pas un site de presse, mais ce n'est pas non plus un simple blog personnel.
+                        C'est quelque chose entre les deux. Pour faire simple, c'est compliqué.</p>
+
+                    <p>Gérer les droits d'auteurs des différents articles invités, la relecture avant publication, les diverses corrections pour que tous les articles soient uniformes, etc.
+                        Tout cela demande beaucoup de temps, beaucoup trop de temps. Si vous souhaitez publier votre article/projet sans pour autant ouvrir un blog personnel
+                        (ce qui est parfaitement compréhensible), sachez que vous êtes le bienvenue sur le forum.</p>
+
+                    <p>Pour les personnes souhaitant par la suite publier d'autres articles/projets, je ne pourrai que leurs conseiller d'ouvrir un blog personnel (sur wordpress.com par exemple).
+                        Gérer un blog n'est pas de tout repos mais c'est une aventure fabuleuse.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseWebsiteBug">Il arrive par moment que le site soit innacessible ou que des bugs surviennent, est-ce normal ?</a>
+                </h4>
+            </div>
+            <div id="collapseWebsiteBug" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Non ce n'est pas normal, mais même avec toute la bonne volonté du monde, il arrive parfois qu'un bug passe inapercu lors des tests ou qu'un probléme matériel entraine le crash d'un serveur.</p>
+
+                    <p>Si un tel cas se produit, je vous conseille d'ouvrir un ticket sur le <a href="{% url 'bugtracker:index' %}"><i class="fa fa-bug"></i> gestionnaire de bug</a> ou de nous contacter directement en cas d'inacessibilité prolongé du site.</p>
+
+                    <p>N.B. Pensez à surveiller les réseaux sociaux, en particulier Twitter, pour avoir des informations en temps réel en cas de probléme serveur.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseWebsiteTooWhite">Le site est un peu ... blanc. C'est voulu ?</a>
+                </h4>
+            </div>
+            <div id="collapseWebsiteTooWhite" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Pas vraiment. Le design actuel du site est l'oeuvre de l'administrateur du site. Or, quand on demande à un développeur de faire une interface graphique, ce n'est en général pas très "joli".</p>
+
+                    <p>Plusieurs recherches de prestataires ont été menées pour donner quelques couleurs au site, mais le budget est pour le moment insuffisant pour pouvoir s'offrir les services d'un webdesigner, ou même d'un graphiste.</p>
+
+                    <p>Pour le moment, comme dit le proverbe : "on fait avec ce que l'on a".</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseWhereSearchBar">Ou est la fonction de recherche ?</a>
+                </h4>
+            </div>
+            <div id="collapseWhereSearchBar" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Elle est en cours de réalisation. Intégrer un moteur de recherche à un site comme Carnet du Maker prend un peu de temps. Désolé pour la gêne occasionnée.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseWhySoLong">Pourquoi a-t-il fallu attendre un an pour entrevoir une premiére version "finale", au lieu des 6 mois prévu à l'origine ?</a>
+                </h4>
+            </div>
+            <div id="collapseWhySoLong" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Question piége, la parole passe à l'administrateur du site.</p>
+
+                    <p>La vérité, c'est que j'avais tout simplement sous estimés la charge de travaille annexe, à côté du dévelopement du site.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseCanVisitLab">Peut-on visiter le l'atelier du TamiaLab ?</a>
+                </h4>
+            </div>
+            <div id="collapseCanVisitLab" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <p>Malheureusement non, l'atelier n'est pas ouvert au public, car bien trop dangereux pour quiconque oserait s'y aventurer.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
