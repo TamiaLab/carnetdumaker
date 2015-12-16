@@ -30,6 +30,12 @@ export LANGUAGE=fr_FR.UTF-8
 export LANG=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
 
+# Extra APT
+
+# Elastic search engine
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+
 # ----- System update
 
 # Update the apt-get database
@@ -122,6 +128,10 @@ apt-get install -y memcached
 
 # Install dependencies for pyLibMC (memcached client for python)
 apt-get install -y libmemcached-dev zlib1g-dev libssl-dev
+
+# ----- Elastic search engine
+sudo apt-get install -y default-jre elasticsearch
+sudo update-rc.d elasticsearch defaults 95 10
 
 # ----- Virtualenv provisioning
 # TODO
