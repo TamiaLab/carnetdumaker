@@ -1,5 +1,4 @@
-{% load i18n %}<blockquote{% if pullright %} class="pull-right"{% endif %}>
-    <p>{{ content|safe }}</p>
-    {% if from_author %}<small>{% trans "by" %} <cite>{% if from_url %}<a href="{{ from_url }}">{{ from_author }}</a>{% else %}{{ from_author }}{% endif %}</cite></small>{% endif %}
-</blockquote>
+{% load i18n %}[quote{% if from_author %} author={{ from_author }}{% endif %}{% if from_url %} link={{ from_url }}{% endif %}{% if from_timestamp %} date={{ from_timestamp }}{% endif %}]
+{{ content|safe }}
+[/quote]
 
