@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from apps.tools.utils import unique_slug
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .settings import LICENSE_LOGO_UPLOAD_DIR_NAME
@@ -62,7 +62,6 @@ class License(models.Model):
         verbose_name = _('License')
         verbose_name_plural = _('Licenses')
         ordering = ('name', )
-        # FIXME Permissions for skcode
 
     def __str__(self):
         return self.name
@@ -96,9 +95,31 @@ class License(models.Model):
         """
 
         # Render HTML
-        # FIXME Deploy skcode engine
-        self.description_html = render_html(self.description, force_nofollow=False)
-        self.description_text = 'TODO'
+        content_html, content_text, _ = render_document(self.description,
+                                                        allow_titles=True,
+                                                        allow_alerts_box=True,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
+        self.description_html = content_html
+        self.description_text = content_text
 
         # Save if required
         if save:
