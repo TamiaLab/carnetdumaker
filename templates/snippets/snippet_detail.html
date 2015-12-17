@@ -7,7 +7,7 @@
 {% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
 
 {% block opengraph_title %}{{ snippet.title }}{% endblock %}
-{% block opengraph_description %}{{ snippet.description }}{% endblock %}
+{% block opengraph_description %}{{ snippet.description_text }}{% endblock %}
 {% block opengraph_image %}{% endblock %}
 {% block opengraph_url %}{{ block.super }}{{ snippet.get_absolute_url }}{% endblock %}
 
@@ -32,7 +32,7 @@
 
     <p><i class="fa fa-pencil-square-o"></i> Description :</p>
     <div class="weel">
-        {{ snippet.description }}
+        {{ snippet.description_html|safe }}
     </div>
 
     {{ snippet.html_for_display|safe }}

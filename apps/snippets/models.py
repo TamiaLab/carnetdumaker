@@ -14,6 +14,9 @@ from pygments.lexers import get_lexer_by_name
 from pygments.styles import get_style_by_name
 
 from apps.tools.models import ModelDiffMixin
+from apps.txtrender.fields import RenderTextField
+from apps.txtrender.utils import render_document
+from apps.txtrender.signals import render_engine_changed
 
 from .settings import (SNIPPETS_DEFAULT_TABULATION_SIZE,
                        SNIPPETS_DISPLAY_LINE_NUMBERS_BY_DEFAULT,
@@ -62,7 +65,11 @@ class CodeSnippet(ModelDiffMixin, models.Model):
 
     # TODO Add license field (FK) with acording admin forms, views, feeds
 
-    description = models.TextField(_('Description'))
+    description = RenderTextField(_('Description'))
+
+    description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
 
     source_code = models.TextField(_('Source code'))
 
@@ -171,3 +178,47 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         if not self.highlight_lines:
             return []
         return [int(i) for i in self.highlight_lines.split(',')]
+
+    def render_description(self, save=False):
+        """
+        Render the description.
+        :param save: Save the model field ``content_html`` if ``True``.
+        """
+
+        # Render HTML
+        content_html, content_text, _ = render_document(self.content,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True)
+        self.description_html = content_html
+        self.description_text = content_text
+
+        # Save if required
+        if save:
+            self.save_no_rendering(update_fields=('description_html', 'description_text'))
+
+
+def _redo_code_snippets_text_rendering(sender, **kwargs):
+    """
+    Redo text rendering of all code snippets.
+    :param sender: Not used.
+    :param kwargs: Not used.
+    """
+    for snippet in CodeSnippet.objects.all():
+        snippet.render_description(save=True)
+
+render_engine_changed.connect(_redo_code_snippets_text_rendering)
