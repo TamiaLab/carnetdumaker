@@ -1,62 +1,117 @@
-/* -------------------------------------------------------------------
-// markItUp!
-// By Jay Salvat - http://markitup.jaysalvat.com/
-// ------------------------------------------------------------------*/
-.markItUp .h1 a {
-	background-image:url(images/h1.png); 
-}
-.markItUp .h2 a {
-	background-image:url(images/h2.png); 
-}
-.markItUp .h3 a {
-	background-image:url(images/h3.png); 
-}
-.markItUp .h4 a {
-	background-image:url(images/h4.png); 
-}
-.markItUp .h5 a {
-	background-image:url(images/h5.png); 
-}
-.markItUp .h6 a {
-	background-image:url(images/h6.png); 
-}
-.markItUp .paragraph a {
-	background-image:url(images/paragraph.png); 
+/* Style for the MarkItUp plugin */
+
+.markItUp .bbheader a {
+	background-image:url(images/header.png);
 }
 
-.markItUp .bold a {
+.markItUp .bbcode a {
+	background-image:url(images/code.png);
+}
+
+.markItUp .bbspoiler a {
+	background-image:url(images/spoiler.png);
+}
+
+.markItUp .bbformat a {
+	background-image:url(images/paragraph.png);
+}
+
+.markItUp .bbbold a {
 	background-image:url(images/bold.png);
 }
-.markItUp .italic a {
+
+.markItUp .bbitalic a {
 	background-image:url(images/italic.png);
 }
-.markItUp .stroke a {
-	background-image:url(images/stroke.png);
-}
-.markItUp .underline a {
-	background-image:url(images/stroke.png);
+
+.markItUp .bbunderline a {
+	background-image:url(images/underline.png);
 }
 
-.markItUp .ul a {
-	background-image:url(images/list-bullet.png);
-}
-.markItUp .ol a {
-	background-image:url(images/list-numeric.png);
-}
-.markItUp .li a {
-	background-image:url(images/list-item.png);
+.markItUp .bbstrikethrough a {
+	background-image:url(images/strikethrough.png);
 }
 
-.markItUp .img a {
-	background-image:url(images/picture.png); 
+.markItUp .bbsuperscript a {
+	background-image:url(images/superscript.png);
 }
-.markItUp .link a {
+
+.markItUp .bbsubscript a {
+	background-image:url(images/subscript.png);
+}
+
+.markItUp .bbalign a {
+	background-image:url(images/align-center.png);
+}
+
+.markItUp .bbcenter a {
+	background-image:url(images/align-center.png);
+}
+
+.markItUp .bbright a {
+	background-image:url(images/align-right.png);
+}
+
+.markItUp .bbleft a {
+	background-image:url(images/align-left.png);
+}
+
+.markItUp .bblist a {
+	background-image:url(images/list.png);
+}
+
+.markItUp .bbul a {
+	background-image:url(images/list-ul.png);
+}
+
+.markItUp .bbol a {
+	background-image:url(images/list-ol.png);
+}
+
+.markItUp .bbli a {
+	background-image:url(images/list.png);
+}
+
+.markItUp .bbtable a {
+	background-image:url(images/table.png);
+}
+
+.markItUp .bbtr a {
+	background-image:url(images/th-list.png);
+}
+
+.markItUp .bbtd a {
+	background-image:url(images/th.png);
+}
+
+.markItUp .bbpicture a {
+	background-image:url(images/picture-o.png);
+}
+
+.markItUp .bblink a {
 	background-image:url(images/link.png);
 }
 
-.markItUp .clean a {
-	background-image:url(images/clean.png);
+.markItUp .bbyoutube a {
+	background-image:url(images/youtube-play.png);
 }
+
+.markItUp .bbmisc a {
+	background-image:url(images/caret-down.png);
+}
+
+.markItUp .bbkeyboard a {
+	background-image:url(images/keyboard-o.png);
+}
+
+.markItUp .bbsmall a {
+	background-image:url(images/text-height.png);
+}
+
+.markItUp .bbquote a {
+	background-image:url(images/quote-left.png);
+}
+
 .markItUp .preview a {
 	background-image:url(images/preview.png);
 }
