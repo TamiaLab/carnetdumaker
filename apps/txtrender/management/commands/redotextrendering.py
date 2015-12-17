@@ -4,7 +4,7 @@ Management command to redo text rendering of all rich text fields in the databas
 
 from django.core.management.base import NoArgsCommand
 
-from apps.txtrender.signals import render_engine_changed
+from ...signals import render_engine_changed
 
 
 class Command(NoArgsCommand):
