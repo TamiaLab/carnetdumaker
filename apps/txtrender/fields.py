@@ -19,7 +19,7 @@ class RenderTextFieldBase(models.TextField):
 
     description = _('A rendered text string')
 
-    HELP_TEXT = _('You can use HTML in this field.')
+    HELP_TEXT = _('You can use BBCode in this field.')
 
     def __init__(self, *args, **kwargs):
         parent_kwargs = {
