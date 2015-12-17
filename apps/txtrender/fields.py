@@ -7,8 +7,8 @@ from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import AdminTextareaWidget
 
-from .widgets import (MarkupEditorTextarea,
-                      AdminMarkupEditorTextarea)
+from .widgets import (RichTextEditorTextarea,
+                      AdminRichTextEditorTextarea)
 
 
 class RenderTextFieldBase(models.TextField):
@@ -44,12 +44,12 @@ class RenderTextFieldBase(models.TextField):
         return "TextField"
 
     def formfield(self, **kwargs):
-        defaults = {'widget': MarkupEditorTextarea}
+        defaults = {'widget': RichTextEditorTextarea}
         defaults.update(kwargs)
 
         # As an ugly hack, we override the admin widget
         if defaults['widget'] == AdminTextareaWidget:
-            defaults['widget'] = AdminMarkupEditorTextarea
+            defaults['widget'] = AdminRichTextEditorTextarea
 
         return super(RenderTextFieldBase, self).formfield(**defaults)
 

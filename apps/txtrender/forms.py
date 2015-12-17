@@ -5,7 +5,7 @@ Custom form fields for the text rendering app.
 from django import forms
 
 from .fields import RenderTextFieldBase
-from .widgets import MarkupEditorTextarea
+from .widgets import RichTextEditorTextarea
 
 
 class MarkupCharField(forms.CharField):
@@ -15,7 +15,7 @@ class MarkupCharField(forms.CharField):
 
     def __init__(self, *args, **kwargs):
         if 'widget' not in kwargs:
-            kwargs['widget'] = MarkupEditorTextarea
+            kwargs['widget'] = RichTextEditorTextarea
         if 'help_text' not in kwargs:
             kwargs['help_text'] = RenderTextFieldBase.HELP_TEXT
         super(MarkupCharField, self).__init__(*args, **kwargs)

@@ -1,13 +1,12 @@
 """
 Custom forms widget for the text rendering app.
-Use http://markitup.jaysalvat.com/home/ for the client-side editing front end.
 """
 
 from django import forms
 from django.contrib.admin.widgets import AdminTextareaWidget
 
 
-class MarkupEditorTextarea(forms.Textarea):
+class RichTextEditorTextarea(forms.Textarea):
     """
     MarkitUp editor widget.
     """
@@ -15,7 +14,7 @@ class MarkupEditorTextarea(forms.Textarea):
     SETTINGS_VARNAME = 'mySettings'
 
     def render(self, name, value, attrs=None):
-        textarea_html = super(MarkupEditorTextarea, self).render(name, value, attrs)
+        textarea_html = super(RichTextEditorTextarea, self).render(name, value, attrs)
         script_html = """<script type="text/javascript" >
     $(document).ready(function() {
         $("#%(textarea_id)s").markItUp(%(settings_varname)s);
@@ -34,8 +33,8 @@ class MarkupEditorTextarea(forms.Textarea):
               'markitup/sets/html/set.js')
 
 
-class AdminMarkupEditorTextarea(MarkupEditorTextarea, AdminTextareaWidget):
+class AdminRichTextEditorTextarea(RichTextEditorTextarea, AdminTextareaWidget):
     """
-    Django-admin version of ``MarkupEditorTextarea``.
+    Django-admin version of ``RichTextEditorTextarea``.
     """
     pass
