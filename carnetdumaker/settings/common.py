@@ -196,6 +196,7 @@ INSTALLED_APPS = [
 
     # Vendor apps
     'mptt',
+    'haystack',
 
     # Local apps
     'apps.accounts',
@@ -487,5 +488,18 @@ REGISTRATION_OPEN = True
 
 # The number of days an activation link is valid for
 ACCOUNT_ACTIVATION_TIMEOUT_DAYS = 2
+
+#endregion
+
+#region ----- Search engine settings
+
+# Settings for the Haystack search API
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystackcdm',
+    },
+}
 
 #endregion
