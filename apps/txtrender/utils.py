@@ -151,7 +151,7 @@ def render_document(input_text,
     # Shortcut for empty documents
     input_text = input_text.strip()
     if not input_text:
-        return ''
+        return '', '', {}
 
     # Filter tags according to permissions
     allowed_tags = {}
