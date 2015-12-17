@@ -194,7 +194,7 @@ class ImageAttachment(models.Model):
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(ImageAttachment, self).save(update_fields=('description_html', ))
+            super(ImageAttachment, self).save(update_fields=('description_html', 'description_text'))
 
 
 def _redo_image_attachments_text_rendering(sender, **kwargs):
