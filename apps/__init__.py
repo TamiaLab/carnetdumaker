@@ -1,4 +1,5 @@
 """
-Applications module. All the black magic is here.
-Applications in this module are made to be reusable in any other project.
+Applications modules repository, all the black magic is here.
+
+Applications in this repository are made to be reusable in any other projects.
 """
