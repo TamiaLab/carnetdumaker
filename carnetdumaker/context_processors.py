@@ -22,7 +22,7 @@ def app_constants(request):
             'DESCRIPTION': _('L\'esprit du Do It Yourself'),
             'TWITTER_USERNAME': 'carnetdumaker',
             'GOOGLE_SITE_VERIFICATION_CODE': '',  # TODO
-            'TWITTER_ACCOUNT_ID': '',  # TODO
+            'TWITTER_ACCOUNT_ID': '3043075520',
             'FACEBOOK_URL': '',  # TODO
         },
         'SITE': {
