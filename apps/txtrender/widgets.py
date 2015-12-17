@@ -29,7 +29,8 @@ class MarkupEditorTextarea(forms.Textarea):
                     'markitup/sets/html/style.css',
                     'markitup/skins/simple/style.css')
         }
-        js = ('markitup/jquery.markitup.js',
+        js = ('js/vendor/jquery-1.11.3.min.js',
+              'markitup/jquery.markitup.js',
               'markitup/sets/html/set.js')
 
 
