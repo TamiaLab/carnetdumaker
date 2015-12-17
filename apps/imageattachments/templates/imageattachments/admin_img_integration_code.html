@@ -1,7 +1,6 @@
-{% load i18n %}
-<pre><code>
-&lt;div class=&quot;thumbnail with-caption&quot;&gt;
-    &lt;a href=&quot;{{ obj.get_absolute_url }}&quot;&gt;&lt;img src=&quot;{{ img.url }}&quot; alt=&quot;{{ obj.title }}&quot; height=&quot;{{ height }}&quot; width=&quot;{{ width }}&quot;/&gt;&lt;/a&gt;
-    {% if obj.legend or obj.license %}&lt;p&gt;{{ obj.legend }} {% if obj.license %}({% trans "license" %} &lt;a href=&quot;{{ obj.license.get_absolute_url }}&quot;&gt;{{ obj.license.name }}&lt;/a&gt;){% endif %}&lt;/p&gt;{% endif %}
-&lt;/div&gt;
+{% load i18n %}<pre><code>
+    [figure]
+    [url="{{ obj.get_absolute_url }}"][img alt="{{ obj.title }}" height="{{ height }}" width="{{ width }}"]{{ img.url }}[/img][/url]
+    {% if obj.legend or obj.license %}[figcaption]{{ obj.legend }} {% if obj.license %}({% trans "license" %} [url="{{ obj.license.get_absolute_url }}"]{{ obj.license.name }}[/url]){% endif %}[figcaption]
+    {% endif %}[/figure]
 </code></pre>
