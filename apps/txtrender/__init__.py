@@ -1,7 +1,7 @@
 """
 Text rendering app.
 
-This reusable Django application provide text rendering routines and forms/models fields for storing and writting
+This reusable Django application provide text rendering routines and forms/models fields for storing and writing
 rich text documents.
 """
 
