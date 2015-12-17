@@ -210,7 +210,7 @@ class Announcement(ModelDiffMixin, models.Model):
 
         # Save if required
         if save:
-            self.save_no_rendering(update_fields=('content_html',))
+            self.save_no_rendering(update_fields=('content_html', 'content_text'))
 
 
 def _redo_announcements_text_rendering(sender, **kwargs):
