@@ -1,3 +1,3 @@
 """
-Tests suite for the text rendering app.
+Tests suites for the text rendering app.
 """
