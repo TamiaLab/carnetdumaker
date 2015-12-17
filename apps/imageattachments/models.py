@@ -11,7 +11,7 @@ from apps.licenses.models import License
 from apps.tools.utils import unique_slug
 from apps.tools.fields import ThumbnailImageField
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .managers import ImageAttachmentManager
@@ -60,7 +60,6 @@ class ImageAttachment(models.Model):
                               default='',
                               blank=True)
 
-    # FIXME Deploy Skcode engine
     description = RenderTextField(_('Description'),
                                    default='',
                                    blank=True)
@@ -120,7 +119,6 @@ class ImageAttachment(models.Model):
         verbose_name_plural = _('Image attachments')
         get_latest_by = 'pub_date'
         ordering = ('-pub_date', )
-        # FIXME Skcode perms here
 
     def __str__(self):
         return self.title
@@ -173,8 +171,25 @@ class ImageAttachment(models.Model):
         """
 
         # Render the description text
-        # FIXME Deploy Skcode engine
-        self.description_html = render_html(self.description, force_nofollow=False)
+        content_html, content_text, _ = render_document(self.description,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True)
+        self.description_html = content_html
+        self.description_text = content_text
 
         # Save if required
         if save:
