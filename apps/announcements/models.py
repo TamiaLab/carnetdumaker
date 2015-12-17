@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.tools.utils import unique_slug
 from apps.tools.models import ModelDiffMixin
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .managers import (AnnouncementManager,
@@ -92,7 +92,6 @@ class Announcement(ModelDiffMixin, models.Model):
         verbose_name = _('Announcement')
         verbose_name_plural = _('Announcements')
         permissions = (
-            # TODO Add fine grained permissions for allowed tags in content field
             ('can_see_preview', 'Can see any announcements in preview'),
         )
         get_latest_by = 'pub_date'
@@ -181,11 +180,33 @@ class Announcement(ModelDiffMixin, models.Model):
         """
 
         # Render HTML
-        # TODO move each permission get into a dedicated method
-        self.content_html = render_html(self.content, force_nofollow=False)
-        # TODO Deploy text version rendering
-        self.content_text = 'TODO'
-        # TODO Deploy SkCode rendering engine
+        content_html, content_text, _ = render_document(self.content,
+                                                        allow_titles=True,
+                                                        allow_code_blocks=True,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
+        self.content_html = content_html
+        self.content_text = content_text
 
         # Save if required
         if save:
