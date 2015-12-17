@@ -27,7 +27,3 @@ msgstr "Une chaine de caractéres pour le moteur de rendu de texte"
 #: apps/txtrender/fields.py:22
 msgid "You can use BBCode in this field."
 msgstr "Vous pouvez utiliser la syntaxe BBCode dans ce champ."
-
-#: apps/txtrender/templates/txtrender/quote.html:3
-msgid "by"
-msgstr "par"
