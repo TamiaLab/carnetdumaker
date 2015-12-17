@@ -17,7 +17,7 @@
 
     <img src="{{ image.img_large.url }}" width="image.img_large_width" height="image.img_large_height" alt="{{ image.title }}" class="center-block" />
     {% if user.is_staff %}
-        <p class="text-center"><a href="{% url 'admin:blog_articleimageattachment_change' image.pk %}"><i class="fa fa-terminal"></i> Modifier l'image dans l'interface d'administration</a></p>
+        <p class="text-center"><a href="{% url 'admin:imageattachments_imageattachment_change' image.pk %}"><i class="fa fa-terminal"></i> Modifier l'image dans l'interface d'administration</a></p>
     {% endif %}
 
     <h2>Fichiers</h2>
