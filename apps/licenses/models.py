@@ -124,7 +124,7 @@ class License(models.Model):
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(License, self).save(update_fields=('description_html',))
+            super(License, self).save(update_fields=('description_html', 'description_text'))
 
 
 def _redo_licenses_text_rendering(sender, **kwargs):
