@@ -23,7 +23,7 @@ from apps.countries.fields import CountryField
 from apps.gender.fields import GenderField
 from apps.timezones import TIMEZONE_SESSION_KEY
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .settings import (AVATAR_HEIGHT_SIZE_PX,
@@ -129,7 +129,8 @@ class UserProfile(models.Model):
                                       editable=False,
                                       blank=True)
 
-    signature = RenderTextField(_('Signature'))
+    signature = RenderTextField(_('Signature'),
+                                max_length=255)
 
     signature_html = models.TextField(_('Signature (raw HTML)'),
                                       default='',
@@ -218,8 +219,19 @@ class UserProfile(models.Model):
         verbose_name = _('User profile')
         verbose_name_plural = _('User profiles')
         permissions = (
-            # TODO Add fine grained permissions for allowed tags in biography and signature fields
+            ('allow_titles_in_biography', 'Allow titles in biography'),
+            ('allow_alerts_box_in_biography', 'Allow alerts box in biography'),
+            ('allow_text_colors_in_biography', 'Allow coloured text in biography'),
+            ('allow_cdm_extra_in_biography', 'Allow CDM extra in biography'),
             ('allow_raw_link_in_biography', 'Allow raw link (without forcing nofollow) in biography'),
+
+            ('allow_code_blocks_in_signature', 'Allow code blocks in signature'),
+            ('allow_text_colors_in_signature', 'Allow coloured text in signature'),
+            ('allow_lists_in_signature', 'Allow lists in signature'),
+            ('allow_tables_in_signature', 'Allow tables in signature'),
+            ('allow_quotes_in_signature', 'Allow quotes in signature'),
+            ('allow_medias_in_signature', 'Allow medias in signature'),
+            ('allow_cdm_extra_in_signature', 'Allow CDM extra in signature'),
             ('allow_raw_link_in_signature', 'Allow raw link (without forcing nofollow) in signature'),
         )
         ordering = ('-user__is_staff', 'user__username')
@@ -333,12 +345,64 @@ class UserProfile(models.Model):
         """
 
         # Render HTML
-        # TODO move each permission get into a dedicated method
+        allow_titles_in_biography = self.user.has_perm('accounts.allow_titles_in_biography')
+        allow_alerts_box_in_biography = self.user.has_perm('accounts.allow_alerts_box_in_biography')
+        allow_text_colors_in_biography = self.user.has_perm('accounts.allow_text_colors_in_biography')
+        allow_cdm_extra_in_biography = self.user.has_perm('accounts.allow_cdm_extra_in_biography')
         force_nofollow_in_biography = not self.user.has_perm('accounts.allow_raw_link_in_biography')
+        content_html, _, __ = render_document(self.biography,
+                                              allow_titles=allow_titles_in_biography,
+                                              allow_code_blocks=True,
+                                              allow_alerts_box=allow_alerts_box_in_biography,
+                                              allow_text_formating=True,
+                                              allow_text_extra=True,
+                                              allow_text_alignments=True,
+                                              allow_text_directions=True,
+                                              allow_text_modifiers=True,
+                                              allow_text_colors=allow_text_colors_in_biography,
+                                              allow_spoilers=True,
+                                              allow_figures=True,
+                                              allow_lists=True,
+                                              allow_todo_lists=True,
+                                              allow_definition_lists=True,
+                                              allow_tables=True,
+                                              allow_quotes=True,
+                                              allow_footnotes=True,
+                                              allow_acronyms=True,
+                                              allow_links=True,
+                                              allow_medias=True,
+                                              allow_cdm_extra=allow_cdm_extra_in_biography,
+                                              force_nofollow=force_nofollow_in_biography,
+                                              merge_footnotes_html=True)
+        self.biography_html = content_html
+
+        allow_code_blocks_in_signature = self.user.has_perm('accounts.allow_code_blocks_in_signature')
+        allow_text_colors_in_signature = self.user.has_perm('accounts.allow_text_colors_in_signature')
+        allow_lists_in_signature = self.user.has_perm('accounts.allow_lists_in_signature')
+        allow_tables_in_signature = self.user.has_perm('accounts.allow_tables_in_signature')
+        allow_quotes_in_signature = self.user.has_perm('accounts.allow_quotes_in_signature')
+        allow_medias_in_signature = self.user.has_perm('accounts.allow_medias_in_signature')
+        allow_cdm_extra_in_signature = self.user.has_perm('accounts.allow_cdm_extra_in_signature')
         force_nofollow_in_signature = not self.user.has_perm('accounts.allow_raw_link_in_signature')
-        self.biography_html = render_html(self.biography, force_nofollow=force_nofollow_in_biography)
-        self.signature_html = render_html(self.signature, force_nofollow=force_nofollow_in_signature)
-        # TODO Deploy SkCode rendering engine
+        content_html, _, __ = render_document(self.signature,
+                                              allow_code_blocks=allow_code_blocks_in_signature,
+                                              allow_text_formating=True,
+                                              allow_text_extra=True,
+                                              allow_text_alignments=True,
+                                              allow_text_directions=True,
+                                              allow_text_modifiers=True,
+                                              allow_text_colors=allow_text_colors_in_signature,
+                                              allow_lists=allow_lists_in_signature,
+                                              allow_todo_lists=allow_lists_in_signature,
+                                              allow_definition_lists=allow_lists_in_signature,
+                                              allow_tables=allow_tables_in_signature,
+                                              allow_quotes=allow_quotes_in_signature,
+                                              allow_acronyms=True,
+                                              allow_links=True,
+                                              allow_medias=allow_medias_in_signature,
+                                              allow_cdm_extra=allow_cdm_extra_in_signature,
+                                              force_nofollow=force_nofollow_in_signature)
+        self.signature_html = content_html
 
         # Save if required
         if save:
