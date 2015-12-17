@@ -25,8 +25,8 @@ msgid "A rendered text string"
 msgstr "Une chaine de caractéres pour le moteur de rendu de texte"
 
 #: apps/txtrender/fields.py:22
-msgid "You can use HTML in this field."
-msgstr "Vous pouvez utiliser la syntaxe HTML dans ce champ."
+msgid "You can use BBCode in this field."
+msgstr "Vous pouvez utiliser la syntaxe BBCode dans ce champ."
 
 #: apps/txtrender/templates/txtrender/quote.html:3
 msgid "by"
