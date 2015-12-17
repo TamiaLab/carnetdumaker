@@ -10,4 +10,209 @@ recursive-include locale *
 recursive-include static *
 recursive-include staticfiles *
 recursive-include templates *
-recursive-include uploads *
+recursive-include uploads .gitignore
+recursive-include uploads/tests/fixtures *
+
+recursive-include apps/accounts/docs *
+recursive-include apps/accounts/fixtures *
+recursive-include apps/accounts/locale *
+recursive-include apps/accounts/static *
+recursive-include apps/accounts/templates *
+
+recursive-include apps/announcements/docs *
+recursive-include apps/announcements/fixtures *
+recursive-include apps/announcements/locale *
+recursive-include apps/announcements/static *
+recursive-include apps/announcements/templates *
+
+recursive-include apps/antispam/docs *
+recursive-include apps/antispam/fixtures *
+recursive-include apps/antispam/locale *
+recursive-include apps/antispam/static *
+recursive-include apps/antispam/templates *
+
+recursive-include apps/badges/docs *
+recursive-include apps/badges/fixtures *
+recursive-include apps/badges/locale *
+recursive-include apps/badges/static *
+recursive-include apps/badges/templates *
+
+recursive-include apps/blog/docs *
+recursive-include apps/blog/fixtures *
+recursive-include apps/blog/locale *
+recursive-include apps/blog/static *
+recursive-include apps/blog/templates *
+
+recursive-include apps/bootstrapform/docs *
+recursive-include apps/bootstrapform/fixtures *
+recursive-include apps/bootstrapform/locale *
+recursive-include apps/bootstrapform/static *
+recursive-include apps/bootstrapform/templates *
+
+recursive-include apps/bugtracker/docs *
+recursive-include apps/bugtracker/fixtures *
+recursive-include apps/bugtracker/locale *
+recursive-include apps/bugtracker/static *
+recursive-include apps/bugtracker/templates *
+
+recursive-include apps/changemail/docs *
+recursive-include apps/changemail/fixtures *
+recursive-include apps/changemail/locale *
+recursive-include apps/changemail/static *
+recursive-include apps/changemail/templates *
+
+recursive-include apps/contactform/docs *
+recursive-include apps/contactform/fixtures *
+recursive-include apps/contactform/locale *
+recursive-include apps/contactform/static *
+recursive-include apps/contactform/templates *
+
+recursive-include apps/contentreport/docs *
+recursive-include apps/contentreport/fixtures *
+recursive-include apps/contentreport/locale *
+recursive-include apps/contentreport/static *
+recursive-include apps/contentreport/templates *
+
+recursive-include apps/countries/docs *
+recursive-include apps/countries/fixtures *
+recursive-include apps/countries/locale *
+recursive-include apps/countries/static *
+recursive-include apps/countries/templates *
+
+recursive-include apps/dbmutex/docs *
+recursive-include apps/dbmutex/fixtures *
+recursive-include apps/dbmutex/locale *
+recursive-include apps/dbmutex/static *
+recursive-include apps/dbmutex/templates *
+
+recursive-include apps/donottrack/docs *
+recursive-include apps/donottrack/fixtures *
+recursive-include apps/donottrack/locale *
+recursive-include apps/donottrack/static *
+recursive-include apps/donottrack/templates *
+
+recursive-include apps/fileattachments/docs *
+recursive-include apps/fileattachments/fixtures *
+recursive-include apps/fileattachments/locale *
+recursive-include apps/fileattachments/static *
+recursive-include apps/fileattachments/templates *
+
+recursive-include apps/forcelogout/docs *
+recursive-include apps/forcelogout/fixtures *
+recursive-include apps/forcelogout/locale *
+recursive-include apps/forcelogout/static *
+recursive-include apps/forcelogout/templates *
+
+recursive-include apps/forum/docs *
+recursive-include apps/forum/fixtures *
+recursive-include apps/forum/locale *
+recursive-include apps/forum/static *
+recursive-include apps/forum/templates *
+
+recursive-include apps/gender/docs *
+recursive-include apps/gender/fixtures *
+recursive-include apps/gender/locale *
+recursive-include apps/gender/static *
+recursive-include apps/gender/templates *
+
+recursive-include apps/home/docs *
+recursive-include apps/home/fixtures *
+recursive-include apps/home/locale *
+recursive-include apps/home/static *
+recursive-include apps/home/templates *
+
+recursive-include apps/imageattachments/docs *
+recursive-include apps/imageattachments/fixtures *
+recursive-include apps/imageattachments/locale *
+recursive-include apps/imageattachments/static *
+recursive-include apps/imageattachments/templates *
+
+recursive-include apps/licenses/docs *
+recursive-include apps/licenses/fixtures *
+recursive-include apps/licenses/locale *
+recursive-include apps/licenses/static *
+recursive-include apps/licenses/templates *
+
+recursive-include apps/loginwatcher/docs *
+recursive-include apps/loginwatcher/fixtures *
+recursive-include apps/loginwatcher/locale *
+recursive-include apps/loginwatcher/static *
+recursive-include apps/loginwatcher/templates *
+
+recursive-include apps/mailqueue/docs *
+recursive-include apps/mailqueue/fixtures *
+recursive-include apps/mailqueue/locale *
+recursive-include apps/mailqueue/static *
+recursive-include apps/mailqueue/templates *
+
+recursive-include apps/multiupload/docs *
+recursive-include apps/multiupload/fixtures *
+recursive-include apps/multiupload/locale *
+recursive-include apps/multiupload/static *
+recursive-include apps/multiupload/templates *
+
+recursive-include apps/notifications/docs *
+recursive-include apps/notifications/fixtures *
+recursive-include apps/notifications/locale *
+recursive-include apps/notifications/static *
+recursive-include apps/notifications/templates *
+
+recursive-include apps/paginator/docs *
+recursive-include apps/paginator/fixtures *
+recursive-include apps/paginator/locale *
+recursive-include apps/paginator/static *
+recursive-include apps/paginator/templates *
+
+recursive-include apps/privatemsg/docs *
+recursive-include apps/privatemsg/fixtures *
+recursive-include apps/privatemsg/locale *
+recursive-include apps/privatemsg/static *
+recursive-include apps/privatemsg/templates *
+
+recursive-include apps/registration/docs *
+recursive-include apps/registration/fixtures *
+recursive-include apps/registration/locale *
+recursive-include apps/registration/static *
+recursive-include apps/registration/templates *
+
+recursive-include apps/apps/shop/docs *
+recursive-include apps/apps/shop/fixtures *
+recursive-include apps/apps/shop/locale *
+recursive-include apps/apps/shop/static *
+recursive-include apps/apps/shop/templates *
+
+recursive-include apps/snippets/docs *
+recursive-include apps/snippets/fixtures *
+recursive-include apps/snippets/locale *
+recursive-include apps/snippets/static *
+recursive-include apps/snippets/templates *
+
+recursive-include apps/staticpages/docs *
+recursive-include apps/staticpages/fixtures *
+recursive-include apps/staticpages/locale *
+recursive-include apps/staticpages/static *
+recursive-include apps/staticpages/templates *
+
+recursive-include apps/timezones/docs *
+recursive-include apps/timezones/fixtures *
+recursive-include apps/timezones/locale *
+recursive-include apps/timezones/static *
+recursive-include apps/timezones/templates *
+
+recursive-include apps/tools/docs *
+recursive-include apps/tools/fixtures *
+recursive-include apps/tools/locale *
+recursive-include apps/tools/static *
+recursive-include apps/tools/templates *
+
+recursive-include apps/twitter/docs *
+recursive-include apps/twitter/fixtures *
+recursive-include apps/twitter/locale *
+recursive-include apps/twitter/static *
+recursive-include apps/twitter/templates *
+
+recursive-include apps/txtrender/docs *
+recursive-include apps/txtrender/fixtures *
+recursive-include apps//txtrender/locale *
+recursive-include apps/txtrender/static *
+recursive-include apps/txtrender/templates *
