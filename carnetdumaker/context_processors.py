@@ -19,7 +19,7 @@ def app_constants(request):
             'TITLE_SHORT': _('Carnet du maker'),
             'AUTHOR': 'Fabien Batteix',
             'COPYRIGHT': _('TamiaLab 2015'),
-            'DESCRIPTION': _('L`\'esprit du Do It Yourself'),
+            'DESCRIPTION': _('L\'esprit du Do It Yourself'),
             'TWITTER_USERNAME': 'carnetdumaker',
             'GOOGLE_SITE_VERIFICATION_CODE': '',  # TODO
             'TWITTER_ACCOUNT_ID': '',  # TODO
