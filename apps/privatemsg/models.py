@@ -14,7 +14,7 @@ from django.contrib.auth.signals import user_logged_in
 
 from apps.tools.fields import AutoOneToOneField
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .manager import (PrivateMessageManager,
@@ -99,8 +99,10 @@ class PrivateMessage(models.Model):
         verbose_name = _('Private message')
         verbose_name_plural = _('Private messages')
         get_latest_by = 'sent_at'
+        permissions = (
+            ('allow_cdm_extra', 'Allow CDM extra'),
+        )
         ordering = ('-sent_at', 'id')
-        # FIXME Skcode perms here
 
     def __str__(self):
         return self.get_subject_display()
@@ -267,9 +269,34 @@ class PrivateMessage(models.Model):
         """
 
         # Render HTML
-        # FIXME Deploy skcode engine
-        self.body_html = render_html(self.body)
-        self.body_text = 'TODO'
+        allow_cdm_extra = self.sender.has_perm('accounts.allow_cdm_extra')
+        content_html, content_text, _ = render_document(self.body,
+                                                        allow_titles=True,
+                                                        allow_code_blocks=True,
+                                                        allow_alerts_box=True,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=allow_cdm_extra,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
+        self.body_html = content_html
+        self.body_text = content_text
 
         # Save if required
         if save:
