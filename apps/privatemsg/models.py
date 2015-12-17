@@ -301,7 +301,7 @@ class PrivateMessage(models.Model):
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(PrivateMessage, self).save(update_fields=('body_html', ))
+            super(PrivateMessage, self).save(update_fields=('body_html', 'body_text'))
 
 
 def _redo_private_messages_text_rendering(sender, **kwargs):
