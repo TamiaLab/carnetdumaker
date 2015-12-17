@@ -1,0 +1,41 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@tamialab.fr>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-09 18:21+0100\n"
+"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: carnetdumaker/context_processors.py:18
+msgid "Carnet du maker - L'esprit Do It Yourself"
+msgstr "Carnet du maker - L'esprit Do It Yourself"
+
+#: carnetdumaker/context_processors.py:19
+msgid "Carnet du maker"
+msgstr "Carnet du maker"
+
+#: carnetdumaker/context_processors.py:21
+msgid "TamiaLab 2015"
+msgstr "TamiaLab 2015"
+
+#: carnetdumaker/context_processors.py:22
+msgid "L'esprit du Do It Yourself"
+msgstr "L'esprit du Do It Yourself"
+
+#: carnetdumaker/settings/common.py:81
+msgid "French"
+msgstr "Français"
+
+#: carnetdumaker/settings/common.py:82
+msgid "English"
+msgstr "Anglais"
