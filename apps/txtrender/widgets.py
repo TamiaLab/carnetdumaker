@@ -25,7 +25,8 @@ class MarkupEditorTextarea(forms.Textarea):
 
     class Media:
         css = {
-            'all': ('markitup/sets/html/style.css',
+            'all': ('css/font-awesome.min.css',
+                    'markitup/sets/html/style.css',
                     'markitup/skins/simple/style.css')
         }
         js = ('markitup/jquery.markitup.js',
