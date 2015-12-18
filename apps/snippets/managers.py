@@ -21,4 +21,4 @@ class CodeSnippetManager(models.Manager):
         Redo highlighting of all code snippets.
         """
         for snippet in self.all():
-            snippet.save(update_fields=('html_for_display', 'css_for_display'))
+            snippet.save(update_fields=('html_for_display', 'css_for_display'), render_description=False)

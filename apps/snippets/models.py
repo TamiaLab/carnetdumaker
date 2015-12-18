@@ -140,7 +140,8 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         """
 
         # Render description
-        self.render_description()
+        if kwargs.pop('render_description', True):
+            self.render_description()
 
         # Fix last modification date if necessary
         changed_fields = self.changed_fields
