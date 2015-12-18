@@ -63,7 +63,7 @@ class CodeSnippet(ModelDiffMixin, models.Model):
     public_listing = models.BooleanField(_('Public listing'),
                                          default=True)
 
-    # TODO Add license field (FK) with acording admin forms, views, feeds
+    # TODO Add license field (FK) with according admin forms, views, feeds
 
     description = RenderTextField(_('Description'))
 
@@ -138,6 +138,9 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         :param kwargs: For super()
         :return: None
         """
+
+        # Render description
+        self.render_description()
 
         # Fix last modification date if necessary
         changed_fields = self.changed_fields
