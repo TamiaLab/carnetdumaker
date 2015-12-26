@@ -7,8 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.response import TemplateResponse
 from django.http import Http404, HttpResponsePermanentRedirect
 
+from apps.licenses.models import License
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
+
 from .settings import NB_ARTICLES_PER_PAGE
 from .models import (Article,
                      ArticleCategory,
@@ -219,6 +221,38 @@ def category_detail(request, hierarchy,
     context = {
         'title': _('Category %s') % category_obj.name,
         'category': category_obj,
+    }
+    update_context_for_pagination(context, 'related_articles', request, paginator, page)
+    if extra_context is not None:
+        context.update(extra_context)
+
+    return TemplateResponse(request, template_name, context)
+
+
+def license_detail(request, slug,
+                   template_name='blog/license_detail.html',
+                   extra_context=None):
+    """
+    Detail view for a specific license.
+    :param slug: The desired license's slug.
+    :param request: The incoming request.
+    :param template_name: The template name to be used.
+    :param extra_context: Any extra context for the template.
+    :return: TemplateResponse
+    """
+
+    # Get the desired license
+    license_obj = get_object_or_404(License, slug=slug)
+
+    # Related articles list pagination
+    paginator, page = paginate(license_obj.articles.published()
+                               .select_related('author').prefetch_related('tags', 'categories'),
+                               request, NB_ARTICLES_PER_PAGE)
+
+    # Render the template
+    context = {
+        'title': _('License %s') % license_obj.name,
+        'license': license_obj,
     }
     update_context_for_pagination(context, 'related_articles', request, paginator, page)
     if extra_context is not None:
