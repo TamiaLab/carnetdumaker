@@ -43,3 +43,6 @@ ARTICLE_CATEGORY_LOGO_HEIGHT = getattr(settings, 'ARTICLE_CATEGORY_LOGO_HEIGHT',
 
 # Width in pixels of the article's category logo
 ARTICLE_CATEGORY_LOGO_WIDTH = getattr(settings, 'ARTICLE_CATEGORY_LOGO_WIDTH', 120)
+
+# Number of days before a published article is "old"
+NB_DAYS_BEFORE_ARTICLE_GET_OLD = getattr(settings, 'NB_DAYS_BEFORE_ARTICLE_GET_OLD', 31 * 6)
