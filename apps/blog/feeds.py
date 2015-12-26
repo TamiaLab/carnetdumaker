@@ -39,7 +39,8 @@ class BaseBlogArticleFeed(Feed):
         :param item: The current feed item.
         """
         content_html = item.content_html  # TODO handle membership restriction
-        return '<p><strong>%s</strong></p>\n%s' % (item.description, content_html) if item.description else content_html
+        # FIXME Handle footnotes
+        return '<p><strong>%s</strong></p>\n%s' % (item.description_html, content_html) if item.description_html else content_html
 
     def item_author_name(self, item):
         """
@@ -216,6 +217,8 @@ class LatestArticlesForLicenseFeed(BaseBlogArticleFeed):
         """
         return obj.description_html or _('Latest articles with license "%s"') % obj.name
 
+    # TODO def feed_url(self, obj):
+
     def items(self, obj):
         """
         Return all article for this license.
@@ -232,6 +235,8 @@ class LatestArticlesForLicenseAtomFeed(LatestArticlesForLicenseFeed):
 
     feed_type = Atom1Feed
     subtitle = LatestArticlesForLicenseFeed.description
+
+    # TODO def feed_url(self, obj):
 
 
 class LatestArticlesForTagFeed(BaseBlogArticleFeed):
@@ -276,6 +281,13 @@ class LatestArticlesForTagFeed(BaseBlogArticleFeed):
         """
         return _('Latest articles with tag "%s"') % obj.name
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles RSS feed for this tag.
+        :param obj: The feed object.
+        """
+        return obj.get_latest_articles_rss_feed_url()
+
     def items(self, obj):
         """
         Return all article for this tag.
@@ -292,6 +304,13 @@ class LatestArticlesForTagAtomFeed(LatestArticlesForTagFeed):
 
     feed_type = Atom1Feed
     subtitle = LatestArticlesForTagFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles Atom feed for this tag.
+        :param obj: The feed object.
+        """
+        return obj.get_latest_articles_atom_feed_url()
 
 
 class ArticlesForYearFeed(BaseBlogArticleFeed):
@@ -336,6 +355,13 @@ class ArticlesForYearFeed(BaseBlogArticleFeed):
         """
         return _('Latest articles for year %(year)s') % obj
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to the articles archive RSS feed for this year.
+        :param obj: The feed object.
+        """
+        return reverse_lazy('blog:articles_archive_year_rss', kwargs=obj)
+
     def items(self, obj):
         """
         Return all article for this archive.
@@ -352,6 +378,13 @@ class ArticlesForYearAtomFeed(ArticlesForYearFeed):
 
     feed_type = Atom1Feed
     subtitle = ArticlesForYearFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to the articles archive Atom feed for this year.
+        :param obj: The feed object.
+        """
+        return reverse_lazy('blog:articles_archive_year_atom', kwargs=obj)
 
 
 class ArticlesForYearAndMonthFeed(BaseBlogArticleFeed):
@@ -398,6 +431,13 @@ class ArticlesForYearAndMonthFeed(BaseBlogArticleFeed):
         """
         return _('Latest articles for month %(year)s/%(month)s') % obj
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to the articles archive RSS feed for this year.
+        :param obj: The feed object.
+        """
+        return reverse_lazy('blog:articles_archive_month_rss', kwargs=obj)
+
     def items(self, obj):
         """
         Return all article for this archive.
@@ -415,3 +455,10 @@ class ArticlesForYearAndMonthAtomFeed(ArticlesForYearAndMonthFeed):
 
     feed_type = Atom1Feed
     subtitle = ArticlesForYearAndMonthFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to the articles archive Atom feed for this year.
+        :param obj: The feed object.
+        """
+        return reverse_lazy('blog:articles_archive_month_atom', kwargs=obj)
