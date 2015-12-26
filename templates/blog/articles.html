@@ -9,10 +9,10 @@
             </a>
         {% endif %}
         <div class="media-body">
-            <p>{% if article.description %}
-                    {{ article.description }}
+            <p>{% if article.description_html %}
+                    {{ article.description_html|safe }}
                 {% else %}
-                    {{ article.get_content_without_html|truncatewords:200 }}
+                    {{ article.content_text|truncatewords:200 }}
             {% endif %}</p>
             <p><a class="btn btn-default" role="button" href="{{ article.get_absolute_url }}">Lire la suite</a></p>
         </div>
