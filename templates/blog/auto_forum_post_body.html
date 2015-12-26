@@ -1,8 +1,4 @@
-<blockquote>
-    <p>{% if article.description %}
-            {{ article.description }}
-        {% else %}
-            {{ article.get_content_without_html|truncatewords:200 }}
-    {% endif %}</p>
-</blockquote>
-<p><a href="{{ article.get_absolute_url }}">Lire la suite de l'article sur le site</a></p>
+[quote]
+{% if article.description %}{{ article.description }}{% else %}{{ article.content_text|truncatewords:200 }}{% endif %}
+[/quote]
+[url="{{ article.get_absolute_url }}"]Lire la suite de l'article sur le site[/url]
