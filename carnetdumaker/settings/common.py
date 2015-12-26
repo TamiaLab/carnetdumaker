@@ -494,6 +494,7 @@ ACCOUNT_ACTIVATION_TIMEOUT_DAYS = 2
 #region ----- Search engine settings
 
 # Settings for the Haystack search API
+# See http://django-haystack.readthedocs.org/en/latest/settings.html#haystack-connections
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -501,5 +502,9 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystackcdm',
     },
 }
+
+# This setting controls how many results are shown per page when using the included SearchView and its subclasses.
+# See http://django-haystack.readthedocs.org/en/latest/settings.html#haystack-search-results-per-page
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 
 #endregion

@@ -34,6 +34,9 @@ urlpatterns = patterns('',
     # Home page
     url(r'^', include('apps.home.urls', namespace='home')),
 
+    # Search engine
+    url(r'^recherche/', include('haystack.urls')),
+
     # Blog / Forum / Boutique
     url(r'^articles/', include('apps.blog.urls', namespace='blog')),
     url(r'^forum/', include('apps.forum.urls', namespace='forum')),
@@ -112,7 +115,6 @@ sitemaps = {
     'licenses': LicensesSitemap,
     'snippets': CodeSnippetsSitemap,
     'staticpages': StaticPagesSitemap,
-    # TODO Add all sitemaps here
 }
 urlpatterns += patterns('',
     (r'^sitemap\.xml$', sitemaps_views.index, {'sitemaps': sitemaps}),
