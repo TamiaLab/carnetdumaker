@@ -3,7 +3,7 @@ RSS/Atom feeds for the blog app.
 """
 
 from django.contrib.syndication.views import Feed
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.feedgenerator import Atom1Feed
 from django.utils.translation import ugettext_lazy as _
 
@@ -208,7 +208,7 @@ class LatestArticlesForLicenseFeed(BaseBlogArticleFeed):
         Return the permalink to the license.
         :param obj: The feed object.
         """
-        return obj.get_absolute_url()
+        return reverse('bloglicense:license_detail', kwargs={'slug': obj.slug})
 
     def description(self, obj):
         """
@@ -217,7 +217,12 @@ class LatestArticlesForLicenseFeed(BaseBlogArticleFeed):
         """
         return obj.description_html or _('Latest articles with license "%s"') % obj.name
 
-    # TODO def feed_url(self, obj):
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles RSS feed with this license.
+        :param obj: The feed object.
+        """
+        return reverse('bloglicense:latest_license_articles_rss', kwargs={'slug': obj.slug})
 
     def items(self, obj):
         """
@@ -236,7 +241,12 @@ class LatestArticlesForLicenseAtomFeed(LatestArticlesForLicenseFeed):
     feed_type = Atom1Feed
     subtitle = LatestArticlesForLicenseFeed.description
 
-    # TODO def feed_url(self, obj):
+    def feed_url(self, obj):
+        """
+        Return the permalink to the latest articles Atom feed with this license.
+        :param obj: The feed object.
+        """
+        return reverse('bloglicense:latest_license_articles_atom', kwargs={'slug': obj.slug})
 
 
 class LatestArticlesForTagFeed(BaseBlogArticleFeed):
@@ -346,7 +356,7 @@ class ArticlesForYearFeed(BaseBlogArticleFeed):
         Return the permalink to the archive.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:archive_year', kwargs=obj)
+        return reverse('blog:archive_year', kwargs=obj)
 
     def description(self, obj):
         """
@@ -360,7 +370,7 @@ class ArticlesForYearFeed(BaseBlogArticleFeed):
         Return the permalink to the articles archive RSS feed for this year.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:articles_archive_year_rss', kwargs=obj)
+        return reverse('blog:articles_archive_year_rss', kwargs=obj)
 
     def items(self, obj):
         """
@@ -384,7 +394,7 @@ class ArticlesForYearAtomFeed(ArticlesForYearFeed):
         Return the permalink to the articles archive Atom feed for this year.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:articles_archive_year_atom', kwargs=obj)
+        return reverse('blog:articles_archive_year_atom', kwargs=obj)
 
 
 class ArticlesForYearAndMonthFeed(BaseBlogArticleFeed):
@@ -422,7 +432,7 @@ class ArticlesForYearAndMonthFeed(BaseBlogArticleFeed):
         Return the permalink to the archive.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:archive_month', kwargs=obj)
+        return reverse('blog:archive_month', kwargs=obj)
 
     def description(self, obj):
         """
@@ -436,7 +446,7 @@ class ArticlesForYearAndMonthFeed(BaseBlogArticleFeed):
         Return the permalink to the articles archive RSS feed for this year.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:articles_archive_month_rss', kwargs=obj)
+        return reverse('blog:articles_archive_month_rss', kwargs=obj)
 
     def items(self, obj):
         """
@@ -461,4 +471,4 @@ class ArticlesForYearAndMonthAtomFeed(ArticlesForYearAndMonthFeed):
         Return the permalink to the articles archive Atom feed for this year.
         :param obj: The feed object.
         """
-        return reverse_lazy('blog:articles_archive_month_atom', kwargs=obj)
+        return reverse('blog:articles_archive_month_atom', kwargs=obj)
