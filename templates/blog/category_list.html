@@ -9,7 +9,7 @@
     <ul>{% recursetree categories %}
         <li>
             <a href="{{ node.get_absolute_url }}">{{ node.name|capfirst }}</a><br/>
-            <p>{{ node.description }}</p>
+            <p>{{ node.description_html|safe }}</p>
             {% if not node.is_leaf_node %}
                 <ul>
                     {{ children }}
