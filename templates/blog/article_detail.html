@@ -73,7 +73,7 @@
     <hr>
 
     {% if article.description_html %}
-        <p><strong>{{ article.description_html }}</strong></p>
+        <p><strong>{{ article.description_html|safe }}</strong></p>
         <br>
     {% endif %}
 
