@@ -8,7 +8,7 @@
 
 {% block opengraph_type %}article{% endblock %}
 {% block opengraph_title %}{{ article.title }}{% endblock %}
-{% block opengraph_description %}{% if article.description %}{{ article.description }}{% else %}{{ article.get_content_without_html|truncatewords:200 }}{% endif %}{% endblock %}
+{% block opengraph_description %}{% if article.description_text %}{{ article.description_text }}{% else %}{{ article.content_text|truncatewords:200 }}{% endif %}{% endblock %}
 {% block opengraph_url %}{{ block.super }}{{ article.get_absolute_url }}{% endblock %}
 {% block opengraph_image %}{% if article.heading_img %}{{ article.heading_img.url }}{% elif article.thumbnail_img %}{{ article.thumbnail_img.url }}{% endif %}{% endblock %}
 {% block twitter_creator %}{% if article.author.user_profile.twitter_name %}@{{ article.author.user_profile.twitter_name }}{% else %}{{ block.super }}{% endif %}{% endblock %}
@@ -53,6 +53,9 @@
     {% if article.expiration_date %}
         <p><i class="fa fa-bomb"></i> Cet article s'auto détruira le {{ article.expiration_date|datetime_html }}</p>
     {% endif %}
+    {% if article.is_old %}
+        <p><i class="fa fa-warning"></i> Cet article n'a pas été mis à jour depuis un certain temps, son contenu n'est peut être plus d'actualité.</p>
+    {% endif %}
     {% if user.is_staff %}
         <p><a href="{% url 'admin:blog_article_change' article.pk %}"><i class="fa fa-terminal"></i> Modifier l'article dans l'interface d'administration</a></p>
     {% endif %}
@@ -69,9 +72,13 @@
 
     <hr>
 
-    {% if article.description %}
-        <p><strong>{{ article.description }}</strong></p>
+    {% if article.description_html %}
+        <p><strong>{{ article.description_html }}</strong></p>
         <br>
+    {% endif %}
+
+    {% if article.summary_html %}
+        {{ article.summary_html|safe }}
     {% endif %}
 
     {% if article.require_membership_for_reading %}
@@ -91,6 +98,10 @@
             </div>
         {% endif %}
     {% endwith %}
+
+    {% if article.footnotes_html %}
+        {{ article.footnotes_html|safe }}
+    {% endif %}
 
     {% with img_attachments=article.img_attachments.all %}
         {% if article.display_img_gallery and img_attachments %}
