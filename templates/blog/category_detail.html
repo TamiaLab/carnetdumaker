@@ -21,8 +21,8 @@
         <img src="{{ category.logo.url }}" alt="logo catégorie {{ category.name }}" class="center-block" />
     {% endif %}
 
-    {% if category.description %}
-        <p><strong>{{ category.description }}</strong></p>
+    {% if category.description_html %}
+        <p><strong>{{ category.description_html|safe }}</strong></p>
     {% endif %}
 
     {% if category.parent %}
