@@ -68,7 +68,8 @@ def recent_articles_list(nb_objects=NB_ARTICLES_PER_PAGE_WIDGET):
     :param nb_objects: The maximum number of objects to be returned.
     :return: A list of all N recently published articles.
     """
-    return Article.objects.published().select_related('author')[:nb_objects]
+    return Article.objects.published() \
+        .select_related('author').prefetch_related('tags', 'categories')[:nb_objects]
 
 
 @register.assignment_tag
