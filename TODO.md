@@ -8,6 +8,8 @@
 - Refactor models to remove the fishy "save_without_rendering" method and add a "render_xxx" (default True) kwargs instead.
 - Refactor "tools" app into multiples simples apps with unit-tests.
 
+- Set on_delete on ALL foreign key.
+
 ## Text rendering engine (PySkCode)
 
 - Add support for cosmetics and smileys in the HTML rendering engine.
@@ -42,6 +44,8 @@
 - Add "to read" user list feature.
 - Maybe add preview key for anonymous preview access.
 - Maybe add "hidden" state to article model to allow unreferenced articles.
+ 
+- Include blog/license urls in root urls configuration.
 
 ## Search engine
 
