@@ -16,7 +16,7 @@ from django.template.response import TemplateResponse
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
 
-from .models import UserProfile
+from .models import (UserProfile, set_preferred_language_and_timezone)
 from .settings import NB_ACCOUNTS_PER_PAGE
 from .forms import UserProfileModificationForm
 
@@ -106,13 +106,15 @@ def my_account_show(request,
         post_edit_redirect = resolve_url(post_edit_redirect)
 
     # Get the current user profile
-    current_user_profile = request.user.user_profile
+    current_user = request.user
+    current_user_profile = current_user.user_profile
 
     # Handle the form
     if request.method == "POST":
         form = account_edit_form(request.POST, request.FILES, instance=current_user_profile)
         if form.is_valid():
             form.save()
+            set_preferred_language_and_timezone(current_user, request)
             messages.add_message(request, messages.SUCCESS,
                                  _('Your profile information has been successfully updated!'))
             return HttpResponseRedirect(post_edit_redirect)
