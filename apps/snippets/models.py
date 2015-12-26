@@ -213,7 +213,7 @@ class CodeSnippet(ModelDiffMixin, models.Model):
 
         # Save if required
         if save:
-            self.save_no_rendering(update_fields=('description_html', 'description_text'))
+            super(CodeSnippet, self).save(update_fields=('description_html', 'description_text'))
 
 
 def _redo_code_snippets_text_rendering(sender, **kwargs):
