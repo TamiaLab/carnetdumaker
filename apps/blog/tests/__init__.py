@@ -1,3 +1,3 @@
 """
-Test suite for the blog app.
+Tests suites for the blog app.
 """
