@@ -190,7 +190,7 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         """
 
         # Render HTML
-        content_html, content_text, _ = render_document(self.content,
+        content_html, content_text, _ = render_document(self.description,
                                                         allow_text_formating=True,
                                                         allow_text_extra=True,
                                                         allow_text_alignments=True,
