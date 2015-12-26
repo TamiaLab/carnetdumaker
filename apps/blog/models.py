@@ -2,13 +2,14 @@
 Data models for the blog app.
 """
 
+from datetime import timedelta
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ImproperlyConfigured
 from django.utils import timezone
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader
 
@@ -18,7 +19,7 @@ from apps.tools.utils import unique_slug
 from apps.tools.models import ModelDiffMixin
 from apps.tools.fields import AutoResizingImageField
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 from apps.forum.models import (Forum,
                                ForumThread)
@@ -41,7 +42,8 @@ from .settings import (ARTICLE_HEADING_IMG_HEIGHT,
                        PARENT_FORUM_ID_FOR_ARTICLE_THREADS,
                        ARTICLE_CATEGORY_LOGO_UPLOAD_DIR_NAME,
                        ARTICLE_CATEGORY_LOGO_WIDTH,
-                       ARTICLE_CATEGORY_LOGO_HEIGHT)
+                       ARTICLE_CATEGORY_LOGO_HEIGHT,
+                       NB_DAYS_BEFORE_ARTICLE_GET_OLD)
 
 
 class Article(ModelDiffMixin, models.Model):
@@ -50,12 +52,12 @@ class Article(ModelDiffMixin, models.Model):
     An article is made of:
     - a slug, unique and database indexed,
     - a title and a subtitle (optional),
-    - an optional brief description (text only),
+    - an optional brief description,
     - an author,
     - a status,
     - a license, auto set to null (default license) if the license is deleted,
     - a "network publish" flag, used by the "social publishing" feature,
-    - a "sticky" flag, for important news or article,
+    - a "featured" flag, for important news or article,
     - an optional heading image (full size and mobile version),
     - some creation, modification (content only) and publication dates,
     - an expiration date (for poll or time-limited article),
@@ -67,6 +69,7 @@ class Article(ModelDiffMixin, models.Model):
     - some content (source and HTML),
     """
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255,
                             unique=True)
@@ -79,9 +82,11 @@ class Article(ModelDiffMixin, models.Model):
                                 default='',
                                 blank=True)
 
-    description = models.TextField(_('Description'),
-                                   default='',
-                                   blank=True)
+    description = RenderTextField(_('Description'))
+
+    description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                db_index=True,  # Database optimization
@@ -98,6 +103,7 @@ class Article(ModelDiffMixin, models.Model):
                                 db_index=True,  # Database optimization
                                 related_name='articles',
                                 verbose_name=_('License'),
+                                on_delete=models.SET_NULL,
                                 default=None,
                                 blank=True,
                                 null=True)
@@ -206,6 +212,12 @@ class Article(ModelDiffMixin, models.Model):
 
     content_html = models.TextField(_('Content (raw HTML)'))
 
+    content_text = models.TextField(_('Content (raw text)'))
+
+    summary_html = models.TextField(_('Summary (raw HTML)'))
+
+    footnotes_html = models.TextField(_('Footnotes (raw HTML)'))
+
     objects = ArticleManager()
 
     class Meta:
@@ -241,6 +253,7 @@ class Article(ModelDiffMixin, models.Model):
         revision_description = kwargs.pop('revision_description', '')
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(Article, self, self.slug, 'slug', self.title)
 
         # Get all dirty fields
@@ -365,6 +378,17 @@ class Article(ModelDiffMixin, models.Model):
     is_gone.boolean = True
     is_gone.short_description = _('Deleted')
 
+    def is_old(self):
+        """
+        Return ``True`` if the last modification date or publication date
+        is older than ``NB_DAYS_BEFORE_ARTICLE_GET_OLD`` days.
+        """
+        last_update_date = self.last_content_modification_date or self.pub_date
+        old_threshold_date = timezone.now() - timedelta(days=NB_DAYS_BEFORE_ARTICLE_GET_OLD)
+        return last_update_date < old_threshold_date
+    is_old.boolean = True
+    is_old.short_description = _('Old')
+
     def can_see_preview(self, user):
         """
         Return True if the given user can see this article in preview mode.
@@ -384,20 +408,59 @@ class Article(ModelDiffMixin, models.Model):
         Render the content. Save the model only if ``save`` is True.
         """
 
-        # Render HTML
-        self.content_html = render_html(self.content, force_nofollow=False)
+        # Render HTML for description
+        description_html, description_text, _ = render_document(self.description,
+                                                                allow_text_formating=True,
+                                                                allow_text_extra=True,
+                                                                allow_text_alignments=True,
+                                                                allow_text_directions=True,
+                                                                allow_text_modifiers=True,
+                                                                allow_text_colors=True,
+                                                                allow_acronyms=True,
+                                                                allow_links=True,
+                                                                allow_cdm_extra=True,
+                                                                force_nofollow=False,
+                                                                render_text_version=True)
+        self.description_html = description_html
+        self.description_text = description_text
+
+        # Render HTML for content
+        content_html, content_text, extra_dict = render_document(self.content,
+                                                                 allow_titles=True,
+                                                                 allow_code_blocks=True,
+                                                                 allow_text_formating=True,
+                                                                 allow_text_extra=True,
+                                                                 allow_text_alignments=True,
+                                                                 allow_text_directions=True,
+                                                                 allow_text_modifiers=True,
+                                                                 allow_text_colors=True,
+                                                                 allow_spoilers=True,
+                                                                 allow_figures=True,
+                                                                 allow_lists=True,
+                                                                 allow_todo_lists=True,
+                                                                 allow_definition_lists=True,
+                                                                 allow_tables=True,
+                                                                 allow_quotes=True,
+                                                                 allow_footnotes=True,
+                                                                 allow_acronyms=True,
+                                                                 allow_links=True,
+                                                                 allow_medias=True,
+                                                                 allow_cdm_extra=True,
+                                                                 force_nofollow=False,
+                                                                 render_text_version=True,
+                                                                 render_extra_dict=True,
+                                                                 merge_footnotes_text=True)
+        self.content_html = content_html
+        self.content_text = content_text
+        self.summary_html = extra_dict['summary_html']
+        self.footnotes_html = extra_dict['footnotes_html']
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(Article, self).save(update_fields=('content_html',))
-
-    @cached_property
-    def get_content_without_html(self):
-        """
-        Return the article's content text without any HTML tag nor entities.
-        """
-        return strip_html(self.content_html)
+            super(Article, self).save(update_fields=('description_html', 'description_text',
+                                                     'content_html', 'content_text',
+                                                     'summary_html', 'footnotes_html'))
 
 
 def _redo_articles_text_rendering(sender, **kwargs):
@@ -531,12 +594,33 @@ class ArticleNote(models.Model):
         """
 
         # Render HTML
-        self.description_html = render_html(self.description, force_nofollow=False)
+        content_html, content_text, _ = render_document(self.description,
+                                                        allow_code_blocks=True,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False)
+        self.description_html = content_html
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(ArticleNote, self).save(update_fields=('description_html',))
+            super(ArticleNote, self).save(update_fields=('description_html', ))
 
 
 def _redo_article_notes_text_rendering(sender, **kwargs):
@@ -560,6 +644,7 @@ class ArticleTag(models.Model):
     - a name (human readable).
     """
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255,
                             unique=True)
@@ -600,6 +685,7 @@ class ArticleTag(models.Model):
         """
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(ArticleTag, self, self.slug, 'slug', self.name)
 
         # Save the tag
@@ -627,6 +713,7 @@ class ArticleCategory(MPTTModel):
                                blank=True,
                                null=True)
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255)
 
@@ -645,9 +732,11 @@ class ArticleCategory(MPTTModel):
                                   blank=True,
                                   null=True)
 
-    description = models.TextField(_('Description'),
-                                   default='',
-                                   blank=True)
+    description = RenderTextField(_('Description'))
+
+    description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
 
     class Meta:
         unique_together = (('slug', 'parent'),)
@@ -662,10 +751,14 @@ class ArticleCategory(MPTTModel):
         """
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(ArticleCategory, self, self.slug, 'slug', self.name, {'parent': self.parent})
 
         # Build complete slug hierarchy
         self.build_slug_hierarchy()
+
+        # Render the description
+        self.render_text()
 
         # Save the category
         super(ArticleCategory, self).save(*args, **kwargs)
@@ -709,6 +802,45 @@ class ArticleCategory(MPTTModel):
                                                              'lft',
                                                              'rght',
                                                              'tree_id'))
+
+    def render_text(self, save=False):
+        """
+        Render the content. Save the model only if ``save`` is True.
+        """
+
+        # Render HTML for description
+        description_html, description_text, _ = render_document(self.description,
+                                                                allow_text_formating=True,
+                                                                allow_text_extra=True,
+                                                                allow_text_alignments=True,
+                                                                allow_text_directions=True,
+                                                                allow_text_modifiers=True,
+                                                                allow_text_colors=True,
+                                                                allow_acronyms=True,
+                                                                allow_links=True,
+                                                                allow_cdm_extra=True,
+                                                                force_nofollow=False,
+                                                                render_text_version=True)
+        self.description_html = description_html
+        self.description_text = description_text
+
+        # Save if required
+        if save:
+            # Avoid infinite loop by calling directly super.save
+            super(ArticleCategory, self).save(update_fields=('description_html', 'description_text'))
+
+
+def _redo_article_categories_text_rendering(sender, **kwargs):
+    """
+    Redo text rendering of all article categories.
+    :param sender: Not used.
+    :param kwargs: Not used.
+    """
+    for category in ArticleCategory.objects.all():
+        category.render_text(save=True)
+
+
+render_engine_changed.connect(_redo_article_categories_text_rendering)
 
 
 def update_child_category_slug_hierarchy_on_parent_save(sender, instance, created, raw, using, update_fields, **kwargs):
