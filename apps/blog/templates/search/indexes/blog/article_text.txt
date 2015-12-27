@@ -3,7 +3,7 @@
 {{ object.description_text }}
 {{ object.author.username }}
 {{ object.author.get_full_name }}
-{{ object.license.name }}
+{% if object.license %}{{ object.license.name }}{% endif %}
 {{ object.content_text }}
 {% for tag in object.tags.all %}{{ tag.name }} {% endfor %}
 {% for category in object.categories.all %}{{ category.name }} {% endfor %}

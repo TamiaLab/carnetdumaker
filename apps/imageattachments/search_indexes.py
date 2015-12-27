@@ -14,7 +14,7 @@ class ImageAttachmentIndex(indexes.SearchIndex, indexes.Indexable):
 
     text = indexes.CharField(document=True, use_template=True)
 
-    license = indexes.CharField(model_attr='license')
+    license = indexes.CharField(model_attr='license', null=True)
 
     pub_date = indexes.DateTimeField(model_attr='pub_date')
 

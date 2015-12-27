@@ -18,11 +18,11 @@ class ArticleIndex(indexes.SearchIndex, indexes.Indexable):
 
     author = indexes.CharField(model_attr='author')
 
-    license = indexes.CharField(model_attr='license')
+    license = indexes.CharField(model_attr='license', null=True)
 
     pub_date = indexes.DateTimeField(model_attr='pub_date')
 
-    last_content_modification_date = indexes.DateTimeField(model_attr='last_content_modification_date')
+    last_content_modification_date = indexes.DateTimeField(model_attr='last_content_modification_date', null=True)
 
     def get_model(self):
         """

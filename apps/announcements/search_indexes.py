@@ -18,7 +18,7 @@ class AnnouncementIndex(indexes.SearchIndex, indexes.Indexable):
 
     pub_date = indexes.DateTimeField(model_attr='pub_date')
 
-    last_content_modification_date = indexes.DateTimeField(model_attr='last_content_modification_date')
+    last_content_modification_date = indexes.DateTimeField(model_attr='last_content_modification_date', null=True)
 
     def get_model(self):
         """
