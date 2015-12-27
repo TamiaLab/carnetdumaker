@@ -5,6 +5,8 @@ Tests suite for the admin views of the blog app.
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.test.utils import override_settings
 
 from ..models import (Article,
                       ArticleRevision,
@@ -13,6 +15,7 @@ from ..models import (Article,
                       ArticleCategory)
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleAdminTestCase(TestCase):
     """
     Tests suite for the admin views.
@@ -61,6 +64,9 @@ class ArticleAdminTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_article_revision_view_available(self):
+        """
+        Test the availability of the "view article revision diff" view.
+        """
         client = Client()
         client.login(username='johndoe', password='illpassword')
         self.assertEqual(ArticleRevision.objects.count(), 1)
@@ -70,12 +76,37 @@ class ArticleAdminTestCase(TestCase):
         self.assertTemplateUsed(response, 'blog/admin_show_rev_diff.html')
 
     def test_article_revision_view_unavailable_with_nx_revision(self):
+        """
+        Test the unavailability of the "view article revision diff" view with a non-existing revision PK.
+        """
         client = Client()
         client.login(username='johndoe', password='illpassword')
         response = client.get(reverse('admin:blog_article_show_rev_diff', args=['1337']))
         self.assertEqual(response.status_code, 404)
 
+    def test_article_revision_restore_view_available(self):
+        """
+        Test the availability of the "restore article revision" view.
+        """
+        client = Client()
+        client.login(username='johndoe', password='illpassword')
+        self.assertEqual(ArticleRevision.objects.count(), 1)
+        revision = ArticleRevision.objects.last()
+        response = client.get(reverse('admin:blog_article_restore_rev', args=[revision.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'blog/admin_restore_rev.html')
 
+    def test_article_revision_restore_view_unavailable_with_nx_revision(self):
+        """
+        Test the unavailability of the "restore article revision" view with a non-existing revision PK.
+        """
+        client = Client()
+        client.login(username='johndoe', password='illpassword')
+        response = client.get(reverse('admin:blog_article_restore_rev', args=['1337']))
+        self.assertEqual(response.status_code, 404)
+
+
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleNoteAdminTestCase(TestCase):
     """
     Tests suite for the admin views.
@@ -114,6 +145,7 @@ class ArticleNoteAdminTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleTagAdminTestCase(TestCase):
     """
     Tests suite for the admin views.
@@ -148,6 +180,7 @@ class ArticleTagAdminTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleCategoryAdminTestCase(TestCase):
     """
     Tests suite for the admin views.
