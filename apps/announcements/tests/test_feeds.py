@@ -294,7 +294,7 @@ class LatestAnnouncementsForTagFeedTestCase(TestCase):
 
     def test_feed_get_object(self):
         """
-        Test the ``title`` method of the feed.
+        Test the ``get_object`` method of the feed.
         """
 
         # Create some test fixtures
