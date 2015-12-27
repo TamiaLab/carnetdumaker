@@ -5,6 +5,7 @@
     <h2>{{ title }}</h2>
 
     <form method="post" action=".">
+        {% csrf_token %}
         {{ form.as_p }}
         <p><input type="submit" value="{% trans "Restore this revision" %}" /></p>
     </form>
