@@ -911,4 +911,4 @@ class ArticleTwitterCrossPublication(models.Model):
         ordering = ('-pub_date', )
 
     def __str__(self):
-        return '%s -> %s' % (self.announcement, self.tweet_id)
+        return '%s -> %s' % (self.article, self.tweet_id)
