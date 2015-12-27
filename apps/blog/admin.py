@@ -12,7 +12,6 @@ from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.decorators.csrf import csrf_protect
 from django.utils.html import format_html
 
 from .models import (Article,
@@ -210,7 +209,6 @@ class ArticleAdmin(admin.ModelAdmin):
         context.update(self.admin_site.each_context(request))
         return TemplateResponse(request, template_name, context)
 
-    @csrf_protect
     def restore_rev_view(self, request, revision_pk,
                          confirmation_form=RestoreRevisionConfirmationForm,
                          template_name='blog/admin_restore_rev.html'):
