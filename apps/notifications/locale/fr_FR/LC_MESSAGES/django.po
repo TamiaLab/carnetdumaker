@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/notifications/admin.py:68 apps/notifications/models.py:40
+#: apps/notifications/admin.py:70 apps/notifications/models.py:40
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: apps/notifications/admin.py:100 apps/notifications/models.py:191
+#: apps/notifications/admin.py:102 apps/notifications/models.py:192
 msgid "Related user"
 msgstr "Utilisateur lié"
 
@@ -56,7 +56,7 @@ msgstr "Message (HTML brut)"
 msgid "Notification"
 msgstr "Notification"
 
-#: apps/notifications/models.py:172
+#: apps/notifications/models.py:173
 #, python-format
 msgid ""
 "You have %(count)d unread notifications <a href=\"%(link)s\" class=\"alert-"
@@ -65,15 +65,15 @@ msgstr ""
 "Vous avez %(count)d notifications non lues <a href=\"%(link)s\" class="
 "\"alert-link\">Cliquez ici pour les voir</a>."
 
-#: apps/notifications/models.py:193
+#: apps/notifications/models.py:194
 msgid "Send mail on new notification"
 msgstr "Envoyer un mail à la réception d'une notification"
 
-#: apps/notifications/models.py:197
+#: apps/notifications/models.py:198
 msgid "Notification user profile"
 msgstr "Profil utilisateur pour les notifications"
 
-#: apps/notifications/models.py:198
+#: apps/notifications/models.py:199
 msgid "Notification user profiles"
 msgstr "Profils utilisateurs pour les notifications"
 
