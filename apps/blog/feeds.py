@@ -148,7 +148,7 @@ class LatestArticlesForCategoryFeed(BaseBlogArticleFeed):
         Return the description of the category.
         :param obj: The feed object.
         """
-        return obj.description or _('Latest articles in category "%s"') % obj.name
+        return obj.description_html or _('Latest articles in category "%s"') % obj.name
 
     def items(self, obj):
         """
@@ -208,7 +208,7 @@ class LatestArticlesForLicenseFeed(BaseBlogArticleFeed):
         Return the permalink to the license.
         :param obj: The feed object.
         """
-        return reverse('bloglicense:license_detail', kwargs={'slug': obj.slug})
+        return reverse('bloglicense:license_articles_detail', kwargs={'slug': obj.slug})
 
     def description(self, obj):
         """
