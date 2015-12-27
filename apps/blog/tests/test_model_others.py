@@ -2,10 +2,14 @@
 Tests suite for the models of the blog app.
 """
 
+from datetime import timedelta
+from unittest.mock import patch
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.utils import timezone
 from django.test.utils import override_settings
 
 
@@ -13,8 +17,10 @@ from ..models import (Article,
                       ArticleRevision,
                       ArticleNote,
                       ArticleTag,
-                      ArticleCategory)
-from ..constants import NOTE_TYPE_DEFAULT
+                      ArticleCategory,
+                      ArticleTwitterCrossPublication)
+from ..constants import (NOTE_TYPE_DEFAULT,
+                         ARTICLE_STATUS_PUBLISHED)
 
 
 @override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
@@ -323,3 +329,194 @@ class ArticleCategoryTestCase(TestCase):
         self.assertEqual('new-parent', parent.slug_hierarchy)
         self.assertEqual('new-parent/new-child', child.slug_hierarchy)
         self.assertEqual('new-parent/new-child/new-leaf', leaf.slug_hierarchy)
+
+
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
+class ArticleTwitterCrossPublicationTestCase(TestCase):
+    """
+    Tests suite for the ``ArticleTwitterCrossPublication`` data model.
+    """
+
+    def test_str_method(self):
+        """
+        Test ``__str__`` result for other tests.
+        """
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        article = Article.objects.create(title='Test 1',
+                                         slug='test-1',
+                                         author=author,
+                                         content='Hello World!')
+        tweet = ArticleTwitterCrossPublication.objects.create(article=article,
+                                                              tweet_id='0123456789')
+        self.assertEqual('%s -> %s' % (article, '0123456789'), str(tweet))
+
+    def test_publish_pending_articles(self):
+        """
+        Test the ``publish_pending_articles`` method of the manager.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        article_unpublished = Article.objects.create(title='Test 1',
+                                                     slug='test-1',
+                                                     author=author,
+                                                     content='Hello World!',
+                                                     pub_date=None)
+        article_published = Article.objects.create(title='Test 2',
+                                                   slug='test-2',
+                                                   author=author,
+                                                   content='Hello World!',
+                                                   pub_date=now,
+                                                   network_publish=False,
+                                                   status=ARTICLE_STATUS_PUBLISHED)
+        article_published_network = Article.objects.create(title='Test 4',
+                                                           slug='test-4',
+                                                           author=author,
+                                                           content='Hello World!',
+                                                           pub_date=now,
+                                                           network_publish=True,
+                                                           status=ARTICLE_STATUS_PUBLISHED)
+        article_published_in_future = Article.objects.create(title='Test 3',
+                                                             slug='test-3',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=future_now,
+                                                             network_publish=True,
+                                                             status=ARTICLE_STATUS_PUBLISHED)
+        self.assertIsNotNone(article_unpublished)
+        self.assertIsNotNone(article_published)
+        self.assertIsNotNone(article_published_network)
+        self.assertIsNotNone(article_published_in_future)
+
+        with patch('apps.blog.managers.publish_article_on_twitter') as mock:
+            mock.return_value = '0123456789'
+            ArticleTwitterCrossPublication.objects.publish_pending_articles()
+
+        self.assertEqual(1, mock.call_count)
+        mock.assert_any_call(article_published_network)
+
+        tweets = ArticleTwitterCrossPublication.objects.all()
+        self.assertQuerysetEqual(tweets, ['<ArticleTwitterCrossPublication: Test 4 -> 0123456789>'])
+
+    def test_publish_pending_articles_error(self):
+        """
+        Test the ``publish_pending_articles`` method of the manager when the Twitter api fail.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        article_unpublished = Article.objects.create(title='Test 1',
+                                                     slug='test-1',
+                                                     author=author,
+                                                     content='Hello World!',
+                                                     pub_date=None)
+        article_published = Article.objects.create(title='Test 2',
+                                                   slug='test-2',
+                                                   author=author,
+                                                   content='Hello World!',
+                                                   pub_date=now,
+                                                   network_publish=False,
+                                                   status=ARTICLE_STATUS_PUBLISHED)
+        article_published_network = Article.objects.create(title='Test 4',
+                                                           slug='test-4',
+                                                           author=author,
+                                                           content='Hello World!',
+                                                           pub_date=now,
+                                                           network_publish=True,
+                                                           status=ARTICLE_STATUS_PUBLISHED)
+        article_published_in_future = Article.objects.create(title='Test 3',
+                                                             slug='test-3',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=future_now,
+                                                             network_publish=False,
+                                                             status=ARTICLE_STATUS_PUBLISHED)
+        self.assertIsNotNone(article_unpublished)
+        self.assertIsNotNone(article_published)
+        self.assertIsNotNone(article_published_network)
+        self.assertIsNotNone(article_published_in_future)
+
+        with patch('apps.blog.managers.publish_article_on_twitter') as mock:
+            mock.return_value = False
+            ArticleTwitterCrossPublication.objects.publish_pending_articles()
+
+        self.assertEqual(1, mock.call_count)
+        mock.assert_any_call(article_published_network)
+
+        tweets = ArticleTwitterCrossPublication.objects.all()
+        self.assertQuerysetEqual(tweets, [])
+
+    def test_publish_pending_articles_with_already_posted(self):
+        """
+        Test the ``publish_pending_articles`` method of the manager when some announcements are already posted.
+        """
+
+        # Create some test fixtures
+        now = timezone.now()
+        future_now = now + timedelta(seconds=10)
+        author = get_user_model().objects.create_user(username='jonhdoe',
+                                                      password='jonhdoe',
+                                                      email='jonh.doe@example.com')
+        article_unpublished = Article.objects.create(title='Test 1',
+                                                     slug='test-1',
+                                                     author=author,
+                                                     content='Hello World!',
+                                                     pub_date=None)
+        article_published = Article.objects.create(title='Test 2',
+                                                   slug='test-2',
+                                                   author=author,
+                                                   content='Hello World!',
+                                                   pub_date=now,
+                                                   network_publish=True,
+                                                   status=ARTICLE_STATUS_PUBLISHED)
+        article_published2 = Article.objects.create(title='Test 3',
+                                                    slug='test-3',
+                                                    author=author,
+                                                    content='Hello World!',
+                                                    pub_date=now,
+                                                    network_publish=True,
+                                                    status=ARTICLE_STATUS_PUBLISHED)
+        article_published_in_future = Article.objects.create(title='Test 4',
+                                                             slug='test-4',
+                                                             author=author,
+                                                             content='Hello World!',
+                                                             pub_date=future_now,
+                                                             network_publish=True,
+                                                             status=ARTICLE_STATUS_PUBLISHED)
+        article_published3 = Article.objects.create(title='Test 5',
+                                                    slug='test-5',
+                                                    author=author,
+                                                    content='Hello World!',
+                                                    pub_date=now,
+                                                    network_publish=False,
+                                                    status=ARTICLE_STATUS_PUBLISHED)
+        self.assertIsNotNone(article_unpublished)
+        self.assertIsNotNone(article_published)
+        self.assertIsNotNone(article_published2)
+        self.assertIsNotNone(article_published3)
+        self.assertIsNotNone(article_published_in_future)
+
+        ArticleTwitterCrossPublication.objects.create(article=article_published,
+                                                      tweet_id='0123456789')
+
+        with patch('apps.blog.managers.publish_article_on_twitter') as mock:
+            mock.return_value = '0123456789'
+            ArticleTwitterCrossPublication.objects.publish_pending_articles()
+
+        self.assertEqual(1, mock.call_count)
+        mock.assert_any_call(article_published2)
+
+        tweets = ArticleTwitterCrossPublication.objects.all()
+        print(tweets)
+        self.assertQuerysetEqual(tweets, ['<ArticleTwitterCrossPublication: Test 2 -> 0123456789>',
+                                          '<ArticleTwitterCrossPublication: Test 3 -> 0123456789>'], ordered=False)
