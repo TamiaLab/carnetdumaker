@@ -1,0 +1,11 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+
+    <form method="post" action=".">
+        {{ form.as_p }}
+        <p><input type="submit" value="{% trans "Restore this revision" %}" /></p>
+    </form>
+{% endblock %}
