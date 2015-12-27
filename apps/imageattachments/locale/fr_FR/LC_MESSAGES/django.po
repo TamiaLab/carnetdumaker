@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,48 +16,48 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/imageattachments/admin.py:21
-msgid "View on site"
-msgstr "Voir sur le site"
-
-#: apps/imageattachments/admin.py:68
+#: apps/imageattachments/admin.py:59
 msgid "Title and slug"
 msgstr "Titre et slug"
 
-#: apps/imageattachments/admin.py:72
+#: apps/imageattachments/admin.py:64
 msgid "Legend, description and license"
 msgstr "Légende, description et licence"
 
-#: apps/imageattachments/admin.py:77
+#: apps/imageattachments/admin.py:69
 msgid "Image (original)"
 msgstr "Image (original)"
 
-#: apps/imageattachments/admin.py:81
+#: apps/imageattachments/admin.py:73
 msgid "Image (small thumbnail)"
 msgstr "Image (petite miniature)"
 
-#: apps/imageattachments/admin.py:85
+#: apps/imageattachments/admin.py:77
 msgid "Image (medium thumbnail)"
 msgstr "Image (moyenne miniature)"
 
-#: apps/imageattachments/admin.py:89
+#: apps/imageattachments/admin.py:81
 msgid "Image (large thumbnail)"
 msgstr "Image (grande miniature)"
 
-#: apps/imageattachments/admin.py:93
+#: apps/imageattachments/admin.py:85
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: apps/imageattachments/admin.py:104
+#: apps/imageattachments/admin.py:96
 msgid "Image"
 msgstr "Image"
 
-#: apps/imageattachments/admin.py:131 apps/imageattachments/admin.py:141
-#: apps/imageattachments/admin.py:151 apps/imageattachments/admin.py:161
+#: apps/imageattachments/admin.py:107
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/imageattachments/admin.py:134 apps/imageattachments/admin.py:144
+#: apps/imageattachments/admin.py:154 apps/imageattachments/admin.py:164
 msgid "HTML integration code"
 msgstr "Code d'intégration HTML"
 
-#: apps/imageattachments/apps.py:15 apps/imageattachments/models.py:113
+#: apps/imageattachments/apps.py:15 apps/imageattachments/models.py:122
 #: apps/imageattachments/views.py:35
 msgid "Image attachments"
 msgstr "Images jointes"
@@ -66,87 +66,99 @@ msgstr "Images jointes"
 msgid "Title"
 msgstr "Titre"
 
-#: apps/imageattachments/models.py:49
+#: apps/imageattachments/models.py:50
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/imageattachments/models.py:53
+#: apps/imageattachments/models.py:54
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: apps/imageattachments/models.py:57
+#: apps/imageattachments/models.py:58
 msgid "Legend"
 msgstr "Légende"
 
-#: apps/imageattachments/models.py:62
+#: apps/imageattachments/models.py:63
 msgid "Description"
 msgstr "Description"
 
-#: apps/imageattachments/models.py:66
+#: apps/imageattachments/models.py:67
 msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
-#: apps/imageattachments/models.py:70
+#: apps/imageattachments/models.py:69
+msgid "Description (raw text)"
+msgstr "Description (texte brut)"
+
+#: apps/imageattachments/models.py:73
 msgid "License"
 msgstr "Licence"
 
-#: apps/imageattachments/models.py:75
+#: apps/imageattachments/models.py:78
+msgid "Public listing"
+msgstr "Listé publiquement"
+
+#: apps/imageattachments/models.py:81
 msgid "Image (small size)"
 msgstr "Image (petite taille)"
 
-#: apps/imageattachments/models.py:81
+#: apps/imageattachments/models.py:87
 msgid "Image height (small size, in pixels)"
 msgstr "Hauteur de l'image (petite taille, en pixels)"
 
-#: apps/imageattachments/models.py:82
+#: apps/imageattachments/models.py:88
 msgid "Image width (small size, in pixels)"
 msgstr "Largeur de l'image (petite taille, en pixels)"
 
-#: apps/imageattachments/models.py:84
+#: apps/imageattachments/models.py:90
 msgid "Image (medium size)"
 msgstr "Image (moyenne taille)"
 
-#: apps/imageattachments/models.py:90
+#: apps/imageattachments/models.py:96
 msgid "Image height (medium size, in pixels)"
 msgstr "Hauteur de l'image (taille moyenne, en pixels)"
 
-#: apps/imageattachments/models.py:91
+#: apps/imageattachments/models.py:97
 msgid "Image width (medium size, in pixels)"
 msgstr "Largeur de l'image (taille moyenne, en pixels)"
 
-#: apps/imageattachments/models.py:93
+#: apps/imageattachments/models.py:99
 msgid "Image (large size)"
 msgstr "Image (grande taille)"
 
-#: apps/imageattachments/models.py:99
+#: apps/imageattachments/models.py:105
 msgid "Image height (large size, in pixels)"
 msgstr "Hauteur de l'image (grande taille, en pixels)"
 
-#: apps/imageattachments/models.py:100
+#: apps/imageattachments/models.py:106
 msgid "Image width (large size, in pixels)"
 msgstr "Largeur de l'image (grande taille, en pixels)"
 
-#: apps/imageattachments/models.py:102
+#: apps/imageattachments/models.py:108
 msgid "Image (original size)"
 msgstr "Image (taille d'origine)"
 
-#: apps/imageattachments/models.py:106
+#: apps/imageattachments/models.py:112
 msgid "Image height (original size, in pixels)"
 msgstr "Hauteur de l'image (taille d'origine, en pixels)"
 
-#: apps/imageattachments/models.py:107
+#: apps/imageattachments/models.py:113
 msgid "Image width (original size, in pixels)"
 msgstr "Largeur de l'image (taille d'origine, en pixels)"
 
-#: apps/imageattachments/models.py:112
+#: apps/imageattachments/models.py:115
+msgid "Last modification date"
+msgstr "Date de derniére modification"
+
+#: apps/imageattachments/models.py:121
 msgid "Image attachment"
 msgstr "Image jointe"
 
-#: apps/imageattachments/templates/imageattachments/admin_img_integration_code.html:5
+#: apps/imageattachments/templates/imageattachments/admin_img_integration_code.html:4
 msgid "license"
 msgstr "licence"
 
-#: apps/imageattachments/views.py:61
+#: apps/imageattachments/views.py:62
 #, python-format
 msgid "Image %s"
 msgstr "Image %s"
