@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -29,25 +29,25 @@ msgid "Date and time"
 msgstr "Date et heure"
 
 #: apps/privatemsg/admin.py:116 apps/privatemsg/forms.py:42
-#: apps/privatemsg/models.py:55
+#: apps/privatemsg/models.py:57
 msgid "Recipient"
 msgstr "Destinataire"
 
-#: apps/privatemsg/admin.py:130 apps/privatemsg/models.py:50
+#: apps/privatemsg/admin.py:130 apps/privatemsg/models.py:52
 msgid "Sender"
 msgstr "Expéditeur"
 
-#: apps/privatemsg/admin.py:168 apps/privatemsg/models.py:314
-#: apps/privatemsg/models.py:366
+#: apps/privatemsg/admin.py:168 apps/privatemsg/models.py:349
+#: apps/privatemsg/models.py:398
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps/privatemsg/apps.py:15 apps/privatemsg/models.py:98
+#: apps/privatemsg/apps.py:15 apps/privatemsg/models.py:100
 msgid "Private messages"
 msgstr "Messages privés"
 
 #: apps/privatemsg/forms.py:39 apps/privatemsg/forms.py:97
-#: apps/privatemsg/models.py:38 apps/privatemsg/models.py:160
+#: apps/privatemsg/models.py:38 apps/privatemsg/models.py:171
 msgid "Subject"
 msgstr "Sujet"
 
@@ -80,55 +80,60 @@ msgstr "Le destinataire n'accèpte pas les messages privés de votre part."
 msgid "Message (raw HTML)"
 msgstr "Message (HTML brut)"
 
-#: apps/privatemsg/models.py:60
+#: apps/privatemsg/models.py:47
+msgid "Message (raw text)"
+msgstr "Message (texte brut)"
+
+#: apps/privatemsg/models.py:62
 msgid "Parent message"
 msgstr "Message parent"
 
-#: apps/privatemsg/models.py:66
+#: apps/privatemsg/models.py:68
 msgid "Sent at"
 msgstr "Envoyé à"
 
-#: apps/privatemsg/models.py:70
+#: apps/privatemsg/models.py:72
 msgid "Read at"
 msgstr "Lu à"
 
-#: apps/privatemsg/models.py:76
+#: apps/privatemsg/models.py:78
 msgid "Sender deleted at"
 msgstr "Supprimé par l'expéditeur à"
 
-#: apps/privatemsg/models.py:82
+#: apps/privatemsg/models.py:84
 msgid "Recipient deleted at"
 msgstr "Supprimé par le destinataire à"
 
-#: apps/privatemsg/models.py:88
+#: apps/privatemsg/models.py:90
 msgid "Sender permanently deleted"
 msgstr "Définitivement supprimé par l'expéditeur à"
 
-#: apps/privatemsg/models.py:91
+#: apps/privatemsg/models.py:93
 msgid "Recipient permanently deleted"
 msgstr "Définitivement supprimé par le destinataire à"
 
-#: apps/privatemsg/models.py:97
+#: apps/privatemsg/models.py:99
 msgid "Private message"
 msgstr "Message privé"
 
-#: apps/privatemsg/models.py:159
+#: apps/privatemsg/models.py:170 apps/privatemsg/tests/test_models.py:65
+#: apps/privatemsg/tests/test_models.py:129
 msgid "(no subject)"
 msgstr "(pas de sujet)"
 
-#: apps/privatemsg/models.py:168
+#: apps/privatemsg/models.py:179
 msgid "Unread"
 msgstr "Non lu"
 
-#: apps/privatemsg/models.py:176
+#: apps/privatemsg/models.py:187
 msgid "Deleted at recipient side"
 msgstr "Supprimé par le destinataire"
 
-#: apps/privatemsg/models.py:184
+#: apps/privatemsg/models.py:195
 msgid "Deleted at sender side"
 msgstr "Supprimé par l'expéditeur"
 
-#: apps/privatemsg/models.py:295
+#: apps/privatemsg/models.py:331
 #, python-format
 msgid ""
 "You have %(count)d unread private messages <a href=\"%(link)s\" class="
@@ -137,39 +142,39 @@ msgstr ""
 "Vous avez %(count)d messages privés non lus <a href=\"%(link)s\" class="
 "\"alert-link\">Cliquer ici pour les voir</a>."
 
-#: apps/privatemsg/models.py:316
+#: apps/privatemsg/models.py:351
 msgid "Notify me of new private message"
 msgstr "Me notifier en cas de nouveau message privé"
 
-#: apps/privatemsg/models.py:319
+#: apps/privatemsg/models.py:354
 msgid "Accept incoming private message"
 msgstr "Accepter les messages privés entrants"
 
-#: apps/privatemsg/models.py:322
+#: apps/privatemsg/models.py:357
 msgid "Last sent private msg date"
 msgstr "Date d'envoi du dernier message privé"
 
-#: apps/privatemsg/models.py:328
+#: apps/privatemsg/models.py:363
 msgid "Private messages user profile"
 msgstr "Profil utiilsateur pour les messages privés"
 
-#: apps/privatemsg/models.py:329
+#: apps/privatemsg/models.py:364
 msgid "Private messages user profiles"
 msgstr "Profils utilisateur pour les messages privés"
 
-#: apps/privatemsg/models.py:371 apps/privatemsg/models.py:382
+#: apps/privatemsg/models.py:403 apps/privatemsg/models.py:414
 msgid "Blocked user"
 msgstr "Utilisateur bloqué"
 
-#: apps/privatemsg/models.py:373
+#: apps/privatemsg/models.py:405
 msgid "Last block date"
 msgstr "Dernière date de blocage"
 
-#: apps/privatemsg/models.py:375
+#: apps/privatemsg/models.py:407
 msgid "Active"
 msgstr "Actif"
 
-#: apps/privatemsg/models.py:383
+#: apps/privatemsg/models.py:415
 msgid "Blocked users"
 msgstr "Utilisateurs bloqués"
 
@@ -213,26 +218,26 @@ msgstr "Vos préférences de messagerie privé ont été mises à jour avec succ
 msgid "My private message preferences"
 msgstr "Mes préférences de messagerie privé"
 
-#: apps/privatemsg/views.py:463
+#: apps/privatemsg/views.py:464
 msgid "Delete message"
 msgstr "Supprimer le message"
 
-#: apps/privatemsg/views.py:506
+#: apps/privatemsg/views.py:508
 msgid "Permanently delete message"
 msgstr "Supprimer définivement le message"
 
-#: apps/privatemsg/views.py:568
+#: apps/privatemsg/views.py:570
 msgid "Un-delete message"
 msgstr "Restaurer le message"
 
-#: apps/privatemsg/views.py:599
+#: apps/privatemsg/views.py:601
 msgid "Blocked users list"
 msgstr "Liste des utilisateurs bloqués"
 
-#: apps/privatemsg/views.py:649
+#: apps/privatemsg/views.py:651
 msgid "Block user"
 msgstr "Bloquer l'utilisateur"
 
-#: apps/privatemsg/views.py:696
+#: apps/privatemsg/views.py:698
 msgid "Unblock user"
 msgstr "Débloquer l'utilisateur"
