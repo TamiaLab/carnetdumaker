@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,108 +16,135 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/blog/admin.py:60 apps/blog/models.py:464
+#: apps/blog/admin.py:63 apps/blog/models.py:530
 msgid "Revision author"
 msgstr "Auteur de la révision"
 
-#: apps/blog/admin.py:70 apps/blog/admin.py:71
+#: apps/blog/admin.py:73 apps/blog/admin.py:74
 msgid "Show diff with current version"
 msgstr "Voir les différences avec la version actuelle"
 
-#: apps/blog/admin.py:80 apps/blog/models.py:452
+#: apps/blog/admin.py:83 apps/blog/admin.py:84
+msgid "Restore this version"
+msgstr "Restaurer cette version"
+
+#: apps/blog/admin.py:93 apps/blog/models.py:518
 msgid "Minor changes"
 msgstr "Changements mineurs"
 
-#: apps/blog/admin.py:85 apps/blog/models.py:456
+#: apps/blog/admin.py:98 apps/blog/models.py:522
 msgid "Revision description"
 msgstr "Description de la révision"
 
-#: apps/blog/admin.py:102
+#: apps/blog/admin.py:112
+msgid "Confirm revision restoration"
+msgstr "Confirmer la restauration de la révision"
+
+#: apps/blog/admin.py:125
 msgid "View on site"
 msgstr "Voir sur le site"
 
 #. Translators: This message appears in the title of the article's revision diff view
-#: apps/blog/admin.py:174
+#: apps/blog/admin.py:201
 msgid "Revision diff"
 msgstr "Différences de la révision"
 
-#: apps/blog/admin.py:240
+#: apps/blog/admin.py:242 apps/blog/admin.py:254
+msgid "Restore revision #%d"
+msgstr "Restaurer la révision #%d"
+
+#: apps/blog/admin.py:246
+#, python-format
+msgid ""
+"Revision #%(revid)d of article \"%(title)s\" has been restored successfully!"
+msgstr ""
+"La révision #%(revid)d de l'article \"%(title)s\" a été restaurée avec succès !"
+
+#: apps/blog/admin.py:318
 msgid "Title and subtitle"
 msgstr "Titre et sous-titre"
 
-#: apps/blog/admin.py:245 apps/blog/admin.py:429
+#: apps/blog/admin.py:323 apps/blog/admin.py:506
 msgid "Iconography"
 msgstr "Iconographie"
 
-#: apps/blog/admin.py:251 apps/blog/models.py:205 apps/blog/models.py:449
+#: apps/blog/admin.py:329 apps/blog/models.py:212 apps/blog/models.py:515
 msgid "Content"
 msgstr "Contenu"
 
-#: apps/blog/admin.py:256
+#: apps/blog/admin.py:334
 msgid "Revision information"
 msgstr "Informations de révision"
 
-#: apps/blog/admin.py:260
+#: apps/blog/admin.py:338
 msgid "General information"
 msgstr "Informations générales"
 
-#: apps/blog/admin.py:266
+#: apps/blog/admin.py:344
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: apps/blog/admin.py:272
+#: apps/blog/admin.py:350
 msgid "Membership"
 msgstr "Abonnements"
 
-#: apps/blog/admin.py:276 apps/blog/models.py:158
+#: apps/blog/admin.py:354 apps/blog/models.py:165
 msgid "Related forum thread"
 msgstr "Topic lié sur le forum"
 
-#: apps/blog/admin.py:280
+#: apps/blog/admin.py:358
 msgid "Tags, attachments and categories"
 msgstr "Mots clefs, piéces jointes et catégories"
 
-#: apps/blog/admin.py:286 apps/blog/models.py:192
+#: apps/blog/admin.py:364 apps/blog/models.py:199
 msgid "Related articles"
 msgstr "Articles liés"
 
-#: apps/blog/admin.py:290
+#: apps/blog/admin.py:368
 msgid "Notes and disclaimers"
 msgstr "Notes et avertissements"
 
-#: apps/blog/admin.py:312 apps/blog/models.py:89
+#: apps/blog/admin.py:390 apps/blog/models.py:95
 msgid "Author"
 msgstr "Auteur"
 
-#: apps/blog/admin.py:322
+#: apps/blog/admin.py:400
 msgid "Current heading image"
 msgstr "Image de une actuelle"
 
-#: apps/blog/admin.py:331
+#: apps/blog/admin.py:409
 msgid "Current thumbnail image"
 msgstr "Image de miniature actuelle"
 
-#: apps/blog/admin.py:351
+#: apps/blog/admin.py:429
 msgid "Internal information"
 msgstr "Informations internes"
 
-#: apps/blog/admin.py:355
+#: apps/blog/admin.py:433
 msgid "Note content"
 msgstr "Contenu de la note"
 
-#: apps/blog/admin.py:388
+#: apps/blog/admin.py:466
 msgid "Use count"
-msgstr "Nombre d'utilisation"
+msgstr "Nombre d'utilisations"
 
-#: apps/blog/admin.py:424
+#: apps/blog/admin.py:501
 msgid "Category name and parent"
 msgstr "Nom de la catégorie et catégorie parente"
 
-#: apps/blog/admin.py:444 apps/blog/models.py:640
+#: apps/blog/admin.py:521 apps/blog/models.py:738
 msgid "Logo"
 msgstr "Logo"
 
-#: apps/blog/apps.py:15 apps/blog/models.py:213 apps/blog/views.py:38
+#: apps/blog/admin.py:557
+msgid "View article on site"
+msgstr "Voir l'article sur le site"
+
+#: apps/blog/admin.py:569
+msgid "View article on Twitter"
+msgstr "Voir l'article sur Twitter"
+
+#: apps/blog/apps.py:15 apps/blog/models.py:229 apps/blog/views.py:40
 msgid "Articles"
 msgstr "Articles"
 
@@ -145,223 +172,268 @@ msgstr "Danger"
 msgid "Draft"
 msgstr "Brouillon"
 
-#: apps/blog/constants.py:27 apps/blog/models.py:356
+#: apps/blog/constants.py:27 apps/blog/models.py:373
 msgid "Published"
 msgstr "Publié"
 
-#: apps/blog/constants.py:28 apps/blog/models.py:366
+#: apps/blog/constants.py:28 apps/blog/models.py:383
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: apps/blog/feeds.py:49 apps/blog/tests/test_feeds.py:81
+#: apps/blog/feeds.py:50 apps/blog/tests/test_feeds.py:95
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: apps/blog/feeds.py:80 apps/blog/tests/test_feeds.py:141
+#: apps/blog/feeds.py:81 apps/blog/tests/test_feeds.py:156
 msgid "Latest articles"
 msgstr "Derniers articles récents"
 
-#: apps/blog/feeds.py:83 apps/blog/tests/test_feeds.py:144
+#: apps/blog/feeds.py:84 apps/blog/tests/test_feeds.py:159
 msgid "Latest articles, all categories together"
 msgstr "Derniers articles récents, toutes catégories confondues"
 
-#: apps/blog/feeds.py:129 apps/blog/feeds.py:150
+#: apps/blog/feeds.py:130 apps/blog/feeds.py:151
+#: apps/blog/tests/test_feeds.py:276 apps/blog/tests/test_feeds.py:324
 #, python-format
 msgid "Latest articles in category \"%s\""
 msgstr "Derniers articles dans la catégorie \"%s\""
 
-#: apps/blog/feeds.py:203 apps/blog/feeds.py:217
+#: apps/blog/feeds.py:204 apps/blog/feeds.py:218
+#: apps/blog/tests/test_feeds.py:458 apps/blog/tests/test_feeds.py:507
 #, python-format
 msgid "Latest articles with license \"%s\""
 msgstr "Derniers articles avec la licence \"%s\""
 
-#: apps/blog/feeds.py:263 apps/blog/feeds.py:277
+#: apps/blog/feeds.py:278 apps/blog/feeds.py:292
+#: apps/blog/tests/test_feeds.py:648 apps/blog/tests/test_feeds.py:684
 #, python-format
 msgid "Latest articles with tag \"%s\""
 msgstr "Derniers articles avec le mot clef \"%s\""
 
-#: apps/blog/feeds.py:323 apps/blog/feeds.py:337
+#: apps/blog/feeds.py:352 apps/blog/feeds.py:366
+#: apps/blog/tests/test_feeds.py:816 apps/blog/tests/test_feeds.py:852
 #, python-format
 msgid "Latest articles for year %(year)s"
 msgstr "Derniers articles de l'année %(year)s"
 
-#: apps/blog/feeds.py:385 apps/blog/feeds.py:399
+#: apps/blog/feeds.py:428 apps/blog/feeds.py:442
+#: apps/blog/tests/test_feeds.py:950 apps/blog/tests/test_feeds.py:986
 #, python-format
 msgid "Latest articles for month %(year)s/%(month)s"
 msgstr "Derniers articles pour le mois %(year)s/%(month)s"
 
-#: apps/blog/models.py:70 apps/blog/models.py:563 apps/blog/models.py:630
+#: apps/blog/models.py:74 apps/blog/models.py:655 apps/blog/models.py:728
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/blog/models.py:74 apps/blog/models.py:434 apps/blog/models.py:494
+#: apps/blog/models.py:78 apps/blog/models.py:500 apps/blog/models.py:561
 msgid "Title"
 msgstr "Titre"
 
-#: apps/blog/models.py:77 apps/blog/models.py:438
+#: apps/blog/models.py:81 apps/blog/models.py:504
 msgid "Subtitle"
 msgstr "Sous-titre"
 
-#: apps/blog/models.py:82 apps/blog/models.py:444 apps/blog/models.py:499
-#: apps/blog/models.py:648
+#: apps/blog/models.py:86 apps/blog/models.py:510 apps/blog/models.py:566
+#: apps/blog/models.py:746
 msgid "Description"
 msgstr "Description"
 
-#: apps/blog/models.py:91
-msgid "Status"
-msgstr "Statut"
-
-#: apps/blog/models.py:100
-msgid "License"
-msgstr "Licence"
-
-#: apps/blog/models.py:106
-msgid "Publish on other networks"
-msgstr "Publier sur les autres réseaux"
-
-#: apps/blog/models.py:109
-msgid "Featured"
-msgstr "Mis en avant"
-
-#: apps/blog/models.py:112
-msgid "Heading image"
-msgstr "Image de une"
-
-#: apps/blog/models.py:120
-msgid "Thumbnail image"
-msgstr "Image de miniature"
-
-#: apps/blog/models.py:128
-msgid "Creation date"
-msgstr "Date de création"
-
-#: apps/blog/models.py:131
-msgid "Last content modification date"
-msgstr "Date de dernière modification du contenu"
-
-#: apps/blog/models.py:136
-msgid "Publication date"
-msgstr "Date de publication"
-
-#: apps/blog/models.py:142
-msgid "Expiration date"
-msgstr "Date d'expiration"
-
-#: apps/blog/models.py:148
-msgid "Membership required"
-msgstr "Abonnement requis"
-
-#: apps/blog/models.py:151
-msgid "Membership required expiration date"
-msgstr "Date d'expiration de l'obligation d'abonnement"
-
-#: apps/blog/models.py:164
-msgid "Auto create related forum thread"
-msgstr "Créer automatiquement le topic lié sur le forum"
-
-#: apps/blog/models.py:169
-msgid "Article's tags"
-msgstr "Mots clefs de l'article"
-
-#: apps/blog/models.py:174
-msgid "Article's categories"
-msgstr "Catégories de l'article"
-
-#: apps/blog/models.py:179
-msgid "Article's image attachments"
-msgstr "Images liées à l'article"
-
-#: apps/blog/models.py:182
-msgid "Display the image gallery"
-msgstr "Afficher la gallerie d'images"
-
-#: apps/blog/models.py:187
-msgid "Follow up of"
-msgstr "Suite des articles"
-
-#: apps/blog/models.py:197
-msgid "Article's heading notes"
-msgstr "Notes de haut de page"
-
-#: apps/blog/models.py:202
-msgid "Article's footer notes"
-msgstr "Notes de bas de page"
-
-#: apps/blog/models.py:207
-msgid "Content (raw HTML)"
-msgstr "Contenu (HTML brut)"
-
-#: apps/blog/models.py:212
-msgid "Article"
-msgstr "Article"
-
-#: apps/blog/models.py:344
-msgid "Require membership for reading"
-msgstr "Nécessite d'être abonné pour lire"
-
-#: apps/blog/models.py:432
-msgid "Related article"
-msgstr "Article lié"
-
-#: apps/blog/models.py:469
-msgid "Revision date"
-msgstr "Date de la révision"
-
-#: apps/blog/models.py:473
-msgid "Article revision"
-msgstr "Révision d'article"
-
-#: apps/blog/models.py:474
-msgid "Article revisions"
-msgstr "Révisions d'article"
-
-#: apps/blog/models.py:491
-msgid "Title (for internal use)"
-msgstr "Titre (pour usage interne)"
-
-#: apps/blog/models.py:501
+#: apps/blog/models.py:88 apps/blog/models.py:568 apps/blog/models.py:748
 msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
-#: apps/blog/models.py:503
+#: apps/blog/models.py:90 apps/blog/models.py:570 apps/blog/models.py:750
+msgid "Description (raw text)"
+msgstr "Description (texte brut)"
+
+#: apps/blog/models.py:97
+msgid "Status"
+msgstr "Statut"
+
+#: apps/blog/models.py:106
+msgid "License"
+msgstr "Licence"
+
+#: apps/blog/models.py:113
+msgid "Publish on other networks"
+msgstr "Publier sur les autres réseaux"
+
+#: apps/blog/models.py:116
+msgid "Featured"
+msgstr "Mis en avant"
+
+#: apps/blog/models.py:119
+msgid "Heading image"
+msgstr "Image de une"
+
+#: apps/blog/models.py:127
+msgid "Thumbnail image"
+msgstr "Image de miniature"
+
+#: apps/blog/models.py:135 apps/blog/models.py:901
+msgid "Creation date"
+msgstr "Date de création"
+
+#: apps/blog/models.py:138
+msgid "Last content modification date"
+msgstr "Date de dernière modification du contenu"
+
+#: apps/blog/models.py:143
+msgid "Publication date"
+msgstr "Date de publication"
+
+#: apps/blog/models.py:149
+msgid "Expiration date"
+msgstr "Date d'expiration"
+
+#: apps/blog/models.py:155
+msgid "Membership required"
+msgstr "Abonnement requis"
+
+#: apps/blog/models.py:158
+msgid "Membership required expiration date"
+msgstr "Date d'expiration de l'obligation d'abonnement"
+
+#: apps/blog/models.py:171
+msgid "Auto create related forum thread"
+msgstr "Créer automatiquement le topic lié sur le forum"
+
+#: apps/blog/models.py:176
+msgid "Article's tags"
+msgstr "Mots clefs de l'article"
+
+#: apps/blog/models.py:181
+msgid "Article's categories"
+msgstr "Catégories de l'article"
+
+#: apps/blog/models.py:186
+msgid "Article's image attachments"
+msgstr "Images liées à l'article"
+
+#: apps/blog/models.py:189
+msgid "Display the image gallery"
+msgstr "Afficher la gallerie d'images"
+
+#: apps/blog/models.py:194
+msgid "Follow up of"
+msgstr "Suite des articles"
+
+#: apps/blog/models.py:204
+msgid "Article's heading notes"
+msgstr "Notes de haut de page"
+
+#: apps/blog/models.py:209
+msgid "Article's footer notes"
+msgstr "Notes de bas de page"
+
+#: apps/blog/models.py:214
+msgid "Content (raw HTML)"
+msgstr "Contenu (HTML brut)"
+
+#: apps/blog/models.py:216
+msgid "Content (raw text)"
+msgstr "Contenu (texte brut)"
+
+#: apps/blog/models.py:218
+msgid "Summary (raw HTML)"
+msgstr "Sommaire (HTML brut)"
+
+#: apps/blog/models.py:220
+msgid "Footnotes (raw HTML)"
+msgstr "Notes de bas de page (HTML brut)"
+
+#: apps/blog/models.py:222 apps/blog/models.py:662 apps/blog/models.py:752
+msgid "Last modification date"
+msgstr "Date de dernière modification"
+
+#: apps/blog/models.py:228 apps/blog/models.py:895
+msgid "Article"
+msgstr "Article"
+
+#: apps/blog/models.py:361
+msgid "Require membership for reading"
+msgstr "Nécessite d'être abonné pour lire"
+
+#: apps/blog/models.py:394
+msgid "Old"
+msgstr "Vieux"
+
+#: apps/blog/models.py:498
+msgid "Related article"
+msgstr "Article lié"
+
+#: apps/blog/models.py:536
+msgid "Revision date"
+msgstr "Date de la révision"
+
+#: apps/blog/models.py:540
+msgid "Article revision"
+msgstr "Révision d'article"
+
+#: apps/blog/models.py:541
+msgid "Article revisions"
+msgstr "Révisions d'article"
+
+#: apps/blog/models.py:558
+msgid "Title (for internal use)"
+msgstr "Titre (pour usage interne)"
+
+#: apps/blog/models.py:572
 msgid "Note type"
 msgstr "Type de note"
 
-#: apps/blog/models.py:509
+#: apps/blog/models.py:578
 msgid "Article note"
 msgstr "Note d'article"
 
-#: apps/blog/models.py:510
+#: apps/blog/models.py:579
 msgid "Article notes"
 msgstr "Notes d'article"
 
-#: apps/blog/models.py:567 apps/blog/models.py:637
+#: apps/blog/models.py:659 apps/blog/models.py:735
 msgid "Name"
 msgstr "Nom"
 
-#: apps/blog/models.py:571
+#: apps/blog/models.py:666
 msgid "Article tag"
 msgstr "Mot clef d'article"
 
-#: apps/blog/models.py:572
+#: apps/blog/models.py:667
 msgid "Article tags"
 msgstr "Mots clefs d'article"
 
-#: apps/blog/models.py:625
+#: apps/blog/models.py:722
 msgid "Parent category"
 msgstr "Catégorie parente"
 
-#: apps/blog/models.py:633
+#: apps/blog/models.py:731
 msgid "Slug hierarchy"
 msgstr "Hiérarchie de slug"
 
-#: apps/blog/models.py:654
+#: apps/blog/models.py:757
 msgid "Article category"
 msgstr "Catégorie d'article"
 
-#: apps/blog/models.py:655
+#: apps/blog/models.py:758
 msgid "Article categories"
 msgstr "Catégories d'article"
+
+#: apps/blog/models.py:897
+msgid "Tweet ID"
+msgstr "ID Tweet"
+
+#: apps/blog/models.py:908
+msgid "Twitter cross-publication"
+msgstr "Cross-publication sur Twitter"
+
+#: apps/blog/models.py:909
+msgid "Twitter cross-publications"
+msgstr "Cross-publications sur Twitter"
+
+#: apps/blog/templates/blog/admin_restore_rev.html:10
+msgid "Restore this revision"
+msgstr "Restaurer cette révision"
 
 #: apps/blog/templates/blog/admin_show_rev_diff.html:5
 msgid "Title diff"
@@ -427,38 +499,43 @@ msgstr "Novembre"
 msgid "December"
 msgstr "Décembre"
 
-#: apps/blog/views.py:70
+#: apps/blog/views.py:72
 msgid "Article lost in cyberspace"
 msgstr "Article perdu dans le cyber-espace"
 
-#: apps/blog/views.py:131
+#: apps/blog/views.py:133
 msgid "Tags list"
 msgstr "Liste des mots clef"
 
-#: apps/blog/views.py:162
+#: apps/blog/views.py:164
 #, python-format
 msgid "Tag %s"
 msgstr "Mot clef %s"
 
-#: apps/blog/views.py:188
+#: apps/blog/views.py:190
 msgid "Categories list"
 msgstr "Liste des catégories"
 
-#: apps/blog/views.py:220
+#: apps/blog/views.py:222
 #, python-format
 msgid "Category %s"
 msgstr "Catégorie %s"
 
-#: apps/blog/views.py:246
+#: apps/blog/views.py:254
+#, python-format
+msgid "License %s"
+msgstr "Licence %s"
+
+#: apps/blog/views.py:280
 msgid "Archives"
 msgstr "Archives"
 
-#: apps/blog/views.py:281
+#: apps/blog/views.py:315
 #, python-format
 msgid "Articles for year %d"
 msgstr "Articles pour l'année %d"
 
-#: apps/blog/views.py:320
+#: apps/blog/views.py:354
 #, python-format
 msgid "Articles for %(month)d / %(year)d"
 msgstr "Articles du %(month)d / %(year)d"
