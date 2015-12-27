@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -32,26 +32,30 @@ msgstr "Connexion échouée"
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: apps/loginwatcher/models.py:29
+#: apps/loginwatcher/models.py:30
 msgid "Event"
 msgstr "Evénement"
 
-#: apps/loginwatcher/models.py:34
+#: apps/loginwatcher/models.py:35
 msgid "Date"
 msgstr "Date"
 
-#: apps/loginwatcher/models.py:38
+#: apps/loginwatcher/models.py:39
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: apps/loginwatcher/models.py:43
+#: apps/loginwatcher/models.py:44
 msgid "IP address"
 msgstr "Adresse IP"
 
-#: apps/loginwatcher/models.py:50
+#: apps/loginwatcher/models.py:53
 msgid "Log event"
 msgstr "Evénement de log"
 
-#: apps/loginwatcher/models.py:51
+#: apps/loginwatcher/models.py:54
 msgid "Log events"
 msgstr "Evénements de log"
+
+#: apps/loginwatcher/views.py:32
+msgid "Login history"
+msgstr "Historique de connexion"
