@@ -86,6 +86,7 @@ urlpatterns = patterns('',
 
     # Content licenses
     url(r'^licences/', include('apps.licenses.urls', namespace='licenses')),
+    url(r'^licences/', include('apps.blog.license_urls', namespace='bloglicense')),
 
     # Content report pages
     url(r'^signalement/', include('apps.contentreport.urls', namespace='contentreport')),
