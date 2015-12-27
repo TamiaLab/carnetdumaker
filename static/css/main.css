@@ -20,3 +20,31 @@
     margin: 0;
     padding-top: 0.5em;
 }
+
+
+/* SkCode TO.DO list */
+
+.task_done {
+    text-decoration: line-through;
+    list-style-type: none;
+}
+
+.task_done p:before {
+    font-family: FontAwesome;
+    content:'\f046';
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+}
+
+.task_pending {
+    list-style-type: none;
+}
+
+.task_pending p:before {
+    font-family: FontAwesome;
+    content:'\f096';
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+}
