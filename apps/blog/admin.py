@@ -163,10 +163,10 @@ class ArticleAdmin(admin.ModelAdmin):
         """
         urls = super(ArticleAdmin, self).get_urls()
         my_urls = [
-            url(r'^article_rev_diff/(?P<revision_pk>[0-9]+)/$',
+            url(r'^revision_diff/(?P<revision_pk>[0-9]+)/$',
                 self.admin_site.admin_view(self.show_rev_diff),
                 name='blog_article_show_rev_diff'),
-            url(r'^article_restore_rev/(?P<revision_pk>[0-9]+)/$',
+            url(r'^restore_revision/(?P<revision_pk>[0-9]+)/$',
                 self.admin_site.admin_view(self.restore_rev_view),
                 name='blog_article_restore_rev'),
         ]
