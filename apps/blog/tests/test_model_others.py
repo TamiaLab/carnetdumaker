@@ -5,6 +5,8 @@ Tests suite for the models of the blog app.
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.test.utils import override_settings
 
 
 from ..models import (Article,
@@ -15,6 +17,7 @@ from ..models import (Article,
 from ..constants import NOTE_TYPE_DEFAULT
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleRevisionTestCase(TestCase):
     """
     Tests suite for the ``ArticleRevision`` data model class.
@@ -57,6 +60,7 @@ class ArticleRevisionTestCase(TestCase):
         self.assertEqual('Revision #%d' % revision.id, str(revision))
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleNoteTestCase(TestCase):
     """
     Tests suite for the ``ArticleNote`` data model class.
@@ -87,6 +91,7 @@ class ArticleNoteTestCase(TestCase):
         self.assertEqual(note.title_internal, str(note))
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleTagTestCase(TestCase):
     """
     Tests suite for the ``ArticleTag`` data model class.
@@ -147,6 +152,7 @@ class ArticleTagTestCase(TestCase):
         self.assertNotEqual(tag1.slug, tag3.slug)
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleCategoryTestCase(TestCase):
     """
     Tests suite for the ``ArticleCategory`` data model class.
