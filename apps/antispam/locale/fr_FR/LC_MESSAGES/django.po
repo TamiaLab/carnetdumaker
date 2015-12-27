@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-31 19:49+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -20,16 +20,16 @@ msgstr ""
 msgid "Anti-spam"
 msgstr "Anti-spam"
 
-#: apps/antispam/forms.py:29
+#: apps/antispam/forms.py:31
 msgid "Leave this field blank"
 msgstr "Laissez ce champ vide"
 
-#: apps/antispam/forms.py:41
+#: apps/antispam/forms.py:43
 msgid "Are you a spam bot ? It seem, because you just fall in my trap."
 msgstr ""
 "Etes vous un robot ? Il semblerait, car vous venez de tomber dans mon piège."
 
-#: apps/antispam/forms.py:53
+#: apps/antispam/forms.py:55
 msgid ""
 "Timestamp validation failed. Form was filled too quickly or too slowly. "
 "Please retry submitting the form."
