@@ -266,10 +266,10 @@ class Article(ModelDiffMixin, models.Model):
             self.last_content_modification_date = None
 
         # Update last content modification date if necessary
-        if self.pk and ('title' in changed_fields or
-                                'subtitle' in changed_fields or
-                                'description' in changed_fields or
-                                'content' in changed_fields) and not minor_change:
+        elif self.pk and ('title' in changed_fields or
+                                  'subtitle' in changed_fields or
+                                  'description' in changed_fields or
+                                        'content' in changed_fields):
             self.last_content_modification_date = now
 
         # Fix last content modification date if necessary
@@ -293,10 +293,10 @@ class Article(ModelDiffMixin, models.Model):
             self.create_related_forum_thread()
 
         # Detect article change
-        if ('title' in changed_fields or
-                    'subtitle' in changed_fields or
-                    'description' in changed_fields or
-                    'content' in changed_fields):
+        if self.pk and ('title' in changed_fields or
+                                'subtitle' in changed_fields or
+                                'description' in changed_fields or
+                                'content' in changed_fields):
             old_title = changed_fields['title'][0] if 'title' in changed_fields else self.title
             old_subtitle = changed_fields['subtitle'][0] if 'subtitle' in changed_fields else self.subtitle
             old_description = changed_fields['description'][0] if 'description' in changed_fields else self.description
@@ -472,7 +472,6 @@ def _redo_articles_text_rendering(sender, **kwargs):
     for article in Article.objects.all():
         article.render_text(save=True)
 
-
 render_engine_changed.connect(_redo_articles_text_rendering)
 
 
@@ -631,7 +630,6 @@ def _redo_article_notes_text_rendering(sender, **kwargs):
     """
     for note in ArticleNote.objects.all():
         note.render_description(save=True)
-
 
 render_engine_changed.connect(_redo_article_notes_text_rendering)
 
@@ -839,7 +837,6 @@ def _redo_article_categories_text_rendering(sender, **kwargs):
     for category in ArticleCategory.objects.all():
         category.render_text(save=True)
 
-
 render_engine_changed.connect(_redo_article_categories_text_rendering)
 
 
@@ -863,6 +860,5 @@ def update_child_category_slug_hierarchy_on_parent_save(sender, instance, create
     # Update child categories
     for child in instance.children.all():
         child.build_slug_hierarchy(save=True)
-
 
 post_save.connect(update_child_category_slug_hierarchy_on_parent_save, sender=ArticleCategory)
