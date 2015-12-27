@@ -112,6 +112,9 @@ class ImageAttachment(models.Model):
     img_original_height = models.IntegerField(_('Image height (original size, in pixels)'))
     img_original_width = models.IntegerField(_('Image width (original size, in pixels)'))
 
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = ImageAttachmentManager()
 
     class Meta:
