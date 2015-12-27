@@ -22,7 +22,7 @@
 
 ## Cross publication
 
-- Cross-publish blog articles on Twitter / Facebook / Google+.
+- Cross-publish blog articles on ~Twitter~~ / Facebook / Google+.
 - Send newsletter by mail for newly blog articles on user demand.
 - Cross-publish announcements on ~~Twitter~~ / Facebook / Google+.
 - Send newsletter by mail for newly announcements on user demand.
