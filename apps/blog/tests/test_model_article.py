@@ -11,6 +11,8 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
+from django.conf import settings
+from django.test.utils import override_settings
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -20,8 +22,10 @@ from ..models import Article
 from ..constants import (ARTICLE_STATUS_DRAFT,
                          ARTICLE_STATUS_PUBLISHED,
                          ARTICLE_STATUS_DELETED)
+from ..settings import NB_DAYS_BEFORE_ARTICLE_GET_OLD
 
 
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
 class ArticleTestCase(TestCase):
     """
     Tests suite for the ``Article`` data model class.
@@ -221,7 +225,7 @@ class ArticleTestCase(TestCase):
         article.create_related_forum_thread = MagicMock()
         article.status = ARTICLE_STATUS_PUBLISHED
         article.save()
-        article.create_related_forum_thread.assert_called_with()
+        article.create_related_forum_thread.assert_called_once_with()
 
     def test_forum_creation_on_save_not_published(self):
         article = self._get_article()
@@ -258,6 +262,7 @@ class ArticleTestCase(TestCase):
         Test if the ``create_related_forum_thread`` create the forum thread as requested.
         """
         article = self._get_article()
+        article.pub_date = timezone.now()
         forum = Forum.objects.create(title='test', slug='test')
         with patch('apps.blog.models.PARENT_FORUM_ID_FOR_ARTICLE_THREADS') as mock_setting:
             mock_setting.return_value = forum.pk
@@ -267,6 +272,7 @@ class ArticleTestCase(TestCase):
             self.assertEqual(article.title, article.related_forum_thread.title)
             self.assertEqual(article.author, article.related_forum_thread.first_post.author)
             self.assertIn(article.get_absolute_url(), article.related_forum_thread.first_post.content)
+            self.assertEqual(article.pub_date, article.related_forum_thread.first_post.pub_date)
             self.assertIsNone(article.related_forum_thread.first_post.author_ip_address)
 
     def test_create_forum_thread_no_forum_id(self):
@@ -507,6 +513,24 @@ class ArticleTestCase(TestCase):
         article = Article(status=ARTICLE_STATUS_PUBLISHED, expiration_date=now)
         self.assertTrue(article.is_gone())
 
+    def test_is_old(self):
+        """
+        Test if ``is_old`` return True when the article is ``NB_DAYS_BEFORE_ARTICLE_GET_OLD`` days old.
+        """
+        now = timezone.now()
+        past_now = now - timedelta(days=NB_DAYS_BEFORE_ARTICLE_GET_OLD)
+        article = Article(status=ARTICLE_STATUS_PUBLISHED, pub_date=past_now)
+        self.assertTrue(article.is_old())
+
+    def test_is_old_false(self):
+        """
+        Test if ``is_old`` return False when the article is ``NB_DAYS_BEFORE_ARTICLE_GET_OLD`` - 1 days old.
+        """
+        now = timezone.now()
+        past_now = now - timedelta(days=NB_DAYS_BEFORE_ARTICLE_GET_OLD - 1)
+        article = Article(status=ARTICLE_STATUS_PUBLISHED, pub_date=past_now)
+        self.assertFalse(article.is_old())
+
     def test_can_see_preview_anonymous(self):
         """
         Test the ``can_see_preview()`` method with a random user (not author nor authorized to see preview).
@@ -568,6 +592,8 @@ class ArticleTestCase(TestCase):
         now = timezone.now()
         past_now = now - timedelta(seconds=1)
         article = Article(pub_date=past_now, last_content_modification_date=None)
+        self.assertFalse(article.has_been_modified_after_publication())
+        article = Article(pub_date=past_now, last_content_modification_date=past_now)
         self.assertFalse(article.has_been_modified_after_publication())
 
     def test_published_method(self):
