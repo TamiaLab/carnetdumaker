@@ -3,7 +3,7 @@ Objects managers for the blog app.
 """
 
 from django.db import models
-from django.db.models import Q, Count
+from django.db.models import Q
 from django.utils import timezone
 
 from .constants import ARTICLE_STATUS_PUBLISHED
@@ -26,9 +26,9 @@ class ArticleManager(models.Manager):
         :return: A queryset with all currently published article.
         """
         now = timezone.now()
-        return self.filter(Q(expiration_date__isnull=True)
-                           | Q(expiration_date__isnull=False,
-                               expiration_date__gte=now),
+        return self.filter(Q(expiration_date__isnull=True) |
+                           Q(expiration_date__isnull=False,
+                             expiration_date__gte=now),
                            pub_date__lte=now,
                            status=ARTICLE_STATUS_PUBLISHED) \
             .order_by('-featured', '-pub_date')
