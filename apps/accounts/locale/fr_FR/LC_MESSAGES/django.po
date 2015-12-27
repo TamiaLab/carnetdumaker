@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -61,7 +61,7 @@ msgstr "Modifier l'utilisateur brut"
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/accounts/apps.py:15 apps/accounts/models.py:219
+#: apps/accounts/apps.py:15 apps/accounts/models.py:230
 msgid "User profiles"
 msgstr "Profils utilisateur"
 
@@ -154,42 +154,50 @@ msgid "Biography (raw HTML)"
 msgstr "Biographie (HTML brut)"
 
 #: apps/accounts/models.py:132
+msgid "Biography (raw text)"
+msgstr "Biographie (texte brut)"
+
+#: apps/accounts/models.py:137
 msgid "Signature"
 msgstr "Signature"
 
-#: apps/accounts/models.py:134
+#: apps/accounts/models.py:140
 msgid "Signature (raw HTML)"
 msgstr "Signature (HTML brut)"
 
-#: apps/accounts/models.py:139
+#: apps/accounts/models.py:145
+msgid "Signature (raw text)"
+msgstr "Signature (texte brut)"
+
+#: apps/accounts/models.py:150
 msgid "Website name"
 msgstr "Nom du site web"
 
-#: apps/accounts/models.py:140
+#: apps/accounts/models.py:151
 msgid "The website URL will be used if empty."
 msgstr "L'URL du site web sera utilisée si non spécifié"
 
-#: apps/accounts/models.py:145
+#: apps/accounts/models.py:156
 msgid "Website url"
 msgstr "URL du site web"
 
-#: apps/accounts/models.py:149
+#: apps/accounts/models.py:160
 msgid "Jabber nickname"
 msgstr "Nom d'utilisateur Jabber"
 
-#: apps/accounts/models.py:154
+#: apps/accounts/models.py:165
 msgid "Skype nickname"
 msgstr "Nom d'utilisateur Skype"
 
-#: apps/accounts/models.py:159
+#: apps/accounts/models.py:170
 msgid "Twitter nickname"
 msgstr "Nom d'utilisateur Twitter"
 
-#: apps/accounts/models.py:164
+#: apps/accounts/models.py:175
 msgid "Facebook URL"
 msgstr "URL page/profil Facebook"
 
-#: apps/accounts/models.py:171
+#: apps/accounts/models.py:182
 msgid ""
 "Please enter a valid Facebook page or profile URL. Examples: https://www."
 "facebook.com/MyPage, https://www.facebook.com/pages/MyPage/123456."
@@ -197,11 +205,11 @@ msgstr ""
 "Merci de saisir une URL de page/profil Facebook valide. Exemples : https://"
 "www.facebook.com/MaPage, https://www.facebook.com/pages/MaPage/123456."
 
-#: apps/accounts/models.py:177
+#: apps/accounts/models.py:188
 msgid "Google+ URL"
 msgstr "URL page/profil Google+"
 
-#: apps/accounts/models.py:184
+#: apps/accounts/models.py:195
 msgid ""
 "Please enter a valid Google+ page or profile URL. Examples: https://plus."
 "google.com/+MyPage, https://plus.google.com/1234536789, https://plus.google."
@@ -211,11 +219,11 @@ msgstr ""
 "plus.google.com/+MaPage, https://plus.google.com/1234536789, https://plus."
 "google.com/u/0/+MaPage, https://plus.google.com/u/0/123456789."
 
-#: apps/accounts/models.py:192
+#: apps/accounts/models.py:203
 msgid "Youtube URL"
 msgstr "URL chaine/profil Youtube"
 
-#: apps/accounts/models.py:199
+#: apps/accounts/models.py:210
 msgid ""
 "Please enter a valid Youtube channel or profile URL. Examples: https://www."
 "youtube.com/c/MySuperChannel, https://www.youtube.com/user/MySuperChannel, "
@@ -225,19 +233,19 @@ msgstr ""
 "www.youtube.com/c/MaSuperChaine, https://www.youtube.com/user/MaSuperChaine, "
 "https://www.youtube.com/channel/0123456789."
 
-#: apps/accounts/models.py:206
+#: apps/accounts/models.py:217
 msgid "Last modification date"
 msgstr "Dernière date de modification"
 
-#: apps/accounts/models.py:209
+#: apps/accounts/models.py:220
 msgid "Last activity date"
 msgstr "Date de dernière activité"
 
-#: apps/accounts/models.py:218
+#: apps/accounts/models.py:229
 msgid "User profile"
 msgstr "Profil utilisateur"
 
-#: apps/accounts/models.py:356
+#: apps/accounts/models.py:436
 msgid "Is online"
 msgstr "Est en ligne"
 
@@ -255,10 +263,10 @@ msgstr "Liste des membres"
 msgid "Public profile of %s"
 msgstr "Profil public de %s"
 
-#: apps/accounts/views.py:117
+#: apps/accounts/views.py:119
 msgid "Your profile information has been successfully updated!"
 msgstr "Vos informations de profil ont été mise à jour avec succès !"
 
-#: apps/accounts/views.py:125
+#: apps/accounts/views.py:127
 msgid "My account"
 msgstr "Mon compte"
