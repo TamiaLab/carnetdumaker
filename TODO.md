@@ -14,7 +14,6 @@
 
 - Add support for cosmetics and smileys in the HTML rendering engine.
 - Add tree-nodes sanitation.
-- Add CSS for TODO lists.
 
 ## Mailing and notifications
 
@@ -31,21 +30,15 @@
 ## Blog app
 
 - Add articles bundles feature.
-- Add an admin view to restore an article revision.
 - Add files attachments support for article.
 - Handle pub_date modification of article with related forum thread.
 - Maybe decouple blog and forum apps by introducing a "go between" app.
 - Add "Report mistake" feature for article.
-- Add "get_short_content" helper on article. (??)
 - Add author's articles list and feed.
 - Add "use_count" on tag for tag cloud size (SQL driven or field driven?).
-- Add warning for old articles.
-- Add "report mistake" view for articles.
 - Add "to read" user list feature.
 - Maybe add preview key for anonymous preview access.
 - Maybe add "hidden" state to article model to allow unreferenced articles.
- 
-- Include blog/license urls in root urls configuration.
 
 ## Search engine
 
