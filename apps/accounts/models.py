@@ -129,7 +129,7 @@ class UserProfile(models.Model):
                                       editable=False,
                                       blank=True)
 
-    biography_text = models.TextField(_('Biography (raw HTML)'),
+    biography_text = models.TextField(_('Biography (raw text)'),
                                       default='',
                                       editable=False,
                                       blank=True)
@@ -142,7 +142,7 @@ class UserProfile(models.Model):
                                       editable=False,
                                       blank=True)
 
-    signature_text = models.TextField(_('Signature (raw HTML)'),
+    signature_text = models.TextField(_('Signature (raw text)'),
                                       default='',
                                       editable=False,
                                       blank=True)
