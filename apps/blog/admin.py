@@ -13,6 +13,7 @@ from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
+from django.http import HttpResponseRedirect
 
 from .models import (Article,
                      ArticleRevision,
@@ -238,6 +239,11 @@ class ArticleAdmin(admin.ModelAdmin):
                 article_obj.save(current_user=request.user,
                                  minor_change=False,
                                  revision_description=_('Restore revision #%d') % revision_obj.id)
+
+                # Redirect user to the list view
+                self.message_user(request, _('Revision #%d of article "%s" has been restored successfully!') % (
+                    revision_obj.id, article_obj.title))
+                return HttpResponseRedirect(reverse('admin:blog_article_changelist'))
         else:
             form = confirmation_form()
 
