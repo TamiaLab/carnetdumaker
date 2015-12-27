@@ -524,6 +524,7 @@ class ArticleRevision(models.Model):
                                         editable=False,
                                         related_name='+',
                                         verbose_name=_('Revision author'),
+                                        on_delete=models.SET_NULL,
                                         default=None,
                                         blank=True,
                                         null=True)
@@ -703,6 +704,7 @@ class ArticleCategory(MPTTModel):
     - an optional description (text only).
     """
 
+    # FIXME Cascade delete or set null?
     parent = models.ForeignKey('self',
                                db_index=True,  # Database optimization
                                related_name='children',
