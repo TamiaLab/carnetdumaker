@@ -1,0 +1,11 @@
+{{ object.title }}
+{{ object.subtitle }}
+{{ object.description_text }}
+{{ object.author.username }}
+{{ object.author.get_full_name }}
+{{ object.license.name }}
+{{ object.content_text }}
+{% for tag in object.tags.all %}{{ tag.name }} {% endfor %}
+{% for category in object.categories.all %}{{ category.name }} {% endfor %}
+{% for note in object.head_notes.all %}{{ note.description_text }} {% endfor %}
+{% for note in object.foot_notes.all %}{{ note.description_text }} {% endfor %}

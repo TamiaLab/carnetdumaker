@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.legend }}
+{{ object.description_text }}
+{{ object.license.name }}

@@ -1,0 +1,4 @@
+{{ object.name }}
+{{ object.description_text }}
+{{ object.usage }}
+{{ object.source_url }}

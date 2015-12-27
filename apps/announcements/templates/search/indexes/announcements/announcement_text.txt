@@ -1,4 +1,5 @@
 {{ object.title }}
 {{ object.author.username }}
 {{ object.author.get_full_name }}
-{{ object.content }}
+{{ object.content_text }}
+{% for tag in object.tags.all %}{{ tag.name }} {% endfor %}

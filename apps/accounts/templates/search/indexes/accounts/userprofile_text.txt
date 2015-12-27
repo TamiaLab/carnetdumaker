@@ -1,0 +1,16 @@
+{{ object.user.username }}
+{% if object.first_last_names_public %}{{ object.user.get_full_name }}{% endif %}
+{% if object.search_by_email_allowed %}{{ object.user.email }}{% endif %}
+{{ object.country }}
+{{ object.location }}
+{{ object.company }}
+{{ object.biography_text }}
+{{ object.signature_text }}
+{{ object.website_name }}
+{{ object.website_url }}
+{{ object.jabber_name }}
+{{ object.skype_name }}
+{{ object.twitter_name }}
+{{ object.facebook_url }}
+{{ object.googleplus_url }}
+{{ object.youtube_url }}

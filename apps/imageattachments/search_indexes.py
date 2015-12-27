@@ -1,36 +1,34 @@
 """
-Search indexes for the announcements app.
+Search indexes for the image attachments app.
 """
 
 from haystack import indexes
 
-from .models import Announcement
+from .models import ImageAttachment
 
 
-class AnnouncementIndex(indexes.SearchIndex, indexes.Indexable):
+class ImageAttachmentIndex(indexes.SearchIndex, indexes.Indexable):
     """
-    Search indexes for the ``Announcement`` model.
+    Search indexes for the ``ImageAttachment`` model.
     """
 
     text = indexes.CharField(document=True, use_template=True)
 
-    author = indexes.CharField(model_attr='author')
+    license = indexes.CharField(model_attr='license')
 
     pub_date = indexes.DateTimeField(model_attr='pub_date')
-
-    last_content_modification_date = indexes.DateTimeField(model_attr='last_content_modification_date')
 
     def get_model(self):
         """
         Return the model class for this index.
         """
-        return Announcement
+        return ImageAttachment
 
     def index_queryset(self, using=None):
         """
         Used when the entire index for this model is updated.
         """
-        return self.get_model().objects.published().select_related('author').prefetch_related('tags')
+        return self.get_model().objects.published().select_related('license')
 
     def get_updated_field(self):
         """
