@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -86,6 +86,7 @@ msgstr "Dernières annonces"
 #: apps/announcements/feeds.py:123 apps/announcements/feeds.py:144
 #: apps/announcements/tests/test_feeds.py:317
 #: apps/announcements/tests/test_feeds.py:353
+#, python-format
 msgid "Latest announcements with tag \"%s\""
 msgstr "Dernières annonces avec le tag \"%s\""
 
@@ -93,11 +94,11 @@ msgstr "Dernières annonces avec le tag \"%s\""
 msgid "Title"
 msgstr "Titre"
 
-#: apps/announcements/models.py:41 apps/announcements/models.py:216
+#: apps/announcements/models.py:41 apps/announcements/models.py:237
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/announcements/models.py:50 apps/announcements/models.py:281
+#: apps/announcements/models.py:50 apps/announcements/models.py:302
 msgid "Creation date"
 msgstr "Date de création"
 
@@ -133,35 +134,35 @@ msgstr "Mots clefs"
 msgid "Last modification date"
 msgstr "Date de dernière modification"
 
-#: apps/announcements/models.py:92 apps/announcements/models.py:275
+#: apps/announcements/models.py:92 apps/announcements/models.py:296
 msgid "Announcement"
 msgstr "Annonce"
 
-#: apps/announcements/models.py:161
+#: apps/announcements/models.py:160
 msgid "Published"
 msgstr "Publié"
 
-#: apps/announcements/models.py:220
+#: apps/announcements/models.py:241
 msgid "Name"
 msgstr "Nom"
 
-#: apps/announcements/models.py:224
+#: apps/announcements/models.py:245
 msgid "Announcement tag"
 msgstr "Mot clef"
 
-#: apps/announcements/models.py:225
+#: apps/announcements/models.py:246
 msgid "Announcement tags"
 msgstr "Mots clefs"
 
-#: apps/announcements/models.py:277
+#: apps/announcements/models.py:298
 msgid "Tweet ID"
 msgstr "ID tweet"
 
-#: apps/announcements/models.py:288
+#: apps/announcements/models.py:309
 msgid "Twitter cross-publication"
 msgstr "Cross-publication sur Twitter"
 
-#: apps/announcements/models.py:289
+#: apps/announcements/models.py:310
 msgid "Twitter cross-publications"
 msgstr "Cross-publications sur Twitter"
 
