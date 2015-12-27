@@ -12,7 +12,8 @@ from ..models import (Article,
                       ArticleRevision,
                       ArticleNote,
                       ArticleTag,
-                      ArticleCategory)
+                      ArticleCategory,
+                      ArticleTwitterCrossPublication)
 
 
 @override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
@@ -215,4 +216,44 @@ class ArticleCategoryAdminTestCase(TestCase):
         client = Client()
         client.login(username='johndoe', password='illpassword')
         response = client.get(reverse('admin:blog_articlecategory_change', args=[self.category.pk]))
+        self.assertEqual(response.status_code, 200)
+
+
+@override_settings(MEDIA_ROOT=settings.DEBUG_MEDIA_ROOT)
+class ArticleTwitterCrossPublicationAdminTestCase(TestCase):
+    """
+    Tests suite for the ``ArticleTwitterCrossPublication`` admin views.
+    """
+
+    def setUp(self):
+        """
+        Create some fixtures for the tests.
+        """
+        self.author = get_user_model().objects.create_superuser(username='johndoe',
+                                                                password='illpassword',
+                                                                email='johndoe@example.com')
+        self.article = Article.objects.create(title='Test 1',
+                                              slug='test-1',
+                                              author=self.author,
+                                              content='Hello World!')
+        self.tweet = ArticleTwitterCrossPublication.objects.create(article=self.article,
+                                                                   tweet_id='0123456789')
+
+    def test_article_twitter_list_view_available(self):
+        """
+        Test the availability of the "article Twitter cross-publication list" view.
+        """
+        client = Client()
+        client.login(username='johndoe', password='illpassword')
+        response = client.get(reverse('admin:blog_articletwittercrosspublication_changelist'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_article_twitter_edit_view_available(self):
+        """
+        Test the availability of the "edit article Twitter cross-publication" view.
+        """
+        client = Client()
+        client.login(username='johndoe', password='illpassword')
+        response = client.get(reverse('admin:blog_articletwittercrosspublication_change',
+                                      args=[self.tweet.pk]))
         self.assertEqual(response.status_code, 200)

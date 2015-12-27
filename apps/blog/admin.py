@@ -19,7 +19,8 @@ from .models import (Article,
                      ArticleRevision,
                      ArticleNote,
                      ArticleTag,
-                     ArticleCategory)
+                     ArticleCategory,
+                     ArticleTwitterCrossPublication)
 
 
 class ArticleRevisionInline(admin.TabularInline):
@@ -520,7 +521,57 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     logo_img.allow_tags = True
 
 
+class ArticleTwitterCrossPublicationAdmin(admin.ModelAdmin):
+    """
+    Admin panel for the ``ArticleTwitterCrossPublication`` model.
+    """
+
+    list_select_related = ('article', )
+
+    list_display = ('article',
+                    'tweet_id',
+                    'pub_date',
+                    'view_article_on_site',
+                    'view_article_on_twitter')
+
+    list_filter = ('pub_date', )
+
+    search_fields = ('article__title',
+                     'tweet_id')
+
+    readonly_fields = ('pub_date', )
+
+    fields = ('article',
+              'tweet_id',
+              'pub_date')
+
+    def view_article_on_site(self, obj):
+        """
+        Inline list display link to view the article on the site.
+        :param obj: the current object.
+        :return: HTML <a> link to the given object on the site.
+        """
+        return format_html('<a href="{0}" class="link">{1}</a>',
+                       obj.article.get_absolute_url(),
+                       _('View article on site'))
+    view_article_on_site.short_description = ''
+    view_article_on_site.allow_tags = True
+
+    def view_article_on_twitter(self, obj):
+        """
+        Inline list display link to view the article on Twitter.
+        :param obj: the current object.
+        :return: HTML <a> link to the given object on Twitter.
+        """
+        return format_html('<a href="https://twitter.com/redirect/status/{0}" class="link">{1}</a>',
+                       obj.tweet_id,
+                       _('View article on Twitter'))
+    view_article_on_twitter.short_description = ''
+    view_article_on_twitter.allow_tags = True
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleNote, ArticleNoteAdmin)
 admin.site.register(ArticleTag, ArticleTagAdmin)
 admin.site.register(ArticleCategory, ArticleCategoryAdmin)
+admin.site.register(ArticleTwitterCrossPublication, ArticleTwitterCrossPublicationAdmin)
