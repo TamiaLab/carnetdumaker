@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.utils import timezone
 
 from .constants import ARTICLE_STATUS_PUBLISHED
+from .utils import publish_article_on_twitter
 
 
 class ArticleManager(models.Manager):
@@ -79,3 +80,30 @@ class ArticleManager(models.Manager):
 
         # Then, sort year
         return sorted(list(archive_calendar.items()), key=lambda x: x[0])
+
+
+class ArticleTwitterCrossPublicationManager(models.Manager):
+    """
+    Manager class for the ``Article`` data model.
+    """
+
+    def publish_pending_articles(self):
+        """
+        Publish on Twitter any articles published on the site but not yet on Twitter.
+        """
+        from .models import Article
+
+        # Get all unpublished articles
+        articles_unpublished = Article.objects.network_publishable().filter(twitter_pubs__isnull=True)
+
+        # Publish all articles
+        for article in articles_unpublished:
+
+            # Publish on Twitter
+            tweet_id = publish_article_on_twitter(article)
+
+            # Handle success
+            if tweet_id:
+
+                # Mark announcement as published on Twitter
+                self.create(article=article, tweet_id=tweet_id)

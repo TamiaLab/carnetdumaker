@@ -26,7 +26,8 @@ from apps.forum.models import (Forum,
 from apps.licenses.models import License
 from apps.imageattachments.models import ImageAttachment
 
-from .managers import ArticleManager
+from .managers import (ArticleManager,
+                       ArticleTwitterCrossPublicationManager)
 from .constants import (NOTE_TYPE_CHOICES,
                         NOTE_TYPE_DEFAULT,
                         ARTICLE_STATUS_CHOICES,
@@ -877,3 +878,37 @@ def update_child_category_slug_hierarchy_on_parent_save(sender, instance, create
         child.build_slug_hierarchy(save=True)
 
 post_save.connect(update_child_category_slug_hierarchy_on_parent_save, sender=ArticleCategory)
+
+
+class ArticleTwitterCrossPublication(models.Model):
+    """
+    Cross-publication marker for the Twitter platform.
+    This simple model store three information:
+    - the cross-published article,
+    - the tweet ID of the cross-publication (for history in case of problem),
+    - the date of cross-publication.
+    """
+
+    article = models.ForeignKey('Article',
+                                db_index=True,  # Database optimization
+                                related_name='twitter_pubs',
+                                verbose_name=_('Article'))
+
+    tweet_id = models.CharField(_('Tweet ID'),
+                                db_index=True,  # Database optimization
+                                max_length=255)
+
+    pub_date = models.DateTimeField(_('Creation date'),
+                                    auto_now_add=True,
+                                    db_index=True)  # Database optimization
+
+    objects = ArticleTwitterCrossPublicationManager()
+
+    class Meta:
+        verbose_name = _('Twitter cross-publication')
+        verbose_name_plural = _('Twitter cross-publications')
+        get_latest_by = 'pub_date'
+        ordering = ('-pub_date', )
+
+    def __str__(self):
+        return '%s -> %s' % (self.announcement, self.tweet_id)
