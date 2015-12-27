@@ -242,8 +242,9 @@ class ArticleAdmin(admin.ModelAdmin):
                                  revision_description=_('Restore revision #%d') % revision_obj.id)
 
                 # Redirect user to the list view
-                self.message_user(request, _('Revision #%d of article "%s" has been restored successfully!') % (
-                    revision_obj.id, article_obj.title))
+                self.message_user(request,
+                                  _('Revision #%(revid)d of article "%(title)s" has been restored successfully!') % {
+                                      'revid': revision_obj.id, 'title': article_obj.title})
                 return HttpResponseRedirect(reverse('admin:blog_article_changelist'))
         else:
             form = confirmation_form()
