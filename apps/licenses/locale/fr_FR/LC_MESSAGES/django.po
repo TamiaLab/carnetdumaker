@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 18:21+0100\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,35 +16,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/licenses/admin.py:20
-msgid "View on site"
-msgstr "Voir sur le site"
-
-#: apps/licenses/admin.py:48
+#: apps/licenses/admin.py:35
 msgid "Name and slug"
 msgstr "Nom et slug"
 
-#: apps/licenses/admin.py:52
+#: apps/licenses/admin.py:39
 msgid "Iconography"
 msgstr "Iconographie"
 
-#: apps/licenses/admin.py:56
+#: apps/licenses/admin.py:43
 msgid "License text"
 msgstr "Texte de la licence"
 
-#: apps/licenses/admin.py:61
+#: apps/licenses/admin.py:48
 msgid "Date and time"
 msgstr "Date et heure"
 
-#: apps/licenses/admin.py:72 apps/licenses/models.py:38
+#: apps/licenses/admin.py:59 apps/licenses/models.py:38
 msgid "Logo"
 msgstr "Logo"
 
-#: apps/licenses/apps.py:15 apps/licenses/models.py:61
+#: apps/licenses/admin.py:70
+msgid "View on site"
+msgstr "Voir sur le site"
+
+#: apps/licenses/apps.py:15 apps/licenses/models.py:63
 msgid "Licenses"
 msgstr "Licences"
 
-#: apps/licenses/models.py:30
+#: apps/licenses/models.py:29
 msgid "Name"
 msgstr "Nom"
 
@@ -61,18 +61,22 @@ msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
 #: apps/licenses/models.py:48
+msgid "Description (raw text)"
+msgstr "Description (texte brut)"
+
+#: apps/licenses/models.py:50
 msgid "Usage"
 msgstr "Consignes d'utilisation"
 
-#: apps/licenses/models.py:52
+#: apps/licenses/models.py:54
 msgid "Source URL"
 msgstr "URL source"
 
-#: apps/licenses/models.py:56
+#: apps/licenses/models.py:58
 msgid "Last modification date"
 msgstr "Date de derniére modification"
 
-#: apps/licenses/models.py:60
+#: apps/licenses/models.py:62
 msgid "License"
 msgstr "Licence"
 
