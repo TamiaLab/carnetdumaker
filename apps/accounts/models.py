@@ -129,10 +129,20 @@ class UserProfile(models.Model):
                                       editable=False,
                                       blank=True)
 
+    biography_text = models.TextField(_('Biography (raw HTML)'),
+                                      default='',
+                                      editable=False,
+                                      blank=True)
+
     signature = RenderTextField(_('Signature'),
                                 max_length=255)
 
     signature_html = models.TextField(_('Signature (raw HTML)'),
+                                      default='',
+                                      editable=False,
+                                      blank=True)
+
+    signature_text = models.TextField(_('Signature (raw HTML)'),
                                       default='',
                                       editable=False,
                                       blank=True)
@@ -350,31 +360,34 @@ class UserProfile(models.Model):
         allow_text_colors_in_biography = self.user.has_perm('accounts.allow_text_colors_in_biography')
         allow_cdm_extra_in_biography = self.user.has_perm('accounts.allow_cdm_extra_in_biography')
         force_nofollow_in_biography = not self.user.has_perm('accounts.allow_raw_link_in_biography')
-        content_html, _, __ = render_document(self.biography,
-                                              allow_titles=allow_titles_in_biography,
-                                              allow_code_blocks=True,
-                                              allow_alerts_box=allow_alerts_box_in_biography,
-                                              allow_text_formating=True,
-                                              allow_text_extra=True,
-                                              allow_text_alignments=True,
-                                              allow_text_directions=True,
-                                              allow_text_modifiers=True,
-                                              allow_text_colors=allow_text_colors_in_biography,
-                                              allow_spoilers=True,
-                                              allow_figures=True,
-                                              allow_lists=True,
-                                              allow_todo_lists=True,
-                                              allow_definition_lists=True,
-                                              allow_tables=True,
-                                              allow_quotes=True,
-                                              allow_footnotes=True,
-                                              allow_acronyms=True,
-                                              allow_links=True,
-                                              allow_medias=True,
-                                              allow_cdm_extra=allow_cdm_extra_in_biography,
-                                              force_nofollow=force_nofollow_in_biography,
-                                              merge_footnotes_html=True)
+        content_html, content_text, _ = render_document(self.biography,
+                                                        allow_titles=allow_titles_in_biography,
+                                                        allow_code_blocks=True,
+                                                        allow_alerts_box=allow_alerts_box_in_biography,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=allow_text_colors_in_biography,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=allow_cdm_extra_in_biography,
+                                                        force_nofollow=force_nofollow_in_biography,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
         self.biography_html = content_html
+        self.biography_text = content_text
 
         allow_code_blocks_in_signature = self.user.has_perm('accounts.allow_code_blocks_in_signature')
         allow_text_colors_in_signature = self.user.has_perm('accounts.allow_text_colors_in_signature')
@@ -384,29 +397,32 @@ class UserProfile(models.Model):
         allow_medias_in_signature = self.user.has_perm('accounts.allow_medias_in_signature')
         allow_cdm_extra_in_signature = self.user.has_perm('accounts.allow_cdm_extra_in_signature')
         force_nofollow_in_signature = not self.user.has_perm('accounts.allow_raw_link_in_signature')
-        content_html, _, __ = render_document(self.signature,
-                                              allow_code_blocks=allow_code_blocks_in_signature,
-                                              allow_text_formating=True,
-                                              allow_text_extra=True,
-                                              allow_text_alignments=True,
-                                              allow_text_directions=True,
-                                              allow_text_modifiers=True,
-                                              allow_text_colors=allow_text_colors_in_signature,
-                                              allow_lists=allow_lists_in_signature,
-                                              allow_todo_lists=allow_lists_in_signature,
-                                              allow_definition_lists=allow_lists_in_signature,
-                                              allow_tables=allow_tables_in_signature,
-                                              allow_quotes=allow_quotes_in_signature,
-                                              allow_acronyms=True,
-                                              allow_links=True,
-                                              allow_medias=allow_medias_in_signature,
-                                              allow_cdm_extra=allow_cdm_extra_in_signature,
-                                              force_nofollow=force_nofollow_in_signature)
+        content_html, content_text, _ = render_document(self.signature,
+                                                        allow_code_blocks=allow_code_blocks_in_signature,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=allow_text_colors_in_signature,
+                                                        allow_lists=allow_lists_in_signature,
+                                                        allow_todo_lists=allow_lists_in_signature,
+                                                        allow_definition_lists=allow_lists_in_signature,
+                                                        allow_tables=allow_tables_in_signature,
+                                                        allow_quotes=allow_quotes_in_signature,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=allow_medias_in_signature,
+                                                        allow_cdm_extra=allow_cdm_extra_in_signature,
+                                                        force_nofollow=force_nofollow_in_signature,
+                                                        render_text_version=True)
         self.signature_html = content_html
+        self.signature_text = content_text
 
         # Save if required
         if save:
-            self.save_no_rendering(update_fields=('biography_html', 'signature_html'))
+            self.save_no_rendering(update_fields=('biography_html', 'biography_text',
+                                                  'signature_html', 'signature_text'))
 
     def is_online(self):
         """
