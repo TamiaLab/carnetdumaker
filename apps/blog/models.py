@@ -218,6 +218,9 @@ class Article(ModelDiffMixin, models.Model):
 
     footnotes_html = models.TextField(_('Footnotes (raw HTML)'))
 
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = ArticleManager()
 
     class Meta:
@@ -563,6 +566,8 @@ class ArticleNote(models.Model):
 
     description_html = models.TextField(_('Description (raw HTML)'))
 
+    description_text = models.TextField(_('Description (raw text)'))
+
     type = models.CharField(_('Note type'),
                             max_length=10,
                             default=NOTE_TYPE_DEFAULT,
@@ -614,8 +619,10 @@ class ArticleNote(models.Model):
                                                         allow_links=True,
                                                         allow_medias=True,
                                                         allow_cdm_extra=True,
-                                                        force_nofollow=False)
+                                                        force_nofollow=False,
+                                                        render_text_version=True)
         self.description_html = content_html
+        self.description_text = content_text
 
         # Save if required
         if save:
@@ -650,6 +657,9 @@ class ArticleTag(models.Model):
 
     name = models.CharField(_('Name'),
                             max_length=255)
+
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
 
     class Meta:
         verbose_name = _('Article tag')
@@ -737,6 +747,9 @@ class ArticleCategory(MPTTModel):
     description_html = models.TextField(_('Description (raw HTML)'))
 
     description_text = models.TextField(_('Description (raw text)'))
+
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
 
     class Meta:
         unique_together = (('slug', 'parent'),)
