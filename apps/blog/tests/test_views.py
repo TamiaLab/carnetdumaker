@@ -9,6 +9,8 @@ from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 
+from apps.licenses.models import License
+
 from ..models import (Article,
                       ArticleTag,
                       ArticleCategory)
@@ -251,6 +253,16 @@ class BlogViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, '404.html')
 
+    def test_latest_article_feeds(self):
+        """
+        Test the availability of the "latest articles" RSS and Atom feeds.
+        """
+        client = Client()
+        response = client.get(reverse('blog:latest_articles_rss'))
+        self.assertEqual(response.status_code, 200)
+        response = client.get(reverse('blog:latest_articles_atom'))
+        self.assertEqual(response.status_code, 200)
+
     def test_tag_list_view_available(self):
         """
         Test the availability of the "tag list" view.
@@ -284,6 +296,16 @@ class BlogViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, '404.html')
 
+    def test_latest_article_for_tag_feeds(self):
+        """
+        Test the availability of the "latest articles with tag" RSS and Atom feeds.
+        """
+        client = Client()
+        response = client.get(self.tag.get_latest_articles_rss_feed_url())
+        self.assertEqual(response.status_code, 200)
+        response = client.get(self.tag.get_latest_articles_atom_feed_url())
+        self.assertEqual(response.status_code, 200)
+
     def test_category_list_view_available(self):
         """
         Test the availability of the "category list" view.
@@ -314,6 +336,64 @@ class BlogViewsTestCase(TestCase):
         """
         client = Client()
         response = client.get(reverse('blog:category_detail', kwargs={'hierarchy': 'unknown'}))
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
+
+    def test_latest_article_for_category_feeds(self):
+        """
+        Test the availability of the "latest articles in category" RSS and Atom feeds.
+        """
+        client = Client()
+        response = client.get(self.category.get_latest_articles_rss_feed_url())
+        self.assertEqual(response.status_code, 200)
+        response = client.get(self.category.get_latest_articles_atom_feed_url())
+        self.assertEqual(response.status_code, 200)
+
+    def test_license_articles_detail_view_available(self):
+        """
+        Test the availability of the "related articles of license detail" view.
+        """
+        license = License.objects.create(name='License 1', slug='license-1')
+        Article.objects.create(title='Test license',
+                               slug='test-license',
+                               author=self.author,
+                               content='Hello World!',
+                               status=ARTICLE_STATUS_PUBLISHED,
+                               pub_date=timezone.now(),
+                               license=license)
+        client = Client()
+        response = client.get(reverse('bloglicense:license_articles_detail', kwargs={'slug': license.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'blog/license_detail.html')
+        self.assertIn('license', response.context)
+        self.assertEqual(response.context['license'], license)
+        self.assertIn('related_articles', response.context)
+        self.assertQuerysetEqual(response.context['related_articles'], ['<Article: Test license>'])
+
+    def test_license_articles_feeds_available(self):
+        """
+        Test the availability of the "related articles of license detail" RSS and Atom feeds.
+        """
+        license = License.objects.create(name='License 1', slug='license-1')
+        Article.objects.create(title='Test license',
+                               slug='test-license',
+                               author=self.author,
+                               content='Hello World!',
+                               status=ARTICLE_STATUS_PUBLISHED,
+                               pub_date=timezone.now(),
+                               license=license)
+        client = Client()
+        response = client.get(reverse('bloglicense:latest_license_articles_rss', kwargs={'slug': license.slug}))
+        self.assertEqual(response.status_code, 200)
+        response = client.get(reverse('bloglicense:latest_license_articles_atom', kwargs={'slug': license.slug}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_license_articles_detail_view_unavailable_with_unknown_category(self):
+        """
+        Test the unavailability of the "related articles of license detail" view with an unknown license.
+        """
+        client = Client()
+        response = client.get(reverse('bloglicense:license_articles_detail', kwargs={'slug': 'unknown'}))
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, '404.html')
 
@@ -435,3 +515,17 @@ class BlogViewsTestCase(TestCase):
         self.assertTemplateUsed(response, 'blog/archive_month.html')
         self.assertIn('articles', response.context)
         self.assertEqual(list(response.context['articles']), [article])
+
+    def test_article_archives_feeds(self):
+        """
+        Test the availability of the "articles archives" RSS and Atom feeds.
+        """
+        client = Client()
+        response = client.get(reverse('blog:articles_archive_year_rss', kwargs={'year': '2015'}))
+        self.assertEqual(response.status_code, 200)
+        response = client.get(reverse('blog:articles_archive_year_rss', kwargs={'year': '2015'}))
+        self.assertEqual(response.status_code, 200)
+        response = client.get(reverse('blog:articles_archive_month_rss', kwargs={'year': '2015', 'month': '02'}))
+        self.assertEqual(response.status_code, 200)
+        response = client.get(reverse('blog:articles_archive_month_rss', kwargs={'year': '2015', 'month': '02'}))
+        self.assertEqual(response.status_code, 200)
