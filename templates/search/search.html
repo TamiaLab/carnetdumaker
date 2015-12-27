@@ -16,8 +16,22 @@
         <h2>Résultats de la recherche</h2>
 
         {% for result in page.object_list %}
-            {% if result.content_type == "announcements.announcement" %}
+            {% if result.content_type == "accounts.userprofile" %}
+                {% include "search/include/accounts/userprofile.html" %}
+            {% elif result.content_type == "announcements.announcement" %}
                 {% include "search/include/announcements/announcement.html" %}
+            {% elif result.content_type == "blog.article" %}
+                {% include "search/include/blog/article.html" %}
+            {% elif result.content_type == "blog.articletag" %}
+                {% include "search/include/blog/articletag.html" %}
+            {% elif result.content_type == "blog.articlecategory" %}
+                {% include "search/include/blog/articlecategory.html" %}
+            {% elif result.content_type == "imageattachments.imageattachment" %}
+                {% include "search/include/imageattachments/imageattachment.html" %}
+            {% elif result.content_type == "licenses.license" %}
+                {% include "search/include/licenses/license.html" %}
+            {% elif result.content_type == "snippets.codesnippet" %}
+                {% include "search/include/snippets/codesnippet.html" %}
             {% endif %}
         {% empty %}
             <p>Aucun résultat trouvés !</p>
