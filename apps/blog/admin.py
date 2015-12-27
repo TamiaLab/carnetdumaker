@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import csrf_protect
 from django.utils.html import format_html
 
 from .models import (Article,
@@ -44,7 +45,8 @@ class ArticleRevisionInline(admin.TabularInline):
               'revision_author_username_link',
               'revision_minor_change',
               'revision_description',
-              'show_diff_with_current_version')
+              'show_diff_with_current_version',
+              'link_restore_this_revision')
     readonly_fields = fields
 
     def revision_author_username_link(self, obj):
@@ -71,6 +73,16 @@ class ArticleRevisionInline(admin.TabularInline):
     show_diff_with_current_version.short_description = _('Show diff with current version')
     show_diff_with_current_version.allow_tags = True
 
+    def link_restore_this_revision(self, obj):
+        """
+        Return a HTML link to the "restore this revision" view.
+        :param obj: The current Revision object.
+        """
+        return '<a href="%s">%s</a>' % (reverse('admin:blog_article_restore_rev', args=[obj.pk]),
+                                        _('Restore this version')) if obj.pk else ''
+    link_restore_this_revision.short_description = _('Restore this version')
+    link_restore_this_revision.allow_tags = True
+
 
 class ArticleAdminForm(forms.ModelForm):
     """
@@ -91,7 +103,17 @@ class ArticleAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
-def view_issue_on_site(obj):
+class RestoreRevisionConfirmationForm(forms.Form):
+    """
+    Custom simple form with a single checkbox for confirming the restoration of a previous revision of an article.
+    """
+
+    restore_confirmed = forms.BooleanField(label=_('Confirm revision restoration'),
+                                           required=True,
+                                           initial=False)
+
+
+def view_on_site(obj):
     """
     Simple "view on site" inline callback.
     :param obj: Current database object.
@@ -100,8 +122,8 @@ def view_issue_on_site(obj):
     return format_html('<a href="{0}" class="link">{1}</a>',
                        obj.get_absolute_url(),
                        _('View on site'))
-view_issue_on_site.short_description = ''
-view_issue_on_site.allow_tags = True
+view_on_site.short_description = ''
+view_on_site.allow_tags = True
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -138,22 +160,26 @@ class ArticleAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Overload admin view urls for the "show revision diff" view.
-        :return:
+        Overload admin view urls for the "show revision diff" and "restore this revision" views.
         """
         urls = super(ArticleAdmin, self).get_urls()
         my_urls = [
-            url(r'^show_rev_diff/(?P<revision_pk>[0-9]+)/$',
+            url(r'^article_rev_diff/(?P<revision_pk>[0-9]+)/$',
                 self.admin_site.admin_view(self.show_rev_diff),
                 name='blog_article_show_rev_diff'),
+            url(r'^article_restore_rev/(?P<revision_pk>[0-9]+)/$',
+                self.admin_site.admin_view(self.restore_rev_view),
+                name='blog_article_restore_rev'),
         ]
         return my_urls + urls
 
-    def show_rev_diff(self, request, revision_pk):
+    def show_rev_diff(self, request, revision_pk,
+                      template_name='blog/admin_show_rev_diff.html'):
         """
         Show a diff table between the current article and the given revision.
         :param request: The current request.
         :param revision_pk: The desired revision PK.
+        :param template_name: Template name to be used.
         :return: TemplateResponse
         """
 
@@ -177,12 +203,57 @@ class ArticleAdmin(admin.ModelAdmin):
             'title_diff_html': title_diff,
             'subtitle_diff_html': subtitle_diff,
             'content_diff_html': content_diff,
-            'description_diff_html': description_diff
+            'description_diff_html': description_diff,
         }
 
         # Include common variables for rendering the admin template.
         context.update(self.admin_site.each_context(request))
-        return TemplateResponse(request, "blog/admin_show_rev_diff.html", context)
+        return TemplateResponse(request, template_name, context)
+
+    @csrf_protect
+    def restore_rev_view(self, request, revision_pk,
+                         confirmation_form=RestoreRevisionConfirmationForm,
+                         template_name='blog/admin_restore_rev.html'):
+        """
+        Show a confirmation view for restoring the given revision.
+        :param request: The current request.
+        :param revision_pk: The desired revision PK.
+        :param confirmation_form: Confirmation form class to be used.
+        :param template_name: Template name to be used.
+        :return: TemplateResponse
+        """
+
+        # Get the article and his revision
+        revision_obj = get_object_or_404(ArticleRevision, pk=revision_pk)
+        article_obj = revision_obj.related_article
+
+        # Handle POST
+        if request.method == 'POST':
+            form = confirmation_form(request.POST)
+            if form.is_valid():
+
+                # Restore the revision
+                article_obj.title = revision_obj.title
+                article_obj.subtitle = revision_obj.subtitle
+                article_obj.description = revision_obj.description
+                article_obj.content = revision_obj.content
+                article_obj.save(current_user=request.user,
+                                 minor_change=False,
+                                 revision_description=_('Restore revision #%d') % revision_obj.id)
+        else:
+            form = confirmation_form()
+
+        # Render the template
+        context = {
+            'title': _('Restore revision #%d') % revision_obj.id,
+            'article': article_obj,
+            'revision': revision_obj,
+            'form': form,
+        }
+
+        # Include common variables for rendering the admin template.
+        context.update(self.admin_site.each_context(request))
+        return TemplateResponse(request, template_name, context)
 
     form = ArticleAdminForm
 
@@ -193,13 +264,14 @@ class ArticleAdmin(admin.ModelAdmin):
                     'author_username_link',
                     'creation_date',
                     'pub_date',
+                    'last_content_modification_date',
                     'status',
                     'featured',
-                    'membership_required',
+                    'network_publish',
                     'require_membership_for_reading',
                     'is_published',
                     'is_gone',
-                    view_issue_on_site)
+                    view_on_site)
 
     list_filter = ('status',
                    'creation_date',
@@ -215,7 +287,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     search_fields = ('title',
                      'subtitle',
-                     'license_name',
+                     'license__name',
                      'author__username',
                      'author__email',
                      'description',
@@ -230,7 +302,7 @@ class ArticleAdmin(admin.ModelAdmin):
                        'cur_heading_img',
                        'cur_thumbnail_img')
 
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('title', )}
 
     raw_id_fields = ('author',
                      'license',
@@ -301,7 +373,7 @@ class ArticleAdmin(admin.ModelAdmin):
                          'head_notes',
                          'foot_notes')
 
-    inlines = (ArticleRevisionInline,)
+    inlines = (ArticleRevisionInline, )
 
     def author_username_link(self, obj):
         """
@@ -341,7 +413,7 @@ class ArticleNoteAdmin(admin.ModelAdmin):
                     'title',
                     'type')
 
-    list_filter = ('type',)
+    list_filter = ('type', )
 
     search_fields = ('title_internal',
                      'title',
@@ -366,14 +438,14 @@ class ArticleTagAdmin(admin.ModelAdmin):
 
     list_display = ('name',
                     'tag_use_count',
-                    view_issue_on_site)
+                    view_on_site)
 
     search_fields = ('name',
                      'slug')
 
-    readonly_fields = ('tag_use_count',)
+    readonly_fields = ('tag_use_count', )
 
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name', )}
 
     fields = ('name',
               'slug',
@@ -404,21 +476,20 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     list_display = ('logo_img',
                     'name',
                     'slug_hierarchy',
-                    view_issue_on_site)
+                    view_on_site)
 
     list_display_links = ('logo_img',
                           'name')
 
     search_fields = ('name',
-                     'slug',
                      'description')
 
     readonly_fields = ('slug_hierarchy',
                        'logo_img')
 
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name', )}
 
-    raw_id_fields = ('parent',)
+    raw_id_fields = ('parent', )
 
     fieldsets = (
         (_('Category name and parent'), {
@@ -431,7 +502,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
                        'logo')
         }),
         ('Category description', {
-            'fields': ('description',)
+            'fields': ('description', )
         }),
     )
 
