@@ -20,6 +20,7 @@ class LatestTicketsFeed(Feed):
 
     title = _('Latest issue tickets')
     link = reverse_lazy('bugtracker:issues_list')
+    feed_url = reverse_lazy('bugtracker:latest_issues_rss')
     description = _('Latest issue tickets')
 
     def items(self):
@@ -64,15 +65,20 @@ class LatestTicketsFeed(Feed):
         """
         Return the categories of the ticket.
         """
-        return item.component.name, item.status, item.priority, item.difficulty
+        if item.component:
+            return item.component.name, item.status, item.priority, item.difficulty
+        else:
+            return item.status, item.priority, item.difficulty
 
 
 class LatestTicketsAtomFeed(LatestTicketsFeed):
     """
     Feed of latest tickets (ATOM version).
     """
+
     feed_type = Atom1Feed
     subtitle = LatestTicketsFeed.description
+    feed_url = reverse_lazy('bugtracker:latest_issues_atom')
 
 
 class LatestTicketCommentsFeed(Feed):
@@ -82,6 +88,7 @@ class LatestTicketCommentsFeed(Feed):
 
     title = _('Latest comments')
     link = reverse_lazy('bugtracker:issues_list')
+    feed_url = reverse_lazy('bugtracker:latest_issue_comments_rss')
     description = _('Latest comments, all tickets together')
 
     def items(self):
@@ -116,13 +123,21 @@ class LatestTicketCommentsFeed(Feed):
         """
         return item.pub_date
 
+    def item_updateddate(self, item):
+        """
+        Return the last modification date of the comment.
+        """
+        return item.last_modification_date
+
 
 class LatestTicketCommentsAtomFeed(LatestTicketCommentsFeed):
     """
     Feed of latest ticket's comments (ATOM version).
     """
+
     feed_type = Atom1Feed
     subtitle = LatestTicketCommentsFeed.description
+    feed_url = reverse_lazy('bugtracker:latest_issue_comments_atom')
 
 
 class LatestTicketCommentsForIssueFeed(Feed):
@@ -154,6 +169,12 @@ class LatestTicketCommentsForIssueFeed(Feed):
         """
         return obj.get_absolute_url()
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_comments_rss_feed_url()
+
     def description(self, obj):
         """
         Return the description of the ticket.
@@ -171,7 +192,10 @@ class LatestTicketCommentsForIssueFeed(Feed):
         """
         Return the categories of the ticket.
         """
-        return obj.component.name, obj.status, obj.priority, obj.difficulty
+        if obj.component:
+            return obj.component.name, obj.status, obj.priority, obj.difficulty
+        else:
+            return obj.status, obj.priority, obj.difficulty
 
     def items(self, obj):
         """
@@ -205,10 +229,23 @@ class LatestTicketCommentsForIssueFeed(Feed):
         """
         return item.pub_date
 
+    def item_updateddate(self, item):
+        """
+        Return the last modification date of the comment.
+        """
+        return item.last_modification_date
+
 
 class LatestTicketCommentsForIssueAtomFeed(LatestTicketCommentsForIssueFeed):
     """
     Feed of latest ticket's comments for the given issue (ATOM version).
     """
+
     feed_type = Atom1Feed
     subtitle = LatestTicketCommentsForIssueFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_comments_atom_feed_url()
