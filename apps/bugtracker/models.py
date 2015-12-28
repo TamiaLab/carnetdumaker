@@ -7,13 +7,12 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from apps.tools.models import ModelDiffMixin
 from apps.tools.fields import AutoOneToOneField
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 from .constants import (STATUS_CODES,
@@ -87,6 +86,8 @@ class IssueTicket(ModelDiffMixin, models.Model):
 
     description_html = models.TextField(_('Description (raw HTML)'))
 
+    description_text = models.TextField(_('Description (raw text)'))
+
     submitter = models.ForeignKey(settings.AUTH_USER_MODEL,
                                   db_index=True,  # Database optimization
                                   verbose_name=_('Submitter'),
@@ -136,6 +137,19 @@ class IssueTicket(ModelDiffMixin, models.Model):
         verbose_name = _('Issue ticket')
         verbose_name_plural = _('Issue tickets')
         get_latest_by = 'submission_date'
+        permissions = (
+            ('allow_titles_in_ticket', 'Allow titles in issue ticket'),
+            ('allow_alerts_box_in_ticket', 'Allow alerts box in issue ticket'),
+            ('allow_text_colors_in_ticket', 'Allow coloured text in issue ticket'),
+            ('allow_cdm_extra_in_ticket', 'Allow CDM extra in issue ticket'),
+            ('allow_raw_link_in_ticket', 'Allow raw link (without forcing nofollow) in issue ticket'),
+
+            ('allow_titles_in_comment', 'Allow titles in issue comment'),
+            ('allow_alerts_box_in_comment', 'Allow alerts box in issue comment'),
+            ('allow_text_colors_in_comment', 'Allow coloured text in issue comment'),
+            ('allow_cdm_extra_in_comment', 'Allow CDM extra in issue comment'),
+            ('allow_raw_link_in_comment', 'Allow raw link (without forcing nofollow) in issue comment'),
+        )
         ordering = ('-submission_date', 'priority', 'status', 'title')
 
     def __str__(self):
@@ -237,8 +251,8 @@ class IssueTicket(ModelDiffMixin, models.Model):
                     IssueChange.objects.create(issue=self,
                                                comment=comment,
                                                field_name=field,
-                                               old_value=old_value or '',
-                                               new_value=new_value or '')
+                                               old_value=str(old_value) or '',
+                                               new_value=str(new_value) or '')
             if request is not None:
                 self.notify_new_comment(comment, request)
 
@@ -263,19 +277,44 @@ class IssueTicket(ModelDiffMixin, models.Model):
         """
 
         # Render HTML
-        self.description_html = render_html(self.description)
+        allow_titles_in_ticket = self.submitter.has_perm('bugtracker.allow_titles_in_ticket')
+        allow_alerts_box_in_ticket = self.submitter.has_perm('bugtracker.allow_alerts_box_in_ticket')
+        allow_text_colors_in_ticket = self.submitter.has_perm('bugtracker.allow_text_colors_in_ticket')
+        allow_cdm_extra_in_ticket = self.submitter.has_perm('bugtracker.allow_cdm_extra_in_ticket')
+        force_nofollow_in_ticket = not self.submitter.has_perm('bugtracker.allow_raw_link_in_ticket')
+        content_html, content_text, _ = render_document(self.description,
+                                                        allow_titles=allow_titles_in_ticket,
+                                                        allow_code_blocks=True,
+                                                        allow_alerts_box=allow_alerts_box_in_ticket,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=allow_text_colors_in_ticket,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=allow_cdm_extra_in_ticket,
+                                                        force_nofollow=force_nofollow_in_ticket,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
+        self.description_html = content_html
+        self.description_text = content_text
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(IssueTicket, self).save(update_fields=('description_html',))
-
-    @cached_property
-    def get_description_without_html(self):
-        """
-        Return the ticket's description text without any HTML tag nor entities.
-        """
-        return strip_html(self.description_html)
+            super(IssueTicket, self).save(update_fields=('description_html', 'description_text'))
 
 
 def _redo_tickets_description_rendering(sender, **kwargs):
@@ -286,7 +325,6 @@ def _redo_tickets_description_rendering(sender, **kwargs):
     """
     for ticket in IssueTicket.objects.all():
         ticket.render_description(save=True)
-
 
 render_engine_changed.connect(_redo_tickets_description_rendering)
 
@@ -322,10 +360,15 @@ class IssueComment(models.Model):
 
     body_html = models.TextField(_('Comment text (raw HTML)'))
 
+    body_text = models.TextField(_('Comment text (raw text)'))
+
     author_ip_address = models.GenericIPAddressField(_('Author IP address'),
                                                      default=None,
                                                      blank=True,
                                                      null=True)
+
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
 
     class Meta:
         verbose_name = _('Issue comment')
@@ -359,7 +402,7 @@ class IssueComment(models.Model):
             .filter(issue=self.issue, id__lt=self.id) \
             .count()
         page_nb_for_this_comment = (nb_comments_before_this_comments + 1) // NB_ISSUE_COMMENTS_PER_PAGE
-        page_str = '?page=%d' % page_nb_for_this_comment if page_nb_for_this_comment > 0 else ''
+        page_str = '?page=%d' % page_nb_for_this_comment if page_nb_for_this_comment > 1 else ''
         return '%s%s#comment-%d' % (self.issue.get_absolute_url(), page_str, self.id)
 
     def get_absolute_url_simple(self):
@@ -376,7 +419,7 @@ class IssueComment(models.Model):
 
     def short_body(self):
         """ Return the 20th first char of the comment body. """
-        return self.get_body_without_html[:20]
+        return self.body_text[:20]
     short_body.short_description = _('Comment text')
 
     def render_body(self, save=False):
@@ -385,19 +428,44 @@ class IssueComment(models.Model):
         """
 
         # Render HTML
-        self.body_html = render_html(self.body)
+        allow_titles_in_comment = self.author.has_perm('bugtracker.allow_titles_in_comment')
+        allow_alerts_box_in_comment = self.author.has_perm('bugtracker.allow_alerts_box_in_comment')
+        allow_text_colors_in_comment = self.author.has_perm('bugtracker.allow_text_colors_in_comment')
+        allow_cdm_extra_in_comment = self.author.has_perm('bugtracker.allow_cdm_extra_in_comment')
+        force_nofollow_in_comment = not self.author.has_perm('bugtracker.allow_raw_link_in_comment')
+        content_html, content_text, _ = render_document(self.body,
+                                                        allow_titles=allow_titles_in_comment,
+                                                        allow_code_blocks=True,
+                                                        allow_alerts_box=allow_alerts_box_in_comment,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=allow_text_colors_in_comment,
+                                                        allow_spoilers=True,
+                                                        allow_figures=True,
+                                                        allow_lists=True,
+                                                        allow_todo_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_footnotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=allow_cdm_extra_in_comment,
+                                                        force_nofollow=force_nofollow_in_comment,
+                                                        render_text_version=True,
+                                                        merge_footnotes_html=True,
+                                                        merge_footnotes_text=True)
+        self.body_html = content_html
+        self.body_text = content_text
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(IssueComment, self).save(update_fields=('body_html',))
-
-    @cached_property
-    def get_body_without_html(self):
-        """
-        Return the comment's body text without any HTML tag nor entities.
-        """
-        return strip_html(self.body_html)
+            super(IssueComment, self).save(update_fields=('body_html', 'body_text'))
 
 
 def _redo_ticket_comments_body_rendering(sender, **kwargs):
@@ -408,7 +476,6 @@ def _redo_ticket_comments_body_rendering(sender, **kwargs):
     """
     for comment in IssueComment.objects.all():
         comment.render_body(save=True)
-
 
 render_engine_changed.connect(_redo_ticket_comments_body_rendering)
 
