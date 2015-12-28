@@ -51,6 +51,9 @@
 - Add icons "subscribed", "has post in" and "unread" to all issue tickets in list view.
 - Add "edit comment" feature (will also require adding comment revision for legal purposes).
 - Add "delete comment" feature. (will require logical deletion with delayed physical deletion for legal purposes).
+- Add tags with related feeds and views.
+- Add file attachments.
+- Add ticket description revision.
 
 ## Forum app
 
