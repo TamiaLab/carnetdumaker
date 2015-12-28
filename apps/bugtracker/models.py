@@ -401,7 +401,7 @@ class IssueComment(models.Model):
         nb_comments_before_this_comments = IssueComment.objects \
             .filter(issue=self.issue, id__lt=self.id) \
             .count()
-        page_nb_for_this_comment = (nb_comments_before_this_comments + 1) // NB_ISSUE_COMMENTS_PER_PAGE
+        page_nb_for_this_comment = (nb_comments_before_this_comments // NB_ISSUE_COMMENTS_PER_PAGE) + 1
         page_str = '?page=%d' % page_nb_for_this_comment if page_nb_for_this_comment > 1 else ''
         return '%s%s#comment-%d' % (self.issue.get_absolute_url(), page_str, self.id)
 
