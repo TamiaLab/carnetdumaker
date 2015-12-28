@@ -95,7 +95,7 @@ class IssueCommentAdmin(admin.ModelAdmin):
         }),
     )
 
-    inlines = (IssueChangesInline,)
+    inlines = (IssueChangesInline, )
 
     def issue_id(self, obj):
         """
@@ -103,7 +103,7 @@ class IssueCommentAdmin(admin.ModelAdmin):
         :param obj: Current ticket comment object.
         :return: The issue ID in #ID format.
         """
-        return '#%d' % obj.issue_id if obj.issue_id else None
+        return '#%d' % obj.issue_id if obj.issue_id else ''
     issue_id.short_description = _('ID')
     issue_id.admin_order_field = 'issue__id'
 
@@ -139,7 +139,7 @@ class IssueCommentInline(admin.StackedInline):
     readonly_fields = ('pub_date',
                        'author_ip_address')
 
-    raw_id_fields = ('author',)
+    raw_id_fields = ('author', )
 
     extra = 1
 
@@ -154,19 +154,6 @@ class IssueCommentInline(admin.StackedInline):
         if db_field.name == 'author':
             kwargs['initial'] = request.user.id
         return super(IssueCommentInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
-
-def view_issue_on_site(obj):
-    """
-    Simple "view on site" inline callback.
-    :param obj: Current database object.
-    :return: HTML <a> link to the given object.
-    """
-    return format_html('<a href="{0}" class="link">{1}</a>',
-                       obj.get_absolute_url(),
-                       _('View on site'))
-view_issue_on_site.short_description = ''
-view_issue_on_site.allow_tags = True
 
 
 class IssueTicketAdminForm(forms.ModelForm):
@@ -278,7 +265,7 @@ class IssueTicketAdmin(admin.ModelAdmin):
                     'priority',
                     'difficulty',
                     'assigned_to_username_link',
-                    view_issue_on_site)
+                    'view_on_site')
 
     list_display_links = ('issue_id',
                           'title')
@@ -383,13 +370,25 @@ class IssueTicketAdmin(admin.ModelAdmin):
     assigned_to_username_link.admin_order_field = 'assign_to__username'
     assigned_to_username_link.allow_tags = True
 
+    def view_on_site(self, obj):
+        """
+        Simple "view on site" inline callback.
+        :param obj: Current database object.
+        :return: HTML <a> link to the given object.
+        """
+        return format_html('<a href="{0}" class="link">{1}</a>',
+                           obj.get_absolute_url(),
+                           _('View on site'))
+    view_on_site.short_description = ''
+    view_on_site.allow_tags = True
+
 
 class BugTrackerUserProfileAdmin(admin.ModelAdmin):
     """
     ``BugTrackerUserProfile`` admin form.
     """
 
-    list_select_related = ('user',)
+    list_select_related = ('user', )
 
     list_display = ('user_username',
                     'notify_of_new_issue',
