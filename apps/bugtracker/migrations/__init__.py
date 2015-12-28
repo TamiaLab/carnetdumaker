@@ -1,3 +1,3 @@
 """
-Migration for the bug tracker app.
+Migrations for the bug tracker app.
 """
