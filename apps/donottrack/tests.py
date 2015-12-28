@@ -2,7 +2,7 @@
 Tests suite for the DoNotTrack app.
 """
 
-from django.test import TestCase
+from django.test import SimpleTestCase
 from django.http import HttpRequest, HttpResponse
 
 from .context_processors import do_not_track
@@ -10,7 +10,7 @@ from .middleware import DoNotTrackMiddleware
 from .utils import get_do_not_track_flag
 
 
-class DoNotTrackUtilitiesTestCase(TestCase):
+class DoNotTrackUtilitiesTestCase(SimpleTestCase):
     """
     Tests case for all utilities functions.
     """
@@ -46,7 +46,7 @@ class DoNotTrackUtilitiesTestCase(TestCase):
         self.assertFalse(do_not_track_flag)
 
 
-class DoNotTrackMiddlewareTestCase(TestCase):
+class DoNotTrackMiddlewareTestCase(SimpleTestCase):
     """
     Tests case for the ``DoNotTrackMiddleware`` middleware.
     """
@@ -97,7 +97,7 @@ class DoNotTrackMiddlewareTestCase(TestCase):
         self.assertIn('DNT', response['VARY'])
 
 
-class DoNotTrackContextProcessorTestCase(TestCase):
+class DoNotTrackContextProcessorTestCase(SimpleTestCase):
     """
     Tests case for the context processor.
     """
