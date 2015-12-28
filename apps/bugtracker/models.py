@@ -251,8 +251,8 @@ class IssueTicket(ModelDiffMixin, models.Model):
                     IssueChange.objects.create(issue=self,
                                                comment=comment,
                                                field_name=field,
-                                               old_value=str(old_value) or '',
-                                               new_value=str(new_value) or '')
+                                               old_value=old_value or '',
+                                               new_value=new_value or '')
             if request is not None:
                 self.notify_new_comment(comment, request)
 
