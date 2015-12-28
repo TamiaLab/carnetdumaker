@@ -42,6 +42,8 @@ def can_edit_ticket(user, ticket):
     :param ticket: The target ticket.
     :return: True if the given user can edit the given ticket.
     """
+    if user is None or ticket is None:
+        return False
     return ticket.can_edit(user)
 
 
