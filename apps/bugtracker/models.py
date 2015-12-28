@@ -592,18 +592,16 @@ class BugTrackerUserProfile(models.Model):
     def __str__(self):
         return 'Bugtracker user\'s profile of "%s"' % self.user.username
 
-    def is_flooding(self, now=None):
+    def is_flooding(self):
         """
         Returns ``True`` if the user has post something less than ``NB_SECONDS_BETWEEN_COMMENTS`` seconds from now.
         Returns ``False`` if the user has never post something.
-        :param now: For testing purpose only.
         :return: bool ``True`` if the user is flooding (= trying to post two messages before the
         ``NB_SECONDS_BETWEEN_COMMENTS`` seconds delay is reached).
         """
         if self.last_comment_date is None:
             return False
-        if now is None:
-            now = timezone.now()
+        now = timezone.now()
         delta = now - self.last_comment_date
         return delta.total_seconds() < NB_SECONDS_BETWEEN_COMMENTS
 
