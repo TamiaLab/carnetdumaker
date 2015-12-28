@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -20,62 +20,62 @@ msgstr ""
 msgid "Component information"
 msgstr "Information sur le composant"
 
-#: apps/bugtracker/admin.py:83
+#: apps/bugtracker/admin.py:87
 msgid "General information"
 msgstr "Informations générales"
 
-#: apps/bugtracker/admin.py:88 apps/bugtracker/forms.py:75
-#: apps/bugtracker/models.py:306 apps/bugtracker/models.py:367
+#: apps/bugtracker/admin.py:92 apps/bugtracker/forms.py:75
+#: apps/bugtracker/models.py:315 apps/bugtracker/models.py:378
 msgid "Comment text"
 msgstr "Texte du commentaire"
 
-#: apps/bugtracker/admin.py:103 apps/bugtracker/admin.py:334
+#: apps/bugtracker/admin.py:107 apps/bugtracker/admin.py:339
 msgid "ID"
 msgstr "ID"
 
-#: apps/bugtracker/admin.py:118
+#: apps/bugtracker/admin.py:122
 msgid "Author"
 msgstr "Auteur"
 
-#: apps/bugtracker/admin.py:163
+#: apps/bugtracker/admin.py:167
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/bugtracker/admin.py:174
+#: apps/bugtracker/admin.py:178
 msgid "Modification comment"
 msgstr "Commentaire de modification"
 
-#: apps/bugtracker/admin.py:305
+#: apps/bugtracker/admin.py:310
 msgid "Issue information"
 msgstr "Information sur le problème"
 
-#: apps/bugtracker/admin.py:313
+#: apps/bugtracker/admin.py:318
 msgid "Issue date and time"
 msgstr "Date et heure du problème"
 
-#: apps/bugtracker/admin.py:317
+#: apps/bugtracker/admin.py:322
 msgid "Issue status"
 msgstr "Statut du problème"
 
-#: apps/bugtracker/admin.py:346
+#: apps/bugtracker/admin.py:351
 msgid "Component"
 msgstr "Composant"
 
-#: apps/bugtracker/admin.py:361 apps/bugtracker/models.py:92
+#: apps/bugtracker/admin.py:366 apps/bugtracker/models.py:94
 msgid "Submitter"
 msgstr "Auteur"
 
-#: apps/bugtracker/admin.py:377 apps/bugtracker/models.py:105
+#: apps/bugtracker/admin.py:382 apps/bugtracker/models.py:107
 msgid "Assigned to"
 msgstr "Assigné à"
 
-#: apps/bugtracker/admin.py:414 apps/bugtracker/admin.py:452
-#: apps/bugtracker/models.py:492
+#: apps/bugtracker/admin.py:419 apps/bugtracker/admin.py:457
+#: apps/bugtracker/models.py:498
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps/bugtracker/admin.py:442 apps/bugtracker/models.py:295
-#: apps/bugtracker/models.py:418 apps/bugtracker/models.py:461
+#: apps/bugtracker/admin.py:447 apps/bugtracker/models.py:304
+#: apps/bugtracker/models.py:423 apps/bugtracker/models.py:467
 msgid "Related issue"
 msgstr "Problème lié"
 
@@ -241,123 +241,131 @@ msgstr "Composants d'application"
 msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
-#: apps/bugtracker/models.py:95
+#: apps/bugtracker/models.py:90
+msgid "Description (raw text)"
+msgstr "Description (text brut)"
+
+#: apps/bugtracker/models.py:97
 msgid "Submission date"
 msgstr "Date de soumission"
 
-#: apps/bugtracker/models.py:99
+#: apps/bugtracker/models.py:101
 msgid "Last modification date"
 msgstr "Date de dernière modification"
 
-#: apps/bugtracker/models.py:112
+#: apps/bugtracker/models.py:114
 msgid "Status"
 msgstr "Statut"
 
-#: apps/bugtracker/models.py:118
+#: apps/bugtracker/models.py:120
 msgid "Priority"
 msgstr "Priorité"
 
-#: apps/bugtracker/models.py:124
+#: apps/bugtracker/models.py:126
 msgid "Difficulty"
 msgstr "Difficulté"
 
-#: apps/bugtracker/models.py:130
+#: apps/bugtracker/models.py:132
 msgid "Submitter IP address"
 msgstr "Adresse IP du submitter"
 
-#: apps/bugtracker/models.py:136
+#: apps/bugtracker/models.py:138
 msgid "Issue ticket"
 msgstr "Ticket de problème"
 
-#: apps/bugtracker/models.py:137
+#: apps/bugtracker/models.py:139
 msgid "Issue tickets"
 msgstr "Tickets de problème"
 
-#: apps/bugtracker/models.py:300
+#: apps/bugtracker/models.py:309
 msgid "Comment author"
 msgstr "Auteur du commentaire"
 
-#: apps/bugtracker/models.py:302
+#: apps/bugtracker/models.py:311
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: apps/bugtracker/models.py:310
+#: apps/bugtracker/models.py:319
 msgid "Comment text (raw HTML)"
 msgstr "Texte du commentaire (HTML brut)"
 
-#: apps/bugtracker/models.py:312
+#: apps/bugtracker/models.py:321
+msgid "Comment text (raw text)"
+msgstr "Texte du commentaire (text brut)"
+
+#: apps/bugtracker/models.py:323
 msgid "Author IP address"
 msgstr "Adresse IP de l'auteur"
 
-#: apps/bugtracker/models.py:318
+#: apps/bugtracker/models.py:329
 msgid "Issue comment"
 msgstr "Commentaire de ticket"
 
-#: apps/bugtracker/models.py:319
+#: apps/bugtracker/models.py:330
 msgid "Issue comments"
 msgstr "Commentaires de ticket"
 
-#: apps/bugtracker/models.py:424
+#: apps/bugtracker/models.py:429
 msgid "Related comment"
 msgstr "Derniers commentaires"
 
-#: apps/bugtracker/models.py:426
+#: apps/bugtracker/models.py:431
 msgid "Change date"
 msgstr "Date de modification"
 
-#: apps/bugtracker/models.py:430
+#: apps/bugtracker/models.py:435
 msgid "Field name"
 msgstr "Nom du champ"
 
-#: apps/bugtracker/models.py:432
+#: apps/bugtracker/models.py:438
 msgid "Old value"
 msgstr "Ancienne valeur"
 
-#: apps/bugtracker/models.py:436
+#: apps/bugtracker/models.py:442
 msgid "New value"
 msgstr "Nouvelle valeur"
 
-#: apps/bugtracker/models.py:441
+#: apps/bugtracker/models.py:447
 msgid "Issue change"
 msgstr "Modification de probléme"
 
-#: apps/bugtracker/models.py:442
+#: apps/bugtracker/models.py:448
 msgid "Issue changes"
 msgstr "Modifications de probléme"
 
-#: apps/bugtracker/models.py:466
+#: apps/bugtracker/models.py:472
 msgid "Subscriber"
 msgstr "Abonnés"
 
-#: apps/bugtracker/models.py:468
+#: apps/bugtracker/models.py:474
 msgid "Active"
 msgstr "Actif"
 
-#: apps/bugtracker/models.py:475
+#: apps/bugtracker/models.py:481
 msgid "Issue ticket subscription"
 msgstr "Abonnement à un ticket"
 
-#: apps/bugtracker/models.py:476
+#: apps/bugtracker/models.py:482
 msgid "Issue ticket subscriptions"
 msgstr "Abonnements aux tickets"
 
-#: apps/bugtracker/models.py:494
+#: apps/bugtracker/models.py:500
 msgid "Notify me of new issue"
 msgstr "Me notifier en cas de nouveau ticket"
 
-#: apps/bugtracker/models.py:497
+#: apps/bugtracker/models.py:503
 msgid "Notify me of new reply by default"
 msgstr "Me notifier par défaut en cas de réponse"
 
-#: apps/bugtracker/models.py:500
+#: apps/bugtracker/models.py:506
 msgid "Last comment date"
 msgstr "Date du dernier commentaire"
 
-#: apps/bugtracker/models.py:508
+#: apps/bugtracker/models.py:514
 msgid "Bug tracker user profile"
 msgstr "Profil utilisateur pour le gestionnaire de bugs"
 
-#: apps/bugtracker/models.py:509
+#: apps/bugtracker/models.py:515
 msgid "Bug tracker user profiles"
 msgstr "Profils utilisateur pour le gestionnaire de bugs"
 
