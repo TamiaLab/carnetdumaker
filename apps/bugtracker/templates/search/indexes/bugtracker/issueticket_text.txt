@@ -1,0 +1,8 @@
+{{ object.title }}
+{% if object.component %}{{ object.component.name }}{% endif %}
+{{ object.description_text }}
+{{ object.submitter.username }}
+{% if object.assigned_to %}{{ object.assigned_to.username }}{% endif %}
+{{ object.status }}
+{{ object.priority }}
+{{ object.difficulty }}

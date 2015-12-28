@@ -1,0 +1,3 @@
+{{ object.issue.title }}
+{{ object.author.username }}
+{{ object.body_text }}
