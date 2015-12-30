@@ -233,6 +233,7 @@ INSTALLED_APPS = [
     'apps.tools',
     'apps.twitter',
     'apps.txtrender',
+    'apps.usernotes',
 ]
 
 # List of all middleware that are enabled in this Django installation

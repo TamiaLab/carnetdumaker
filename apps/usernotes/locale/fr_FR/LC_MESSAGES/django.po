@@ -1,0 +1,61 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-30 19:25+0100\n"
+"PO-Revision-Date: 2015-12-30 19:25+0100\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin.py:55 models.py:24
+msgid "Title"
+msgstr "Titre"
+
+#: admin.py:58
+msgid "Metadata"
+msgstr "Métadonnées"
+
+#: admin.py:65
+msgid "Note information"
+msgstr "Informations de la note"
+
+#: admin.py:76 models.py:30
+msgid "Author"
+msgstr "Auteur"
+
+#: admin.py:86 models.py:37
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps.py:15 models.py:50
+msgid "User notes"
+msgstr "Notes utitlisateur"
+
+#: models.py:32
+msgid "Description"
+msgstr "Description"
+
+#: models.py:39
+msgid "Creation date"
+msgstr "Date de création"
+
+#: models.py:42
+msgid "Last modification date"
+msgstr "Date de derniére modification"
+
+#: models.py:45
+msgid "Sticky"
+msgstr "Epinglé"
+
+#: models.py:49
+msgid "User note"
+msgstr "Note utitlisateur"
