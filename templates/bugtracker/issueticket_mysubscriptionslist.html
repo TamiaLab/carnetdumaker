@@ -1,5 +1,5 @@
 {% extends "bugtracker/base_myaccount.html" %}
-{% load bugtracker %}
+{% load bugtracker tools %}
 
 {% block breadcrumb %}{{ block.super }}
     <li><a href="{% url 'bugtracker:myticketsubscribtions_list' %}">Mes tickets suivis</a></li>{% endblock %}
