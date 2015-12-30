@@ -2,6 +2,7 @@
 Views for the bug tracker app.
 """
 
+from django.db.models import Prefetch
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, resolve_url
@@ -59,6 +60,18 @@ def tickets_list(request,
     :param extra_context: Any extra context dict.
     """
     queryset = IssueTicket.objects.all()
+
+    # Prefetch comments and subscribers
+    current_user = request.user
+    if current_user.is_authenticated():
+        prefetch_comments = Prefetch('comments',
+                                     queryset=IssueComment.objects.filter(author=current_user),
+                                     to_attr='user_comments')
+        prefetch_subscriptions = Prefetch('subscribers',
+                                          queryset=IssueTicketSubscription.objects.filter(user=current_user),
+                                          to_attr='user_subscriptions')
+        queryset = queryset.prefetch_related(prefetch_comments, prefetch_subscriptions)
+
     context = {
         'title': _('Tickets list'),
         }
