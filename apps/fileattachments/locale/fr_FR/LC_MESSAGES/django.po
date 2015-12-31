@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,51 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/fileattachments/admin.py:37 apps/fileattachments/models.py:51
+#: apps/fileattachments/admin.py:35 apps/fileattachments/models.py:51
 msgid "File"
 msgstr "Fichier"
 
-#: apps/fileattachments/admin.py:42
+#: apps/fileattachments/admin.py:40
 msgid "Other stuff"
 msgstr "Autres informations"
 
-#: apps/fileattachments/admin.py:46
+#: apps/fileattachments/admin.py:44
 msgid "Related object"
 msgstr "Object lié"
 
-#: apps/fileattachments/admin.py:59
+#: apps/fileattachments/admin.py:57
 msgid "Download"
 msgstr "Télécharger"
 
-#: apps/fileattachments/admin.py:60
+#: apps/fileattachments/admin.py:58
 msgid "Download link"
 msgstr "Lien de téléchargement"
 
-#: apps/fileattachments/admin.py:70
+#: apps/fileattachments/admin.py:68
 msgid "No link available"
 msgstr "Pas de lien disponible"
 
-#: apps/fileattachments/admin.py:73 apps/fileattachments/admin.py:74
+#: apps/fileattachments/admin.py:71 apps/fileattachments/admin.py:72
 msgid "View related object"
 msgstr "Voir l'objet lié"
 
-#: apps/fileattachments/apps.py:15 apps/fileattachments/forms.py:28
+#: apps/fileattachments/apps.py:15 apps/fileattachments/forms.py:29
 #: apps/fileattachments/models.py:74
 msgid "File attachments"
 msgstr "Fichiers joints"
 
-#: apps/fileattachments/forms.py:65
+#: apps/fileattachments/forms.py:66
 #, python-format
 msgid "Total files size exceed maximum upload size %(total_max_size)s bytes."
-msgstr "La taille totale des fichiers dépasse la limite maximum de "
-"téléversement de %(total_max_size)s octets."
+msgstr ""
+"La taille totale des fichiers dépasse la limite maximum de téléversement de "
+"%(total_max_size)s octets."
 
-#: apps/fileattachments/forms.py:80
+#: apps/fileattachments/forms.py:81
 #, python-format
 msgid "%s (untick to delete)"
 msgstr "%s (décocher pour supprimer)"
 
-#: apps/fileattachments/models.py:54 apps/fileattachments/models.py:105
+#: apps/fileattachments/models.py:54 apps/fileattachments/models.py:107
 msgid "File size"
 msgstr "Taille du fichier"
 
@@ -80,17 +81,17 @@ msgstr "Date de téléversement"
 msgid "File attachment"
 msgstr "Fichier joint"
 
-#: apps/fileattachments/models.py:100
+#: apps/fileattachments/models.py:102
 #, python-format
 msgid "%dB"
 msgstr "%do"
 
-#: apps/fileattachments/models.py:102
+#: apps/fileattachments/models.py:104
 #, python-format
 msgid "%dKB"
 msgstr "%dKo"
 
-#: apps/fileattachments/models.py:104
+#: apps/fileattachments/models.py:106
 #, python-format
 msgid "%.2fMB"
 msgstr "%.2fMo"
