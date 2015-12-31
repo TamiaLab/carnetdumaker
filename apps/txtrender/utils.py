@@ -18,10 +18,15 @@ from skcode.utility import (make_paragraphs,
                             render_footnotes_text,
                             extract_titles,
                             make_titles_hierarchy,
-                            make_auto_title_ids)
+                            make_auto_title_ids,
+                            setup_smileys_replacement,
+                            setup_cosmetics_replacement)
 from skcode.tools import escape_attrvalue
 
 from django.template import loader
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
+from .settings import EMOTICONS_IMG_DIR
 
 
 def copy_tags_if_allowed(tags, tags_array_in, tags_array_out, allowed):
@@ -202,6 +207,12 @@ def render_document(input_text,
                             newline_node_opts=newlines_opts,
                             drop_unrecognized=False,
                             texturize_unclosed_tags=False)
+
+    # Setup smileys and cosmetics replacement
+    def _base_url(filename):
+        return static(EMOTICONS_IMG_DIR + filename)
+    setup_cosmetics_replacement(document)
+    setup_smileys_replacement(document, _base_url)
 
     # Make paragraphs
     make_paragraphs(document)

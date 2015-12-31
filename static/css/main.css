@@ -48,3 +48,10 @@
     padding-right: 3px;
     vertical-align: middle;
 }
+
+/* Emoticons */
+
+.emoticons img.resize{
+    width: 16px;
+    height: 16px;
+}
