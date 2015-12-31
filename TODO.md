@@ -6,6 +6,7 @@
 - Add all important apps settings to the main settings files.
 - Write text for the remaining two static pages and CGU/CGV.
 - Refactor models to remove the fishy "save_without_rendering" method and add a "render_xxx" (default True) kwargs instead.
+- Refactor models to used clean() method when possible.
 - Refactor "tools" app into multiples simples apps with unit-tests.
 
 - Set on_delete on ALL foreign key.
@@ -15,7 +16,6 @@
 
 ## Text rendering engine (PySkCode)
 
-- Add support for cosmetics and smileys in the HTML rendering engine.
 - Add tree-nodes sanitation.
 
 ## Mailing and notifications
@@ -51,7 +51,6 @@
 
 ## Bug tracker
 
-- Add icons "subscribed" and "has post in" to all issue tickets in list view.
 - Add "edit comment" feature (will also require adding comment revision for legal purposes).
 - Add "delete comment" feature. (will require logical deletion with delayed physical deletion for legal purposes).
 - Add tags with related feeds and views.
@@ -103,8 +102,6 @@
 ## Wish
 
 - AutoSlugField replacement of unique_slug function.
-- Warning/ban user app.
-- Internal note system linked with user account.
 - Stats app (without requiring cookie).
 - Vanity badges app.
 - Membership app.
