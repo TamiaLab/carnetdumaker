@@ -234,6 +234,7 @@ INSTALLED_APPS = [
     'apps.twitter',
     'apps.txtrender',
     'apps.usernotes',
+    'apps.userstrike',
 ]
 
 # List of all middleware that are enabled in this Django installation
@@ -253,6 +254,7 @@ MIDDLEWARE_CLASSES = [
     'apps.forcelogout.middleware.ForceLogoutMiddleware',  # For forcing logout of specific users
     'apps.accounts.middleware.LastActivityDateUpdateMiddleware',  # For last login date update
     'apps.donottrack.middleware.DoNotTrackMiddleware',  # For DoNotTrack support
+    'apps.userstrike.middleware.UserStrikeMiddleware',  # For warning/ban users/ip address
 ]
 
 #endregion

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accès interdit</title>
+</head>
+<body>
+    <h1>Vous n'avez pas (ou plus) accès à ce site sur demande d'un des administrateurs.</h1>
+    {% if strike.public_reason %}
+        <p>La raison évoquée est la suivante : "{{ strike.public_reason }}".</p>
+    {% endif %}
+    {% if strike.expiration_date %}
+        <p>Cette restriction totale d'accès au site sera levée à la date suivante : {{ strike.expiration_date|date:"r" }}.</p>
+    {% else %}
+        <p>Cette restriction totale d'accès au site est définitive.</p>
+    {% endif %}
+    <p>Pour toute réclamation, merci de vous adresser à l'administrateur du site via l'adresse : contact [@] carnetdumaker.net</p>
+</body>
+</html>
