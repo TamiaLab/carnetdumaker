@@ -44,3 +44,6 @@ DELETED_THREAD_PHYSICAL_DELETION_TIMEOUT_DAYS = getattr(settings, 'DELETED_THREA
 # Number of days before a logically deleted thread post is really deleted.
 DELETED_THREAD_POST_PHYSICAL_DELETION_TIMEOUT_DAYS = getattr(settings,
                                                              'DELETED_THREAD_POST_PHYSICAL_DELETION_TIMEOUT_DAYS', 365)
+
+# Number of days before a post become "old"
+NB_DAYS_BEFORE_FORUM_POST_GET_OLD = getattr(settings, 'NB_DAYS_BEFORE_FORUM_POST_GET_OLD', 31 * 6)

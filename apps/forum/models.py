@@ -2,6 +2,8 @@
 Data models for the forum app.
 """
 
+from datetime import timedelta
+
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.conf import settings
@@ -26,7 +28,8 @@ from .settings import (NB_FORUM_POST_PER_PAGE,
                        NB_SECONDS_BETWEEN_POSTS,
                        FORUM_LOGO_HEIGHT_SIZE_PX,
                        FORUM_LOGO_WIDTH_SIZE_PX,
-                       FORUM_LOGO_UPLOAD_DIR_NAME)
+                       FORUM_LOGO_UPLOAD_DIR_NAME,
+                       NB_DAYS_BEFORE_FORUM_POST_GET_OLD)
 from .managers import (ForumManager,
                        ForumThreadManager,
                        ForumThreadPostManager,
@@ -465,6 +468,17 @@ class ForumThread(models.Model):
         return self.deleted_at is not None
     is_deleted.short_description = _('is deleted')
     is_deleted.boolean = True
+
+    def is_old(self):
+        """
+        Return ``True`` if the last modification date of the last message
+        is older than ``NB_DAYS_BEFORE_FORUM_POST_GET_OLD`` days.
+        """
+        last_update_date = self.last_post.last_content_modification_date or self.last_post.pub_date
+        old_threshold_date = timezone.now() - timedelta(days=NB_DAYS_BEFORE_FORUM_POST_GET_OLD)
+        return last_update_date < old_threshold_date
+    is_old.boolean = True
+    is_old.short_description = _('Old')
 
 
 class ForumThreadPost(models.Model):

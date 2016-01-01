@@ -17,6 +17,14 @@
                     <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
                 </div>
             {% endif %}
+            {% if thread.is_old %}
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                    <p>Attention : Ce topic est relativement ancien.
+                        Vous risquez de ne pas avoir de réponse de la part de l'auteur d'origine.
+                        Vous devriez envisager d'ouvrir un nouveau topic.</p>
+                </div>
+            {% endif %}
             <form method="post" action="{{ thread.get_reply_url }}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|bootstrapform }}
