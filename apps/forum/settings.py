@@ -11,6 +11,12 @@ NB_FORUM_THREAD_PER_PAGE = getattr(settings, 'NB_FORUM_THREAD_PER_PAGE', 25)
 # Number of forum's posts per page (default 25)
 NB_FORUM_POST_PER_PAGE = getattr(settings, 'NB_FORUM_POST_PER_PAGE', 25)
 
+# Number of forum's threads per page widget (default 5)
+NB_FORUM_THREAD_PER_PAGE_WIDGET = getattr(settings, 'NB_FORUM_THREAD_PER_PAGE_WIDGET', 5)
+
+# Number of forum's posts per page widget (default 5)
+NB_FORUM_POST_PER_PAGE_WIDGET = getattr(settings, 'NB_FORUM_POST_PER_PAGE_WIDGET', 5)
+
 # Number of forum's threads in feeds
 NB_FORUM_THREADS_IN_FEEDS = getattr(settings, 'NB_FORUM_THREADS_IN_FEEDS', 10)
 
