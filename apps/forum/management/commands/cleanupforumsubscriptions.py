@@ -1,19 +1,19 @@
 """
-Custom ``manage.py`` command to cleanup inactive forum/thread subscriptions.
+Custom ``manage.py`` command to cleanup inactive forum and thread subscriptions.
 """
 
 from django.core.management.base import NoArgsCommand
 
-from apps.forum.models import (ForumSubscription,
-                               ForumThreadSubscription)
+from ...models import (ForumSubscription,
+                       ForumThreadSubscription)
 
 
 class Command(NoArgsCommand):
     """
-    A management command which deletes inactive forum/thread subscriptions from the database.
+    A management command which deletes inactive forum and thread subscriptions from the database.
     """
 
-    help = "Delete inactive forum/thread subscriptions from the database"
+    help = "Delete inactive forum and thread subscriptions from the database."
 
     def handle_noargs(self, **options):
         """

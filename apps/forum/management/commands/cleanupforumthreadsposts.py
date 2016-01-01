@@ -4,8 +4,8 @@ Custom ``manage.py`` command to cleanup deleted forum's threads and posts.
 
 from django.core.management.base import NoArgsCommand
 
-from apps.forum.models import (ForumThread,
-                               ForumThreadPost)
+from ...models import (ForumThread,
+                       ForumThreadPost)
 
 
 class Command(NoArgsCommand):
@@ -13,7 +13,7 @@ class Command(NoArgsCommand):
     A management command which deletes deleted forum's threads and posts from the database.
     """
 
-    help = "Delete deleted forum threads and posts from the database"
+    help = "Delete deleted forum threads and posts from the database."
 
     def handle_noargs(self, **options):
         """
