@@ -78,7 +78,7 @@ def has_been_read(thread, args_dict):
     parent_forum_last_read_date = args_dict['parent_forum_last_read_date']
 
     # Get the last post modification date
-    last_modification_date = thread.last_post.last_modification_date
+    last_modification_date = thread.last_post.last_content_modification_date
 
     # Get the "read" marker for this thread, if any
     last_read_date = args_dict['thread_markers'].get(thread.id, None)

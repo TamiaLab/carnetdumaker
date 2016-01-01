@@ -54,7 +54,7 @@ class ForumThreadsBaseFeed(Feed):
         """
         Return the last modification date of the forum's thread.
         """
-        return item.last_post.last_modification_date
+        return item.last_post.last_content_modification_date or item.last_post.pub_date
 
 
 class ForumPostsBaseFeed(Feed):
@@ -97,7 +97,7 @@ class ForumPostsBaseFeed(Feed):
         """
         Return the last modification date of the forum's thread's post.
         """
-        return item.last_modification_date
+        return item.last_content_modification_date or item.pub_date
 
 
 class LatestForumThreadsFeed(ForumThreadsBaseFeed):

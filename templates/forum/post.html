@@ -13,8 +13,8 @@
 
     <hr>
 
-    {% if post.last_modification_date != post.pub_date %}
-        <p><em>Derniére modification le {{ post.last_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
+    {% if post.has_been_modified_after_publication %}
+        <p><em>Derniére modification le {{ post.last_content_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
     {% endif %}
 
     {{ post.footnotes_html|safe }}

@@ -94,6 +94,9 @@ class Forum(MPTTModel):
                                    db_index=True,  # Database optimization
                                    default=1)
 
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = ForumManager()
 
     class MPTTMeta:
@@ -361,6 +364,9 @@ class ForumThread(models.Model):
                                       blank=True,
                                       null=True)
 
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = ForumThreadManager()
 
     class Meta:
@@ -509,8 +515,8 @@ class ForumThreadPost(models.Model):
     pub_date = models.DateTimeField(_('Publication date'),
                                     db_index=True)  # Database optimization
 
-    last_modification_date = models.DateTimeField(_('Last modification date'),
-                                                  db_index=True)  # Database optimization
+    last_content_modification_date = models.DateTimeField(_('Last content modification date'),
+                                                          db_index=True)  # Database optimization
 
     last_modification_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                              related_name='+',
@@ -544,6 +550,9 @@ class ForumThreadPost(models.Model):
     attachments = GenericRelation(FileAttachment,
                                   related_query_name='forum_posts')
 
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
     objects = ForumThreadPostManager()
 
     class Meta:
@@ -575,17 +584,17 @@ class ForumThreadPost(models.Model):
         # Handle last_modification_by
         self.last_modification_by = kwargs.pop('current_user', self.author)
 
-        # Handle optional pub_date and refresh last_modification_date
+        # Handle optional pub_date and refresh last_content_modification_date
         now = timezone.now()
         if not self.pub_date:
             self.pub_date = now
-        if not self.last_modification_date:
+        if not self.last_content_modification_date:
             if now > self.pub_date:
-                self.last_modification_date = now
+                self.last_content_modification_date = now
             else:
-                self.last_modification_date = self.pub_date
-        elif now > self.last_modification_date:
-            self.last_modification_date = now
+                self.last_content_modification_date = self.pub_date
+        elif now > self.last_content_modification_date:
+            self.last_content_modification_date = now
 
         # Render the HTML version
         self.render_text()
@@ -677,6 +686,13 @@ class ForumThreadPost(models.Model):
 
     is_deleted.short_description = _('is deleted')
     is_deleted.boolean = True
+
+    def has_been_modified_after_publication(self):
+        """
+        Return True if the post has been modified after publication.
+        """
+        return self.last_content_modification_date is not None and \
+               self.last_content_modification_date != self.pub_date
 
     def reset_parent_last_post(self):
         """

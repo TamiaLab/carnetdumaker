@@ -47,17 +47,17 @@ class ForumThreadPostAdmin(admin.ModelAdmin):
                     'author_username_link',
                     'parent_thread_link',
                     'pub_date',
-                    'last_modification_date',
+                    'last_content_modification_date',
                     'last_modification_by',
                     'is_deleted')
 
     readonly_fields = ('pub_date',
-                       'last_modification_date',
+                       'last_content_modification_date',
                        'last_modification_by',
                        'author_ip_address')
 
     list_filter = ('pub_date',
-                   'last_modification_date',
+                   'last_content_modification_date',
                    'deleted_at')
 
     search_fields = ('id',
@@ -82,7 +82,7 @@ class ForumThreadPostAdmin(admin.ModelAdmin):
                        'content')
         }),
         (_('Date and time'), {
-            'fields': ('last_modification_date',
+            'fields': ('last_content_modification_date',
                        'last_modification_by',
                        'deleted_at')
         }),
@@ -165,7 +165,7 @@ class ForumThreadPostInline(admin.StackedInline):
     formset = ForumThreadPostInlineFormset
 
     readonly_fields = ('pub_date',
-                       'last_modification_date',
+                       'last_content_modification_date',
                        'last_modification_by',
                        'author_ip_address')
 
@@ -185,7 +185,7 @@ class ForumThreadPostInline(admin.StackedInline):
                        'content')
         }),
         (_('Date and time'), {
-            'fields': ('last_modification_date',
+            'fields': ('last_content_modification_date',
                        'last_modification_by',
                        'deleted_at')
         }),

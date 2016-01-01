@@ -45,4 +45,4 @@ class ForumThreadsSitemap(Sitemap):
         :param obj: The forum's thread.
         :return: The last modification date of the given forum's thread.
         """
-        return obj.last_post.last_modification_date
+        return obj.last_post.last_content_modification_date or obj.last_post.pub_date
