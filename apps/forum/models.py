@@ -741,7 +741,6 @@ class ForumThreadPost(models.Model):
                                                                  force_nofollow=force_nofollow_in_post,
                                                                  render_text_version=True,
                                                                  render_extra_dict=True,
-                                                                 merge_footnotes_html=True,
                                                                  merge_footnotes_text=True)
         self.content_html = content_html
         self.content_text = content_text
