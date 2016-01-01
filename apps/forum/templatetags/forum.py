@@ -4,6 +4,11 @@ Custom template tag for the forum app.
 
 from django import template
 
+from ..models import (ForumThread,
+                      ForumThreadPost)
+from ..settings import (NB_FORUM_THREAD_PER_PAGE_WIDGET,
+                        NB_FORUM_POST_PER_PAGE_WIDGET)
+
 
 register = template.Library()
 
@@ -16,6 +21,8 @@ def has_access_to(user, forum_or_thread):
     :param forum_or_thread: The forum or thread instance.
     :return: bool True if the given user has access to the given forum or thread.
     """
+    if user is None or forum_or_thread is None:
+        return False
     return forum_or_thread.has_access(user)
 
 
@@ -27,6 +34,8 @@ def can_edit(user, thread_or_post):
     :param thread_or_post: The thread or post instance.
     :return: bool True if the given user can edit this thread or post.
     """
+    if user is None or thread_or_post is None:
+        return False
     return thread_or_post.can_edit(user)
 
 
@@ -38,6 +47,8 @@ def can_delete(user, thread_or_post):
     :param thread_or_post: The thread or post instance.
     :return: bool True if the given user can edit this thread or post.
     """
+    if user is None or thread_or_post is None:
+        return False
     return thread_or_post.can_delete(user)
 
 
@@ -49,6 +60,8 @@ def can_delete(user, post):
     :param post: The post instance.
     :return: bool True if the given user can edit this thread or post.
     """
+    if user is None or post is None:
+        return False
     return post.can_see_ip_adress(user)
 
 
@@ -72,7 +85,7 @@ def has_been_read(thread, args_dict):
 
     # Check for modification made after the last "mark forum as read" action
     if parent_forum_last_read_date is not None \
-            and parent_forum_last_read_date > last_modification_date:
+            and parent_forum_last_read_date >= last_modification_date:
         return True
 
     # The user has not read this thread yet if no marker exist
@@ -81,3 +94,29 @@ def has_been_read(thread, args_dict):
 
     # If the marker exist, check the last update date
     return last_read_date >= last_modification_date
+
+
+@register.assignment_tag
+def recent_forum_threads_list(nb_objects=NB_FORUM_THREAD_PER_PAGE_WIDGET):
+    """
+    Returns a list of all N recently published forum threads.
+    :param nb_objects: The maximum number of objects to be returned.
+    :return: A list of all N recently published forum threads.
+    """
+    return ForumThread.objects.public_threads().select_related('first_post__author',
+                                                               'first_post__last_modification_by',
+                                                               'last_post__author',
+                                                               'last_post__last_modification_by')[:nb_objects]
+
+
+@register.assignment_tag
+def recent_forum_posts_list(nb_objects=NB_FORUM_POST_PER_PAGE_WIDGET):
+    """
+    Returns a list of all N recently published forum posts.
+    :param nb_objects: The maximum number of objects to be returned.
+    :return: A list of all N recently published forum posts.
+    """
+    return ForumThreadPost.objects.public_published() \
+                   .select_related('parent_thread__first_post__author',
+                                   'parent_thread__first_post__last_modification_by',
+                                   'author', 'last_modification_by')[:nb_objects]
