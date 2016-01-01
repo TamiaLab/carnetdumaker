@@ -1,4 +1,5 @@
 {% extends "staticpages/base_staticpages.html" %}
+{% load static from staticfiles %}
 
 {% block title %}Qui sommes-nous ? | {{ block.super }}{% endblock %}
 
@@ -8,5 +9,94 @@
 {% block content %}
     <h1>Qui sommes-nous ?</h1>
 
-    <p>TODO</p>
+    <p>Carnet du Maker est un site orienté nouvelles technologies et bricolage. Carnet du Maker est édité par la startup "TamiaLab", avec à sa tête Fabien Batteix, alias Skywodd, un savant fou amateur d'électronique, d'informatique et de rongeurs depuis sa plus tendre enfance.</p>
+
+    <p>Carnet du Maker est un site ayant comme principale thématique les nouvelles technologies, le bricolage et plus généralement le "Do It Yourself". Notre mission consiste à fournir une documentation de qualité à toute personne souhaitant se lancer dans l'aventure de l’électronique numérique, de l'informatique et/ou du "Do It Yourself".</p>
+
+    <p>Carnet du Maker c'est aussi et avant tout, une communauté de passionnés, de tout âge et de toute profession, qui permettent à ce site d'exister.</p>
+    <hr>
+
+    <h2>L'équipe du site</h2>
+
+    <p>Pour le moment l'équipe du site se résume à une unique personne, mais ce n'est qu'un début. Aujourd'hui, un rédacteur, demain, des milliers !</p>
+
+    <div class="media">
+        <div class="media-left">
+            <img src="{% static "images/no_avatar.png" %}" class="media-object img-circle" alt="Fabien Batteix">
+        </div>
+
+        <div class="media-body">
+            <h4 class="media-heading">Fabien Batteix (Skywodd pour les intimes) <small>rédacteur en chef et gérant du TamiaLab</small></h4>
+            <dl>
+                <dt>Passion :</dt>
+                <dd>L'électronique numérique, l'informatique et les rongeurs (au point d'avoir nommé le TamiaLab du nom d'une espèce d'écureuils)</dd>
+
+                <dt>Profession :</dt>
+                <dd>Savant fou le jour, développeur informatique toutes plateformes la nuit</dd>
+            </dl>
+
+            <p>Ne le laissez jamais seul à proximité d'une carte électronique et d'un PC.
+                Dans le cas contraire, vous vous retrouverez avec plusieurs tutoriels d'utilisation, une liste longue comme le bras de remarques et un PC
+                remis à neuf avec l'intégralité des suites de développement logiciels open source disponible. Vous êtes prévenu !</p>
+
+            <p>Par précaution, vous pouvez disposer des mangas et autres animes japonais à proximité de l'ordinateur.
+                Le Skywodd est très friand de ce genre de divertissement et se jettera toujours en priorité sur un bon manga ou anime, vous laissant le temps de fuir avec l'informatique.</p>
+        </div>
+    </div>
+    <hr>
+
+    <h2>L'atelier</h2>
+
+    <div id="tamialabCarousel" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#tamialabCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#tamialabCarousel" data-slide-to="1"></li>
+            <li data-target="#tamialabCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img class="img-responsive center-block" src="{% static "images/no_avatar.png" %}" alt="TODO">
+                <div class="carousel-caption">
+                    <h3>TODO</h3>
+                    <p>TODO</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img class="img-responsive center-block" src="{% static "images/no_avatar.png" %}" alt="TODO">
+                <div class="carousel-caption">
+                    <h3>TODO</h3>
+                    <p>TODO</p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img class="img-responsive center-block" src="{% static "images/no_avatar.png" %}" alt="TODO">
+                <div class="carousel-caption">
+                    <h3>TODO</h3>
+                    <p>TODO</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#tamialabCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Précédent</span>
+        </a>
+
+        <a class="right carousel-control" href="#tamialabCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Suivant</span>
+        </a>
+    </div>
+
+    <p>L'atelier du TamiaLab est l'endroit où tout se passe. C'est ici que sont écrits les articles du site, que sont testées les cartes ou encore que sont conçus les divers projets et produits.</p>
+
+    <p>La légende raconte qu'un jour quelqu'un y est entré pendant qu'une expérimentation était en cours. On n'a plus de nouvelle de cette personne depuis.</p>
+
 {% endblock %}
