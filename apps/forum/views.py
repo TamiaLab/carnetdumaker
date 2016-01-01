@@ -11,8 +11,9 @@ from django.http import (HttpResponseRedirect,
 from django.template.response import TemplateResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
+from django.contrib import messages
 
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
@@ -83,10 +84,23 @@ def forum_show(request, hierarchy,
     if not forum_obj.has_access(request.user):
         raise PermissionDenied()
 
+    # Get all threads in this forum
+    queryset = ForumThread.objects.display_ordered(forum_obj) \
+        .select_related('first_post__author', 'last_post')
+
+    # Prefetch posts and subscriptions
+    current_user = request.user
+    if current_user.is_authenticated():
+        prefetch_posts = Prefetch('posts',
+                                  queryset=ForumThreadPost.objects.filter(author=current_user),
+                                  to_attr='user_posts')
+        prefetch_subscriptions = Prefetch('subscribers',
+                                          queryset=ForumThreadSubscription.objects.filter(user=current_user),
+                                          to_attr='user_subscriptions')
+        queryset = queryset.prefetch_related(prefetch_posts, prefetch_subscriptions)
+
     # Related thread list pagination
-    paginator, page = paginate(ForumThread.objects.display_ordered(forum_obj)
-                               .select_related('first_post__author', 'last_post'),
-                               request, NB_FORUM_THREAD_PER_PAGE)
+    paginator, page = paginate(queryset, request, NB_FORUM_THREAD_PER_PAGE)
 
     # Prefetch child forums
     if not page.has_previous():
@@ -96,7 +110,6 @@ def forum_show(request, hierarchy,
         child_forums = None
 
     # Avoid useless SQL request for anonymous
-    current_user = request.user
     if current_user.is_authenticated():
         has_subscribe_to_forum = ForumSubscription.objects.has_subscribed_to_forum(current_user, forum_obj)
     else:

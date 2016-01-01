@@ -3,7 +3,7 @@ Un nouveau message a été posté sur un des topics que vous suivez !
 Message de {{ post.author.username }}
 
 """
-{{ post.get_content_without_html }}
+{{ post.content_text }}
 """
 
 Posté dans le topic "{{ thread.title }}"

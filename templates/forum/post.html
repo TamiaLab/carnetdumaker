@@ -4,11 +4,20 @@
 <i class="fa fa-calendar"></i> <time datetime="{{ post.pub_date|date:"d-m-Y" }} {{ post.pub_date|time:"H:i" }}">{{ post.pub_date|date }}</time></p>
 
 <div class="well">
+    {% if post.summary_html %}
+        {{ post.summary_html|safe }}
+        <hr>
+    {% endif %}
+
     {{ post.content_html|safe }}
+
+    <hr>
 
     {% if post.last_modification_date != post.pub_date %}
         <p><em>Derniére modification le {{ post.last_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
     {% endif %}
+
+    {{ post.footnotes_html|safe }}
 
     {% with attachments=post.attachments.all %}
         {% if attachments %}

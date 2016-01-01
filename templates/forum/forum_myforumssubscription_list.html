@@ -29,7 +29,7 @@
                             <tr>
                                 <td>{% if forum.logo %}<a href="{{ forum.get_absolute_url }}"><img src="{{ forum.logo.url }}" alt="Logo forum {{ forum.title }}" /></a>{% endif %}</td>
                                 <td><a href="{{ forum.get_absolute_url }}">{{ forum.title|capfirst }}</a></td>
-                                <td>{{ forum.description }}</td>
+                                <td>{{ forum.description_html|safe }}</td>
                             </tr>
                         {% endif %}
                     {% endwith %}

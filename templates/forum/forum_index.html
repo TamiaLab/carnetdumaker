@@ -26,7 +26,7 @@
                 <tr>
                     <td>{% if root_forum.logo %}<a href="{{ root_forum.get_absolute_url }}"><img src="{{ root_forum.logo.url }}" alt="Logo forum {{ root_forum.title }}" /></a>{% endif %}</td>
                     <td><a href="{{ root_forum.get_absolute_url }}">{{ root_forum.title|capfirst }}</a></td>
-                    <td>{{ root_forum.description }}</td>
+                    <td>{{ root_forum.description_html|safe }}</td>
                 </tr>
             {% endif %}
         {% empty %}
