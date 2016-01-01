@@ -30,6 +30,12 @@
                 {% include "search/include/bugtracker/issueticket.html" %}
             {% elif result.content_type == "bugtracker.issuecomment" %}
                 {% include "search/include/bugtracker/issuecomment.html" %}
+            {% elif result.content_type == "forum.forum" %}
+                {% include "search/include/forum/forum.html" %}
+            {% elif result.content_type == "forum.forumthread" %}
+                {% include "search/include/forum/forumthread.html" %}
+            {% elif result.content_type == "forum.forumthreadpost" %}
+                {% include "search/include/forum/forumthreadpost.html" %}
             {% elif result.content_type == "imageattachments.imageattachment" %}
                 {% include "search/include/imageattachments/imageattachment.html" %}
             {% elif result.content_type == "licenses.license" %}
