@@ -12,10 +12,15 @@
 {% block title %}Archive de {{ month|month_name }} {{ year }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Archive de {{ month|month_name }} {{ year }}</h1>
-    <p><a href="{% url "blog:articles_archive_month_rss" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux RSS des articles de {{ month|month_name }} {{ year }}</a> (<a href="{% url "blog:articles_archive_month_atom" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% include "blog/articles.html" %}
+    <!-- Article detail -->
+    <div class="col-md-12">
+
+        <h1>Archive de {{ month|month_name }} {{ year }}</h1>
+        <p><a href="{% url "blog:articles_archive_month_rss" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux RSS des articles de {{ month|month_name }} {{ year }}</a> (<a href="{% url "blog:articles_archive_month_atom" year=year month=month|month_format %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        {% include "blog/articles.html" %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

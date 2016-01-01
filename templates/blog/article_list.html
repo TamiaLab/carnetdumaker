@@ -3,14 +3,21 @@
 {% block title %}Les articles | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Les articles</h1>
-    <p><a href="{% url "blog:latest_articles_rss" %}"><i class="fa fa-rss"></i> Flux RSS des articles récents</a> (<a href="{% url "blog:latest_articles_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:blog_article_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ecrire un nouvel article</a></p>
-    {% endif %}
+    <!-- Articles list -->
+    <div class="col-md-12">
 
-    {% include "blog/articles.html" %}
+        <h1>Les articles</h1>
+        <p><a href="{% url "blog:latest_articles_rss" %}"><i class="fa fa-rss"></i> Flux RSS des articles récents</a> (<a href="{% url "blog:latest_articles_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:blog_article_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ecrire un nouvel article</a></p>
+        {% endif %}
+
+        <!-- Articles -->
+        {% include "blog/articles.html" %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

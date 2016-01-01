@@ -11,14 +11,22 @@
 {% block title %}Mot clef "{{ tag.name }}" | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Article portant le mot clef "{{ tag.name }}"</h1>
-    <p><a href="{{ tag.get_latest_articles_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{{ tag.get_latest_articles_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:blog_articletag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
-    {% endif %}
+    <!-- Tag detail -->
+    <div class="col-md-12">
 
-    {% include "blog/articles.html" with articles=related_articles %}
+        <!-- Header -->
+        <h1>Article portant le mot clef "{{ tag.name }}"</h1>
+        <p><a href="{{ tag.get_latest_articles_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{{ tag.get_latest_articles_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:blog_articletag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- Related articles -->
+        {% include "blog/articles.html" with articles=related_articles %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

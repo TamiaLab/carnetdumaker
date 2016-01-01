@@ -3,10 +3,17 @@
 {% block title %}Les articles liés | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Les articles liés à la licence {{ license.name }}</h1>
-    <p><a href="{% url "bloglicense:latest_license_articles_rss" slug=license.slug %}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{% url "bloglicense:latest_license_articles_atom" slug=license.slug %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% include "blog/articles.html" with articles=related_articles %}
+    <!-- License detail -->
+    <div class="col-md-12">
+
+        <!-- Related articles feeds -->
+        <h1>Les articles liés à la licence {{ license.name }}</h1>
+        <p><a href="{% url "bloglicense:latest_license_articles_rss" slug=license.slug %}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{% url "bloglicense:latest_license_articles_atom" slug=license.slug %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Related articles -->
+        {% include "blog/articles.html" with articles=related_articles %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

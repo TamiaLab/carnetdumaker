@@ -11,10 +11,15 @@
 {% block title %}Archives de l'année {{ year }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Archives de l'année {{ year }}</h1>
-    <p><a href="{% url "blog:articles_archive_year_rss" year=year %}"><i class="fa fa-rss"></i> Flux RSS des articles de l'année {{ year }}</a> (<a href="{% url "blog:articles_archive_year_atom" year=year %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% include "blog/articles.html" %}
+    <!-- Article detail -->
+    <div class="col-md-12">
+
+        <h1>Archives de l'année {{ year }}</h1>
+        <p><a href="{% url "blog:articles_archive_year_rss" year=year %}"><i class="fa fa-rss"></i> Flux RSS des articles de l'année {{ year }}</a> (<a href="{% url "blog:articles_archive_year_atom" year=year %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        {% include "blog/articles.html" %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}
