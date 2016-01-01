@@ -66,8 +66,8 @@
                 <td>{% if user.is_authenticated %}
                         {% if thread.user_posts %}<i class="fa fa-comment" title="Vous avez participé à ce topic"></i>{% endif %}
                         {% if thread.user_subscriptions %}<i class="fa fa-star" title="Vous suivez ce topic"></i>{% endif %}
+                        {% if not thread|has_been_read:read_markers %}<i class="fa fa-asterisk" title="Non lu"></i> {% endif %}
                     {% endif %}
-                    {% if display_read_markers and not thread|has_been_read:read_markers %}<i class="fa fa-asterisk" title="Non lu"></i> {% endif %}
                     {% if thread.sticky or thread.global_sticky %}<i class="fa fa-thumb-tack" title="Epinglé"></i> {% endif %}
                     {% if thread.closed or thread.locked %}<i class="fa fa-lock" title="Verrouillé"></i> {% endif %}
                     {% if thread.resolved %}<i class="fa fa-check" title="Résolu"></i>{% endif %}</td>
