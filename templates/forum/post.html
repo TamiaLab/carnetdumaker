@@ -1,5 +1,5 @@
 {% load accounts tools %}
-<p><a id="#post-{{ post.id }}" href="{{ post.get_absolute_url_simple }}">#{{ post.id }}</a> |
+<p><a id="post-{{ post.id }}" href="{{ post.get_absolute_url_simple }}">#{{ post.id }}</a> |
 <i class="fa fa-user"></i> par {{ post.author|user_profile_link }} |
 <i class="fa fa-calendar"></i> <time datetime="{{ post.pub_date|date:"d-m-Y" }} {{ post.pub_date|time:"H:i" }}">{{ post.pub_date|date }}</time></p>
 
