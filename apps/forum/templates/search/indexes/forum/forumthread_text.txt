@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.parent_forum.title }}
+{{ object.first_post.content_text }}
+{{ object.first_post.author.username }}

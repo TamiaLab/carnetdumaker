@@ -1,0 +1,3 @@
+{{ object.parent_thread.title }}
+{{ object.author.username }}
+{{ object.content_text }}
