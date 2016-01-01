@@ -65,9 +65,17 @@
     {% endif %}
     <style>
         body {
-            /*padding-top: 70px;*/
             padding-top: 120px;
             padding-bottom: 20px;
+            background-color: gray;
+        }
+
+        .page-content {
+            background-color: white;
+        }
+
+        .page-footer {
+            background-color: white;
         }
     </style>
     <link rel="stylesheet" href="{% static "css/main.css" %}">
@@ -87,7 +95,7 @@
 <body>
     <!-- No support for IE versions before IE8 -->
     <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <p class="browserupgrade">Vous utilisez un navigateur web <strong>extrêmement vieux</strong>. Merci <a href="http://browsehappy.com/">de mettre à jour votre navigateur</a> afin de visiter ce site sans problémes.</p>
     <![endif]-->
 
     <!-- Navigation -->
@@ -160,7 +168,7 @@
     {% block extra_navbar %}{% endblock %}
 
     <!-- Page content -->
-    <div class="container container-narrow">
+    <div class="container container-narrow page-content">
 
         <!-- Breadcrumb -->
         <div class="row">
@@ -175,26 +183,28 @@
         </div>
 
         <!-- Flash messages -->
-        {% if messages %}<div class="row">
-            <div class="flash-messages">
-                {% for message in messages %}
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}
-                        <div class="alert alert-info alert-dismissible" role="alert">
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-                        <div class="alert alert-info alert-dismissible" role="alert">
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-                        <div class="alert alert-warning alert-dismissible" role="alert">
-                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                    {% endif %}
-                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        {% if messages %}
+            <div class="row">
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                        {% endif %}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        </div>{% endif %}
+        {% endif %}
 
         <!-- Extra before content -->
         <div class="row">
@@ -213,8 +223,12 @@
 
         <!-- Back to top button -->
         <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Revenir en haut de page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    </div>
 
-        <!-- Footer -->
+    <!-- Page footer -->
+    <div class="container container-narrow page-footer">
+
+        <!-- Footer links -->
         <hr>
         <footer>
             <div class="row">
@@ -263,6 +277,7 @@
     <script>
         // Attach Backstrech to the body's background image
         //$.backstretch("path/to/image.jpg", {fade: "normal"});
+        {% block backstretch %}{% endblock %}
     </script>
     <script src="{% static "js/main.js" %}"></script>
 
