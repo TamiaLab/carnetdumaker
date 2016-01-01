@@ -77,7 +77,7 @@ class ForumThreadManager(models.Manager):
         """
 
         # Import here to avoid circular dependency
-        from apps.forum.models import ForumThread, ForumThreadPost
+        from .models import ForumThread, ForumThreadPost
 
         # Create the first post (step 1/3)
         new_first_post = ForumThreadPost.objects.create(author=author,
@@ -136,6 +136,12 @@ class ForumThreadPostManager(models.Manager):
         Returns a queryset with all published (non deleted) post.
         """
         return self.filter(deleted_at__isnull=True)
+
+    def public_published(self):
+        """
+        Return a queryset with all publicly published (non deleted, not in private thread) post.
+        """
+        return self.published().filter(parent_thread__parent_forum__private=False)
 
     def delete_deleted_posts(self, queryset=None):
         """
