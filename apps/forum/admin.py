@@ -74,7 +74,7 @@ class ForumThreadPostAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_('System information'), {
-            'fields': ('parent_thread',)
+            'fields': ('parent_thread', )
         }),
         (_('Post information'), {
             'fields': ('author',
@@ -134,6 +134,16 @@ class ForumThreadPostAdmin(admin.ModelAdmin):
     author_username_link.allow_tags = True
 
 
+class ForumThreadPostInlineFormset(forms.BaseInlineFormSet):
+    """
+    Custom inline formset which prefetch ``author`` and ``last_modification_by`` at queryset level.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(ForumThreadPostInlineFormset, self).__init__(*args, **kwargs)
+        self.queryset = self.queryset.select_related('author', 'last_modification_by', )
+
+
 class ForumThreadPostInline(admin.StackedInline):
     """
     Forum's thread's post inline admin form.
@@ -151,15 +161,8 @@ class ForumThreadPostInline(admin.StackedInline):
             kwargs['initial'] = request.user.id
         return super(ForumThreadPostInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    def get_queryset(self, request):
-        """
-        Return the queryset for this inline form.
-        """
-        # TODO SEEM TO BE NOT WORKING
-        return super(ForumThreadPostInline, self).get_queryset(request) \
-            .select_related('author', 'last_modification_by', )
-
     model = ForumThreadPost
+    formset = ForumThreadPostInlineFormset
 
     readonly_fields = ('pub_date',
                        'last_modification_date',
@@ -174,7 +177,7 @@ class ForumThreadPostInline(admin.StackedInline):
 
     fieldsets = (
         (_('System information'), {
-            'fields': ('parent_thread',)
+            'fields': ('parent_thread', )
         }),
         (_('Post information'), {
             'fields': ('author',
@@ -187,12 +190,12 @@ class ForumThreadPostInline(admin.StackedInline):
                        'deleted_at')
         }),
         (_('Legal stuff'), {
-            'fields': ('author_ip_address',)
+            'fields': ('author_ip_address', )
         }),
     )
 
 
-def view_issue_on_site(obj):
+def view_on_site(obj):
     """
     Simple "view on site" inline callback.
     :param obj: Current database object.
@@ -201,8 +204,8 @@ def view_issue_on_site(obj):
     return format_html('<a href="{0}" class="link">{1}</a>',
                        obj.get_absolute_url(),
                        _('View on site'))
-view_issue_on_site.short_description = ''
-view_issue_on_site.allow_tags = True
+view_on_site.short_description = ''
+view_on_site.allow_tags = True
 
 
 class ForumThreadAdmin(admin.ModelAdmin):
@@ -292,7 +295,7 @@ class ForumThreadAdmin(admin.ModelAdmin):
                     'closed',
                     'resolved',
                     'locked',
-                    view_issue_on_site)
+                    view_on_site)
 
     list_display_links = ('thread_id',
                           'title')
@@ -334,7 +337,7 @@ class ForumThreadAdmin(admin.ModelAdmin):
         }),
     )
 
-    inlines = (ForumThreadPostInline,)
+    inlines = (ForumThreadPostInline, )
 
     def thread_id(self, obj):
         """
@@ -479,7 +482,7 @@ class ForumAdmin(admin.ModelAdmin):
                     'private',
                     'closed',
                     'ordering',
-                    view_issue_on_site)
+                    view_on_site)
 
     list_display_links = ('logo_img',
                           'slug_hierarchy',
@@ -494,9 +497,9 @@ class ForumAdmin(admin.ModelAdmin):
     search_fields = ('title',
                      'description')
 
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('title', )}
 
-    raw_id_fields = ('parent',)
+    raw_id_fields = ('parent', )
 
     fieldsets = (
         (_('Forum information'), {
@@ -535,7 +538,7 @@ class ForumUserProfileAdmin(admin.ModelAdmin):
     ``ForumUserProfile`` admin form.
     """
 
-    list_select_related = ('user',)
+    list_select_related = ('user', )
 
     list_display = ('user_username',
                     'notify_of_reply_by_default',
@@ -547,7 +550,7 @@ class ForumUserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__email',
                      'user__username')
 
-    readonly_fields = ('user_username',)
+    readonly_fields = ('user_username', )
 
     fields = ('user_username',
               'notify_of_reply_by_default',
