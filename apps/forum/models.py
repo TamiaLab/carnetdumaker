@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from mptt.models import MPTTModel
@@ -19,7 +18,7 @@ from apps.tools.fields import (AutoOneToOneField,
                                AutoResizingImageField)
 from apps.tools.utils import unique_slug
 from apps.txtrender.fields import RenderTextField
-from apps.txtrender.utils import render_html, strip_html
+from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
 
@@ -52,6 +51,7 @@ class Forum(MPTTModel):
     title = models.CharField(_('Title'),
                              max_length=255)
 
+    # FIXME AutoSlugField
     slug = models.SlugField(_('Slug'),
                             max_length=255)
 
@@ -67,9 +67,11 @@ class Forum(MPTTModel):
                                   blank=True,
                                   null=True)
 
-    description = models.TextField(_('Description'),
-                                   default='',
-                                   blank=True)
+    description = RenderTextField(_('Description'))
+
+    description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
 
     private = models.BooleanField(_('Private'),
                                   default=False)
@@ -95,11 +97,11 @@ class Forum(MPTTModel):
         order_insertion_by = ('ordering', 'title')
 
     class Meta:
-        unique_together = (('slug', 'parent'),)
+        unique_together = (('slug', 'parent'), )
         verbose_name = _('Forum')
         verbose_name_plural = _('Forums')
         ordering = ('ordering', 'title')
-        permissions = (('can_see_private_forum', 'Can see private forum'),)
+        permissions = (('can_see_private_forum', 'Can see private forum'), )
 
     def save(self, *args, **kwargs):
         """
@@ -109,7 +111,11 @@ class Forum(MPTTModel):
         """
 
         # Avoid duplicate slug
+        # FIXME AutoSlugField
         self.slug = unique_slug(Forum, self, self.slug, 'slug', self.title, {'parent': self.parent})
+
+        # Render the description
+        self.render_description()
 
         # Build complete slug hierarchy
         self.build_slug_hierarchy()
@@ -207,10 +213,9 @@ class Forum(MPTTModel):
             self.threads.all().update(closed=closed)
         if recursive:
             for forum in self.children.all():
-                forum.set_closed(closed, close_threads, recursive)
-                forum.save()
+                forum.set_closed(closed, close_threads, recursive, save=True)
         if save:
-            self.save()
+            self.save(update_fields=('closed', ))
 
     def set_private(self, private, recursive=False, save=False):
         """
@@ -222,16 +227,56 @@ class Forum(MPTTModel):
         self.private = private
         if recursive:
             for forum in self.children.all():
-                forum.set_private(private, recursive)
-                forum.save()
+                forum.set_private(private, recursive, save=True)
         if save:
-            self.save()
+            self.save(update_fields=('private', ))
 
     def has_access(self, user):
         """
         Return True if the given user has access to this forum.
         """
         return user.has_perm('forum.can_see_private_forum') if self.private else True
+
+    def render_description(self, save=False):
+        """
+        Render the content. Save the model only if ``save`` is True.
+        """
+
+        # Render HTML
+        content_html, content_text, _ = render_document(self.content,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True)
+        self.description_html = content_html
+        self.description_text = content_text
+
+        # Save if required
+        if save:
+            # Avoid infinite loop by calling directly super.save
+            super(Forum, self).save(update_fields=('description_html', 'description_text'))
+
+
+def _redo_forum_text_rendering(sender, **kwargs):
+    """
+    Redo text rendering of all forums.
+    :param sender: Not used.
+    :param kwargs: Not used.
+    """
+    for forum in Forum.objects.all():
+        forum.render_description(save=True)
+
+render_engine_changed.connect(_redo_forum_text_rendering)
 
 
 def update_child_forum_slug_hierarchy_on_parent_save(sender, instance, created, raw, using, update_fields, **kwargs):
@@ -255,7 +300,6 @@ def update_child_forum_slug_hierarchy_on_parent_save(sender, instance, created, 
     for child in instance.children.all():
         child.build_slug_hierarchy(save=True)
 
-
 post_save.connect(update_child_forum_slug_hierarchy_on_parent_save, sender=Forum)
 
 
@@ -276,6 +320,7 @@ class ForumThread(models.Model):
     title = models.CharField(_('Title'),
                              max_length=255)
 
+    # FIXME AutoSlugField (non unique)
     slug = models.SlugField(_('Slug'),
                             max_length=255)  # NOT unique, use urls like PK-SLUG
 
@@ -331,6 +376,10 @@ class ForumThread(models.Model):
         # Compute slug
         if not self.slug:
             self.slug = slugify(self.title)
+
+        # Set sticky flag if global sticky set
+        if self.global_sticky:
+            self.sticky = True
 
         # Save the model
         super(ForumThread, self).save(*args, **kwargs)
@@ -461,6 +510,12 @@ class ForumThreadPost(models.Model):
 
     content_html = models.TextField(_('Content (raw HTML)'))
 
+    content_text = models.TextField(_('Content (raw text)'))
+
+    summary_html = models.TextField(_('Content summary (raw HTML)'))
+
+    footnotes_html = models.TextField(_('Content footnotes (raw HTML)'))
+
     author_ip_address = models.GenericIPAddressField(_('Author IP address'),
                                                      default=None,
                                                      blank=True,
@@ -481,8 +536,16 @@ class ForumThreadPost(models.Model):
         verbose_name = _('Forum post')
         verbose_name_plural = _('Forum posts')
         get_latest_by = 'pub_date'
-        permissions = (('can_see_ip_address', 'Can see IP address'),)
-        ordering = ('-pub_date',)
+        permissions = (
+            ('can_see_ip_address', 'Can see IP address'),
+
+            ('allow_titles_in_post', 'Allow titles in forum post'),
+            ('allow_alerts_box_in_post', 'Allow alerts box in forum post'),
+            ('allow_text_colors_in_post', 'Allow coloured text in forum post'),
+            ('allow_cdm_extra_in_post', 'Allow CDM extra in forum post'),
+            ('allow_raw_link_in_post', 'Allow raw link (without forcing nofollow) in forum post'),
+        )
+        ordering = ('-pub_date', )
 
     def __str__(self):
         return "Post from %s" % self.author.username
@@ -618,19 +681,48 @@ class ForumThreadPost(models.Model):
         """
 
         # Render HTML
-        self.content_html = render_html(self.content, force_nofollow=False)
+        allow_titles_in_post = self.author.has_perm('forum.allow_titles_in_post')
+        allow_alerts_box_in_post = self.author.has_perm('forum.allow_alerts_box_in_post')
+        allow_text_colors_in_post = self.author.has_perm('forum.allow_text_colors_in_post')
+        allow_cdm_extra_in_post = self.author.has_perm('forum.allow_cdm_extra_in_post')
+        force_nofollow_in_post = not self.author.has_perm('forum.allow_raw_link_in_post')
+        content_html, content_text, extra_dict = render_document(self.content,
+                                                                 allow_titles=allow_titles_in_post,
+                                                                 allow_code_blocks=True,
+                                                                 allow_alerts_box=allow_alerts_box_in_post,
+                                                                 allow_text_formating=True,
+                                                                 allow_text_extra=True,
+                                                                 allow_text_alignments=True,
+                                                                 allow_text_directions=True,
+                                                                 allow_text_modifiers=True,
+                                                                 allow_text_colors=allow_text_colors_in_post,
+                                                                 allow_spoilers=True,
+                                                                 allow_figures=True,
+                                                                 allow_lists=True,
+                                                                 allow_todo_lists=True,
+                                                                 allow_definition_lists=True,
+                                                                 allow_tables=True,
+                                                                 allow_quotes=True,
+                                                                 allow_footnotes=True,
+                                                                 allow_acronyms=True,
+                                                                 allow_links=True,
+                                                                 allow_medias=True,
+                                                                 allow_cdm_extra=allow_cdm_extra_in_post,
+                                                                 force_nofollow=force_nofollow_in_post,
+                                                                 render_text_version=True,
+                                                                 render_extra_dict=True,
+                                                                 merge_footnotes_html=True,
+                                                                 merge_footnotes_text=True)
+        self.content_html = content_html
+        self.content_text = content_text
+        self.summary_html = extra_dict['summary_html'] if allow_titles_in_post else ''
+        self.footnotes_html = extra_dict['footnotes_html']
 
         # Save if required
         if save:
             # Avoid infinite loop by calling directly super.save
-            super(ForumThreadPost, self).save(update_fields=('content_html',))
-
-    @cached_property
-    def get_content_without_html(self):
-        """
-        Return the post's content text without any HTML tag nor entities.
-        """
-        return strip_html(self.content_html)
+            super(ForumThreadPost, self).save(update_fields=('content_html', 'content_text',
+                                                             'summary_html', 'footnotes_html'))
 
 
 def _redo_forum_thread_posts_text_rendering(sender, **kwargs):
@@ -641,7 +733,6 @@ def _redo_forum_thread_posts_text_rendering(sender, **kwargs):
     """
     for post in ForumThreadPost.objects.all():
         post.render_text(save=True)
-
 
 render_engine_changed.connect(_redo_forum_thread_posts_text_rendering)
 
@@ -864,4 +955,4 @@ class ForumUserProfile(models.Model):
         Re-arm the anti flood delay and save the model.
         """
         self.last_post_date = timezone.now()
-        self.save(update_fields=('last_post_date',))
+        self.save(update_fields=('last_post_date', ))
