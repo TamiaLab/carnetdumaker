@@ -2,9 +2,15 @@
 {% load tools accounts announcements blog forum %}
 
 {% block content %}
-    <h1 class="text-center">Bienvenue sur le site Carnet du Maker !</h1>
 
+    <!-- Website presentation -->
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Bienvenue sur le site Carnet du Maker !</h1>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
                 <h3><i class="fa fa-rocket"></i> L'électronique et l'informatique pour tous, mais pas que !</h3>
@@ -52,104 +58,147 @@
         </div>
     </div>
 
-    <hr>
-    <h1 class="text-center">Je cherche ...</h1>
+    <!-- Omni-Search bar -->
     <div class="container">
         <div class="row">
-            <div class="text-center">
-                <form class="form-inline" method="get" action="/recherche/">
-                    <div class="form-group">
-                        <label class="sr-only" for="searchInput">Recherche</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">Recherche</div>
-                            <input type="text" class="form-control" id="searchInput" name="q" placeholder="Arduino, Chipkit, STM32, Teensy" required>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search" title="Go !"></i></button>
-                            </span>
+            <div class="col-md-12">
+                <hr>
+                <h1 class="text-center">Je cherche ...</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <form class="form-inline" method="get" action="{% url 'search:haystack_search' %}">
+                        <div class="form-group">
+                            <label class="sr-only" for="searchInput">Recherche</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">Recherche</div>
+                                <input type="text" class="form-control" id="searchInput" name="q" placeholder="Arduino, Chipkit, STM32, Teensy" required>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search" title="Go !"></i></button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr>
-    <h1>Les derniers articles</h1>
+    <!-- Latest articles -->
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <h1>Les derniers articles</h1>
+            </div>
+        </div>
+
         {% recent_articles_list as recent_articles %}
         {% include "blog/articles.html" with articles=recent_articles %}
     </div>
 
-    <hr>
-    <h1>Les derniers topics du forum</h1>
+    <!-- Latest forum threads -->
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <h1>Les derniers topics du forum</h1>
+            </div>
+        </div>
+
         {% recent_forum_threads_list as recent_forum_threads %}
-        <table class="table table-striped table-condensed table-responsive">
-            <thead>
-            <tr>
-                <th>Sujet</th>
-                <th>Auteur</th>
-                <th>Date mise à jour</th>
-                <th>Dernier message</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for thread in recent_forum_threads %}
-                <tr>
-                    <td><a href="{{ thread.get_absolute_url }}">{{ thread.title|capfirst }}</a></td>
-                    <td>{{ thread.first_post.author|user_profile_link }}</td>
-                    <td>{{ thread.first_post.last_modification_date|datetime_html }}</td>
-                    <td>par {{ thread.last_post.author|user_profile_link }}
-                        <a href="{{ thread.last_post.get_absolute_url_simple }}">le {{ thread.last_post.last_modification_date|datetime_html }}</a></td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">Pas de topics à afficher !</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Sujet</th>
+                        <th>Auteur</th>
+                        <th>Date mise à jour</th>
+                        <th>Dernier message</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for thread in recent_forum_threads %}
+                        <tr>
+                            <td><a href="{{ thread.get_absolute_url }}">{{ thread.title|capfirst }}</a></td>
+                            <td>{{ thread.first_post.author|user_profile_link }}</td>
+                            <td>{{ thread.first_post.last_modification_date|datetime_html }}</td>
+                            <td>par {{ thread.last_post.author|user_profile_link }}, le
+                                <a href="{{ thread.last_post.get_absolute_url_simple }}">{{ thread.last_post.last_modification_date|datetime_html }}</a></td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">Aucun topic à afficher <i class="fa fa-frown-o"></i></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <hr>
-    <h1>Les derniers messages du forum</h1>
+    <!-- Latest forum posts -->
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+                <h1>Les derniers messages du forum</h1>
+            </div>
+        </div>
+
         {% recent_forum_posts_list as recent_forum_posts %}
-        <table class="table table-striped table-condensed table-responsive">
-            <thead>
-            <tr>
-                <th>Sujet parent</th>
-                <th>Auteur</th>
-                <th>Date mise à jour</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for post in recent_forum_posts %}
-                <tr>
-                    <td><a href="{{ post.get_absolute_url_simple }}">{{ post.parent_thread.title|capfirst }}</a></td>
-                    <td>{{ post.author|user_profile_link }}</td>
-                    <td>{{ post.last_modification_date|datetime_html }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">Pas de topics à afficher !</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Sujet parent</th>
+                        <th>Auteur</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for post in recent_forum_posts %}
+                        <tr>
+                            <td><a href="{{ post.get_absolute_url_simple }}">{{ post.parent_thread.title|capfirst }}</a></td>
+                            <td>{{ post.author|user_profile_link }}</td>
+                            <td>{{ post.last_modification_date|datetime_html }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Aucun message à afficher <i class="fa fa-frown-o"></i></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <hr>
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <h2><i class="fa fa-bullhorn"></i> En direct du site</h2>
 
                 <h3>Les dernières annonces et actualités</h3>
                 {% recent_announcements_list as recent_announcements %}
-                <ul>{% for announcement in recent_announcements %}
-                    <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a> - par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</li>
-                {% endfor %}</ul>
+                <ul>
+                    {% for announcement in recent_announcements %}
+                        <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a> - par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</li>
+                    {% endfor %}
+                </ul>
             </div>
 
             <div class="col-md-6">
@@ -157,21 +206,27 @@
 
                 <h3>Les derniers utilisateurs inscrits</h3>
                 {% get_latest_created_user_accounts as latest_created_user_accounts %}
-                <ul class="list-inline">{% for user_account in latest_created_user_accounts %}
-                    <li>{{ user_account.user|user_profile_link }}</li>
-                {% endfor %}</ul>
+                <ul class="list-inline">
+                    {% for user_account in latest_created_user_accounts %}
+                        <li>{{ user_account.user|user_profile_link }}</li>
+                    {% endfor %}
+                </ul>
 
                 <h3>Les derniers profils utilisateurs mis à jour</h3>
                 {% get_latest_modified_user_accounts as latest_modified_user_accounts %}
-                <ul class="list-inline">{% for user_account in latest_modified_user_accounts %}
-                    <li>{{ user_account.user|user_profile_link }}</li>
-                {% endfor %}</ul>
+                <ul class="list-inline">
+                    {% for user_account in latest_modified_user_accounts %}
+                        <li>{{ user_account.user|user_profile_link }}</li>
+                    {% endfor %}
+                </ul>
 
                 <h3>Les derniers utilisateurs actifs</h3>
                 {% get_latest_online_user_accounts as latest_online_user_accounts %}
-                <ul class="list-inline">{% for user_account in latest_online_user_accounts %}
-                    <li>{{ user_account.user|user_profile_link }}</li>
-                {% endfor %}</ul>
+                <ul class="list-inline">
+                    {% for user_account in latest_online_user_accounts %}
+                        <li>{{ user_account.user|user_profile_link }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
