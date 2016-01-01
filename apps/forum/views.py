@@ -86,7 +86,7 @@ def forum_show(request, hierarchy,
 
     # Get all threads in this forum
     queryset = ForumThread.objects.display_ordered(forum_obj) \
-        .select_related('first_post__author', 'last_post')
+        .select_related('first_post__author', 'last_post__author')
 
     # Prefetch posts and subscriptions
     current_user = request.user
@@ -129,15 +129,11 @@ def forum_show(request, hierarchy,
     # Prefetch read markers
     if current_user.is_authenticated():
         parent_forum_last_read_date = ReadForumTracker.objects.get_marker_for_forum(current_user, forum_obj)
-        thread_ids = [t.id for t in context['threads']]
-        thread_markers = ReadForumThreadTracker.objects.get_marker_for_threads(current_user, thread_ids)
-        context['display_read_markers'] = True
+        thread_markers = ReadForumThreadTracker.objects.get_marker_for_threads(current_user, page.object_list)
         context['read_markers'] = {
             'parent_forum_last_read_date': parent_forum_last_read_date,
             'thread_markers': thread_markers
         }
-    else:
-        context['display_read_markers'] = False
 
     return TemplateResponse(request, template_name, context)
 
