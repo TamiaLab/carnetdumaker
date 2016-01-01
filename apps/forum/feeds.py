@@ -106,14 +106,15 @@ class LatestForumThreadsFeed(ForumThreadsBaseFeed):
     """
     title = _('Latest forum threads')
     link = reverse_lazy('forum:index')
+    feed_url = reverse_lazy('forum:latest_forum_threads_rss')
     description = _('Latest forum threads, all forums together')
 
     def items(self):
         """
         Return a list of the N most recent (public) forum's threads.
         """
-        return ForumThread.objects.public_threads().select_related('first_post__author', 'last_post') \
-                   .order_by('-first_post__pub_date')[:NB_FORUM_THREADS_IN_FEEDS]
+        return ForumThread.objects.public_threads() \
+                   .select_related('first_post__author', 'last_post')[:NB_FORUM_THREADS_IN_FEEDS]
 
 
 class LatestForumThreadsAtomFeed(LatestForumThreadsFeed):
@@ -122,6 +123,7 @@ class LatestForumThreadsAtomFeed(LatestForumThreadsFeed):
     """
     feed_type = Atom1Feed
     subtitle = LatestForumThreadsFeed.description
+    feed_url = reverse_lazy('forum:latest_forum_threads_atom')
 
 
 class LatestForumPostsFeed(ForumPostsBaseFeed):
@@ -130,16 +132,16 @@ class LatestForumPostsFeed(ForumPostsBaseFeed):
     """
     title = _('Latest forum posts')
     link = reverse_lazy('forum:index')
+    feed_url = reverse_lazy('forum:latest_forum_thread_posts_rss')
     description = _('Latest forum posts, all threads together')
 
     def items(self):
         """
         Return a list of the five most recent (public) forum's thread's post.
         """
-        return ForumThreadPost.objects.select_related('parent_thread__last_post',
-                                                      'parent_thread__first_post', 'author') \
-                   .filter(parent_thread__parent_forum__private=False) \
-                   .order_by('-pub_date')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
+        return ForumThreadPost.objects.public_published() \
+                   .select_related('parent_thread__last_post',
+                                   'parent_thread__first_post', 'author')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
 
 
 class LatestForumPostsAtomFeed(LatestForumPostsFeed):
@@ -148,6 +150,7 @@ class LatestForumPostsAtomFeed(LatestForumPostsFeed):
     """
     feed_type = Atom1Feed
     subtitle = LatestForumPostsFeed.description
+    feed_url = reverse_lazy('forum:latest_forum_thread_posts_atom')
 
 
 class LatestForumThreadsForForumFeed(ForumThreadsBaseFeed):
@@ -171,7 +174,7 @@ class LatestForumThreadsForForumFeed(ForumThreadsBaseFeed):
         """
         Return the title of the forum.
         """
-        return _('Latest forum threads in forum %s') % obj.title
+        return _('Latest forum threads in forum "%s"') % obj.title
 
     def link(self, obj):
         """
@@ -179,18 +182,24 @@ class LatestForumThreadsForForumFeed(ForumThreadsBaseFeed):
         """
         return obj.get_absolute_url()
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_threads_rss_feed_url()
+
     def description(self, obj):
         """
         Return the description of the forum.
         """
-        return obj.description or _('Latest forum threads in forum %s') % obj.title
+        return obj.description or _('Latest forum threads in forum "%s"') % obj.title
 
     def items(self, obj):
         """
         Return a list of the N most recent (public) forum's threads in the given forum.
         """
-        return obj.threads.public_threads().select_related('first_post__author', 'last_post') \
-                   .order_by('-first_post__pub_date')[:NB_FORUM_THREADS_IN_FEEDS]
+        return obj.threads.public_threads() \
+                   .select_related('first_post__author', 'last_post')[:NB_FORUM_THREADS_IN_FEEDS]
 
 
 class LatestForumThreadsForForumAtomFeed(LatestForumThreadsForForumFeed):
@@ -199,6 +208,12 @@ class LatestForumThreadsForForumAtomFeed(LatestForumThreadsForForumFeed):
     """
     feed_type = Atom1Feed
     subtitle = LatestForumThreadsForForumFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_threads_atom_feed_url()
 
 
 class LatestForumPostsForForumFeed(ForumPostsBaseFeed):
@@ -222,7 +237,7 @@ class LatestForumPostsForForumFeed(ForumPostsBaseFeed):
         """
         Return the title of the forum.
         """
-        return _('Latest forum posts in forum %s') % obj.title
+        return _('Latest forum posts in forum "%s"') % obj.title
 
     def link(self, obj):
         """
@@ -230,20 +245,25 @@ class LatestForumPostsForForumFeed(ForumPostsBaseFeed):
         """
         return obj.get_absolute_url()
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_posts_rss_feed_url()
+
     def description(self, obj):
         """
         Return the description of the forum.
         """
-        return obj.description or _('Latest forum posts in forum %s') % obj.title
+        return obj.description or _('Latest forum posts in forum "%s"') % obj.title
 
     def items(self, obj):
         """
         Return a list of the N most recent (public) forum's thread's post in the given forum.
         """
-        return ForumThreadPost.objects.select_related('parent_thread__last_post',
-                                                      'parent_thread__first_post', 'author') \
-                   .filter(parent_thread__parent_forum=obj) \
-                   .order_by('-pub_date')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
+        return ForumThreadPost.objects.public_published() \
+                   .select_related('parent_thread__last_post',
+                                   'parent_thread__first_post', 'author')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
 
 
 class LatestForumPostsForForumAtomFeed(LatestForumPostsForForumFeed):
@@ -252,6 +272,12 @@ class LatestForumPostsForForumAtomFeed(LatestForumPostsForForumFeed):
     """
     feed_type = Atom1Feed
     subtitle = LatestForumPostsForForumFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_posts_atom_feed_url()
 
 
 class LatestForumPostsForThreadFeed(ForumPostsBaseFeed):
@@ -285,6 +311,12 @@ class LatestForumPostsForThreadFeed(ForumPostsBaseFeed):
         """
         return obj.get_absolute_url()
 
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_posts_rss_feed_url()
+
     def description(self, obj):
         """
         Return the description of the forum's thread.
@@ -295,9 +327,9 @@ class LatestForumPostsForThreadFeed(ForumPostsBaseFeed):
         """
         Return a list of the N most recent (public) forum's thread's post in the given forum's thread.
         """
-        return obj.posts.select_related('parent_thread__last_post',
-                                        'parent_thread__first_post', 'author') \
-                   .order_by('-pub_date')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
+        return obj.posts.published().select_related('parent_thread__last_post',
+                                                    'parent_thread__first_post',
+                                                    'author')[:NB_FORUM_THREAD_POSTS_IN_FEEDS]
 
 
 class LatestForumPostsForThreadAtomFeed(LatestForumPostsForThreadFeed):
@@ -306,3 +338,9 @@ class LatestForumPostsForThreadAtomFeed(LatestForumPostsForThreadFeed):
     """
     feed_type = Atom1Feed
     subtitle = LatestForumPostsForThreadFeed.description
+
+    def feed_url(self, obj):
+        """
+        Return the permalink to this feed.
+        """
+        return obj.get_latest_posts_atom_feed_url()
