@@ -59,11 +59,8 @@
 
 ## Forum app
 
-- Add warning when posting on old topics.
 - Add forums/topics reader tracker for stats.
 - Add forum post edit history with revisions like for blog articles for legal purposes.
-- Add logical deletion with delayed physical deletion for legal purposes.
-- Add icons "subscribed", "has post in" and "unread" for all forum threads in list view.
 - Add topics/posts per author views and feeds.
 - Add forum "unread topics/posts" view.
 - Add fields "last_thread", "last_post", "post_count", "thread_count" and "view_count".
