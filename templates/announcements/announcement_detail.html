@@ -23,30 +23,40 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ announcement.title }}</h1>
-    <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ announcement.pub_date|datetime_html }}</p>
-    {% if announcement.has_been_modified_after_publication %}
-        <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
-    {% endif %}
-    {% with announcement_tags=announcement.tags.all %}
-        {% if announcement_tags %}
-            <p><i class="fa fa-tags"></i> Mots clefs :{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}</p>
+
+    <!-- Announcement detail -->
+    <div class="col-md-12">
+
+        <!-- Announcement title and information -->
+        <h1>{{ announcement.title }}</h1>
+
+        <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ announcement.pub_date|datetime_html }}</p>
+        {% if announcement.has_been_modified_after_publication %}
+            <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
         {% endif %}
-    {% endwith %}
+        {% with announcement_tags=announcement.tags.all %}
+            {% if announcement_tags %}
+                <p><i class="fa fa-tags"></i> Mots clefs :{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}</p>
+            {% endif %}
+        {% endwith %}
 
-    {% if not announcement.is_published %}
-        {% if announcement.pub_date %}
-            <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas encore en ligne ! La publication de l'annonce est programmé pour le {{ announcement.pub_date|datetime_html }}</p>
-        {% else %}
-            <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas en ligne ! Ceci est une simple prévisualisation de l'annonce.</p>
+        <!-- Preview mode warning -->
+        {% if not announcement.is_published %}
+            {% if announcement.pub_date %}
+                <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas encore en ligne ! La publication de l'annonce est programmé pour le {{ announcement.pub_date|datetime_html }}</p>
+            {% else %}
+                <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas en ligne ! Ceci est une simple prévisualisation de l'annonce.</p>
+            {% endif %}
         {% endif %}
-    {% endif %}
 
-    <hr>
+        <hr>
 
-    {{ announcement.content_html|safe }}
+        <!-- Announcement content -->
+        {{ announcement.content_html|safe }}
 
-    {% if user.is_staff %}
-        <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>
-    {% endif %}
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>
+        {% endif %}
+    </div>
 {% endblock %}

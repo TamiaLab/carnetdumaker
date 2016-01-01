@@ -3,15 +3,25 @@
 {% block title %}Liste des mots clefs | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Liste des mots clefs</h1>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:announcements_announcementtag_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un mot clef</a></p>
-    {% endif %}
+    <!-- Tags list -->
+    <div class="col-md-12">
 
-    <p>{% for tag in tags %}
-        <span class="label label-default"><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> </span>
-    {% empty %}
-        Aucun mots clefs à afficher <i class="fa fa-frown-o"></i>
-    {% endfor %}</p>
+        <h1>Liste des mots clefs</h1>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:announcements_announcementtag_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un mot clef</a></p>
+        {% endif %}
+
+        <!-- Tags -->
+        <p>
+            {% for tag in tags %}
+                <span class="label label-default"><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> </span>
+            {% empty %}
+                Aucun mots clefs à afficher <i class="fa fa-frown-o"></i>
+            {% endfor %}
+        </p>
+
+    </div>
 {% endblock %}

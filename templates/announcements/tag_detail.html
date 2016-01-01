@@ -12,38 +12,21 @@
 {% block title %}Mot clef "{{ tag.name }}" | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Annonces portant le mot clef "{{ tag.name }}"</h1>
-    <p><a href="{{ tag.get_latest_announcements_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{{ tag.get_latest_announcements_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:announcements_announcementtag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
-    {% endif %}
+    <!-- Tags detail -->
+    <div class="col-md-12">
 
-    {% for announcement in related_announcements %}
-        <div class="panel panel-{{ announcement.type }}">
-            <div class="panel-heading">
-                <h1 class="panel-title"><i class="fa fa-bullhorn"></i> <a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a></h1>
-            </div>
-            <div class="panel-body">
-                {{ announcement.content_html|safe }}
+        <h1>Annonces portant le mot clef "{{ tag.name }}"</h1>
+        <p><a href="{{ tag.get_latest_announcements_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{{ tag.get_latest_announcements_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-                {% if user.is_staff %}
-                    <p class="text-right"><a href="{% url 'admin:announcements_announcement_change' announcement.pk %}"><i class="fa fa-terminal"></i> Modifier l'annonce dans l'interface d'administration</a></p>
-                {% endif %}
-            </div>
-            <div class="panel-footer">
-                <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}
-                {% with announcement_tags=announcement.tags.all %}
-                    {% if announcement_tags %}
-                        | <i class="fa fa-tags"></i>{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                </p>
-            </div>
-        </div>
-    {% empty %}
-        <p class="text-center">Aucune annonce à afficher pour le moment !</p>
-    {% endfor %}
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:announcements_announcementtag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- Related announcements -->
+        {% include "announcements/announcements.html" with announcements=related_announcements %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}
