@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     url(r'^', include('apps.home.urls', namespace='home')),
 
     # Search engine
-    url(r'^recherche/', include('haystack.urls')),
+    url(r'^recherche/', include('haystack.urls', namespace='search')),
 
     # Blog / Forum / Boutique
     url(r'^articles/', include('apps.blog.urls', namespace='blog')),
