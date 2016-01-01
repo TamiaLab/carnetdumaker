@@ -1,3 +1,3 @@
 """
-Migrations for the forum apps.
+Migrations for the forum app.
 """
