@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-03 16:00+0200\n"
-"PO-Revision-Date: 2015-07-30 11:41+0200\n"
+"POT-Creation-Date: 2015-12-27 17:02+0100\n"
+"PO-Revision-Date: 2015-12-27 17:02+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -36,11 +36,11 @@ msgstr "Informations légales"
 msgid "ID"
 msgstr "ID"
 
-#: apps/forum/admin.py:116 apps/forum/models.py:434
+#: apps/forum/admin.py:116 apps/forum/models.py:436
 msgid "Parent thread"
 msgstr "Topic parent"
 
-#: apps/forum/admin.py:132 apps/forum/admin.py:371 apps/forum/models.py:442
+#: apps/forum/admin.py:132 apps/forum/admin.py:371 apps/forum/models.py:444
 msgid "Author"
 msgstr "Auteur"
 
@@ -92,16 +92,16 @@ msgstr "Statut du forum"
 msgid "Other stuff"
 msgstr "Autres informations"
 
-#: apps/forum/admin.py:529 apps/forum/models.py:60
+#: apps/forum/admin.py:529 apps/forum/models.py:62
 msgid "Logo"
 msgstr "Logo"
 
-#: apps/forum/admin.py:563 apps/forum/models.py:739 apps/forum/models.py:781
-#: apps/forum/models.py:823
+#: apps/forum/admin.py:563 apps/forum/models.py:742 apps/forum/models.py:784
+#: apps/forum/models.py:826
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps/forum/apps.py:15 apps/forum/models.py:97
+#: apps/forum/apps.py:15 apps/forum/models.py:99
 msgid "Forum"
 msgstr "Forum"
 
@@ -140,20 +140,20 @@ msgstr "Derniers messages dans le forum %s"
 msgid "Latest posts in forum thread \"%s\""
 msgstr "Derniers messages dans le topic \"%s\""
 
-#: apps/forum/forms.py:28 apps/forum/models.py:50 apps/forum/models.py:274
+#: apps/forum/forms.py:28 apps/forum/models.py:52 apps/forum/models.py:276
 msgid "Title"
 msgstr "Titre"
 
 #: apps/forum/forms.py:30 apps/forum/forms.py:82 apps/forum/forms.py:162
-#: apps/forum/models.py:458
+#: apps/forum/models.py:460
 msgid "Content"
 msgstr "Contenu"
 
-#: apps/forum/forms.py:33 apps/forum/models.py:75 apps/forum/models.py:291
+#: apps/forum/forms.py:33 apps/forum/models.py:77 apps/forum/models.py:293
 msgid "Closed"
 msgstr "Fermé"
 
-#: apps/forum/forms.py:37 apps/forum/models.py:294
+#: apps/forum/forms.py:37 apps/forum/models.py:296
 msgid "Resolved"
 msgstr "Résolu"
 
@@ -173,168 +173,172 @@ msgstr "Vous devez cocher cette case pour confirmer la suppression."
 msgid "I really want to delete this post"
 msgstr "Je souhaite vraiment supprimer ce message"
 
-#: apps/forum/models.py:53 apps/forum/models.py:277
+#: apps/forum/models.py:55 apps/forum/models.py:279
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/forum/models.py:56
+#: apps/forum/models.py:58
 msgid "Slug hierarchy"
 msgstr "Hiérarchie de slug"
 
-#: apps/forum/models.py:68
+#: apps/forum/models.py:70
 msgid "Description"
 msgstr "Description"
 
-#: apps/forum/models.py:72
+#: apps/forum/models.py:74
 msgid "Private"
 msgstr "Privé"
 
-#: apps/forum/models.py:81 apps/forum/models.py:283
+#: apps/forum/models.py:83 apps/forum/models.py:285
 msgid "Parent forum"
 msgstr "Forum parent"
 
-#: apps/forum/models.py:86
+#: apps/forum/models.py:88
 msgid "Ordering"
 msgstr "Ordre"
 
-#: apps/forum/models.py:98
+#: apps/forum/models.py:100
 msgid "Forums"
 msgstr "Forums"
 
-#: apps/forum/models.py:285
+#: apps/forum/models.py:287
 msgid "Sticky"
 msgstr "Epinglé"
 
-#: apps/forum/models.py:288
+#: apps/forum/models.py:290
 msgid "Global sticky"
 msgstr "Epinglé partout"
 
-#: apps/forum/models.py:297
+#: apps/forum/models.py:299
 msgid "Locked"
 msgstr "Vérouillé"
 
-#: apps/forum/models.py:302
+#: apps/forum/models.py:304
 msgid "First post"
 msgstr "Premier message"
 
-#: apps/forum/models.py:306
+#: apps/forum/models.py:308
 msgid "Last post"
 msgstr "Dernier message"
 
-#: apps/forum/models.py:308 apps/forum/models.py:467
+#: apps/forum/models.py:310 apps/forum/models.py:471
 msgid "Deletion date"
 msgstr "Date de suppression"
 
-#: apps/forum/models.py:317
+#: apps/forum/models.py:319
 msgid "Forum thread"
 msgstr "Topic sur le forum"
 
-#: apps/forum/models.py:318
+#: apps/forum/models.py:320
 msgid "Forum threads"
 msgstr "Topics sur le forum"
 
-#: apps/forum/models.py:415 apps/forum/models.py:596
+#: apps/forum/models.py:417 apps/forum/models.py:603
 msgid "is deleted"
 msgstr "est supprimé"
 
-#: apps/forum/models.py:444
+#: apps/forum/models.py:446
 msgid "Publication date"
 msgstr "Date de publication"
 
-#: apps/forum/models.py:447
+#: apps/forum/models.py:449
 msgid "Last modification date"
 msgstr "Date de dernière modification"
 
-#: apps/forum/models.py:452
+#: apps/forum/models.py:454
 msgid "Last modification by"
 msgstr "Dernière modification par"
 
-#: apps/forum/models.py:460
+#: apps/forum/models.py:462
 msgid "Content (raw HTML)"
 msgstr "Contenu (HTML brut)"
 
-#: apps/forum/models.py:462
+#: apps/forum/models.py:464
+msgid "Content (raw text)"
+msgstr "Contenu (texte brut)"
+
+#: apps/forum/models.py:466
 msgid "Author IP address"
 msgstr "Adresse IP de l'auteur"
 
-#: apps/forum/models.py:476
+#: apps/forum/models.py:483
 msgid "Forum post"
 msgstr "Message du forum"
 
-#: apps/forum/models.py:477
+#: apps/forum/models.py:484
 msgid "Forum posts"
 msgstr "Messages du forum"
 
-#: apps/forum/models.py:673 apps/forum/models.py:745
+#: apps/forum/models.py:676 apps/forum/models.py:748
 msgid "Related forum"
 msgstr "Forum lié"
 
-#: apps/forum/models.py:679 apps/forum/models.py:714
+#: apps/forum/models.py:682 apps/forum/models.py:717
 msgid "Subscriber"
 msgstr "Abonné"
 
-#: apps/forum/models.py:681 apps/forum/models.py:716 apps/forum/models.py:749
-#: apps/forum/models.py:791
+#: apps/forum/models.py:684 apps/forum/models.py:719 apps/forum/models.py:752
+#: apps/forum/models.py:794
 msgid "Active"
 msgstr "Actif"
 
-#: apps/forum/models.py:688
+#: apps/forum/models.py:691
 msgid "Forum subscription"
 msgstr "Abonnement à un forum"
 
-#: apps/forum/models.py:689
+#: apps/forum/models.py:692
 msgid "Forum subscriptions"
 msgstr "Abonnements aux forums"
 
-#: apps/forum/models.py:708
+#: apps/forum/models.py:711
 msgid "Related thread"
 msgstr "Topic lié"
 
-#: apps/forum/models.py:723
+#: apps/forum/models.py:726
 msgid "Forum thread subscription"
 msgstr "Abonnement à un topic"
 
-#: apps/forum/models.py:724
+#: apps/forum/models.py:727
 msgid "Forum thread subscriptions"
 msgstr "Abonnements aux topics"
 
-#: apps/forum/models.py:747 apps/forum/models.py:789
+#: apps/forum/models.py:750 apps/forum/models.py:792
 msgid "Last read date"
 msgstr "Date de dernière lecture"
 
-#: apps/forum/models.py:756
+#: apps/forum/models.py:759
 msgid "Read forum tracker"
 msgstr "Marqueur de forum lu"
 
-#: apps/forum/models.py:757
+#: apps/forum/models.py:760
 msgid "Read forum trackers"
 msgstr "Marqueur de forums lus"
 
-#: apps/forum/models.py:787
+#: apps/forum/models.py:790
 msgid "Related forum thread"
 msgstr "Topic lié"
 
-#: apps/forum/models.py:798
+#: apps/forum/models.py:801
 msgid "Read forum thread tracker"
 msgstr "Marqueur de topic lu"
 
-#: apps/forum/models.py:799
+#: apps/forum/models.py:802
 msgid "Read forum thread trackers"
 msgstr "Marqueur de topics lus"
 
-#: apps/forum/models.py:825
+#: apps/forum/models.py:828
 msgid "Notify me of new reply by default"
 msgstr "Me notifier en cas de réponse par défaut"
 
-#: apps/forum/models.py:828
+#: apps/forum/models.py:831
 msgid "Last post date"
 msgstr "Dernière date de publication d'un message"
 
-#: apps/forum/models.py:834
+#: apps/forum/models.py:837
 msgid "Forum user profile"
 msgstr "Profil utilisateur du forum"
 
-#: apps/forum/models.py:835
+#: apps/forum/models.py:838
 msgid "Forum user profiles"
 msgstr "Profils utilisateurs du forum"
 
