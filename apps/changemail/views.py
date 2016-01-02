@@ -146,7 +146,7 @@ def change_email_confirm(request, uidb64=None, token=None, addressb64=None,
     # Handle the security token
     if user is not None and \
             address is not None and \
-            token_generator.check_token(user, token):
+            token_generator.check_token(user, address, token):
 
             # Save the new email address
             user.email = address

@@ -34,7 +34,7 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         Test if the ``make_token`` method return something.
         """
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token = default_token_generator.make_token(user)
+        token = default_token_generator.make_token(user, 'newjohn.doe@example.com')
         self.assertTrue(token)
 
     def test_make_token_repeatable(self):
@@ -44,8 +44,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         date_today = date.today()
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token1 = token_generator.make_token(user)
-        token2 = token_generator.make_token(user)
+        token1 = token_generator.make_token(user, 'newjohn.doe@example.com')
+        token2 = token_generator.make_token(user, 'newjohn.doe@example.com')
         self.assertEqual(token1, token2)
 
     def test_make_token_timestamp(self):
@@ -55,8 +55,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         date_today = date.today()
         date_not_today = date.today() + timedelta(days=1)
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token1 = FixedEmailChangeTokenGenerator(date_today).make_token(user)
-        token2 = FixedEmailChangeTokenGenerator(date_not_today).make_token(user)
+        token1 = FixedEmailChangeTokenGenerator(date_today).make_token(user, 'newjohn.doe@example.com')
+        token2 = FixedEmailChangeTokenGenerator(date_not_today).make_token(user, 'newjohn.doe@example.com')
         self.assertNotEqual(token1, token2)
 
     def test_make_token_user_pk(self):
@@ -67,8 +67,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         user = MagicMock(pk=1, email='john.doe@example.com')
         user2 = MagicMock(pk=2, email='john.doe@example.com')
-        token1 = token_generator.make_token(user)
-        token2 = token_generator.make_token(user2)
+        token1 = token_generator.make_token(user, 'newjohn.doe@example.com')
+        token2 = token_generator.make_token(user2, 'newjohn.doe@example.com')
         self.assertNotEqual(token1, token2)
 
     def test_make_token_user_email(self):
@@ -79,8 +79,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         user = MagicMock(pk=1, email='john.doe@example.com')
         user2 = MagicMock(pk=1, email='not.john.doe@example.com')
-        token1 = token_generator.make_token(user)
-        token2 = token_generator.make_token(user2)
+        token1 = token_generator.make_token(user, 'newjohn.doe@example.com')
+        token2 = token_generator.make_token(user2, 'newjohn.doe@example.com')
         self.assertNotEqual(token1, token2)
 
     def test_check_token_valid(self):
@@ -90,8 +90,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         date_today = date.today()
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token = token_generator.make_token(user)
-        self.assertTrue(token_generator.check_token(user, token))
+        token = token_generator.make_token(user, 'newjohn.doe@example.com')
+        self.assertTrue(token_generator.check_token(user, 'newjohn.doe@example.com', token))
 
     def test_check_token_expired(self):
         """
@@ -102,8 +102,8 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         token_generator_expired = FixedEmailChangeTokenGenerator(date_expired)
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token = token_generator.make_token(user)
-        self.assertFalse(token_generator_expired.check_token(user, token))
+        token = token_generator.make_token(user, 'newjohn.doe@example.com')
+        self.assertFalse(token_generator_expired.check_token(user, 'newjohn.doe@example.com', token))
 
     def test_check_token_invalid(self):
         """
@@ -112,6 +112,17 @@ class EmailChangeTokenGeneratorTestCase(SimpleTestCase):
         date_today = date.today()
         token_generator = FixedEmailChangeTokenGenerator(date_today)
         user = MagicMock(pk=1, email='john.doe@example.com')
-        token = token_generator.make_token(user)
+        token = token_generator.make_token(user, 'newjohn.doe@example.com')
         token = '%sx' % token  # Tamper the signature
-        self.assertFalse(token_generator.check_token(user, token))
+        self.assertFalse(token_generator.check_token(user, 'newjohn.doe@example.com', token))
+
+    def test_check_token_address_altered(self):
+        """
+        Test if the ``check_token`` method return False with an altered email address.
+        """
+        date_today = date.today()
+        token_generator = FixedEmailChangeTokenGenerator(date_today)
+        user = MagicMock(pk=1, email='john.doe@example.com')
+        token = token_generator.make_token(user, 'newjohn.doe@example.com')
+        token = '%sx' % token  # Tamper the signature
+        self.assertFalse(token_generator.check_token(user, 'john.smith@example.com', token))

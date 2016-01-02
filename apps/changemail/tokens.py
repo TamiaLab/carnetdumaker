@@ -19,17 +19,19 @@ class EmailChangeTokenGenerator(object):
 
     key_salt = "apps.changemail.tokens.EmailChangeTokenGenerator"
 
-    def make_token(self, user):
+    def make_token(self, user, address):
         """
         Returns a token that can be used once to do an email change for the given user.
         :param user: The user which request the token.
+        :param address: The new address of the user.
         """
-        return self._make_token_with_timestamp(user, self._num_days(self._today()))
+        return self._make_token_with_timestamp(user, address, self._num_days(self._today()))
 
-    def check_token(self, user, token):
+    def check_token(self, user, address, token):
         """
         Check that an email change token is correct for a given user.
         :param user: The user which request the token.
+        :param address: The new address of the user.
         :param token: The token to be checked.
         """
 
@@ -45,7 +47,7 @@ class EmailChangeTokenGenerator(object):
             return False
 
         # Check that the timestamp/uid has not been tampered with
-        if not constant_time_compare(self._make_token_with_timestamp(user, ts), token):
+        if not constant_time_compare(self._make_token_with_timestamp(user, address, ts), token):
             return False
 
         # Check the timestamp is within limit
@@ -54,7 +56,7 @@ class EmailChangeTokenGenerator(object):
 
         return True
 
-    def _make_token_with_timestamp(self, user, timestamp):
+    def _make_token_with_timestamp(self, user, address, timestamp):
         # timestamp is number of days since 2001-1-1.  Converted to
         # base 36, this gives us a 3 digit string until about 2121
         ts_b36 = int_to_base36(timestamp)
@@ -67,14 +69,14 @@ class EmailChangeTokenGenerator(object):
 
         hash = salted_hmac(
             self.key_salt,
-            self._make_hash_value(user, timestamp),
+            self._make_hash_value(user, address, timestamp),
         ).hexdigest()[::2]
         return "%s-%s" % (ts_b36, hash)
 
-    def _make_hash_value(self, user, timestamp):
+    def _make_hash_value(self, user, address, timestamp):
         # Ensure results are consistent across DB backends
         return (
-            six.text_type(user.pk) + user.email + six.text_type(timestamp)
+            six.text_type(user.pk) + user.email + six.text_type(timestamp) + six.text_type(address)
         )
 
     def _num_days(self, dt):
