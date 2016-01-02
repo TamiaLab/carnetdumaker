@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div class="col-md-10">{% block content %}{% endblock %}</div>
-    <div class="col-md-2">{% block menu %}{% endblock %}</div>
-    {# TODO collapse sidebar to top (just before content) on xs/sm #}
+    <div class="col-xs-10">
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <div class="row">
+            {% block menu %}{% endblock %}
+        </div>
+    </div>
 {% endblock %}
