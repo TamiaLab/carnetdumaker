@@ -4,19 +4,26 @@
 {% block title %}Signaler un contenu | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Signaler un contenu</h1>
 
-    <p class="text-warning">Merci de ne signaler que des contenus réellement inadéquat.
-    De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+    <!-- Report content -->
+    <div class="col-md-12">
 
-    <div class="panel panel-default">
-        <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler un contenu</div>
-        <div class="panel-body">
-            <form method="post" action="{{ comment.get_report_url }}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Signaler le contenu" />
-            </form>
+        <h1>Signaler un contenu</h1>
+
+        <!-- Report warning -->
+        <p class="text-warning">Merci de ne signaler que des contenus réellement inadéquat.
+        De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+
+        <!-- Report form -->
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler un contenu</div>
+            <div class="panel-body">
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Signaler le contenu" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

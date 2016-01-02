@@ -1,6 +1,7 @@
 <p>Bonjour {{ user.username }},</p>
 
-<p>Une demande de modération pour un contenu du site {{ site_name }} vient d'être effectuée par {{ reporter.username }}.</p>
+<p>Une demande de modération pour un contenu du site {{ site_name }} vient d'être effectuée par
+    <a href="{{ protocol }}://{{ domain }}{% url "accounts:user_profile" username=reporter.username  %}">{{ reporter.username }}</a>.</p>
 
 <p>La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}</p>
 

@@ -6,9 +6,14 @@
 {% block title %}Merci de votre aide | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Merci de votre aide</h1>
 
-    <p>L'équipe du site va traiter votre signalement au plus vite. Merci de votre aide.</p>
+    <!-- Content report thanks -->
+    <div class="col-md-12">
 
-    <p><a href="{% url "home:index" %}">Revenir sur la page d'accueil</a></p>
+        <h1>Merci de votre aide</h1>
+        <p>L'équipe du site va traiter votre signalement au plus vite. Merci de votre aide.</p>
+
+        <!-- Return link -->
+        <p><a href="{% url "home:index" %}"><i class="fa fa-arrow-left"></i> Revenir sur la page d'accueil</a></p>
+    </div>
 {% endblock %}

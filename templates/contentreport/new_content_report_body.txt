@@ -1,7 +1,7 @@
-Bonjour {{ user.username }},
+Bonjour {{ user.username|safe }},
 
-Une demande de modération pour un contenu du site {{ site_name }} vient d'être effectuée par {{ reporter.username }}.
+Une demande de modération pour un contenu du site {{ site_name|safe }} vient d'être effectuée par {{ reporter.username|safe }}.
 
-La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}
+La raison donnée est : {% if report.reason %}{{ report.reason|safe }}{% else %}(pas de raison spécifiée){% endif %}
 
 Pour voir la demande de modération dans le panel d'administration : {{ protocol }}://{{ domain }}{% url "admin:contentreport_contentreport_change" report.pk %}
