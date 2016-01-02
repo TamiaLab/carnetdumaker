@@ -6,13 +6,19 @@
 {% block title %}Supprimer définitement le message | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Supprimer définitivement le message</h1>
 
-    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
-    <p>Cette action est irréversible.</p>
+    <!-- Delete message permanently -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ message.get_delete_permanent_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-danger" value="Supprimer définitivement le message" />
-    </form>
+        <h1>Supprimer définitivement le message</h1>
+
+        <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+        <p><strong>Cette action est irréversible.</strong></p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{{ message.get_delete_permanent_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Supprimer définitivement le message" />
+        </form>
+    </div>
 {% endblock %}

@@ -1,9 +1,9 @@
-Vous avez recu un nouveau message privé de {{ message.sender.username }}.
+Vous avez recu un nouveau message privé de {{ message.sender.username|safe }}.
 
-Titre du message : {{ message.get_subject_display }}
+Titre du message : {{ message.get_subject_display|safe }}
 
 Aperçu du message :
-{{ message.body_text }}
+{{ message.body_text|safe }}
 
 Pour voir les détails du message : {{ protocol }}://{{ domain }}{{ message.get_absolute_url }}
 Pour ne plus recevoir de notification à chaque nouveau message privé : {{ protocol }}://{{ domain }}{% url "privatemsg:myaccount" %}

@@ -4,37 +4,47 @@
 {% block title %}Mes messages privés supprimés | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Mes messages privés supprimés</h1>
 
-    <p><a href="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}"><i class="fa fa-trash"></i> Supprimer tous les messages définitivement.</a></p>
+    <!-- Trash box -->
+    <div class="col-md-12">
 
-    <table class="table table-striped table-condensed table-responsive">
-        <thead>
-            <tr>
-                <th>Sujet</th>
-                <th>Expéditeur</th>
-                <th>Destinataire</th>
-                <th>Date d'envoi</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for message in private_messages %}
-            <tr>
-                <td><a href="{{ message.get_absolute_url }}">{% if message.unread and user == message.recipient %}<strong>{{ message.get_subject_display }}</strong>{% else %}{{ message.get_subject_display }}{% endif %}</a></td>
-                <td>{{ message.sender|user_profile_link }}</td>
-                <td>{{ message.recipient|user_profile_link }}</td>
-                <td>{{ message.sent_at|date_html }}</td>
-                <td>{% if message.parent_msg %}<i class="fa fa-reply" title="Réponse à un précédent message"></i>{% endif %}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="5" class="text-center"><i class="fa fa-envelope-o"></i> Aucun message supprimé !</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <p class="text-center"><i class="fa fa-info-circle"></i> Les messages mis à la corbeille depuis plus de {{ deletion_timeout_days }} jours sont automatiquement supprimés.</p>
+        <h1>Mes messages privés supprimés</h1>
+
+        <!-- Delete all link -->
+        <p><a href="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}"><i class="fa fa-trash"></i> Supprimer tous les messages définitivement.</a></p>
+
+        <!-- Messages<!-- Trash box -->
+        <table class="table table-striped table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th>Sujet</th>
+                    <th>Expéditeur</th>
+                    <th>Destinataire</th>
+                    <th>Date d'envoi</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for message in private_messages %}
+                <tr>
+                    <td><a href="{{ message.get_absolute_url }}">{% if message.unread and user == message.recipient %}<strong>{{ message.get_subject_display }}</strong>{% else %}{{ message.get_subject_display }}{% endif %}</a></td>
+                    <td>{{ message.sender|user_profile_link }}</td>
+                    <td>{{ message.recipient|user_profile_link }}</td>
+                    <td>{{ message.sent_at|date_html }}</td>
+                    <td>{% if message.parent_msg %}<i class="fa fa-reply" title="Réponse à un précédent message"></i>{% endif %}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center"><i class="fa fa-envelope-o"></i> Aucun message supprimé !</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Auto deletion warning -->
+        <p class="text-center"><i class="fa fa-info-circle"></i> Les messages mis à la corbeille depuis plus de {{ deletion_timeout_days }} jours sont automatiquement supprimés.</p>
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

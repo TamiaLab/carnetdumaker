@@ -6,13 +6,19 @@
 {% block title %}Vider la corbeille | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Vider la corbeille</h1>
 
-    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
-    <p>Cette action est irréversible.</p>
+    <!-- Cleanup trash box -->
+    <div class="col-md-12">
 
-    <form method="post" action="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-danger" value="Vider la corbeille" />
-    </form>
+        <h1>Vider la corbeille</h1>
+
+        <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+        <p><strong>Cette action est irréversible.</strong></p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{% url 'privatemsg:delete_all_deleted_msg_permanently' %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Vider la corbeille" />
+        </form>
+    </div>
 {% endblock %}

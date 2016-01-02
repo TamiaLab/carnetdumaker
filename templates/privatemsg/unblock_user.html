@@ -6,19 +6,27 @@
 {% block title %}Débloquer l'utilisateur "{{ blocked_user.username }}" | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">Débloquer l'utilisateur "{{ blocked_user.username }}"</h1>
-        </div>
-        <div class="panel-body">
-            <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
 
-            <form method="post" action="{% url "privatemsg:unblock_user" username=blocked_user.username %}">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-primary" value="Débloquer l'utilisateur" />
-            </form>
+    <!-- Unblocked user -->
+    <div class="col-md-12">
+
+        <!-- Unblocked user form panel -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Débloquer l'utilisateur "{{ blocked_user.username }}"</h1>
+            </div>
+
+            <div class="panel-body">
+                <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+
+                <form method="post" action="{% url "privatemsg:unblock_user" username=blocked_user.username %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Débloquer l'utilisateur" />
+                </form>
+            </div>
         </div>
+
+        <!-- Return link -->
+        <p><a href="{% url 'privatemsg:blocked_users' %}"><i class="fa fa-arrow-left"></i> Retour à la liste des utilisateurs bloqués</a></p>
     </div>
-
-    <p><a href="{% url 'privatemsg:blocked_users' %}"><i class="fa fa-arrow-left"></i> Retour à la liste des utilisateurs bloqués</a></p>
 {% endblock %}

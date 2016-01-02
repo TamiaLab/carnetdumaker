@@ -6,12 +6,17 @@
 {% block title %}Restaurer le message | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Restaurer le message</h1>
 
-    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+    <!-- Undelete message -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ message.get_undelete_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Restaurer le message" />
-    </form>
+        <h1>Restaurer le message</h1>
+        <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{{ message.get_undelete_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Restaurer le message" />
+        </form>
+    </div>
 {% endblock %}

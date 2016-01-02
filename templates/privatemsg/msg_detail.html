@@ -4,54 +4,71 @@
 {% block title %}{{ message.get_subject_display }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>{{ message.get_subject_display }}</h1>
 
-    <p><i class="fa fa-user"></i> Expéditeur : {% if is_sender %}moi{% else %}{{ message.sender|user_profile_link }}{% endif %}</p>
-    <p><i class="fa fa-user"></i> Destinataire : {% if is_recipient %}moi{% else %}{{ message.recipient|user_profile_link }}{% endif %}</p>
-    <p><i class="fa fa-clock-o"></i> Date d'envoi : le {{ message.sent_at|datetime_html }}</p>
+    <!-- Message detail -->
+    <div class="col-md-12">
 
-    {% if is_recipient and message.read_at and not msg_just_read %}
-        <p><i class="fa fa-eye"></i> Message lu le {{ message.read_at|datetime_html }}</p>
-    {% endif %}
+        <h1>{{ message.get_subject_display }}</h1>
 
-    {% if is_recipient and message.deleted_at_recipient_side %}
-        <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
-            <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite de réception</a>.<br>
-            <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
-    {% elif is_sender and message.deleted_at_sender_side %}
-        <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
-            <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite d'envoi</a>.<br>
-            <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
-    {% else %}
-        <p><i class="fa fa-trash"></i> <a href="{{ message.get_delete_url }}">Cliquez ici pour mettre le message à la corbeille</a></p>
-    {% endif %}
-    <hr>
+        <!-- Message information -->
+        <p><i class="fa fa-user"></i> Expéditeur : {% if is_sender %}moi{% else %}{{ message.sender|user_profile_link }}{% endif %}</p>
+        <p><i class="fa fa-user"></i> Destinataire : {% if is_recipient %}moi{% else %}{{ message.recipient|user_profile_link }}{% endif %}</p>
+        <p><i class="fa fa-clock-o"></i> Date d'envoi : le {{ message.sent_at|datetime_html }}</p>
 
-    <div class="well">
-        {{ message.body_html|safe }}
-    </div>
-
-    <div class="clearfix">
-        {% if is_recipient %}
-            <form method="post" action="{{ message.get_absolute_url }}">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-primary pull-left" name="mark_unread" value="Marquer comme non lu" />
-            </form>
+        <!-- Recipient read date -->
+        {% if is_recipient and message.read_at and not msg_just_read %}
+            <p><i class="fa fa-eye"></i> Message lu le {{ message.read_at|datetime_html }}</p>
         {% endif %}
-        <a href="{{ message.get_reply_url }}" class="btn btn-primary pull-right" role="button">Répondre à ce message</a>
-        <a href="{% url "privatemsg:block_user" username=message.sender.username %}" class="btn btn-primary pull-right" role="button">Bloquer l'utilisateur</a>
-    </div>
-    <hr>
 
-    <p><i class="fa fa-envelope-o"></i> Message parent : {% if message.parent_msg %}<a href="{{ message.parent_msg.get_absolute_url }}">{{ message.parent_msg.get_subject_display }}</a>{% else %}(aucun){% endif %}</p>
-    {% with replies=message.replies.all %}
-        <p><strong><i class="fa fa-comments-o"></i> Réponses</strong></p>
-        <ul>
-            {% for reply in replies %}
-                <li>{{ reply.sent_at|date_html }}- <a href="{{ reply.get_absolute_url }}">{{ reply.get_subject_display }}</a></li>
-            {% empty %}
-                <li>Pas de réponse</li>
-            {% endfor %}
-        </ul>
-    {% endwith %}
+        <!-- Delete link -->
+        {% if is_recipient and message.deleted_at_recipient_side %}
+            <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
+                <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite de réception</a>.<br>
+                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
+        {% elif is_sender and message.deleted_at_sender_side %}
+            <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
+                <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite d'envoi</a>.<br>
+                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
+        {% else %}
+            <p><i class="fa fa-trash"></i> <a href="{{ message.get_delete_url }}">Cliquez ici pour mettre le message à la corbeille</a></p>
+        {% endif %}
+
+        <hr>
+
+        <!-- Message body -->
+        <div class="well">
+            {{ message.body_html|safe }}
+        </div>
+
+        <!-- Action links -->
+        <div class="clearfix">
+
+            <!-- Mark as unread link -->
+            {% if is_recipient %}
+                <form method="post" action="{{ message.get_absolute_url }}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary pull-left" name="mark_unread" value="Marquer comme non lu" />
+                </form>
+            {% endif %}
+
+            <!-- Reply / block user links -->
+            <a href="{{ message.get_reply_url }}" class="btn btn-primary pull-right" role="button">Répondre à ce message</a>
+            <a href="{% url "privatemsg:block_user" username=message.sender.username %}" class="btn btn-primary pull-right" role="button">Bloquer l'utilisateur</a>
+        </div>
+
+        <hr>
+
+        <!-- Message tree -->
+        <p><i class="fa fa-envelope-o"></i> Message parent : {% if message.parent_msg %}<a href="{{ message.parent_msg.get_absolute_url }}">{{ message.parent_msg.get_subject_display }}</a>{% else %}(aucun){% endif %}</p>
+        {% with replies=message.replies.all %}
+            <p><strong><i class="fa fa-comments-o"></i> Réponses</strong></p>
+            <ul>
+                {% for reply in replies %}
+                    <li>{{ reply.sent_at|date_html }}- <a href="{{ reply.get_absolute_url }}">{{ reply.get_subject_display }}</a></li>
+                {% empty %}
+                    <li>Pas de réponse</li>
+                {% endfor %}
+            </ul>
+        {% endwith %}
+    </div>
 {% endblock %}

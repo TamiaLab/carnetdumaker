@@ -6,12 +6,17 @@
 {% block title %}Marquer tous les messages comme lus | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Marquer tous les messages comme lus</h1>
 
-    <p>Etes-vous sûr de vouloir faire cela ?</p>
+    <!-- Mark all messages as read -->
+    <div class="col-md-12">
 
-    <form method="post" action="{% url 'privatemsg:inbox_mark_all_as_read' %}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Marquer tous les messages comme lus"/>
-    </form>
+        <h1>Marquer tous les messages comme lus</h1>
+        <p>Etes-vous sûr de vouloir faire cela ?</p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{% url 'privatemsg:inbox_mark_all_as_read' %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Marquer tous les messages comme lus"/>
+        </form>
+    </div>
 {% endblock %}
