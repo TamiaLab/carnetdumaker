@@ -3,26 +3,33 @@
 {% block title %}Liste des licences | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Liste des licences</h1>
 
-    {% for license in licenses %}
-        <div class="media">
-            {% if license.logo %}
-                <div class="media-left media-middle">
-                    <a href="{{ license.get_absolute_url }}">
-                        <img src="{{ license.logo.url }}" alt="logo licence {{ license.name }}" />
-                    </a>
+    <!-- Licenses list -->
+    <div class="col-md-12">
+
+        <h1>Liste des licences</h1>
+
+        <!-- Licenses -->
+        {% for license in licenses %}
+            <div class="media">
+                {% if license.logo %}
+                    <div class="media-left">
+                        <a href="{{ license.get_absolute_url }}">
+                            <img src="{{ license.logo.url }}" alt="logo licence {{ license.name }}" />
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ license.get_absolute_url }}">{{ license.name }}</a></h4>
+                    <p>{{ license.description_text|truncatewords:200 }}</p>
+                    <p><a class="btn btn-default" role="button" href="{{ license.get_absolute_url }}">Lire la suite &hellip;</a></p>
                 </div>
-            {% endif %}
-            <div class="media-body">
-                <h4 class="media-heading"><a href="{{ license.get_absolute_url }}">{{ license.name }}</a></h4>
-                <p>{{ license.description_html|truncatewords_html:200|safe }}</p>
-                <p class="text-right"><a href="{{ license.get_absolute_url }}">Lire la suite</a></p>
             </div>
-        </div>
-    {% empty %}
-            <p>Aucune licence à afficher <i class="fa fa-frown-o"></i></p>
-    {% endfor %}
+        {% empty %}
+                <p>Aucune licence à afficher <i class="fa fa-frown-o"></i></p>
+        {% endfor %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

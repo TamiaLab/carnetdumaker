@@ -6,26 +6,43 @@
 {% block title %}Licence {{ license.name }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Licence {{ license.name }}</h1>
 
-    {% if license.logo %}
-        <img src="{{ license.logo.url }}" alt="logo licence {{ license.name }}" class="center-block" />
-    {% endif %}
+    <!-- License detail -->
+    <div class="col-md-12">
 
-    <p><i class="fa fa-file-text-o"></i> Description :</p>
-    <div class="well">
-        {{ license.description_html|safe }}
+        <h1>Licence {{ license.name }}</h1>
+
+        <!-- License logo -->
+        {% if license.logo %}
+            <div class="text-center">
+                <img src="{{ license.logo.url }}" alt="logo licence {{ license.name }}" />
+            </div>
+        {% endif %}
+
+        <!-- License description and source URL -->
+        <p><i class="fa fa-file-text-o"></i> Description :</p>
+        <div class="well">
+            {{ license.description_html|safe }}
+        </div>
+        {% if license.source_url %}
+            <p><i class="fa fa-external-link"></i>Lien source : <a href="{{ license.source_url }}">cliquez ici</a></p>
+        {% endif %}
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:licenses_license_change' license.pk %}"><i class="fa fa-terminal"></i> Modifier la licence dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- License usage -->
+        {% if license.usage %}
+            <h2>Informations légales</h2>
+            <pre>{{ license.usage }}</pre>
+        {% endif %}
+
+        <hr>
+
+        <!-- related resources -->
+        <h2>Ressources liées</h2>
+        <a href="{% url 'bloglicense:license_articles_detail' slug=license.slug %}"><i class="fa fa-external-link"></i> Articles publiés sous cette licence.</a>
     </div>
-    {% if license.source_url %}
-        <p><i class="fa fa-external-link"></i>Lien source : <a href="{{ license.source_url }}">cliquez ici</a></p>
-    {% endif %}
-
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:licenses_license_change' license.pk %}"><i class="fa fa-terminal"></i> Modifier la licence dans l'interface d'administration</a></p>
-    {% endif %}
-
-    {% if license.usage %}
-        <h2>Informations légales</h2>
-        <pre>{{ license.usage }}</pre>
-    {% endif %}
 {% endblock %}
