@@ -4,34 +4,43 @@
 {% block title %}Liste des forums | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Liste des forums</h1>
-    <p><a href="{% url "forum:latest_forum_threads_rss" %}"><i class="fa fa-rss"></i> Flux RSS des topics récents</a> (<a href="{% url "forum:latest_forum_threads_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
-    <p><a href="{% url "forum:latest_forum_thread_posts_rss" %}"><i class="fa fa-rss"></i> Flux RSS des posts récents</a> (<a href="{% url "forum:latest_forum_thread_posts_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:forum_forum_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un forum dans l'interface d'administration</a></p>
-    {% endif %}
+    <!-- Root forums list -->
+    <div class="col-md-12">
 
-    <table class="table table-striped table-condensed table-responsive">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Titre</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for root_forum in root_forums %}
-            {% if user|has_access_to:root_forum %}
-                <tr>
-                    <td>{% if root_forum.logo %}<a href="{{ root_forum.get_absolute_url }}"><img src="{{ root_forum.logo.url }}" alt="Logo forum {{ root_forum.title }}" /></a>{% endif %}</td>
-                    <td><a href="{{ root_forum.get_absolute_url }}">{{ root_forum.title|capfirst }}</a></td>
-                    <td>{{ root_forum.description_html|safe }}</td>
-                </tr>
-            {% endif %}
-        {% empty %}
-            <tr><td colspan="3"><p class="text-center">Pas de forums !</p></td></tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <!-- Forum information and feeds -->
+        <h1>Liste des forums</h1>
+        <p><a href="{% url "forum:latest_forum_threads_rss" %}"><i class="fa fa-rss"></i> Flux RSS des topics récents</a> (<a href="{% url "forum:latest_forum_threads_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+        <p><a href="{% url "forum:latest_forum_thread_posts_rss" %}"><i class="fa fa-rss"></i> Flux RSS des posts récents</a> (<a href="{% url "forum:latest_forum_thread_posts_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:forum_forum_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un forum dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- Root forums -->
+        <table class="table table-striped table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Titre</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for root_forum in root_forums %}
+                {% if user|has_access_to:root_forum %}
+                    <tr>
+                        <td>{% if root_forum.logo %}<a href="{{ root_forum.get_absolute_url }}"><img src="{{ root_forum.logo.url }}" alt="Logo forum {{ root_forum.title }}" /></a>{% endif %}</td>
+                        <td><a href="{{ root_forum.get_absolute_url }}">{{ root_forum.title|capfirst }}</a></td>
+                        <td>{{ root_forum.description_html|safe }}</td>
+                    </tr>
+                {% endif %}
+            {% empty %}
+                <tr><td colspan="3"><p class="text-center">Aucun forum à afficher <i class="fa fa-frown-o"></i></p></td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

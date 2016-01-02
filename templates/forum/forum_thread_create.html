@@ -7,22 +7,31 @@
 {% block title %}Ouvrir un nouveau topic | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Ouvrir un nouveau topic</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            {% if is_flooding %}
-                <div class="alert alert-danger">
-                    <ul>
-                        <li><p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p></li>
-                    </ul>
-                </div>
-            {% endif %}
-            <form method="post" action="{{ forum.get_create_thread_url }}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Créer le topic" />
-            </form>
+    <!-- New forum thread -->
+    <div class="col-md-12">
+
+        <h1>Ouvrir un nouveau topic</h1>
+
+        <!-- New forum thread form panel -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <!-- Anti-flood protection -->
+                {% if is_flooding %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                        <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
+                    </div>
+                {% endif %}
+
+                <!-- New forum thread form -->
+                <form method="post" action="{{ forum.get_create_thread_url }}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Créer le topic" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -6,12 +6,18 @@
 {% block title %}Ne plus suivre le topic | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Ne plus suivre le topic</h1>
 
-    <p>Merci de confirmer votre volonté de ne plus suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+    <!-- Forum thread un-subscribe -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ thread.get_unsubscribe_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Ne plus suivre le topic" />
-    </form>
+        <h1>Ne plus suivre le topic</h1>
+
+        <p>Merci de confirmer votre volonté de ne plus suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{{ thread.get_unsubscribe_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Ne plus suivre le topic" />
+        </form>
+    </div>
 {% endblock %}

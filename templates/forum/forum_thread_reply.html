@@ -7,33 +7,47 @@
 {% block title %}Nouveau message | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Nouveau message</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            {% if is_flooding %}
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
-                    <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
-                </div>
-            {% endif %}
-            {% if thread.is_old %}
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
-                    <p>Attention : Ce topic est relativement ancien.
-                        Vous risquez de ne pas avoir de réponse de la part de l'auteur d'origine.
-                        Vous devriez envisager d'ouvrir un nouveau topic.</p>
-                </div>
-            {% endif %}
-            <form method="post" action="{{ thread.get_reply_url }}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Nouveau message" />
-            </form>
+    <!-- Reply to forum thread -->
+    <div class="col-md-12">
+
+        <h1>Nouveau message</h1>
+
+        <!-- Reply form panel -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <!-- Anti-flood protection -->
+                {% if is_flooding %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                        <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux messages.</p>
+                    </div>
+                {% endif %}
+
+                <!-- Old forum thread warning -->
+                {% if thread.is_old %}
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                        <p>Attention : Ce topic est relativement ancien.
+                            Vous risquez de ne pas avoir de réponse de la part de l'auteur d'origine.
+                            Vous devriez envisager d'ouvrir un nouveau topic.</p>
+                    </div>
+                {% endif %}
+
+                <!-- Reply form -->
+                <form method="post" action="{{ thread.get_reply_url }}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Nouveau message" />
+                </form>
+            </div>
         </div>
-    </div>
-    <hr>
 
-    <h2>Derniers messages</h2>
-    {% include "forum/posts.html" with posts=latest_posts %}
+        <hr>
+
+        <!-- Latest forum posts in this thread -->
+        <h2>Derniers messages</h2>
+        {% include "forum/posts.html" with posts=latest_posts %}
+    </div>
 {% endblock %}

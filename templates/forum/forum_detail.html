@@ -4,86 +4,108 @@
 {% block title %}Forum {{ forum.title|capfirst }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Forum {{ forum.title|capfirst }}</h1>
-    <p><a href="{{ forum.get_latest_threads_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des topics récents dans ce forum</a> (<a href="{{ forum.get_latest_threads_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
-    <p><a href="{{ forum.get_latest_posts_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des posts récents dans ce forum</a> (<a href="{{ forum.get_latest_posts_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_authenticated %}
-        {% if has_subscribe_to_forum %}
-            <p><i class="fa fa-info-circle"></i> Vous êtes abonné à ce forum. <a href="{{ forum.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
-        {% else %}
-            <p><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce forum. <a href="{{ forum.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
-        {% endif %}
+    <!-- Forum detail -->
+    <div class="col-md-12">
 
-        {% if user.is_staff %}
-            <p><a href="{% url 'admin:forum_forum_change' forum.pk %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Modifier le forum dans l'interface d'administration</a>
-            <a href="{% url 'admin:forum_forum_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un forum dans l'interface d'administration</a></p>
-        {% endif %}
+        <!-- Forum information and feeds -->
+        <h1>Forum {{ forum.title|capfirst }}</h1>
+        <p><a href="{{ forum.get_latest_threads_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des topics récents dans ce forum</a> (<a href="{{ forum.get_latest_threads_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+        <p><a href="{{ forum.get_latest_posts_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des posts récents dans ce forum</a> (<a href="{{ forum.get_latest_posts_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-        <a href="{{ forum.get_mark_all_threads_as_read_url }}" class="btn btn-primary" role="button">Marquer tous les topics comme lus</a>
-        {% if not forum.closed %}
+        <!-- User links -->
+        {% if user.is_authenticated %}
+
+            <!-- Subscribe / Un-subscribe links -->
+            {% if has_subscribe_to_forum %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous êtes abonné à ce forum. <a href="{{ forum.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
+            {% else %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce forum. <a href="{{ forum.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
+            {% endif %}
+
+            <hr>
+
+            <!-- Staff links -->
+            {% if user.is_staff %}
+                <p><a href="{% url 'admin:forum_forum_change' forum.pk %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Modifier le forum dans l'interface d'administration</a>
+                <a href="{% url 'admin:forum_forum_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un forum dans l'interface d'administration</a></p>
+            {% endif %}
+
+            <!-- Mark forum as read link -->
+            <a href="{{ forum.get_mark_all_threads_as_read_url }}" class="btn btn-primary" role="button">Marquer tous les topics comme lus</a>
+
+            <!-- New topic link -->
+            {% if not forum.closed %}
                 <a href="{{ forum.get_create_thread_url }}" class="btn btn-primary" role="button">Ouvrir un nouveau topic</a>
-        {% endif %}
-        <hr>
-    {% endif %}
+            {% endif %}
 
-    {% if child_forums %}
+            <hr>
+        {% endif %}
+
+        <!-- Child forums -->
+        {% if child_forums %}
+            <table class="table table-striped table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for child_forum in child_forums %}
+                    {% if user|has_access_to:child_forum %}
+                        <tr>
+                            <td>{% if child_forum.logo %}<a href="{{ child_forum.get_absolute_url }}"><img src="{{ child_forum.logo.url }}" alt="Logo forum {{ child_forum.title }}" /></a>{% endif %}</td>
+                            <td><a href="{{ child_forum.get_absolute_url }}">{{ child_forum.title|capfirst }}</a></td>
+                            <td>{{ child_forum.description_html|safe }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <!-- Forum threads -->
         <table class="table table-striped table-condensed table-responsive">
             <thead>
             <tr>
                 <th></th>
-                <th>Titre</th>
-                <th>Description</th>
+                <th>Sujet</th>
+                <th>Auteur</th>
+                <th>Date mise à jour</th>
+                <th>Dernier message</th>
             </tr>
             </thead>
+
             <tbody>
-            {% for child_forum in child_forums %}
-                {% if user|has_access_to:child_forum %}
-                    <tr>
-                        <td>{% if child_forum.logo %}<a href="{{ child_forum.get_absolute_url }}"><img src="{{ child_forum.logo.url }}" alt="Logo forum {{ child_forum.title }}" /></a>{% endif %}</td>
-                        <td><a href="{{ child_forum.get_absolute_url }}">{{ child_forum.title|capfirst }}</a></td>
-                        <td>{{ child_forum.description_html|safe }}</td>
-                    </tr>
-                {% endif %}
+            {% for thread in threads %}
+                <tr>
+                    <td>
+                        {% if user.is_authenticated %}
+                            {% if thread.user_posts %}<i class="fa fa-comment" title="Vous avez participé à ce topic"></i>{% endif %}
+                            {% if thread.user_subscriptions %}<i class="fa fa-star" title="Vous suivez ce topic"></i>{% endif %}
+                            {% if not thread|has_been_read:read_markers %}<i class="fa fa-asterisk" title="Non lu"></i> {% endif %}
+                        {% endif %}
+                        {% if thread.sticky or thread.global_sticky %}<i class="fa fa-thumb-tack" title="Epinglé"></i> {% endif %}
+                        {% if thread.closed or thread.locked %}<i class="fa fa-lock" title="Verrouillé"></i> {% endif %}
+                        {% if thread.resolved %}<i class="fa fa-check" title="Résolu"></i>{% endif %}
+                    </td>
+                    <td><a href="{{ thread.get_absolute_url }}">{{ thread.title|capfirst }}</a></td>
+                    <td>{{ thread.first_post.author|user_profile_link }}</td>
+                    <td>{{ thread.first_post.last_content_modification_date|datetime_html }}</td>
+                    <td>par {{ thread.last_post.author|user_profile_link }}
+                        <a href="{{ thread.last_post.get_absolute_url_simple }}">le {{ thread.last_post.last_content_modification_date|datetime_html }}</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Pas de topics dans ce forum !</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
-    {% endif %}
-
-    <table class="table table-striped table-condensed table-responsive">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Sujet</th>
-            <th>Auteur</th>
-            <th>Date mise à jour</th>
-            <th>Dernier message</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for thread in threads %}
-            <tr>
-                <td>{% if user.is_authenticated %}
-                        {% if thread.user_posts %}<i class="fa fa-comment" title="Vous avez participé à ce topic"></i>{% endif %}
-                        {% if thread.user_subscriptions %}<i class="fa fa-star" title="Vous suivez ce topic"></i>{% endif %}
-                        {% if not thread|has_been_read:read_markers %}<i class="fa fa-asterisk" title="Non lu"></i> {% endif %}
-                    {% endif %}
-                    {% if thread.sticky or thread.global_sticky %}<i class="fa fa-thumb-tack" title="Epinglé"></i> {% endif %}
-                    {% if thread.closed or thread.locked %}<i class="fa fa-lock" title="Verrouillé"></i> {% endif %}
-                    {% if thread.resolved %}<i class="fa fa-check" title="Résolu"></i>{% endif %}</td>
-                <td><a href="{{ thread.get_absolute_url }}">{{ thread.title|capfirst }}</a></td>
-                <td>{{ thread.first_post.author|user_profile_link }}</td>
-                <td>{{ thread.first_post.last_content_modification_date|datetime_html }}</td>
-                <td>par {{ thread.last_post.author|user_profile_link }}
-                    <a href="{{ thread.last_post.get_absolute_url_simple }}">le {{ thread.last_post.last_content_modification_date|datetime_html }}</a></td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="5">Pas de topics dans ce forum !</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

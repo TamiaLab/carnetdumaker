@@ -1,4 +1,4 @@
-{% extends "forum/base_threaddetail.html" %}
+{% extends "forum/base_forum.html" %}
 {% load bootstrapform accounts %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -12,24 +12,33 @@
 {% block title %}Signaler un message | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Signaler un message</h1>
 
-    <p>Veuillez confirmer le signalement du message ci-dessous.</p>
-    <p class="text-warning">Merci de ne signaler que des messages réellement inadéquat.
-    De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+    <!-- Report forum post -->
+    <div class="col-md-12">
 
-    <div class="well">
-        {% include "forum/post.html" with report_disabled=True %}
-    </div>
+        <h1>Signaler un message</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler le message</div>
-        <div class="panel-body">
-            <form method="post" action="{{ post.get_report_url }}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Signaler le message" />
-            </form>
+        <!-- Report warning -->
+        <p>Veuillez confirmer le signalement du message ci-dessous.</p>
+        <p class="text-warning">Merci de ne signaler que des messages réellement inadéquat.
+        De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
+
+        <!-- Related post -->
+        <p>Message :</p>
+        <div class="well">
+            {% include "forum/post.html" with report_disabled=True %}
+        </div>
+
+        <!-- Report form -->
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler le message</div>
+            <div class="panel-body">
+                <form method="post" action="{{ post.get_report_url }}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Signaler le message" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

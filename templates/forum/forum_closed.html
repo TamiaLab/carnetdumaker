@@ -3,8 +3,13 @@
 {% block title %}Forum fermé | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Forum fermé</h1>
 
-    <p>Ce forum est fermé. Il n'est pas possible de créer de nouveau topic sur ce forum.</p>
-    <p><a href="{{ forum.get_absolute_url }}">Retour au forum</a></p>
+    <!-- Forum closed -->
+    <div class="col-md-12">
+
+        <h1>Forum fermé</h1>
+
+        <p>Ce forum est fermé. Il n'est pas possible de créer de nouveau topic dans ce forum.</p>
+        <p><a href="{{ forum.get_absolute_url }}"><i class="fa fa-arrow-left"></i> Retour au forum</a></p>
+    </div>
 {% endblock %}

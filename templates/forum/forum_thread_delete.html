@@ -7,17 +7,24 @@
 {% block title %}Supprimer le topic | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Supprimer le topic</h1>
 
-    <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+    <!-- Delete forum thread -->
+    <div class="col-md-12">
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{{ thread.get_delete_url }}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-danger center-block" value="Supprimer le topic" />
-            </form>
+        <h1>Supprimer le topic</h1>
+
+        <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
+        <p><strong>Cette action est irréversible.</strong></p>
+
+        <!-- Confirmation form -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" action="{{ thread.get_delete_url }}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-danger center-block" value="Supprimer le topic" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

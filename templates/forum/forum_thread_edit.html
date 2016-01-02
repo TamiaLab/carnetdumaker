@@ -7,15 +7,21 @@
 {% block title %}Modifier le topic | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Modifier le topic</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{{ thread.get_edit_url }}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
-            </form>
+    <!-- Edit forum thread -->
+    <div class="col-md-12">
+
+        <h1>Modifier le topic</h1>
+
+        <!-- Edition form -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" action="{{ thread.get_edit_url }}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -6,12 +6,18 @@
 {% block title %}Marquer tout les topics comme lus | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Marquer tous les topics comme lus</h1>
 
-    <p>Etes-vous sûr de vouloir faire cela ?</p>
+    <!-- Mark all threads as read -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ forum.get_mark_all_threads_as_read_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Marquer tout les topics comme lus"/>
-    </form>
+        <h1>Marquer tous les topics comme lus</h1>
+
+        <p>Etes-vous sûr de vouloir faire cela ?</p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{{ forum.get_mark_all_threads_as_read_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Marquer tout les topics comme lus"/>
+        </form>
+    </div>
 {% endblock %}

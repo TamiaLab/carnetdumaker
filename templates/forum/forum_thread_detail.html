@@ -4,31 +4,54 @@
 {% block title %}Topic "{{ thread.title }}" | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Topic "{{ thread.title }}"</h1>
-    <p><a href="{{ thread.get_latest_posts_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des posts récents dans ce topic</a> (<a href="{{ thread.get_latest_posts_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_authenticated %}
-        {% if has_subscribe_to_thread %}
-            <p><i class="fa fa-info-circle"></i> Vous êtes abonné à ce topic. <a href="{{ thread.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
-        {% else %}
-            <p><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce topic. <a href="{{ thread.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
-        {% endif %}
-        {% if user.is_staff %}
-            <p><a href="{% url 'admin:forum_forumthread_change' thread.pk %}"><i class="fa fa-terminal"></i> Modifier le topic dans l'interface d'administration</a></p>
-        {% endif %}
+    <!-- Forum thread detail -->
+    <div class="col-md-12">
 
-        <form method="post" action="{{ thread.get_absolute_url }}">
-            {% csrf_token %}
-            <input type="submit" class="btn btn-primary" name="mark_unread" value="Marquer le topic comme non lu" />
+        <!-- Forum thread information and feeds -->
+        <h1>Topic "{{ thread.title }}"</h1>
+        <p><a href="{{ thread.get_latest_posts_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des posts récents dans ce topic</a> (<a href="{{ thread.get_latest_posts_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-            {% if not thread.locked and not thread.closed %}
-                <a href="{{ thread.get_reply_url }}" class="btn btn-primary" role="button">Cliquez ici pour ajouter une réponse.</a>
+        <!-- User links -->
+        {% if user.is_authenticated %}
+
+            <!-- Subscribe / un-subscribe links -->
+            {% if has_subscribe_to_thread %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous êtes abonné à ce topic. <a href="{{ thread.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
+            {% else %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce topic. <a href="{{ thread.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
             {% endif %}
-        </form>
-        <hr>
-    {% endif %}
 
-    {% include "forum/posts.html" with controls=True %}
+            <hr>
+
+            <!-- Staff links -->
+            {% if user.is_staff %}
+                <p><a href="{% url 'admin:forum_forumthread_change' thread.pk %}"><i class="fa fa-terminal"></i> Modifier le topic dans l'interface d'administration</a></p>
+            {% endif %}
+
+            <!-- Reply and mark as read buttons -->
+            <form method="post" action="{{ thread.get_absolute_url }}">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" name="mark_unread" value="Marquer le topic comme non lu" />
+
+                {% if not thread.locked and not thread.closed %}
+                    <a href="{{ thread.get_reply_url }}" class="btn btn-primary" role="button">Cliquez ici pour ajouter une réponse.</a>
+                {% endif %}
+            </form>
+
+            <hr>
+        {% endif %}
+
+        <!-- Forum posts of this thread -->
+        {% include "forum/posts.html" with controls=True %}
+
+        <!-- Reply button -->
+        {% if not thread.locked and not thread.closed %}
+            <div class="text-center">
+                <a href="{{ thread.get_reply_url }}" class="btn btn-primary" role="button">Cliquez ici pour ajouter une réponse.</a>
+            </div>
+        {% endif %}
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

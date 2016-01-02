@@ -6,12 +6,18 @@
 {% block title %}Suivre le topic | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Suivre le topic</h1>
 
-    <p>Merci de confirmer votre volonté de suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+    <!-- Forum thread subscribe -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ thread.get_subscribe_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Suivre le topic" />
-    </form>
+        <h1>Suivre le topic</h1>
+
+        <p>Merci de confirmer votre volonté de suivre le topic "{{ thread.title }}" en cliquant sur le bouton ci-dessous.</p>
+
+        <!-- Confirmation form -->
+        <form method="post" action="{{ thread.get_subscribe_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Suivre le topic" />
+        </form>
+    </div>
 {% endblock %}
