@@ -22,7 +22,7 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
                     'pub_date',
                     'legend',
                     'public_listing',
-                    'view_on_site')
+                    'view_on_site_link')
 
     list_display_links = ('small_img',
                           'title')
@@ -96,7 +96,7 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
     small_img.short_description = _('Image')
     small_img.allow_tags = True
 
-    def view_on_site(self, obj):
+    def view_on_site_link(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
@@ -105,8 +105,8 @@ class ImageAttachmentAdmin(admin.ModelAdmin):
         return format_html('<a href="{0}" class="link">{1}</a>',
                            obj.get_absolute_url(),
                            _('View on site'))
-    view_on_site.short_description = ''
-    view_on_site.allow_tags = True
+    view_on_site_link.short_description = ''
+    view_on_site_link.allow_tags = True
 
     def img_int_code(self, obj, img, height, width):
         """

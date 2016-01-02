@@ -35,7 +35,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
                     'code_language',
                     'creation_date',
                     'last_modification_date',
-                    'view_on_site')
+                    'view_on_site_link')
 
     list_display_links = ('filename',
                           'title')
@@ -89,7 +89,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
     author_username_link.admin_order_field = 'author__username'
     author_username_link.allow_tags = True
 
-    def view_on_site(self, obj):
+    def view_on_site_link(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
@@ -98,8 +98,8 @@ class CodeSnippetAdmin(admin.ModelAdmin):
         return format_html('<a href="{0}" class="link">{1}</a>',
                            obj.get_absolute_url(),
                            _('View on site'))
-    view_on_site.short_description = ''
-    view_on_site.allow_tags = True
+    view_on_site_link.short_description = ''
+    view_on_site_link.allow_tags = True
 
 
 admin.site.register(CodeSnippet, CodeSnippetAdmin)

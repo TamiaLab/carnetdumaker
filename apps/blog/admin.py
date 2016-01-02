@@ -114,7 +114,7 @@ class RestoreRevisionConfirmationForm(forms.Form):
                                            initial=False)
 
 
-def view_on_site(obj):
+def view_on_site_link(obj):
     """
     Simple "view on site" inline callback.
     :param obj: Current database object.
@@ -123,8 +123,8 @@ def view_on_site(obj):
     return format_html('<a href="{0}" class="link">{1}</a>',
                        obj.get_absolute_url(),
                        _('View on site'))
-view_on_site.short_description = ''
-view_on_site.allow_tags = True
+view_on_site_link.short_description = ''
+view_on_site_link.allow_tags = True
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -277,7 +277,7 @@ class ArticleAdmin(admin.ModelAdmin):
                     'require_membership_for_reading',
                     'is_published',
                     'is_gone',
-                    view_on_site)
+                    view_on_site_link)
 
     list_filter = ('status',
                    'creation_date',
@@ -444,7 +444,7 @@ class ArticleTagAdmin(admin.ModelAdmin):
 
     list_display = ('name',
                     'tag_use_count',
-                    view_on_site)
+                    view_on_site_link)
 
     search_fields = ('name',
                      'slug')
@@ -482,7 +482,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     list_display = ('logo_img',
                     'name',
                     'slug_hierarchy',
-                    view_on_site)
+                    view_on_site_link)
 
     list_display_links = ('logo_img',
                           'name')

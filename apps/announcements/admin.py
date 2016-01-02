@@ -13,7 +13,7 @@ from .models import (Announcement,
                      AnnouncementTwitterCrossPublication)
 
 
-def view_on_site(obj):
+def view_on_site_link(obj):
     """
     Simple "view on site" inline callback.
     :param obj: Current database object.
@@ -22,8 +22,8 @@ def view_on_site(obj):
     return format_html('<a href="{0}" class="link">{1}</a>',
                        obj.get_absolute_url(),
                        _('View on site'))
-view_on_site.short_description = ''
-view_on_site.allow_tags = True
+view_on_site_link.short_description = ''
+view_on_site_link.allow_tags = True
 
 
 class AnnouncementAdmin(admin.ModelAdmin):
@@ -52,7 +52,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
                     'pub_date',
                     'type',
                     'site_wide',
-                    view_on_site)
+                    view_on_site_link)
 
     list_filter = ('creation_date',
                    'last_content_modification_date',
@@ -114,7 +114,7 @@ class AnnouncementTagAdmin(admin.ModelAdmin):
 
     list_display = ('name',
                     'tag_use_count',
-                    view_on_site)
+                    view_on_site_link)
 
     search_fields = ('name',
                      'slug')

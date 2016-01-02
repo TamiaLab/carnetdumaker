@@ -265,7 +265,7 @@ class IssueTicketAdmin(admin.ModelAdmin):
                     'priority',
                     'difficulty',
                     'assigned_to_username_link',
-                    'view_on_site')
+                    'view_on_site_link')
 
     list_display_links = ('issue_id',
                           'title')
@@ -370,7 +370,7 @@ class IssueTicketAdmin(admin.ModelAdmin):
     assigned_to_username_link.admin_order_field = 'assign_to__username'
     assigned_to_username_link.allow_tags = True
 
-    def view_on_site(self, obj):
+    def view_on_site_link(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
@@ -379,8 +379,8 @@ class IssueTicketAdmin(admin.ModelAdmin):
         return format_html('<a href="{0}" class="link">{1}</a>',
                            obj.get_absolute_url(),
                            _('View on site'))
-    view_on_site.short_description = ''
-    view_on_site.allow_tags = True
+    view_on_site_link.short_description = ''
+    view_on_site_link.allow_tags = True
 
 
 class BugTrackerUserProfileAdmin(admin.ModelAdmin):

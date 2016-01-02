@@ -195,7 +195,7 @@ class ForumThreadPostInline(admin.StackedInline):
     )
 
 
-def view_on_site(obj):
+def view_on_site_link(obj):
     """
     Simple "view on site" inline callback.
     :param obj: Current database object.
@@ -204,8 +204,8 @@ def view_on_site(obj):
     return format_html('<a href="{0}" class="link">{1}</a>',
                        obj.get_absolute_url(),
                        _('View on site'))
-view_on_site.short_description = ''
-view_on_site.allow_tags = True
+view_on_site_link.short_description = ''
+view_on_site_link.allow_tags = True
 
 
 class ForumThreadAdmin(admin.ModelAdmin):
@@ -295,7 +295,7 @@ class ForumThreadAdmin(admin.ModelAdmin):
                     'closed',
                     'resolved',
                     'locked',
-                    view_on_site)
+                    view_on_site_link)
 
     list_display_links = ('thread_id',
                           'title')
@@ -482,7 +482,7 @@ class ForumAdmin(admin.ModelAdmin):
                     'private',
                     'closed',
                     'ordering',
-                    view_on_site)
+                    view_on_site_link)
 
     list_display_links = ('logo_img',
                           'slug_hierarchy',

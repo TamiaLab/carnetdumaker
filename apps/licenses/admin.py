@@ -16,7 +16,7 @@ class LicenseAdmin(admin.ModelAdmin):
 
     list_display = ('logo_img',
                     'name',
-                    'view_on_site')
+                    'view_on_site_link')
 
     list_display_links = ('logo_img',
                           'name')
@@ -59,7 +59,7 @@ class LicenseAdmin(admin.ModelAdmin):
     logo_img.short_description = _('Logo')
     logo_img.allow_tags = True
 
-    def view_on_site(self, obj):
+    def view_on_site_link(self, obj):
         """
         Simple "view on site" inline callback.
         :param obj: Current database object.
@@ -68,8 +68,8 @@ class LicenseAdmin(admin.ModelAdmin):
         return format_html('<a href="{0}" class="link">{1}</a>',
                            obj.get_absolute_url(),
                            _('View on site'))
-    view_on_site.short_description = ''
-    view_on_site.allow_tags = True
+    view_on_site_link.short_description = ''
+    view_on_site_link.allow_tags = True
 
 
 admin.site.register(License, LicenseAdmin)
