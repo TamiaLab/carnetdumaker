@@ -119,11 +119,13 @@
                 <h3>Gallerie d'images</h3>
                 <div class="col-md-12">
                     {% for image in img_attachments %}
-                        <div class="col-lg-3 col-md-4 col-xs-6 thumbnail with-caption">
-                            <a href="{{ image.get_absolute_url }}">
-                                <img src="{{ image.img_small.url }}" width="image.img_small_width" height="image.img_small_height" alt="{{ image.title }}" class="center-block" />
-                            </a>
-                        {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="thumbnail with-caption">
+                                <a href="{{ image.get_absolute_url }}">
+                                    <img src="{{ image.img_small.url }}" width="image.img_small_width" height="image.img_small_height" alt="{{ image.title }}" class="center-block" />
+                                </a>
+                            {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
