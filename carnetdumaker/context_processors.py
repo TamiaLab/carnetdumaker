@@ -28,6 +28,7 @@ def app_constants(request):
         'SITE': {
             'NAME': site.name,
             'DOMAIN': site.domain,
-            'PROTO': 'https' if request.is_secure() else 'http'
+            'PROTO': 'https' if request.is_secure() else 'http',
+            'CURRENT_URL': request.get_full_path(),
         }
     }
