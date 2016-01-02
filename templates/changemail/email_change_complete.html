@@ -5,14 +5,22 @@
     <li><a href="{% url 'myaccountmail:email_change_complete' %}">Modification d'adresse email terminée</a></li>{% endblock %}
 
 {% block content %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title"><i class="fa fa-envelope"></i> Modification d'adresse email terminée</h1>
-        </div>
-        <div class="panel-body">
-            <p>Votre adresse email a été modifié avec succés. Vous receverez désormais vos emails sur votre nouvelle adresse.</p>
-        </div>
-    </div>
 
-    <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
+    <!-- Change email form -->
+    <div class="col-md-12">
+
+        <!-- Return link -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-envelope"></i> Modification d'adresse email terminée</h1>
+            </div>
+
+            <div class="panel-body">
+                <p>Votre adresse email a été modifié avec succés. Vous receverez désormais vos emails sur votre nouvelle adresse.</p>
+            </div>
+        </div>
+
+        <!-- Return link -->
+        <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
+    </div>
 {% endblock %}

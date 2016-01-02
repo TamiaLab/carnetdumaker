@@ -1,1 +1,1 @@
-[{{ site_name }}] Confirmation du changement d'adresse email
+[{{ site_name }}] Confirmation de changement d'adresse email
