@@ -4,21 +4,30 @@
 {% block title %}Gallerie des images | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Gallerie des images</h1>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:imageattachments_imageattachment_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter une nouvelle image</a></p>
-    {% endif %}
+    <!-- Images gallery -->
+    <div class="col-md-12">
 
-    <div class="row">
-    {% for image in images %}
-        <div class="col-lg-3 col-md-4 col-xs-6 thumbnail with-caption">
-            <a href="{{ image.get_absolute_url }}">
-                <img src="{{ image.img_small.url }}" width="image.img_small_width" height="image.img_small_height" alt="{{ image.title }}" class="center-block" />
-            </a>
-            {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
+        <h1>Gallerie des images</h1>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:imageattachments_imageattachment_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter une nouvelle image</a></p>
+        {% endif %}
+
+        <!-- Images -->
+        <div class="col-md-12">
+            {% for image in images %}
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <div class="thumbnail with-caption">
+                        <a href="{{ image.get_absolute_url }}">
+                            <img src="{{ image.img_small.url }}" width="image.img_small_width" height="image.img_small_height" alt="{{ image.title }}" class="center-block" />
+                        </a>
+                        {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     </div>
 
     {% include "paginator/pagination.html" %}
