@@ -33,7 +33,7 @@
                     <tbody>
                     {% for event in events %}
                         <tr>
-                            <td>{{ event.event_date }}</td>
+                            <td>{{ event.event_date|datetime_html }}</td>
                             <td>{{ event.get_type_display }}</td>
                             <td>{% if event.ip_address %}{{ event.ip_address }}{% endif %}</td>
                         </tr>
