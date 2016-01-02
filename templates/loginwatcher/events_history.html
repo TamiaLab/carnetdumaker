@@ -7,35 +7,44 @@
 {% block title %}Mon historique de connexion | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title"><i class="fa fa-key"></i> Mon historique de connexion</h1>
-        </div>
-        <div class="panel-body">
-            <table class="table table-striped table-condensed">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Adresse IP</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for event in events %}
+    <!-- Login history -->
+    <div class="col-md-12">
+
+        <!-- Return link -->
+        <p><a href="{% url 'myaccount:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations du compte</a></p>
+
+        <!-- Login history -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-key"></i> Mon historique de connexion</h1>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped table-condensed">
+                    <thead>
                     <tr>
-                        <td>{{ event.event_date }}</td>
-                        <td>{{ event.get_type_display }}</td>
-                        <td>{% if event.ip_address %}{{ event.ip_address }}{% endif %}</td>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Adresse IP</th>
                     </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="5"><p class="text-center">Aucun historique de connexion disponible !</p></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.event_date }}</td>
+                            <td>{{ event.get_type_display }}</td>
+                            <td>{% if event.ip_address %}{{ event.ip_address }}{% endif %}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3"><p class="text-center">Aucun historique de connexion disponible !</p></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
