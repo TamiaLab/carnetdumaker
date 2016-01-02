@@ -1,30 +1,34 @@
 {% extends "staticpages/base_staticpages.html" %}
 
 {% block breadcrumb %}{{ block.super }}
-    <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation</a></li>{% endblock %}
+    <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation et de vente</a></li>{% endblock %}
 
-{% block title %}Conditions générales d'utilisation | {{ block.super }}{% endblock %}
+{% block title %}Conditions générales d'utilisation et de vente | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Conditions générales d'utilisation</h1>
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#sectionCGU">Conditions générales d'utilisation</a></li>
-        <li><a data-toggle="tab" href="#sectionCGV">Conditions générales de vente</a></li>
-    </ul>
+    <!-- Terms of services and terms of sell -->
+    <div class="col-md-12">
 
-    <div class="tab-content">
-        <div id="sectionCGU" class="tab-pane fade in active">
-            <h3>Conditions générales d'utilisation du site Carnet du Maker</h3>
+        <h1>Conditions générales d'utilisation et de vente</h1>
 
-            <p>TODO</p>
-        </div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#sectionCGU">Conditions générales d'utilisation</a></li>
+            <li><a data-toggle="tab" href="#sectionCGV">Conditions générales de vente</a></li>
+        </ul>
 
-        <div id="sectionCGV" class="tab-pane fade">
-            <h3>Conditions générales de vente de la boutique Carnet du Maker</h3>
+        <div class="tab-content">
+            <div id="sectionCGU" class="tab-pane fade in active">
+                <h3>Conditions générales d'utilisation du site Carnet du Maker</h3>
 
-            <p>TODO</p>
+                <p>TODO</p>
+            </div>
+
+            <div id="sectionCGV" class="tab-pane fade">
+                <h3>Conditions générales de vente de la boutique Carnet du Maker</h3>
+
+                <p>TODO</p>
+            </div>
         </div>
     </div>
-
 {% endblock %}

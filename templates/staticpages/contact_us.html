@@ -6,44 +6,60 @@
 {% block title %}Nous contacter | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Nous contacter</h1>
 
-    <p>Si pour une quelconque raison vous avez besoin de nous contacter, voici comment faire :</p>
-    <ul>
-        <li>Vous pouvez nous contacter à l'adresse email suivante : contact [@] carnetdumaker.net</li>
-        <li>Vous pouvez nous envoyer un message via Twitter sur le compte @carnetdumaker</li>
-        <li>Vous pouvez nous envoyer un message via Google+ ou Facebook sur la page CarnetDuMaker</li>
-        <li>Ou vous pouvez tout simplement nous envoyer un message en utilisant le système de  messagerie interne du site.</li>
-    </ul>
+    <!-- Contact us -->
+    <div class="col-md-12">
 
-    <p>Pour les emails professionnels, d'ordre légal ou commercial, merci de préférer l'adresse de contact du TamiaLab : contact [@] tamialab.fr</p>
+        <h1>Nous contacter</h1>
 
-    <p>Si vous prenez la décision de nouveau envoyer un email, merci de bien vouloir prendre en compte que :</p>
-    <ul>
-        <li>On aime les titres qui veulent dire quelques choses et les messages en français correct.
-            Evitez par pitié les titres comme "URGENT", "À L'AIDE", "IMPORTANT", ça ne sert à rien.</li>
-        <li>Amis étudiants, nous ne sommes pas là pour faire ton TPE / sujet de bac / projet quelconque d’écoles à ta place, même contre rémunération.
-            On est toujours prêt à aider en donnant des conseils ou des idées de solutions, que ce soit par mail ou sur le forum, mais jamais la solution toute prête.</li>
-        <li>On essaye toujours de répondre aux mails le plus vite possible, mais parfois ça prend du temps.
-            Quoi qu'il arrive, on répond toujours aux mails qu'on nous envoie. Si jamais un mail reste sans réponse plus de 10 jours, c'est qu'il s'est perdu en chemin.</li>
-        <li>Vérifiez deux fois, non, trois fois, que dis-je, quatre fois, que votre adresse email est correcte, AVANT d'envoyer votre mail.
-            Il n’y a rien de plus énervant que de répondre à un email et de recevoir en retour une erreur du serveur comme quoi l’adresse en question n’existe pas.
-            On prend parfois plusieurs heures, voire une journée entière pour répondre à simple email.
-            Il est déjà arrivé par le passé qu'une simple question par email déclenche l'écriture d'un article complet sur le sujet en guise de réponse.
-            On fait tout ça gratuitement pour vous aider, alors SVP, vérifié votre adresse email avant de cliquer "envoyer".</li>
-        <li>Tout ce qui finit dans la boite à spam n’en ressort jamais. Inutile donc de nous ajouter en vrac dans votre liste de mailing, ça finira en spam.
-            Préférez un email personnalisé si vous souhaitez nous présenter un projet / produit / service, on adore ça et avec un peu de chance on sera intéressé.</li>
-    </ul>
+        <p class="text-justify">Si pour une quelconque raison vous avez besoin de nous contacter, voici comment faire :</p>
+        <ul>
+            <li>Vous pouvez nous contacter à l'adresse email suivante : contact [@] carnetdumaker.net</li>
+            <li>Vous pouvez nous envoyer un message via Twitter sur le compte <a href="https://twitter.com/carnetdumaker">@carnetdumaker</a></li>
+            <li>Vous pouvez nous envoyer un message via <a href="https://plus.google.com/102700422941341090773/about">Google+</a> ou <a>Facebook</a> sur la page CarnetDuMaker</li>
+            <li>Ou vous pouvez tout simplement nous envoyer un message en utilisant le système de  messagerie interne du site.</li>
+        </ul>
 
-    <h3>Quelques remarques bonus de l'administrateur du site concernant les emails</h3>
-    <p>Après 4 années et demie de mails en tout genre avec le blog Skyduino, je tiens à rappeler que :</p>
-    <ul>
-        <li>Personne sur ce site n'est votre esclave. Les messages du style « fais-moi ceci » ou encore « je voudrai cela » ne donnent jamais la réponse attendue.</li>
-        <li>Bonjour, merci, SVP, cordialement. Ce n'est pas grand-chose, mais ça rend tout le monde content.</li>
-        <li>Qu'importe le niveau de français, tant que c’est compréhensible et un poil plus recherchait que du langage SMS, ça me va.</li>
-        <li>Si vous me tutoyez, je vous tutoie. Si vous me vouvoyez, je vous vouvoie. C'est vous qui choisissez.</li>
-        <li>Je ne suis pas ingénieur en thermophysique nucléaire, ni même consultant pour la NASA (malheureusement). Si vous me parlez d’un domaine métier qui n’est pas le mien, les chances que je comprenne ce que vous me dites sans vulgarisation sont plutôt réduites.</li>
-        <li>I understand English. I’m not a native speaker, far from it, but please don’t use google translate. I understand better plain text English than Google translated french.</li>
-    </ul>
+        <p class="text-justify">Pour les emails professionnels, d'ordre légal ou commercial, merci de préférer l'adresse de contact du TamiaLab : contact [@] tamialab.fr</p>
 
+        <hr>
+
+        <p class="text-justify">Si vous prenez la décision de nouveau envoyer un email, merci de bien vouloir prendre en compte que :</p>
+        <ul>
+            <li><p class="text-justify">On aime les titres qui veulent dire quelques choses et les messages en français correct.
+                Evitez par pitié les titres comme "URGENT", "À L'AIDE", "IMPORTANT", ça ne sert à rien.</p></li>
+
+            <li><p class="text-justify">Amis étudiants, nous ne sommes pas là pour faire ton TPE / sujet de bac / projet quelconque d’écoles à ta place, même contre rémunération.
+                On est toujours prêt à aider en donnant des conseils ou des idées de solutions, que ce soit par mail ou sur <a href="{% url 'forum:index' %}">le forum</a>,
+                mais jamais la solution toute prête.</p></li>
+
+            <li><p class="text-justify">On essaye toujours de répondre aux mails le plus vite possible, mais parfois ça prend du temps.
+                Quoi qu'il arrive, on répond toujours aux mails qu'on nous envoie. Si jamais un mail reste sans réponse plus de 10 jours, c'est qu'il s'est perdu en chemin.</p></li>
+
+            <li><p class="text-justify">Vérifiez deux fois, non, trois fois, que dis-je, quatre fois, que votre adresse email est correcte, AVANT d'envoyer votre mail.
+                Il n’y a rien de plus énervant que de répondre à un email et de recevoir en retour une erreur du serveur comme quoi l’adresse en question n’existe pas.</p>
+
+                <p class="text-justify">On prend parfois plusieurs heures, voire une journée entière pour répondre à simple email.
+                Il est déjà arrivé par le passé qu'une simple question par email déclenche l'écriture d'un article complet sur le sujet en guise de réponse.
+                On fait tout ça gratuitement pour vous aider, alors SVP, vérifié votre adresse email avant de cliquer "envoyer".</p></li>
+
+            <li><p class="text-justify">Tout ce qui finit dans la boite à spam n’en ressort jamais. Inutile donc de nous ajouter en vrac dans votre liste de mailing, ça finira en spam.
+                Préférez un email personnalisé si vous souhaitez nous présenter un projet / produit / service, on adore tester de nouvelles choses et avec un peu de chance on sera intéressé.</p></li>
+        </ul>
+
+        <hr>
+
+        <h3>Quelques remarques bonus concernant les emails</h3>
+
+        <p class="text-justify">Après 4 années et demie de mails en tout genre avec <a href="https://skyduino.wordpress.com/">le blog Skyduino</a>, il semble bon de rappeler que :</p>
+        <ul>
+            <li>Personne sur ce site n'est votre esclave. Les messages du style « fait-moi ceci » ou encore « je voudrais cela » ne donnent jamais la réponse attendue.</li>
+            <li>Bonjour, merci, SVP, cordialement. Ce n'est pas grand-chose, mais ça rend tout le monde content.</li>
+            <li>Qu'importe le niveau de français, tant que c’est compréhensible et un poil plus recherchait que du langage SMS, ça nous va.</li>
+            <li>Si vous nous tutoyez, on vous tutoie. Si vous nous vouvoyez, on vous vouvoie. C'est vous qui choisissez.</li>
+            <li>On n'est pas ingénieur en thermophysique nucléaire, ni même consultant pour la NASA (malheureusement). Si vous nous parlez d’un domaine métier qui n’est pas le notre,
+                les chances q'on comprenne ce que vous nous dites sans vulgarisation sont plutôt faibles.</li>
+            <li>We understand English. We're not native speaker, far from it, but please don’t use google translate. We understand plain text English better than Google translated french.</li>
+        </ul>
+    </div>
 {% endblock %}

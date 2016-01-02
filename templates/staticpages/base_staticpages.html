@@ -1,1 +1,4 @@
 {% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'staticpages:index' %}">Pages statiques</a></li>{% endblock %}

@@ -6,112 +6,117 @@
 {% block title %}Plan du site | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Plan du site</h1>
 
-    <p>Page d'accueil</p>
-    <ul>
-        <li><a href="{% url "home:index" %}">Page d'accueil</a></li>
-    </ul>
+    <!-- Human sitemap -->
+    <div class="col-md-12">
 
-    <p>Connexion</p>
-    <ul>
-        <li><a href="{% url "auth:login" %}">Connexion</a></li>
-        <li><a href="{% url "auth:logout" %}">Déconnexion</a></li>
-        <li><a href="{% url "auth:password_reset" %}">Mot de passe perdu</a></li>
-    </ul>
+        <h1>Plan du site</h1>
 
-    <p>Inscription</p>
-    <ul>
-        <li><a href="{% url "registration:registration_register" %}">Inscription</a></li>
-    </ul>
+        <p>Page d'accueil</p>
+        <ul>
+            <li><a href="{% url "home:index" %}">Page d'accueil</a></li>
+        </ul>
 
-    <p>Comptes utilisateur</p>
-    <ul>
-        <li><a href="{% url "accounts:index" %}">Liste des membres</a></li>
-        <li><a href="{% url "myaccount:index" %}"><i class="fa fa-lock"></i> Mon compte</a></li>
-        <li><a href="{% url "myaccount:password_change" %}"><i class="fa fa-lock"></i> Modifier mon mot de passe</a></li>
-        <li><a href="{% url "myaccountmail:email_change" %}"><i class="fa fa-lock"></i> Modifier mon adresse email</a></li>
-        <li><a href="{% url "loginwatcher:index" %}"><i class="fa fa-lock"></i> Voir mon historique de connexion</a></li>
-    </ul>
+        <p>Connexion</p>
+        <ul>
+            <li><a href="{% url "auth:login" %}">Connexion</a></li>
+            <li><a href="{% url "auth:logout" %}">Déconnexion</a></li>
+            <li><a href="{% url "auth:password_reset" %}">Mot de passe perdu</a></li>
+        </ul>
 
-    <p>Annonces</p>
-    <ul>
-        <li><a href="{% url "announcements:index" %}">Liste des annonces</a></li>
-    </ul>
+        <p>Inscription</p>
+        <ul>
+            <li><a href="{% url "registration:registration_register" %}">Inscription</a></li>
+        </ul>
 
-    <p>Blog</p>
-    <ul>
-        <li><a href="{% url "blog:index" %}">Accueil du blog</a></li>
-        <li><a href="{% url "blog:archive_index" %}">Archives du blog</a></li>
-        <li><a href="{% url "blog:category_list" %}">Liste des catégories</a></li>
-        <li><a href="{% url "blog:tag_list" %}">Liste des mots clef</a></li>
-    </ul>
+        <p>Comptes utilisateur</p>
+        <ul>
+            <li><a href="{% url "accounts:index" %}">Liste des membres</a></li>
+            <li><a href="{% url "myaccount:index" %}"><i class="fa fa-lock"></i> Mon compte</a></li>
+            <li><a href="{% url "myaccount:password_change" %}"><i class="fa fa-lock"></i> Modifier mon mot de passe</a></li>
+            <li><a href="{% url "myaccountmail:email_change" %}"><i class="fa fa-lock"></i> Modifier mon adresse email</a></li>
+            <li><a href="{% url "loginwatcher:index" %}"><i class="fa fa-lock"></i> Voir mon historique de connexion</a></li>
+        </ul>
 
-    <p>Licences</p>
-    <ul>
-        <li><a href="{% url "licenses:index" %}">Liste des licences</a></li>
-    </ul>
+        <p>Annonces</p>
+        <ul>
+            <li><a href="{% url "announcements:index" %}">Liste des annonces</a></li>
+        </ul>
 
-    <p>Images</p>
-    <ul>
-        <li><a href="{% url "imageattachments:index" %}">Liste des images</a></li>
-    </ul>
+        <p>Blog</p>
+        <ul>
+            <li><a href="{% url "blog:index" %}">Accueil du blog</a></li>
+            <li><a href="{% url "blog:archive_index" %}">Archives du blog</a></li>
+            <li><a href="{% url "blog:category_list" %}">Liste des catégories</a></li>
+            <li><a href="{% url "blog:tag_list" %}">Liste des mots clef</a></li>
+        </ul>
 
-    <p>Extraits de code</p>
-    <ul>
-        <li><a href="{% url "snippets:index" %}">Liste des extraits de code</a></li>
-    </ul>
+        <p>Licences</p>
+        <ul>
+            <li><a href="{% url "licenses:index" %}">Liste des licences</a></li>
+        </ul>
 
-    <p>Gestionnaire de bugs</p>
-    <ul>
-        <li><a href="{% url "bugtracker:index" %}">Accueil du gestionnaire de bugs</a></li>
-        <li><a href="{% url "bugtracker:issues_list" %}">Liste des tickets</a></li>
-        <li><a href="{% url "bugtracker:issue_create" %}"><i class="fa fa-lock"></i> Ouvrir un nouveau ticket</a></li>
-        <li><a href="{% url "bugtracker:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences du gestionnaire de bugs</a></li>
-        <li><a href="{% url "bugtracker:mytickets_list" %}"><i class="fa fa-lock"></i> Mes tickets</a></li>
-        <li><a href="{% url "bugtracker:myticketsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes tickets suivis</a></li>
-    </ul>
+        <p>Images</p>
+        <ul>
+            <li><a href="{% url "imageattachments:index" %}">Liste des images</a></li>
+        </ul>
 
-    <p>Forum</p>
-    <ul>
-        <li><a href="{% url "forum:index" %}">Accueil du forum</a></li>
-        <li><a href="{% url "forum:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences du forum</a></li>
-        <li><a href="{% url "forum:mythreads_list" %}"><i class="fa fa-lock"></i> Mes topics</a></li>
-        <li><a href="{% url "forum:myposts_list" %}"><i class="fa fa-lock"></i> Mes posts</a></li>
-        <li><a href="{% url "forum:myforumsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes forums suivis</a></li>
-        <li><a href="{% url "forum:mythreadsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes topics suivis</a></li>
-    </ul>
+        <p>Extraits de code</p>
+        <ul>
+            <li><a href="{% url "snippets:index" %}">Liste des extraits de code</a></li>
+        </ul>
 
-    <p>Notifications</p>
-    <ul>
-        <li><a href="{% url "notifications:index" %}"><i class="fa fa-lock"></i> Mes notifications</a></li>
-        <li><a href="{% url "notifications:notification_read_list" %}"><i class="fa fa-lock"></i> Mes notifications lues</a></li>
-        <li><a href="{% url "notifications:notification_unread_list" %}"><i class="fa fa-lock"></i> Mes notifications non lues</a></li>
-        <li><a href="{% url "notifications:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences de notifications</a></li>
-    </ul>
+        <p>Gestionnaire de bugs</p>
+        <ul>
+            <li><a href="{% url "bugtracker:index" %}">Accueil du gestionnaire de bugs</a></li>
+            <li><a href="{% url "bugtracker:issues_list" %}">Liste des tickets</a></li>
+            <li><a href="{% url "bugtracker:issue_create" %}"><i class="fa fa-lock"></i> Ouvrir un nouveau ticket</a></li>
+            <li><a href="{% url "bugtracker:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences du gestionnaire de bugs</a></li>
+            <li><a href="{% url "bugtracker:mytickets_list" %}"><i class="fa fa-lock"></i> Mes tickets</a></li>
+            <li><a href="{% url "bugtracker:myticketsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes tickets suivis</a></li>
+        </ul>
 
-    <p>Messages privés</p>
-    <ul>
-        <li><a href="{% url "privatemsg:inbox" %}"><i class="fa fa-lock"></i> Mes messages</a></li>
-        <li><a href="{% url "privatemsg:inbox_read" %}"><i class="fa fa-lock"></i> Mes messages lus</a></li>
-        <li><a href="{% url "privatemsg:inbox_unread" %}"><i class="fa fa-lock"></i> Mes messages non lus</a></li>
-        <li><a href="{% url "privatemsg:outbox" %}"><i class="fa fa-lock"></i> Mes messages envoyés</a></li>
-        <li><a href="{% url "privatemsg:trash" %}"><i class="fa fa-lock"></i> Mes messages supprimés</a></li>
-        <li><a href="{% url "privatemsg:compose" %}"><i class="fa fa-lock"></i> Ecrire un nouveau message</a></li>
-        <li><a href="{% url "privatemsg:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences de message privés</a></li>
-        <li><a href="{% url "privatemsg:blocked_users" %}"><i class="fa fa-lock"></i> Ma liste d'utilisateurs bloqués</a></li>
-    </ul>
+        <p>Forum</p>
+        <ul>
+            <li><a href="{% url "forum:index" %}">Accueil du forum</a></li>
+            <li><a href="{% url "forum:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences du forum</a></li>
+            <li><a href="{% url "forum:mythreads_list" %}"><i class="fa fa-lock"></i> Mes topics</a></li>
+            <li><a href="{% url "forum:myposts_list" %}"><i class="fa fa-lock"></i> Mes posts</a></li>
+            <li><a href="{% url "forum:myforumsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes forums suivis</a></li>
+            <li><a href="{% url "forum:mythreadsubscribtions_list" %}"><i class="fa fa-lock"></i> Mes topics suivis</a></li>
+        </ul>
 
-    <p>Pages statiques</p>
-    <ul>
-        <li><a href="{% url 'staticpages:about_us' %}">Qui sommes-nous ?</a></li>
-        <li><a href="{% url 'staticpages:why_this_site' %}">Pourquoi ce site ?</a></li>
-        <li><a href="{% url 'staticpages:our_commitments' %}">Nos engagements</a></li>
-        <li><a href="{% url 'staticpages:faq' %}">Foire aux questions</a></li>
-        <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation</a></li>
-        <li><a href="{% url 'staticpages:contact_us' %}">Nous contacter</a></li>
-        <li><a href="{% url 'staticpages:legal_notices' %}">Mentions légales</a></li>
-        <li><a href="{% url 'staticpages:cookies_usage' %}">Utilisation des cookies</a></li>
-        <li><a href="{% url 'staticpages:human_sitemap' %}">Plan du site</a></li>
-    </ul>
+        <p>Notifications</p>
+        <ul>
+            <li><a href="{% url "notifications:index" %}"><i class="fa fa-lock"></i> Mes notifications</a></li>
+            <li><a href="{% url "notifications:notification_read_list" %}"><i class="fa fa-lock"></i> Mes notifications lues</a></li>
+            <li><a href="{% url "notifications:notification_unread_list" %}"><i class="fa fa-lock"></i> Mes notifications non lues</a></li>
+            <li><a href="{% url "notifications:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences de notifications</a></li>
+        </ul>
+
+        <p>Messages privés</p>
+        <ul>
+            <li><a href="{% url "privatemsg:inbox" %}"><i class="fa fa-lock"></i> Mes messages</a></li>
+            <li><a href="{% url "privatemsg:inbox_read" %}"><i class="fa fa-lock"></i> Mes messages lus</a></li>
+            <li><a href="{% url "privatemsg:inbox_unread" %}"><i class="fa fa-lock"></i> Mes messages non lus</a></li>
+            <li><a href="{% url "privatemsg:outbox" %}"><i class="fa fa-lock"></i> Mes messages envoyés</a></li>
+            <li><a href="{% url "privatemsg:trash" %}"><i class="fa fa-lock"></i> Mes messages supprimés</a></li>
+            <li><a href="{% url "privatemsg:compose" %}"><i class="fa fa-lock"></i> Ecrire un nouveau message</a></li>
+            <li><a href="{% url "privatemsg:myaccount" %}"><i class="fa fa-lock"></i> Mes préférences de message privés</a></li>
+            <li><a href="{% url "privatemsg:blocked_users" %}"><i class="fa fa-lock"></i> Ma liste d'utilisateurs bloqués</a></li>
+        </ul>
+
+        <p>Pages statiques</p>
+        <ul>
+            <li><a href="{% url 'staticpages:about_us' %}">Qui sommes-nous ?</a></li>
+            <li><a href="{% url 'staticpages:why_this_site' %}">Pourquoi ce site ?</a></li>
+            <li><a href="{% url 'staticpages:our_commitments' %}">Nos engagements</a></li>
+            <li><a href="{% url 'staticpages:faq' %}">Foire aux questions</a></li>
+            <li><a href="{% url 'staticpages:tos' %}">Conditions générales d'utilisation</a></li>
+            <li><a href="{% url 'staticpages:contact_us' %}">Nous contacter</a></li>
+            <li><a href="{% url 'staticpages:legal_notices' %}">Mentions légales</a></li>
+            <li><a href="{% url 'staticpages:cookies_usage' %}">Utilisation des cookies</a></li>
+            <li><a href="{% url 'staticpages:human_sitemap' %}">Plan du site</a></li>
+        </ul>
+    </div>
 {% endblock %}
