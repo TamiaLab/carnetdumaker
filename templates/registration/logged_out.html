@@ -4,9 +4,13 @@
     <li><a href="{% url 'auth:logout' %}">Deconnexion</a></li>{% endblock %}
 
 {% block content %}
-    <h1>Deconnexion réussie !</h1>
 
-    <p>Vous êtes maintenant déconnecté du site.</p>
+    <!-- Logout -->
+    <div class="col-md-12">
 
-    <p><a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a></p>
+        <h1>Deconnexion réussie !</h1>
+        <p>Vous êtes maintenant déconnecté du site.</p>
+
+        <p><a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a></p>
+    </div>
 {% endblock %}

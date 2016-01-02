@@ -4,11 +4,16 @@
     <li><a href="{% url 'registration:registration_done' %}">Inscription enregistrée</a></li>{% endblock %}
 
 {% block content %}
-    <h1>Inscription enregistrée</h1>
 
-    <p>Un mail vous a été envoyé avec un lien permettant d'activer votre compte. Veuillez vérifier votre boite mail.</p>
-    <p>Vous ne pouvez pas vous connecter tant que votre compte n'est pas activé.</p>
-    <p>Remarque : le mail peut mettre quelques minutes avant d'apparaitre dans votre boite mail. Pensez aussi à vérifer votre dossier spam.</p>
+    <!-- Registration done -->
+    <div class="col-md-12">
 
-    <p><a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a></p>
+        <h1>Inscription enregistrée</h1>
+
+        <p>Un mail vous a été envoyé avec un lien permettant d'activer votre compte. Veuillez vérifier votre boite mail.</p>
+        <p>Vous ne pouvez pas vous connecter tant que votre compte n'est pas activé.</p>
+        <p>Remarque : le mail peut mettre quelques minutes avant d'apparaitre dans votre boite mail. Pensez aussi à vérifer votre dossier spam.</p>
+
+        <p><a href="{% url 'home:index' %}">Cliquez ici pour revenir sur la page d'accueil du site.</a></p>
+    </div>
 {% endblock %}

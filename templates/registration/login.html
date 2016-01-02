@@ -5,20 +5,28 @@
     <li><a href="{% url 'auth:login' %}">Connexion</a></li>{% endblock %}
 
 {% block content %}
-    <h1>Connexion</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{% url 'auth:login' %}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="hidden" name="next" value="{{ next }}" />
-                <input type="submit" class="btn btn-primary center-block" value="Connexion" />
-            </form>
+    <!-- Login page -->
+    <div class="col-md-12">
+
+        <h1>Connexion</h1>
+
+        <!-- Login form panel -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" action="{% url 'auth:login' %}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <input type="submit" class="btn btn-primary center-block" value="Connexion" />
+                </form>
+            </div>
         </div>
-    </div>
-    <hr>
 
-    <p>Vous avez oubliez votre mot de passe ? <a href="{% url 'auth:password_reset' %}">Cliquez ici pour le réinitialiser</a>.</p>
-    <p>Vous n'avez pas de compte ? <a href="{% url 'registration:registration_register' %}">Cliquez ici pour créer un nouveau compte</a>.</p>
+        <hr>
+
+        <!-- Extra links -->
+        <p><i class="fa fa-info-circle"></i> Vous avez oubliez votre mot de passe ? <a href="{% url 'auth:password_reset' %}">Cliquez ici pour le réinitialiser</a>.</p>
+        <p><i class="fa fa-info-circle"></i> Vous n'avez pas de compte ? <a href="{% url 'registration:registration_register' %}">Cliquez ici pour créer un nouveau compte</a>.</p>
+    </div>
 {% endblock %}
