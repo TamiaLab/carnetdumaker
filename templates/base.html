@@ -133,7 +133,7 @@
                 <!-- Right navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <form role="search" class="navbar-form" method="get" action="{% url 'search:haystack_search' %}">
+                        <form role="search" class="navbar-form hidden-sm" method="get" action="{% url 'search:haystack_search' %}">
                             <div class="form-group">
                                 <label class="sr-only" for="searchInput">Recherche</label>
                                 <div class="input-group">
@@ -144,6 +144,7 @@
                                 </div>
                             </div>
                         </form>
+                        <a href="{% url 'search:haystack_search' %}" title="Recherche" class="visible-sm"><i class="fa fa-search"></i></a>
                     </li>
                     <li class="dropdown">
                     {% if user.is_authenticated %}
