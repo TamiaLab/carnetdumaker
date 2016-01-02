@@ -131,9 +131,17 @@ LOGGING["loggers"]["django.request"]["handlers"].append("syslog")
 
 #endregion
 
+#region ----- SSL proxy settings
+
 # Allow reverse proxy (nginx) to forward HTTPS over the local http connection
 # See https://docs.djangoproject.com/fr/1.8/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Haystack settings
-#HAYSTACK_SEARCH_ENGINE = 'xapian'
+#endregion
+
+#region ----- Twitter app settings
+
+# Base URL for all links in tweets (with no trailing slash at end)
+TWITTER_LINKS_BASE_URL = 'https://www.carnetdumaker.net'
+
+#endregion

@@ -100,6 +100,3 @@ if DEBUG:
         'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 #endregion
-
-# Haystack settings
-#HAYSTACK_SEARCH_ENGINE = 'whoosh'

@@ -484,10 +484,10 @@ SITE_ID = 1
 
 #endregion
 
-#region ----- Registration apps settings
+#region ----- Registration app settings
 
 # Set to true to allow new user registrations
-REGISTRATION_OPEN = True
+REGISTRATION_OPEN = SECRETS.get('REGISTRATION_OPEN', True)
 
 # The number of days an activation link is valid for
 ACCOUNT_ACTIVATION_TIMEOUT_DAYS = 2
@@ -501,13 +501,64 @@ ACCOUNT_ACTIVATION_TIMEOUT_DAYS = 2
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystackcdm',
+        'URL': SECRETS.get('HAYSTACK_URL', 'http://127.0.0.1:9200/'),
+        'INDEX_NAME': SECRETS.get('HAYSTACK_INDEX_NAME', 'haystack'),
     },
 }
 
 # This setting controls how many results are shown per page when using the included SearchView and its subclasses.
 # See http://django-haystack.readthedocs.org/en/latest/settings.html#haystack-search-results-per-page
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
+
+#endregion
+
+#region ----- Anti-spam app settings
+
+# Set to True to disable completely the antispam verification
+DISABLE_ANTISPAM_VERIFICATION = SECRETS.get('DISABLE_ANTISPAM_VERIFICATION', False)
+
+#endregion
+
+#region ----- Blog app settings
+
+# Parent forum ID for all article related forum's thread (None = no related thread created).
+PARENT_FORUM_ID_FOR_ARTICLE_THREADS = SECRETS.get('PARENT_FORUM_ID_FOR_ARTICLE_THREADS', None)
+
+#endregion
+
+#region ----- Change-email app settings
+
+# Number of days a "change email" link is valid
+CHANGE_EMAIL_TIMEOUT_DAYS = 2
+
+#endregion
+
+#region ----- Content report app settings
+
+# List of user names for notification of new content report
+USERNAME_LIST_FOR_CONTENT_REPORT_NOTIFICATION = SECRETS.get('USERNAME_LIST_FOR_CONTENT_REPORT_NOTIFICATION', [])
+
+#endregion
+
+#region ----- Login watcher app settings
+
+# Number of days before an event is deleted.
+LOG_EVENT_TTL_TIMEOUT_DAYS = 3 * 31
+
+#endregion
+
+#region ----- Twitter app settings
+
+# Consumer key (from https://apps.twitter.com/)
+TWITTER_CONSUMER_KEY = SECRETS.get('TWITTER_CONSUMER_KEY', None)
+
+# Consumer secret (from https://apps.twitter.com/)
+TWITTER_CONSUMER_SECRET = SECRETS.get('TWITTER_CONSUMER_SECRET', None)
+
+# OAuth token (from ``get_access_token.py`` helper of ``python-twitter``)
+TWITTER_OAUTH_TOKEN = SECRETS.get('TWITTER_OAUTH_TOKEN', None)
+
+# OAuth token (from ``get_access_token.py`` helper of ``python-twitter``)
+TWITTER_OAUTH_TOKEN_SECRET = SECRETS.get('TWITTER_OAUTH_TOKEN_SECRET', None)
 
 #endregion
