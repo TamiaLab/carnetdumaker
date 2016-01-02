@@ -9,5 +9,5 @@
 
 <blockquote>{{ comment.body_html|safe }}</blockquote>
 
-<a href="{{ protocol }}://{{ domain }}{% url "admin:bugtracker_issuecomment_change" comment.pk %}">Modifier le commentaire dans le panel d'administration.</a>
-<a href="{{ protocol }}://{{ domain }}{% url "admin:contentreport_contentreport_change" report.pk %}">Voir la demande de modération dans le panel d'administration.</a>
+<p><a href="{{ protocol }}://{{ domain }}{% url "admin:bugtracker_issuecomment_change" comment.pk %}">Modifier le commentaire dans le panel d'administration.</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{% url "admin:contentreport_contentreport_change" report.pk %}">Voir la demande de modération dans le panel d'administration.</a></p>
