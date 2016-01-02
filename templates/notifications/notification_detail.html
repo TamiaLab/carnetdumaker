@@ -7,17 +7,26 @@
 {% block title %}{{ notification.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>{{ notification.title }}</h1>
 
-    <p><i class="fa fa-calendar"></i> Reçu le {{ notification.notification_date|datetime_html }}</p>
-    <hr>
+    <!-- Notification detail -->
+    <div class="col-md-12">
 
-    <div class="well">
-        {{ notification.message_html|safe }}
+        <h1>{{ notification.title }}</h1>
+
+        <!-- Notification information -->
+        <p><i class="fa fa-calendar"></i> Reçu le {{ notification.notification_date|datetime_html }}</p>
+
+        <hr>
+
+        <!-- Notification message -->
+        <div class="well">
+            {{ notification.message_html|safe }}
+        </div>
+
+        <!-- Notification "unread" form -->
+        <form method="post" action="{{ notification.get_absolute_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" name="mark_unread" value="Marquer comme non lue" />
+        </form>
     </div>
-
-    <form method="post" action="{{ notification.get_absolute_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" name="mark_unread" value="Marquer comme non lue" />
-    </form>
 {% endblock %}
