@@ -7,21 +7,27 @@
 {% block title %}Ouvrir un nouveau ticket | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Ouvrir un nouveau ticket</h1>
 
-    <div class="well">
-        <p class="text-warning">Merci de ne pas ouvrir un nouveau ticket sans avoir fait préalablement une recherche parmi les tickets existants.
-        De plus, merci de ne pas ouvrir un ticket si cela ne concerne pas le site en lui même.
-        Pour tout autre problème, merci d'utiliser le forum ou le formulaire de contact.</p>
-    </div>
+    <!-- New ticket form -->
+    <div class="col-md-12">
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{% url 'bugtracker:issue_create' %}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Créer le ticket" />
-            </form>
+        <h1>Ouvrir un nouveau ticket</h1>
+
+        <!-- Remark and warning -->
+        <div class="well">
+            <p class="text-warning">Merci de bien vouloir faire <a href="{% url 'search:haystack_search' %}">une recherche parmi les tickets existants</a> avant d'ouvrir un nouveau ticket.
+            De plus, pour tout problème extérieur au site lui même, merci d'utiliser <a href="{% url 'forum:index' %}">le forum</a> ou <a href="{% url 'staticpages:contact_us' %}">le formulaire de contact</a>.</p>
+        </div>
+
+        <!-- Form panel -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" action="{% url 'bugtracker:issue_create' %}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Créer le ticket" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

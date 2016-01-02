@@ -1,11 +1,11 @@
-Une demande de modération pour un commentaire de bug vient d'être effectuée par {{ reporter.username }}.
+Une demande de modération pour un commentaire de bug vient d'être effectuée par {{ reporter.username|safe }}.
 
-La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}
-La demande de modération porte sur le ticket de bug #{{ comment.issue.id }} ({{ comment.issue.title }})
+La raison donnée est : {% if report.reason %}{{ report.reason|safe }}{% else %}(pas de raison spécifiée){% endif %}
+La demande de modération porte sur le ticket de bug #{{ comment.issue.id }} ({{ comment.issue.title|safe }})
 
-Le commentaire problématique (ID {{ comment.id }}, écrit par {{ comment.author }} le {{ comment.pub_date|date }}) est le suivant :
+Le commentaire problématique (ID {{ comment.id }}, écrit par {{ comment.author.username|safe }} le {{ comment.pub_date|date }}) est le suivant :
 
-{{ comment.get_body_without_html }}
+{{ comment.body_text|safe }}
 
 Pour modifier le commentaire dans le panel d'administration : {{ protocol }}://{{ domain }}{% url "admin:bugtracker_issuecomment_change" comment.pk %}
 Pour voir la demande de modération dans le panel d'administration : {{ protocol }}://{{ domain }}{% url "admin:contentreport_contentreport_change" report.pk %}

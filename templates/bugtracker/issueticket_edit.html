@@ -8,15 +8,24 @@
 {% block title %}Editer le ticket | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Editer le ticket</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{{ issue.get_edit_url }}">
-                {% csrf_token %}
-                {{ form|bootstrapform }}
-                <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
-            </form>
+    <!-- Edit ticket -->
+    <div class="col-md-12">
+
+        <h1>Editer le ticket</h1>
+
+        <!-- Return link -->
+        <p><a href="{{ issue.get_absolute_url }}"><i class="fa fa-arrow-left"></i> Retour au ticket</a></p>
+
+        <!-- Edit form -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" action="{{ issue.get_edit_url }}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-primary center-block" value="Enregistrer les modifications" />
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

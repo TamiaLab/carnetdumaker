@@ -1,9 +1,11 @@
-<p>Une demande de modération pour un commentaire de bug vient d'être effectuée par {{ reporter.username }}.</p>
+<p>Une demande de modération pour un commentaire de bug vient d'être effectuée par
+    <a href="{{ protocol }}://{{ domain }}{% url "accounts:user_profile" username=reporter.username  %}">{{ reporter.username }}</a>.</p>
 
 <p>La raison donnée est : {% if report.reason %}{{ report.reason }}{% else %}(pas de raison spécifiée){% endif %}</p>
 <p>La demande de modération porte sur le ticket de bug #{{ comment.issue.id }} ({{ comment.issue.title }})</p>
 
-<p>Le commentaire problématique (ID {{ comment.id }}, écrit par {{ comment.author }} le {{ comment.pub_date|date }}) est le suivant :</p>
+<p>Le commentaire problématique (ID {{ comment.id }}, écrit par
+    <a href="{{ protocol }}://{{ domain }}{% url "accounts:user_profile" username=comment.author.username  %}">{{ comment.author.username }}</a> le {{ comment.pub_date|date }}) est le suivant :</p>
 
 <blockquote>{{ comment.body_html|safe }}</blockquote>
 

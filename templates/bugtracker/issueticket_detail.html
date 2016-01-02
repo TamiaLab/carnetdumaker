@@ -12,76 +12,96 @@
 {% block title %}Ticket #{{ issue.id }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>{{ issue.title }} | Ticket #{{ issue.id }}</h1>
 
-    <p><i class="fa fa-cubes"></i> Composant : {% if issue.component %}{{ issue.component.name }}{% else %}non spécifié{% endif %}</p>
-    <p><i class="fa fa-user"></i> Auteur : {{ issue.submitter|user_profile_link }}</p>
-    <p><i class="fa fa-clock-o"></i> Date soumission : {{ issue.submission_date|datetime_html }}</p>
-    <p><i class="fa fa-pencil"></i> Date de derniére modification : {{ issue.last_modification_date|datetime_html }}</p>
-    <p><i class="fa fa-code"></i> Personne en charge du ticket : {% if issue.assigned_to %}{{ issue.assigned_to|user_profile_link }}{% else %}personne{% endif %}</p>
-    <p><i class="fa fa-heartbeat"></i> Status du ticket : <span class="label label-{{ issue.status|color_status }}">{{ issue.status }}</span> ({{ issue.get_status_display }})</p>
-    <p><i class="fa fa-exclamation-circle"></i> Priorité du ticket : <span class="label label-{{ issue.priority|color_priority }}">{{ issue.priority }}</span> ({{ issue.get_priority_display }})</p>
-    <p><i class="fa fa-bomb"></i> Difficulté du ticket : <span class="label label-{{ issue.difficulty|color_difficulty }}">{{ issue.difficulty }}</span> ({{ issue.get_difficulty_display }})</p>
-    <hr>
+    <!-- Ticket detail -->
+    <div class="col-md-12">
 
-    <blockquote>{{ issue.description_html|safe }}</blockquote>
+        <h1>{{ issue.title }} | Ticket #{{ issue.id }}</h1>
 
-    <div class="clearfix">
-        {% if user|can_edit_ticket:issue %}
-            <p class="pull-right"><a href="{{ issue.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier le ticket</a></p>
+        <!-- Ticket information -->
+        <p><i class="fa fa-user"></i> Auteur : {{ issue.submitter|user_profile_link }}</p>
+        <p><i class="fa fa-cubes"></i> Composant : {% if issue.component %}<abbr title="{{ issue.component.description }}">{{ issue.component.name }}</abbr>{% else %}non spécifié{% endif %}</p>
+        <p><i class="fa fa-clock-o"></i> Date soumission : {{ issue.submission_date|datetime_html }}</p>
+        <p><i class="fa fa-pencil"></i> Date de derniére modification : {{ issue.last_modification_date|datetime_html }}</p>
+        <p><i class="fa fa-code"></i> Personne en charge du ticket : {% if issue.assigned_to %}{{ issue.assigned_to|user_profile_link }}{% else %}personne{% endif %}</p>
+        <p><i class="fa fa-heartbeat"></i> Status du ticket : <span class="label label-{{ issue.status|color_status }}">{{ issue.status }}</span> ({{ issue.get_status_display }})</p>
+        <p><i class="fa fa-exclamation-circle"></i> Priorité du ticket : <span class="label label-{{ issue.priority|color_priority }}">{{ issue.priority }}</span> ({{ issue.get_priority_display }})</p>
+        <p><i class="fa fa-bomb"></i> Difficulté du ticket : <span class="label label-{{ issue.difficulty|color_difficulty }}">{{ issue.difficulty }}</span> ({{ issue.get_difficulty_display }})</p>
+
+        <hr>
+
+        <!-- Ticket description -->
+        <blockquote>{{ issue.description_html|safe }}</blockquote>
+
+        <!-- Ticket edit link -->
+        <div class="clearfix">
+            {% if user|can_edit_ticket:issue %}
+                <p class="pull-right"><a href="{{ issue.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier le ticket</a></p>
+            {% endif %}
+        </div>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:bugtracker_issueticket_change' issue.pk %}"><i class="fa fa-terminal"></i> Modifier le ticket dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- Ticket subscribe / un-subscribe links -->
+        {% if user.is_authenticated %}
+            <hr>
+
+            {% if has_subscribe_to_issue %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous êtes abonné à ce ticket. <a href="{{ issue.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
+            {% else %}
+                <p class="text-center"><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce ticket. <a href="{{ issue.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
+            {% endif %}
+        {% endif %}
+
+        <hr>
+
+        <!-- Ticket comments header and feeds -->
+        <h2>Commentaires</h2>
+        <p><a href="{{ issue.get_latest_comments_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des commentaires récents pour ce ticket</a> (<a href="{{ issue.get_latest_comments_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Ticket comments sorting links -->
+        <p>Voir les commentaires : {% if cur_order_by == "reverse" %}
+            <a href="{{ issue.get_absolute_url }}">du plus ancien au plus récent</a> | <span style="text-decoration: underline;">du plus récent au plus ancien</span>
+        {% else %}
+            <span style="text-decoration: underline;">du plus ancien au plus récent</span> | <a href="{{ issue.get_absolute_url }}?sort=reverse">du plus récent au plus ancien</a>
+        {% endif %}</p>
+
+        <!-- Ticket comments -->
+        {% for comment in issue_comments %}
+            {% include "bugtracker/issue_comment.html" %}
+        {% empty %}
+            <p class="text-center">Pas de commentaires !</p>
+        {% endfor %}
+
+        <!-- Ticket comment panel -->
+        {% if user.is_authenticated %}
+            <hr>
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-comments"></i> Ajouter un commentaire</div>
+                <div class="panel-body">
+
+                    <!-- Flood protection -->
+                    {% if is_flooding %}
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
+                            <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux commentaires.</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Ticket comment form -->
+                    <form method="post" action="{{ issue.get_absolute_url }}">
+                        {% csrf_token %}
+                        {{ comment_form|bootstrapform }}
+                        <input type="submit" class="btn btn-primary center-block" value="Poster le commentaire" />
+                    </form>
+                </div>
+            </div>
         {% endif %}
     </div>
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:bugtracker_issueticket_change' issue.pk %}"><i class="fa fa-terminal"></i> Modifier le ticket dans l'interface d'administration</a></p>
-    {% endif %}
-
-    {% if user.is_authenticated %}
-        <hr>
-
-        {% if has_subscribe_to_issue %}
-            <p><i class="fa fa-info-circle"></i> Vous êtes abonné à ce ticket. <a href="{{ issue.get_unsubscribe_url }}">Cliquez ici pour vous désabonner.</a></p>
-        {% else %}
-            <p><i class="fa fa-info-circle"></i> Vous n'êtes pas abonné à ce ticket. <a href="{{ issue.get_subscribe_url }}">Cliquez ici pour vous abonner.</a></p>
-        {% endif %}
-    {% endif %}
-    <hr>
-
-    <h2>Commentaires</h2>
-    <p><a href="{{ issue.get_latest_comments_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des commentaires récents pour ce ticket</a> (<a href="{{ issue.get_latest_comments_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
-
-    <p>Voir les commentaires : {% if cur_order_by == "reverse" %}
-        <a href="{{ issue.get_absolute_url }}">du plus ancien au plus récent</a> | <span style="text-decoration: underline;">du plus récent au plus ancien</span>
-    {% else %}
-        <span style="text-decoration: underline;">du plus ancien au plus récent</span> | <a href="{{ issue.get_absolute_url }}?sort=reverse">du plus récent au plus ancien</a>
-    {% endif %}</p>
-
-    {% for comment in issue_comments %}
-        {% include "bugtracker/issue_comment.html" %}
-    {% empty %}
-        <p class="text-center">Pas de commentaires !</p>
-    {% endfor %}
-
-    {% if user.is_authenticated %}
-        <hr>
-
-        <div class="panel panel-default">
-            <div class="panel-heading"><i class="fa fa-comments"></i> Ajouter un commentaire</div>
-            <div class="panel-body">
-                {% if is_flooding %}
-                    <div class="alert alert-danger">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="Fermer">&times;</a>
-                        <p>Vous devez attendre au moins {{ flood_delay_sec }} secondes entre deux commentaires.</p>
-                    </div>
-                {% endif %}
-
-                <form method="post" action="{{ issue.get_absolute_url }}">
-                    {% csrf_token %}
-                    {{ comment_form|bootstrapform }}
-                    <input type="submit" class="btn btn-primary center-block" value="Poster le commentaire" />
-                </form>
-            </div>
-        </div>
-    {% endif %}
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

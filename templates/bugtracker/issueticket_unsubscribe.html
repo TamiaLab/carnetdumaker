@@ -7,12 +7,17 @@
 {% block title %}Ne plus suivre le ticket | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Ne plus suivre le ticket</h1>
 
-    <p>Merci de confirmer votre volonté de ne plus suivre le ticket de bug en cliquant sur le bouton ci-dessous.</p>
+    <!-- Un-subscribe confirmation -->
+    <div class="col-md-12">
 
-    <form method="post" action="{{ issue.get_unsubscribe_url }}">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Ne plus suivre le ticket" />
-    </form>
+        <h1>Ne plus suivre le ticket</h1>
+        <p>Merci de confirmer votre volonté de ne plus suivre le ticket de bug en cliquant sur le bouton ci-dessous.</p>
+
+        <!-- Un-subscribe form -->
+        <form method="post" action="{{ issue.get_unsubscribe_url }}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Ne plus suivre le ticket" />
+        </form>
+    </div>
 {% endblock %}

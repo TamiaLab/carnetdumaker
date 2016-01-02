@@ -7,45 +7,54 @@
 {% block title %}Mes tickets | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <p><a href="{% url 'bugtracker:myaccount' %}"><i class="fa fa-arrow-left"></i> Retour au préférences</a></p>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title"><i class="fa fa-bug"></i> Mes tickets</h1>
-        </div>
-        <div class="panel-body">
-            {% include "bugtracker/tickets_sort_form.html" %}
+    <!-- My tickets list -->
+    <div class="col-md-12">
 
-            <table class="table table-striped table-condensed table-responsive">
-                <thead>
-                <tr>
-                    <th>Ticket</th>
-                    <th>Titre</th>
-                    <th>Date de création</th>
-                    <th>Date de mise à jour</th>
-                    <th>Statut</th>
-                    <th>Priorité</th>
-                    <th>Difficulté</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for issue in issues %}
-                        <tr>
-                            <td><a href="{{ issue.get_absolute_url }}">#{{ issue.pk }}</a></td>
-                            <td><a href="{{ issue.get_absolute_url }}">{{ issue.title }}</a></td>
-                            <td>{{ issue.submission_date|date_html }}</td>
-                            <td>{{ issue.last_modification_date|date_html }}</td>
-                            <td><span class="label label-{{ issue.status|color_status }}">{{ issue.status }}</span></td>
-                            <td><span class="label label-{{ issue.priority|color_priority }}">{{ issue.priority }}</span></td>
-                            <td><span class="label label-{{ issue.difficulty|color_difficulty }}">{{ issue.difficulty }}</span></td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="7"><p class="text-center">Pas de tickets !</p></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <!-- Return link -->
+        <p><a href="{% url 'bugtracker:myaccount' %}"><i class="fa fa-arrow-left"></i> Retour au préférences</a></p>
+
+        <!-- My tickets -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-bug"></i> Mes tickets</h1>
+            </div>
+
+            <div class="panel-body">
+                {% include "bugtracker/tickets_sort_form.html" %}
+
+                <table class="table table-striped table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Titre</th>
+                        <th>Date de création</th>
+                        <th>Date de mise à jour</th>
+                        <th>Statut</th>
+                        <th>Priorité</th>
+                        <th>Difficulté</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for issue in issues %}
+                            <tr>
+                                <td><a href="{{ issue.get_absolute_url }}">#{{ issue.pk }}</a></td>
+                                <td><a href="{{ issue.get_absolute_url }}">{{ issue.title }}</a></td>
+                                <td>{{ issue.submission_date|date_html }}</td>
+                                <td>{{ issue.last_modification_date|date_html }}</td>
+                                <td><span class="label label-{{ issue.status|color_status }}">{{ issue.status }}</span></td>
+                                <td><span class="label label-{{ issue.priority|color_priority }}">{{ issue.priority }}</span></td>
+                                <td><span class="label label-{{ issue.difficulty|color_difficulty }}">{{ issue.difficulty }}</span></td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7"><p class="text-center">Aucun ticket à afficher <i class="fa fa-frown-o"></i></p></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

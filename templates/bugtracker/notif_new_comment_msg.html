@@ -1,4 +1,4 @@
-<p>Un nouveau commentaire vient d'être posté sur un des tickets que vous suivez !</p>
+<p>Un nouveau commentaire vient d'être posté sur un des tickets de bug que vous suivez !</p>
 
 <p>Ticket parent : <code>#{{ issue.id }}</code> ({{ issue.title }})</p>
 
@@ -6,5 +6,5 @@
 <p>Aperçu du commentaire :</p>
 <blockquote>{{ comment.body_html|safe }}</blockquote>
 
-<p><a href="{{ protocol }}://{{ domain }}{{ comment.get_absolute_url }}">Accéder au détail du commentaire.</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{{ comment.get_absolute_url }}">Accéder aux détails du commentaire.</a></p>
 <p><a href="{{ protocol }}://{{ domain }}{{ issue.get_unsubscribe_url }}">Ne plus recevoir de notification par rapport à ce ticket.</a></p>

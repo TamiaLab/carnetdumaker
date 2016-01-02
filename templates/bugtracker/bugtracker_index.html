@@ -3,17 +3,23 @@
 {% block title %}Gestionnaire de bug | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Bienvenue sur le gestionnaire de bugs du Carnet Du Maker</h1>
 
-    <p>Ce gestionnaire de bugs permet à tout un chacun de rapporter un bug, un défaut du site, une fonctionnalité
-    manquante, ou tout simplement d'émettre un souhait d'évolution pour les futures versions du site.</p>
+    <!-- Bug tracker index page -->
+    <div class="col-md-12">
 
-    <p>Vous venez de tomber sur un bug ? Vous avez un problème avec le site ?
-    Si le problème que vous avez constaté n'a pas déjà été rapporté, n'hésitez pas une seule seconde à ouvrir un ticket.
-    Les nouveaux tickets seront lus, classés et traités aussi vite que possible.</p>
+        <h1>Bienvenue sur le gestionnaire de bugs du Carnet Du Maker</h1>
 
-    <div class="well">
-        <p><i class="fa fa-list"></i> Pour voir la liste des tickets : <a href="{% url "bugtracker:issues_list" %}">cliquez ici</a>.</p>
-        <p><i class="fa fa-plus"></i> Pour ouvrir un nouveau ticket : <a href="{% url "bugtracker:issue_create" %}">cliquez ici</a>.</p>
+        <p>Ce gestionnaire de bugs permet à tout un chacun de rapporter un bug, un défaut du site, une fonctionnalité
+        manquante, ou tout simplement d'émettre un souhait d'évolution pour les futures versions du site.</p>
+
+        <p>Vous venez de tomber sur un bug ? Vous avez un problème avec le site ?
+        Si le problème que vous avez constaté n'a pas déjà été rapporté, n'hésitez pas une seule seconde à ouvrir un ticket.
+        Les nouveaux tickets seront lus, classés et traités aussi vite que possible.</p>
+
+        <!-- Bug tracker links -->
+        <div class="well">
+            <p><i class="fa fa-list"></i> Pour voir la liste des tickets : <a href="{% url "bugtracker:issues_list" %}">cliquez ici</a>.</p>
+            <p><i class="fa fa-plus"></i> Pour ouvrir un nouveau ticket : <a href="{% url "bugtracker:issue_create" %}">cliquez ici</a>.</p>
+        </div>
     </div>
 {% endblock %}

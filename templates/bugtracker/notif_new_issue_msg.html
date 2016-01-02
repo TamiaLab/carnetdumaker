@@ -6,5 +6,5 @@
 <p>Aperçu du ticket :</p>
 <blockquote>{{ issue.description_html|safe }}</blockquote>
 
-<p><a href="{{ protocol }}://{{ domain }}{{ issue.get_absolute_url }}">Accéder au détail du ticket.</a></p>
+<p><a href="{{ protocol }}://{{ domain }}{{ issue.get_absolute_url }}">Accéder aux détails du ticket.</a></p>
 <p><a href="{{ protocol }}://{{ domain }}{% url "bugtracker:myaccount" %}">Ne plus recevoir de notification à chaque nouveau ticket de bug.</a></p>
