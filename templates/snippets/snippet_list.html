@@ -4,37 +4,45 @@
 {% block title %}Extraits de code | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Extraits de code</h1>
-    <p><a href="{% url "snippets:latest_snippets_rss" %}"><i class="fa fa-rss"></i> Flux RSS des extraits récents</a> (<a href="{% url "snippets:latest_snippets_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
-    {% if user.is_staff %}
-        <p><a href="{% url 'admin:snippets_codesnippet_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un nouvel extrait de code</a></p>
-    {% endif %}
+    <!-- Snippets list -->
+    <div class="col-md-12">
 
-    <table class="table table-striped table-condensed table-responsive">
-        <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Date de création</th>
-            <th>Langue</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for snippet in snippets %}
+        <h1>Extraits de code</h1>
+        <p><a href="{% url "snippets:latest_snippets_rss" %}"><i class="fa fa-rss"></i> Flux RSS des extraits récents</a> (<a href="{% url "snippets:latest_snippets_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p><a href="{% url 'admin:snippets_codesnippet_add' %}" class="btn btn-primary" role="button"><i class="fa fa-terminal"></i> Ajouter un nouvel extrait de code</a></p>
+        {% endif %}
+
+        <!-- Snippets -->
+        <table class="table table-striped table-condensed table-responsive">
+            <thead>
             <tr>
-                <td><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></td>
-                <td>{{ snippet.creation_date|date_html }}</td>
-                <td>{{ snippet.get_code_language_display }}</td>
-                <td>{{ snippet.description }}</td>
+                <th>Titre</th>
+                <th>Date de création</th>
+                <th>Langue</th>
+                <th>Description</th>
             </tr>
-        {% empty %}
-            <tr>
-                <td colspan="3" class="text-center">Aucun extrait de code disponible pour le moment !</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+            {% for snippet in snippets %}
+                <tr>
+                    <td><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></td>
+                    <td>{{ snippet.creation_date|date_html }}</td>
+                    <td>{{ snippet.get_code_language_display }}</td>
+                    <td>{{ snippet.description }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucun extrait de code à afficher <i class="fa fa-frown-o"></i></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     {% include "paginator/pagination.html" %}
 {% endblock %}

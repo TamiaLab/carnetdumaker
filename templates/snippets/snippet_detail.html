@@ -13,33 +13,53 @@
 
 {% block head_extra %}
     <style>
+        .codetable {
+            width:100%;
+            height: auto;
+            overflow: auto;
+        }
+
         {{ snippet.css_for_display|safe }}
     </style>
 {% endblock head_extra %}
 
 {% block content %}
-    <h1>{{ snippet.title }}</h1>
 
-    <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}</p>
-    {% if snippet.has_been_modified %}
-        <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippet.last_modification_date|datetime_html }}</p>
-    {% endif %}
-    <p><i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}</p>
+    <!-- Snippet detail -->
+    <div class="col-md-12">
 
-    {% if not snippet.public_listing %}
-        <p class="text-warning"><i class="fa fa-exclamation-triangle"></i> Cet extrait de code n'est pas public. Seule les personnes possédant le lien vers l'extrait peuvent le voir.</p>
-    {% endif %}
+        <h1>{{ snippet.title }}</h1>
 
-    <p><i class="fa fa-pencil-square-o"></i> Description :</p>
-    <div class="weel">
-        {{ snippet.description_html|safe }}
+        <!-- Snippet information -->
+        <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}</p>
+        {% if snippet.has_been_modified %}
+            <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippet.last_modification_date|datetime_html }}</p>
+        {% endif %}
+        <p><i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}</p>
+
+        <!-- Secret snippet warning -->
+        {% if not snippet.public_listing %}
+            <p class="text-warning"><i class="fa fa-exclamation-triangle"></i> Cet extrait de code n'est pas public. Seule les personnes possédant le lien vers l'extrait peuvent le voir.</p>
+        {% endif %}
+
+        <!-- Snippet description -->
+        <p><i class="fa fa-pencil-square-o"></i> Description :</p>
+        <div class="well">
+            {{ snippet.description_html|safe }}
+        </div>
+
+        <!-- Snippet code -->
+        <p><i class="fa fa-code"></i> Code source :</p>
+        <div class="codetable">
+            {{ snippet.html_for_display|safe }}
+        </div>
+
+        <!-- Snippet download and raw sorce links -->
+        <p><a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a> | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a></p>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p class="text-right"><a href="{% url 'admin:snippets_codesnippet_change' snippet.pk %}"><i class="fa fa-terminal"></i> Modifier l'extrait de code dans l'interface d'administration</a></p>
+        {% endif %}
     </div>
-
-    {{ snippet.html_for_display|safe }}
-
-    <p><a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a> | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a></p>
-
-    {% if user.is_staff %}
-        <p class="text-right"><a href="{% url 'admin:snippets_codesnippet_change' snippet.pk %}"><i class="fa fa-terminal"></i> Modifier l'extrait de code dans l'interface d'administration</a></p>
-    {% endif %}
 {% endblock %}
