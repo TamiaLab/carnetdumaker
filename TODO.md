@@ -3,16 +3,16 @@
 ## When possible
 
 - Add more unit-testing on code, especially scenario testing (currently only simple GET requests are tested).
-- Add all important apps settings to the main settings files.
-- Write text for the remaining two static pages and CGU/CGV.
+- Write text for the remaining CGU/CGV.
 - Refactor models to remove the fishy "save_without_rendering" method and add a "render_xxx" (default True) kwargs instead.
 - Refactor models to used clean() method when possible.
 - Refactor "tools" app into multiples simples apps with unit-tests.
 
 - Set on_delete on ALL foreign key.
-- HTML anchor don't seem to work, why?
 - signature/avatar not used on the site, maybe add include template or include tag?
 - Quote in answer/reply message are strange, better display the quoted message above the textarea and not include quote tag in reply.
+
+- User account, avatar form widget with raw link displayed is ugly, better just have the upload button and delete checkbox.
 
 ## Text rendering engine (PySkCode)
 
@@ -42,12 +42,6 @@
 - Add "to read" user list feature.
 - Maybe add preview key for anonymous preview access.
 - Maybe add "hidden" state to article model to allow unreferenced articles.
-
-## Search engine
-
-- Integrate Haystack with ElasticSearch search engine in all apps.
-- Add a modification date on all indexed models for fast/optimized index updating.
-- Always use the text version of the rendered text instead of the source version to avoid searching skcode/html tags.
 
 ## Bug tracker
 
