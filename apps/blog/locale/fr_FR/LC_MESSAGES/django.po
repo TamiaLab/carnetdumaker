@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-27 17:02+0100\n"
-"PO-Revision-Date: 2015-12-27 17:02+0100\n"
+"POT-Creation-Date: 2016-01-03 19:50+0100\n"
+"PO-Revision-Date: 2016-01-03 19:50+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -50,6 +50,7 @@ msgid "Revision diff"
 msgstr "Différences de la révision"
 
 #: apps/blog/admin.py:242 apps/blog/admin.py:254
+#, python-format
 msgid "Restore revision #%d"
 msgstr "Restaurer la révision #%d"
 
@@ -58,7 +59,8 @@ msgstr "Restaurer la révision #%d"
 msgid ""
 "Revision #%(revid)d of article \"%(title)s\" has been restored successfully!"
 msgstr ""
-"La révision #%(revid)d de l'article \"%(title)s\" a été restaurée avec succès !"
+"La révision #%(revid)d de l'article \"%(title)s\" a été restaurée avec "
+"succès !"
 
 #: apps/blog/admin.py:318
 msgid "Title and subtitle"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-31 11:45+0100\n"
-"PO-Revision-Date: 2015-12-31 11:45+0100\n"
+"POT-Creation-Date: 2016-01-03 19:50+0100\n"
+"PO-Revision-Date: 2016-01-03 19:50+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,76 +16,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:56
+#: apps/userstrike/admin.py:56
 msgid "Target user"
 msgstr "Utilisateur cible"
 
-#: admin.py:60
+#: apps/userstrike/admin.py:60
 msgid "Metadata"
 msgstr "Métadonnées"
 
-#: admin.py:66
+#: apps/userstrike/admin.py:66
 msgid "Strike information"
 msgstr "Information d'avertissement"
 
-#: admin.py:78 models.py:41
+#: apps/userstrike/admin.py:78 apps/userstrike/models.py:41
 msgid "Author"
 msgstr "Auteur"
 
-#: admin.py:88 models.py:27
+#: apps/userstrike/admin.py:88 apps/userstrike/models.py:27
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps.py:15 models.py:63
+#: apps/userstrike/apps.py:15 apps/userstrike/models.py:63
 msgid "User strike"
 msgstr "Avertissement utilisateur"
 
-#: middleware.py:49
+#: apps/userstrike/middleware.py:49
 #, python-format
 msgid "The reason of this warning is: \"%s\"."
 msgstr "La raison de cet avertissement est : \"%s\"."
 
-#: middleware.py:50
+#: apps/userstrike/middleware.py:50
 #, python-format
 msgid "This warning will expire at %s."
 msgstr "Cet avertissement expirera le %s."
 
-#: middleware.py:50
+#: apps/userstrike/middleware.py:50
 msgid "This warning is not time limited."
 msgstr "Cet avertissement n'est pas limité dans le temps."
 
-#: middleware.py:52
+#: apps/userstrike/middleware.py:52
 msgid "You have received a warning from an administrator."
-msgstr "Vous avez reçu un avertissement de la part d'un administrateur du site."
+msgstr ""
+"Vous avez reçu un avertissement de la part d'un administrateur du site."
 
-#: models.py:32
+#: apps/userstrike/models.py:32
 msgid "Related IP address"
 msgstr "Adresse IP liée"
 
-#: models.py:43
+#: apps/userstrike/models.py:43
 msgid "Creation date"
 msgstr "Date de création"
 
-#: models.py:46
+#: apps/userstrike/models.py:46
 msgid "Expiration date"
 msgstr "Date d'expiration"
 
-#: models.py:51
+#: apps/userstrike/models.py:51
 msgid "Block access (ban)"
 msgstr "Bloquer l'accès (banissement)"
 
-#: models.py:54
+#: apps/userstrike/models.py:54
 msgid "Strike reason (internal)"
 msgstr "Raison avertissement (interne)"
 
-#: models.py:56
+#: apps/userstrike/models.py:56
 msgid "Strike reason (public)"
 msgstr "Raison avertissement (publique)"
 
-#: models.py:64
+#: apps/userstrike/models.py:64
 msgid "User strikes"
 msgstr "Avertissements utilisateur"
 
-#: models.py:78
+#: apps/userstrike/models.py:78
 msgid "You must select an user or enter an IP address."
 msgstr "Vous devez sélectionner un utilisateur ou saisir une adresse IP."

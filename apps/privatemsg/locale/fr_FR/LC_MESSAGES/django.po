@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-27 17:02+0100\n"
-"PO-Revision-Date: 2015-12-27 17:02+0100\n"
+"POT-Creation-Date: 2016-01-03 19:50+0100\n"
+"PO-Revision-Date: 2016-01-03 19:50+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -212,7 +212,8 @@ msgstr "Répondre au message privé"
 
 #: apps/privatemsg/views.py:413
 msgid "Your private message preferences has been successfully updated!"
-msgstr "Vos préférences de messagerie privée ont été mises à jour avec succès !"
+msgstr ""
+"Vos préférences de messagerie privée ont été mises à jour avec succès !"
 
 #: apps/privatemsg/views.py:421
 msgid "My private message preferences"
