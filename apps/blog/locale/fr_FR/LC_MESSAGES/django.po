@@ -313,7 +313,7 @@ msgstr "Images liées à l'article"
 
 #: apps/blog/models.py:189
 msgid "Display the image gallery"
-msgstr "Afficher la gallerie d'images"
+msgstr "Afficher la galerie d'images"
 
 #: apps/blog/models.py:194
 msgid "Follow up of"

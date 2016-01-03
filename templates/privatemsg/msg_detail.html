@@ -23,12 +23,12 @@
         <!-- Delete link -->
         {% if is_recipient and message.deleted_at_recipient_side %}
             <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
-                <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite de réception</a>.<br>
-                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
+                <a href="{{ message.get_undelete_url }}">Cliquez ici pour déplacer le message dans la boîte de réception</a>.<br>
+                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitivement</a>.</p>
         {% elif is_sender and message.deleted_at_sender_side %}
             <p><i class="fa fa-trash"></i> Ce message est dans la corbeille.<br>
-                <a href="{{ message.get_undelete_url }}">Cliquez ici pour le déplacer le message dans la boite d'envoi</a>.<br>
-                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitevement</a>.</p>
+                <a href="{{ message.get_undelete_url }}">Cliquez ici pour déplacer le message dans la boîte d'envoi</a>.<br>
+                <a href="{{ message.get_delete_permanent_url }}">Cliquez ici pour le supprimer définitivement</a>.</p>
         {% else %}
             <p><i class="fa fa-trash"></i> <a href="{{ message.get_delete_url }}">Cliquez ici pour mettre le message à la corbeille</a></p>
         {% endif %}

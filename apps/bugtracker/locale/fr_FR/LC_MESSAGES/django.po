@@ -89,7 +89,7 @@ msgstr "Ticket ouvert"
 
 #: apps/bugtracker/constants.py:20
 msgid "Issue reopened"
-msgstr "Ticket rouvert"
+msgstr "Ticket réouvert"
 
 #: apps/bugtracker/constants.py:21
 msgid "Need more details"
@@ -198,7 +198,7 @@ msgstr "Derniers commentaires"
 
 #: apps/bugtracker/feeds.py:85
 msgid "Latest comments, all tickets together"
-msgstr "Derniers commentaires, tout tickets confondus"
+msgstr "Derniers commentaires, tous tickets confondus"
 
 #: apps/bugtracker/feeds.py:149 apps/bugtracker/feeds.py:161
 #, python-format

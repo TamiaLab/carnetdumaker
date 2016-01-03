@@ -180,7 +180,7 @@ msgstr "Utilisateurs bloqués"
 
 #: apps/privatemsg/views.py:61
 msgid "Private messages inbox"
-msgstr "Boite de réception des message privés"
+msgstr "Boîte de réception des message privés"
 
 #: apps/privatemsg/views.py:99
 msgid "Mark all private messages has read"
@@ -188,7 +188,7 @@ msgstr "Marquer tout les messages comme lus"
 
 #: apps/privatemsg/views.py:128
 msgid "Private messages outbox"
-msgstr "Boite d'envoi des messages privés"
+msgstr "Boîte d'envoi des messages privés"
 
 #: apps/privatemsg/views.py:158
 msgid "Private messages trash"
@@ -212,11 +212,11 @@ msgstr "Répondre au message privé"
 
 #: apps/privatemsg/views.py:413
 msgid "Your private message preferences has been successfully updated!"
-msgstr "Vos préférences de messagerie privé ont été mises à jour avec succès !"
+msgstr "Vos préférences de messagerie privée ont été mises à jour avec succès !"
 
 #: apps/privatemsg/views.py:421
 msgid "My private message preferences"
-msgstr "Mes préférences de messagerie privé"
+msgstr "Mes préférences de messagerie privée"
 
 #: apps/privatemsg/views.py:464
 msgid "Delete message"

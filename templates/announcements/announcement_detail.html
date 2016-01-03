@@ -43,7 +43,7 @@
         <!-- Preview mode warning -->
         {% if not announcement.is_published %}
             {% if announcement.pub_date %}
-                <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas encore en ligne ! La publication de l'annonce est programmé pour le {{ announcement.pub_date|datetime_html }}</p>
+                <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas encore en ligne ! La publication de l'annonce est programmée pour le {{ announcement.pub_date|datetime_html }}</p>
             {% else %}
                 <p class="text-warning"><i class="fa fa-warning"></i> Cette annonce n'est pas en ligne ! Ceci est une simple prévisualisation de l'annonce.</p>
             {% endif %}

@@ -175,7 +175,7 @@ msgstr "Nom du site web"
 
 #: apps/accounts/models.py:151
 msgid "The website URL will be used if empty."
-msgstr "L'URL du site web sera utilisée si non spécifié"
+msgstr "L'URL du site web sera utilisée si non spécifiée"
 
 #: apps/accounts/models.py:156
 msgid "Website url"

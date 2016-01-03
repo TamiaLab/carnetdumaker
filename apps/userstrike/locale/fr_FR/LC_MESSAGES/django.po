@@ -60,7 +60,7 @@ msgstr "Vous avez reçu un avertissement de la part d'un administrateur du site.
 
 #: models.py:32
 msgid "Related IP address"
-msgstr "Adresse IP lié"
+msgstr "Adresse IP liée"
 
 #: models.py:43
 msgid "Creation date"
