@@ -26,6 +26,8 @@
                         {% if image.legend or image.license %}<p class="text-center">{{ image.legend }} {% if image.license %}(licence <a href="{{ image.license.get_absolute_url }}">{{ image.license.name }}</a>){% endif %}</p>{% endif %}
                     </div>
                 </div>
+            {% empty %}
+                <p class="text-center">Aucune image à afficher <i class="fa fa-frown-o"></i></p>
             {% endfor %}
         </div>
     </div>
