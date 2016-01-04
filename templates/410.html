@@ -3,10 +3,15 @@
 {% block title %}Page supprimée | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>Page supprimée</h1>
 
-    <p>La page que vous avez demandée a été supprimée.</p>
-    <p>Cela peut être dû a la demande d'un tiers, des autorités, ou tout simplement suite à une mise à jour d'un contenu vieillissant</p>
+    <!-- Page deleted error -->
+    <div class="col-md-12">
 
-    <p>Merci de votre compréhension.</p>
+        <h1>Page supprimée</h1>
+
+        <p>La page que vous avez demandée a été supprimée.</p>
+        <p>Cela peut être dû a la demande d'un tiers, des autorités, ou tout simplement suite à une mise à jour d'un contenu vieillissant</p>
+
+        <p>Merci de votre compréhension.</p>
+    </div>
 {% endblock %}
