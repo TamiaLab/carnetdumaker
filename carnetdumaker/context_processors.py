@@ -21,9 +21,9 @@ def app_constants(request):
             'COPYRIGHT': _('TamiaLab 2015'),
             'DESCRIPTION': _('L\'esprit du Do It Yourself'),
             'TWITTER_USERNAME': 'carnetdumaker',
-            'GOOGLE_SITE_VERIFICATION_CODE': '',  # TODO
+            'GOOGLE_SITE_VERIFICATION_CODE': 't3KwbPbJCHz-enFYH50Hcd8PDN8NWWC9gCMx7uTjhpQ',
             'TWITTER_ACCOUNT_ID': '3043075520',
-            'FACEBOOK_URL': '',  # TODO
+            'FACEBOOK_URL': 'https://www.facebook.com/CarnetDuMaker/',
         },
         'SITE': {
             'NAME': site.name,
