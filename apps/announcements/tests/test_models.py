@@ -483,8 +483,8 @@ class AnnouncementTwitterCrossPublicationTestCase(TestCase):
         mock.assert_any_call(announcement_published_site_wide)
 
         tweets = AnnouncementTwitterCrossPublication.objects.all()
-        self.assertQuerysetEqual(tweets, ['<AnnouncementTwitterCrossPublication: Test 2 -> 0123456789>',
-                                          '<AnnouncementTwitterCrossPublication: Test 4 -> 0123456789>'])
+        self.assertQuerysetEqual(tweets, ['<AnnouncementTwitterCrossPublication: Test 4 -> 0123456789>',
+                                          '<AnnouncementTwitterCrossPublication: Test 2 -> 0123456789>'])
 
     def test_publish_pending_announcements_error(self):
         """
