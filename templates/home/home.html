@@ -133,7 +133,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4">Aucun topic à afficher <i class="fa fa-frown-o"></i></td>
+                            <td colspan="4"><p class="text-center">Aucun topic à afficher <i class="fa fa-frown-o"></i></p></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -172,7 +172,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="3">Aucun message à afficher <i class="fa fa-frown-o"></i></td>
+                            <td colspan="3"><p class="text-center">Aucun message à afficher <i class="fa fa-frown-o"></i></p></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -197,6 +197,8 @@
                 <ul>
                     {% for announcement in recent_announcements %}
                         <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a> - par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</li>
+                    {% empty %}
+                        <li>Aucune annonces à afficher <i class="fa fa-frown-o"></i></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -209,6 +211,8 @@
                 <ul class="list-inline">
                     {% for user_account in latest_created_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
+                    {% empty %}
+                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
                     {% endfor %}
                 </ul>
 
@@ -217,6 +221,8 @@
                 <ul class="list-inline">
                     {% for user_account in latest_modified_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
+                    {% empty %}
+                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
                     {% endfor %}
                 </ul>
 
@@ -225,6 +231,8 @@
                 <ul class="list-inline">
                     {% for user_account in latest_online_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
+                    {% empty %}
+                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
                     {% endfor %}
                 </ul>
             </div>
