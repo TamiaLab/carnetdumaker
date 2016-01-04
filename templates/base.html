@@ -49,6 +49,20 @@
         {% block extra_opengraph %}{% endblock %}
     {% endblock %}
 
+    <!-- Google search add-on -->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "{{ SITE.PROTO }}://{{ SITE.DOMAIN }}",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "{{ SITE.PROTO }}://{{ SITE.DOMAIN }}{% url 'search:haystack_search' %}?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+
     <!-- Extra head -->
     {% block head_extra %}{% endblock head_extra %}
 
