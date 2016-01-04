@@ -299,6 +299,8 @@ class ReadForumTrackerManager(models.Manager):
         :param forum_ids: A list of forum's id for retrieving.
         :return: A dict {thread_id: last_read_date}
         """
+        if not forum_ids:
+            return {}
         return dict(self.filter(user=user, active=True, forum__in=forum_ids).values_list('forum__id',
                                                                                          'last_read_date'))
 
@@ -349,5 +351,7 @@ class ReadForumThreadTrackerManager(models.Manager):
         :param thread_ids: A list of thread's id for retrieving.
         :return: A dict {thread_id: last_read_date}
         """
+        if not thread_ids:
+            return {}
         return dict(self.filter(user=user, active=True, thread__in=thread_ids).values_list('thread__id',
                                                                                            'last_read_date'))
