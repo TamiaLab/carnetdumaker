@@ -263,11 +263,13 @@ class ArticleTestCase(TestCase):
         """
         article = self._get_article()
         article.pub_date = timezone.now()
+        article.save()
         forum = Forum.objects.create(title='test', slug='test')
         with patch('apps.blog.models.PARENT_FORUM_ID_FOR_ARTICLE_THREADS') as mock_setting:
             mock_setting.return_value = forum.pk
             self.assertIsNone(article.related_forum_thread)
             article.create_related_forum_thread()
+            article.refresh_from_db()
             self.assertIsNotNone(article.related_forum_thread)
             self.assertEqual(article.title, article.related_forum_thread.title)
             self.assertEqual(article.author, article.related_forum_thread.first_post.author)

@@ -348,6 +348,7 @@ class Article(ModelDiffMixin, models.Model):
                                                                       pub_date=self.pub_date,
                                                                       content=post_body_html,
                                                                       author_ip_address=None)
+        super(Article, self).save(update_fields=('related_forum_thread', ))
 
     def require_membership_for_reading(self):
         """
