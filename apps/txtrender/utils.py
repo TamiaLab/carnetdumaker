@@ -97,7 +97,8 @@ def render_document(input_text,
                     render_text_version=False,
                     render_extra_dict=False,
                     merge_footnotes_html=False,
-                    merge_footnotes_text=False):
+                    merge_footnotes_text=False,
+                    make_auto_paragraphs=True):
     """
     Render the given document as HTML, text (if requested) and output extra runtime information.
     :param input_text: The input document text (not safe).
@@ -165,7 +166,8 @@ def render_document(input_text,
     setup_smileys_replacement(document, _base_url)
 
     # Make paragraphs
-    make_paragraphs(document)
+    if make_auto_paragraphs:
+        make_paragraphs(document)
 
     # Make auto titles IDs
     make_auto_title_ids(document)

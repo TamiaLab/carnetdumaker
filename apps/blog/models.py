@@ -426,7 +426,8 @@ class Article(ModelDiffMixin, models.Model):
                                                                 allow_links=True,
                                                                 allow_cdm_extra=True,
                                                                 force_nofollow=False,
-                                                                render_text_version=True)
+                                                                render_text_version=True,
+                                                                make_auto_paragraphs=False)
         self.description_html = description_html
         self.description_text = description_text
 
