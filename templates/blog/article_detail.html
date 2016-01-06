@@ -89,7 +89,11 @@
 
         <!-- Article summary (HTML) -->
         {% if article.summary_html %}
+            <h3>Sommaire</h3>
+
             {{ article.summary_html|safe }}
+
+            <p><!-- Spacer --></p>
         {% endif %}
 
         <!-- Article content -->
@@ -110,6 +114,8 @@
 
         <!-- Article footnotes (HTML) -->
         {% if article.footnotes_html %}
+            <hr>
+
             {{ article.footnotes_html|safe }}
         {% endif %}
 
