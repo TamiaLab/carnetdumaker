@@ -388,6 +388,8 @@ class Article(ModelDiffMixin, models.Model):
         is older than ``NB_DAYS_BEFORE_ARTICLE_GET_OLD`` days.
         """
         last_update_date = self.last_content_modification_date or self.pub_date
+        if not last_update_date:
+            return False
         old_threshold_date = timezone.now() - timedelta(days=NB_DAYS_BEFORE_ARTICLE_GET_OLD)
         return last_update_date < old_threshold_date
     is_old.boolean = True

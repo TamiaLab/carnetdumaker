@@ -522,6 +522,13 @@ class ArticleTestCase(TestCase):
         article = Article(status=ARTICLE_STATUS_PUBLISHED, pub_date=past_now)
         self.assertTrue(article.is_old())
 
+    def test_is_old_none(self):
+        """
+        Test if ``is_old`` return False when the article is not published.
+        """
+        article = Article(status=ARTICLE_STATUS_PUBLISHED, pub_date=None, last_content_modification_date=None)
+        self.assertFalse(article.is_old())
+
     def test_is_old_false(self):
         """
         Test if ``is_old`` return False when the article is ``NB_DAYS_BEFORE_ARTICLE_GET_OLD`` - 1 days old.
