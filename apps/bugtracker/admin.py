@@ -9,6 +9,7 @@ from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from apps.tools.http_utils import get_client_ip_address
+from apps.txtrender.forms import RichTextEditorTextarea
 
 from .models import (AppComponent,
                      IssueTicket,
@@ -161,7 +162,7 @@ class IssueTicketAdminForm(forms.ModelForm):
     Custom admin model form with extra field for the changes comment.
     """
 
-    changes_comment = forms.CharField(widget=forms.Textarea(),
+    changes_comment = forms.CharField(widget=RichTextEditorTextarea(),
                                       label=_('Modification comment'),
                                       required=False,
                                       initial='')
