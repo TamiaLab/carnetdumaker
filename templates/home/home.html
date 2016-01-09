@@ -45,14 +45,14 @@
                 </p>
                 <p class="text-justify">
                     Ici, pas de publicité ou de publirédactionnel, que du contenu de qualité, accessible à tous !
-                    Et si un projet est d'une quelconque façon soutenu par un tier, <a href="{% url 'staticpages:our_commitments' %}">on vous le dit dés les premiéres lignes</a>.
+                    Et si un projet est d'une quelconque façon soutenu par un tier, <a href="{% url 'staticpages:our_commitments' %}">on vous le dit dès les premiéres lignes</a>.
                 </p>
                 <p class="text-justify">
                     Le site Carnet du Maker fonctionne sur un modéle "gratuit, payant à la demande". Pour faire simple, la grande majorité du site est gratuit et accessible à tous.
                     Si vous voulez soutenir le site, c'est vous qui décidez. En contrepartie de votre soutien, on vous donne accès à plein de fonctionnalités avancées et à certains articles en avant-premiére.
                 </p>
                 <p class="text-justify">
-                    Ce n'est pas le nombres de vues ou une quelconque régie publicitaire qui fait la loi sur ce site, <strong>c'est vous !</strong>
+                    Ce n'est pas le nombre de vues ou une quelconque régie publicitaire qui fait la loi sur ce site, <strong>c'est vous !</strong>
                 </p>
             </div>
         </div>
@@ -198,7 +198,7 @@
                     {% for announcement in recent_announcements %}
                         <li><a href="{{ announcement.get_absolute_url }}">{{ announcement.title }}</a> - par {{ announcement.author|user_profile_link }}, le {{ announcement.pub_date|datetime_html }}</li>
                     {% empty %}
-                        <li>Aucune annonces à afficher <i class="fa fa-frown-o"></i></li>
+                        <li><p class="text-center">Aucune annonces à afficher <i class="fa fa-frown-o"></i></p></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -212,7 +212,7 @@
                     {% for user_account in latest_created_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
                     {% empty %}
-                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
+                        <li><p class="text-center">Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></p></li>
                     {% endfor %}
                 </ul>
 
@@ -222,7 +222,7 @@
                     {% for user_account in latest_modified_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
                     {% empty %}
-                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
+                        <li><p class="text-center">Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></p></li>
                     {% endfor %}
                 </ul>
 
@@ -232,7 +232,7 @@
                     {% for user_account in latest_online_user_accounts %}
                         <li>{{ user_account.user|user_profile_link }}</li>
                     {% empty %}
-                        <li>Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></li>
+                        <li><p class="text-center">Aucun utilisateur à afficher <i class="fa fa-frown-o"></i></p></li>
                     {% endfor %}
                 </ul>
             </div>
