@@ -39,7 +39,7 @@
         <!-- Child category -->
         {% with child_categories=category.get_children %}
             {% if child_categories %}
-                <p><i class="fa fa-sitemap"></i> Catégories filles :</p>
+                <p><i class="fa fa-sitemap"></i> Sous catégories :</p>
                 <ul>
                 {% for child_category in child_categories %}
                     <li><a href="{{ child_category.get_absolute_url }}">{{ child_category.name|capfirst }}</a></li>
