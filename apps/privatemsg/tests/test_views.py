@@ -565,6 +565,22 @@ class NotificationsViewsTestCase(TestCase):
         self.assertIn('trying_self_block', response.context)
         self.assertTrue(response.context['trying_self_block'])
 
+    def test_block_user_view_available_staff_block(self):
+        """
+        Test the availability of the "block user" view when trying to block an admin.
+        """
+        client = Client()
+        client.login(username='johndoe1', password='johndoe1')
+        self.user3.is_staff = True
+        self.user3.save()
+        response = client.get(reverse('privatemsg:block_user', kwargs={'username': self.user3}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'privatemsg/block_user.html')
+        self.assertIn('blocked_user', response.context)
+        self.assertEqual(response.context['blocked_user'], self.user3)
+        self.assertIn('trying_block_staff', response.context)
+        self.assertTrue(response.context['trying_block_staff'])
+
     def test_block_user_view_with_unknown_nickname(self):
         """
         Test the UN-availability of the "block user" view with an unknown user name.
