@@ -17,6 +17,10 @@
             <div class="alert alert-danger">
                 <p>Vous ne pouvez pas vous bloquer vous même !</p>
             </div>
+        {% elif trying_block_staff %}
+            <div class="alert alert-danger">
+                <p>Vous ne pouvez pas bloquer un membre de staff !</p>
+            </div>
         {% else %}
             <p>Merci de cliquer sur le bouton ci-dessous pour confirmer cette action.</p>
 

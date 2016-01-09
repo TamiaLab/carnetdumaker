@@ -633,11 +633,12 @@ def block_user(request, username,
     # Get the user object
     blocked_user_obj = get_object_or_404(get_user_model(), username=username)
 
-    # Cannot block yourself
+    # Cannot block yourself or an admin
     user_is_stupid = request.user == blocked_user_obj
+    try_block_staff = blocked_user_obj.is_staff
 
     # Handle POST
-    if request.method == "POST" and not user_is_stupid:
+    if request.method == "POST" and not user_is_stupid and not try_block_staff:
 
         # Subscribe
         BlockedUser.objects.block_user(request.user, blocked_user_obj)
@@ -649,7 +650,8 @@ def block_user(request, username,
     context = {
         'blocked_user': blocked_user_obj,
         'title': _('Block user'),
-        'trying_self_block': user_is_stupid
+        'trying_self_block': user_is_stupid,
+        'trying_block_staff': try_block_staff
         }
     if extra_context is not None:
         context.update(extra_context)
