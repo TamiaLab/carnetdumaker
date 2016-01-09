@@ -48,18 +48,18 @@
             {{ snippet.description_html|safe }}
         </div>
 
-        <!-- Snippet code -->
-        <p><i class="fa fa-code"></i> Code source :</p>
-        <div class="codetable">
-            {{ snippet.html_for_display|safe }}
-        </div>
-
-        <!-- Snippet download and raw sorce links -->
-        <p><a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a> | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a></p>
-
         <!-- Staff links -->
         {% if user.is_staff %}
             <p class="text-right"><a href="{% url 'admin:snippets_codesnippet_change' snippet.pk %}"><i class="fa fa-terminal"></i> Modifier l'extrait de code dans l'interface d'administration</a></p>
         {% endif %}
+
+        <!-- Snippet code with download and raw source links -->
+        <p><i class="fa fa-code"></i> Code source :
+            <a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a> | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a></p>
+
+        <!-- Source code -->
+        <div class="codetable">
+            {{ snippet.html_for_display|safe }}
+        </div>
     </div>
 {% endblock %}
