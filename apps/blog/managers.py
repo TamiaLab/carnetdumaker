@@ -79,7 +79,7 @@ class ArticleManager(models.Manager):
             archive_calendar[year] = sorted(list(months.items()), key=lambda x: x[0])
 
         # Then, sort year
-        return sorted(list(archive_calendar.items()), key=lambda x: x[0])
+        return sorted(list(archive_calendar.items()), key=lambda x: x[0], reverse=True)
 
 
 class ArticleTwitterCrossPublicationManager(models.Manager):

@@ -767,14 +767,14 @@ class ArticleTestCase(TestCase):
 
         calendar = Article.objects.published_per_month()
         excepted_result = [
-            (2013, [(1, 1)]),
-            (2014, [(2, 1),
-                    (5, 1),
-                    (6, 1),
-                    (7, 3)]),
             (2015, [(3, 2),
                     (4, 1),
                     (5, 2),
                     (6, 1)]),
+            (2014, [(2, 1),
+                    (5, 1),
+                    (6, 1),
+                    (7, 3)]),
+            (2013, [(1, 1)]),
         ]
         self.assertEqual(calendar, excepted_result)
