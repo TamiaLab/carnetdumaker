@@ -178,7 +178,7 @@
                     {% else %}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Connexion <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'auth:login' %}?next={{ SITE.CURRENT_URL }}"><i class="fa fa-lock"></i> Connexion</a></li>
+                            <li><a href="{% url 'auth:login' %}{% block conn_next_page %}?next={{ SITE.CURRENT_URL }}{% endblock %}"><i class="fa fa-lock"></i> Connexion</a></li>
                             <li><a href="{% url 'registration:registration_register' %}"><i class="fa fa-user-plus"></i> Inscription</a></li>
                         </ul>
                     {% endif %}

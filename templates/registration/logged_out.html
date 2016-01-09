@@ -3,6 +3,8 @@
 {% block breadcrumb %}{{ block.super }}
     <li><a href="{% url 'auth:logout' %}">Deconnexion</a></li>{% endblock %}
 
+{% block conn_next_page %}{% endblock %}
+
 {% block content %}
 
     <!-- Logout -->
