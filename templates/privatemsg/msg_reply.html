@@ -7,8 +7,8 @@
 
 {% block title %}Répondre au message | {{ block.super }}{% endblock %}
 
-{% block menu %}
-    {% include "privatemsg/menu.html" with active="compose" %}
+{% block pre_content %}
+    {% include "privatemsg/menu_tabs.html" with active="compose" %}
 {% endblock %}
 
 {% block content %}

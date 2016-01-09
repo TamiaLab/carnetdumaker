@@ -3,6 +3,6 @@
 {% block breadcrumb %}{{ block.super }}
     <li><a href="{% url 'privatemsg:trash' %}">Mes messages privés supprimés</a></li>{% endblock %}
 
-{% block menu %}
-    {% include "privatemsg/menu.html" with active="trash" %}
+{% block pre_content %}
+    {% include "privatemsg/menu_tabs.html" with active="trash" %}
 {% endblock %}

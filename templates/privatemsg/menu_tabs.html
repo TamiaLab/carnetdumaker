@@ -1,0 +1,8 @@
+<!-- Private message tabs -->
+<ul class="nav nav-tabs">
+    <li class="{% if active == "compose" %}active{% endif %}"><a href="{% url "privatemsg:compose" %}"><i class="fa fa-envelope"></i> Nouveau message</a></li>
+    <li class="{% if active == "inbox" %}active{% endif %}"><a href="{% url "privatemsg:inbox" %}"><i class="fa fa-inbox"></i> Boite de réception{% if messages_count %} <span class="badge">{{ messages_count }}</span>{% endif %}</a></li>
+    <li class="{% if active == "outbox" %}active{% endif %}"><a href="{% url "privatemsg:outbox" %}"><i class="fa fa-paper-plane"></i> Messages envoyés</a></li>
+    <li class="{% if active == "trash" %}active{% endif %}"><a href="{% url "privatemsg:trash" %}"><i class="fa fa-trash"></i> Corbeille</a></li>
+</ul>
+<p><!-- Spacer --></p>

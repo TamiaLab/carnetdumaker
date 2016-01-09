@@ -6,6 +6,6 @@
     {% endif %}
     <li><a href="{{ message.get_absolute_url }}">{{ message.get_subject_display }}</a></li>{% endblock %}
 
-{% block menu %}
-    {% include "privatemsg/menu.html" with active="" %}
+{% block pre_content %}
+    {% include "privatemsg/menu_tabs.html" with active="" %}
 {% endblock %}

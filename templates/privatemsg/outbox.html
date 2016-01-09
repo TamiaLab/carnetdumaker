@@ -6,8 +6,8 @@
 
 {% block title %}Mes messages privés envoyés | {{ block.super }}{% endblock %}
 
-{% block menu %}
-    {% include "privatemsg/menu.html" with active="outbox" %}
+{% block pre_content %}
+    {% include "privatemsg/menu_tabs.html" with active="outbox" %}
 {% endblock %}
 
 {% block content %}
