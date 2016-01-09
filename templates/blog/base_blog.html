@@ -1,4 +1,4 @@
-{% extends "base_sidebar.html" %}
+{% extends "base_fullpage.html" %}
 {% load blog mptt_tags %}
 
 {% block breadcrumb %}{{ block.super }}
@@ -9,47 +9,49 @@
     <link rel="alternate" type="application/atom+xml" title="Articles récents (flux Atom)" href="{% url "blog:latest_articles_atom" %}">
 {% endblock %}
 
-{% block menu %}
-    {% include "blog/menu.html" %}
-{% endblock %}
-
 {% block extra_navbar %}
 
-    <!-- Second navbar for blog categories -->
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar-collapse-2">
-                    <span class="sr-only">Ouvrir le menu</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'blog:category_list' %}">Catégories</a>
-            </div>
+    <!-- Fix body padding -->
+    <style>
+        body {
+            padding-top: 185px;
+        }
+    </style>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="header-navbar-collapse-2">
-                <!-- Blog navbar -->
-                <ul class="nav navbar-nav">
-                    {% all_categories as category_nodes %}
-                    {% recursetree category_nodes %}
-                        {% if not node.is_leaf_node %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ node.name }} <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ node.get_absolute_url }}">Voir cette catégorie</a></li>
-                                    <li class="divider"></li>
-                                    {{ children }}
-                                </ul>
-                            </li>
-                        {% else %}
-                            <li><a href="{{ node.get_absolute_url }}">{{ node.name }}</a></li>
-                        {% endif %}
-                    {% endrecursetree %}
-                </ul>
-            </div>
+    <!-- Second navbar for blog categories -->
+    <div class="container" id="blog-category-navbar-fade">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar-collapse-2">
+                <span class="sr-only">Ouvrir le menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'blog:category_list' %}">Catégories</a>
         </div>
-    </nav>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="header-navbar-collapse-2">
+            <!-- Blog navbar -->
+            <ul class="nav navbar-nav">
+                {% all_categories as category_nodes %}
+                {% recursetree category_nodes %}
+                    {% if not node.is_leaf_node %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ node.name }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ node.get_absolute_url }}">Voir cette catégorie</a></li>
+                                <li class="divider"></li>
+                                {{ children }}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ node.get_absolute_url }}">{{ node.name }}</a></li>
+                    {% endif %}
+                {% endrecursetree %}
+                <li><a href="{% url 'blog:archive_index' %}">Les archives</a></li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

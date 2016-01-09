@@ -28,6 +28,16 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#blog-category-navbar-fade').fadeOut();
+        } else {
+            $('#blog-category-navbar-fade').fadeIn();
+        }
+    });
+});
+
 $(".spoiler").each(function(index) {
 	var t = $(this);
 	t.hide();
