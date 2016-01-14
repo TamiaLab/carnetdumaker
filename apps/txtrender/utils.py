@@ -107,7 +107,12 @@ def render_document(input_text,
     # Shortcut for empty documents
     input_text = input_text.strip()
     if not input_text:
-        return '', '', {}
+        return '', '', {
+            'footnotes_html': '',
+            'footnotes_text': '',
+            'summary_html': '',
+            'summary_text': '',
+        }
 
     # Filter tags according to permissions
     allowed_tags = {}
