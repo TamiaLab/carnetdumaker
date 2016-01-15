@@ -27,10 +27,11 @@ class CodeSnippetAdmin(admin.ModelAdmin):
             kwargs['initial'] = request.user.id
         return super(CodeSnippetAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
-    list_select_related = ('author', )
+    list_select_related = ('author', 'license')
 
-    list_display = ('filename',
-                    'title',
+    list_display = ('title',
+                    'filename',
+                    'license_link',
                     'author_username_link',
                     'code_language',
                     'creation_date',
@@ -49,9 +50,10 @@ class CodeSnippetAdmin(admin.ModelAdmin):
                      'filename',
                      'title',
                      'code_language',
+                     'license__name',
                      'source_code')
 
-    raw_id_fields = ('author', )
+    raw_id_fields = ('author', 'license')
 
     readonly_fields = ('creation_date',
                        'last_modification_date')
@@ -65,6 +67,7 @@ class CodeSnippetAdmin(admin.ModelAdmin):
                        'filename',
                        'code_language',
                        'public_listing',
+                       'license',
                        'creation_date',
                        'last_modification_date')
         }),
@@ -88,6 +91,20 @@ class CodeSnippetAdmin(admin.ModelAdmin):
     author_username_link.short_description = _('Author')
     author_username_link.admin_order_field = 'author__username'
     author_username_link.allow_tags = True
+
+    def license_link(self, obj):
+        """
+        Simple link to the license.
+        :param obj: Current database object.
+        :return: HTML <a> link to the given object.
+        """
+        if not obj.license:
+            return ''
+        return format_html('<a href="{0}" class="link">{1}</a>',
+                           obj.license.get_absolute_url(),
+                           obj.license.name)
+    license_link.short_description = ''
+    license_link.allow_tags = True
 
     def view_on_site_link(self, obj):
         """

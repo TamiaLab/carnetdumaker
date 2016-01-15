@@ -39,6 +39,7 @@ class CodeSnippetModelTestCase(TestCase):
         snippet = self._get_snippet()
         self.assertEqual(CODE_LANGUAGE_DEFAULT, snippet.code_language)
         self.assertTrue(snippet.public_listing)
+        self.assertIsNone(snippet.license)
         self.assertNotEqual('', snippet.html_for_display)
         self.assertNotEqual('', snippet.css_for_display)
         self.assertEqual(snippet.display_line_numbers, SNIPPETS_DISPLAY_LINE_NUMBERS_BY_DEFAULT)
@@ -77,6 +78,14 @@ class CodeSnippetModelTestCase(TestCase):
         snippet = self._get_snippet()
         excepted_url = reverse('snippets:snippet_download', kwargs={'pk': snippet.pk})
         self.assertEqual(excepted_url, snippet.get_download_url())
+
+    def test_get_zip_download_url_method(self):
+        """
+        Test the ``get_zip_download_url`` method of the model.
+        """
+        snippet = self._get_snippet()
+        excepted_url = reverse('snippets:snippet_zip_download', kwargs={'pk': snippet.pk})
+        self.assertEqual(excepted_url, snippet.get_zip_download_url())
 
     def test_last_modification_date_change_after_title_change(self):
         """

@@ -87,6 +87,18 @@ class SnippetsViewsTestCase(TestCase):
         self.assertEqual(response['Content-Disposition'], 'attachment; filename="%s"' % self.snippet.filename)
         self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
 
+    def test_snippet_zip_download_view_available(self):
+        """
+        Test the availability of the "code snippet zip download" view.
+        """
+        client = Client()
+        response = client.get(self.snippet.get_zip_download_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/zip')
+        self.assertEqual(response['Content-Length'], str(len(response.content)))
+        self.assertEqual(response['Content-Disposition'], 'attachment; filename="%s.zip"' % self.snippet.filename)
+        self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
+
     def test_private_snippet_detail_view_available(self):
         """
         Test the availability of the "code snippet detail" view for a private (not listed on index page) snippet.
@@ -122,6 +134,19 @@ class SnippetsViewsTestCase(TestCase):
         self.assertEqual(response['Content-Type'], 'text/plain')
         self.assertEqual(response['Content-Length'], str(len(self.snippet_private.source_code)))
         self.assertEqual(response['Content-Disposition'], 'attachment; filename="%s"' % self.snippet_private.filename)
+        self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
+
+    def test_private_snippet_zip_download_view_available(self):
+        """
+        Test the availability of the "code snippet zip download" view for a private (not listed on index page) snippet.
+        """
+        client = Client()
+        response = client.get(self.snippet_private.get_zip_download_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/zip')
+        self.assertEqual(response['Content-Length'], str(len(response.content)))
+        self.assertEqual(response['Content-Disposition'], 'attachment; filename="%s.zip"' %
+                         self.snippet_private.filename)
         self.assertEqual(response['X-Content-Type-Options'], 'nosniff')
 
     def test_snippet_detail_view_unavailable_with_unknown_snippet(self):

@@ -1,6 +1,7 @@
 {{ object.title }}
 {{ object.author.username }}
 {{ object.author.get_full_name }}
+{% if object.license %}{{ object.license.name }}{% endif %}
 {{ object.filename }}
 {{ object.description_text }}
 {{ object.source_code }}

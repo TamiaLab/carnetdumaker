@@ -23,6 +23,7 @@
                 <th>Titre</th>
                 <th>Date de création</th>
                 <th>Langue</th>
+                <th>Licence</th>
                 <th>Description</th>
             </tr>
             </thead>
@@ -33,11 +34,12 @@
                     <td><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></td>
                     <td>{{ snippet.creation_date|date_html }}</td>
                     <td>{{ snippet.get_code_language_display }}</td>
+                    <td>{% if snippet.license %}<a href="{{ snippet.license.get_absolute_url }}">{{ snippet.license.name }}</a>{% else %}(voir pied de page){% endif %}</td>
                     <td>{{ snippet.description }}</td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4" class="text-center">Aucun extrait de code à afficher <i class="fa fa-frown-o"></i></td>
+                    <td colspan="5" class="text-center">Aucun extrait de code à afficher <i class="fa fa-frown-o"></i></td>
                 </tr>
             {% endfor %}
             </tbody>

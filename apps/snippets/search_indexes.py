@@ -14,6 +14,8 @@ class CodeSnippetIndex(indexes.SearchIndex, indexes.Indexable):
 
     text = indexes.CharField(document=True, use_template=True)
 
+    license = indexes.CharField(model_attr='license', null=True)
+
     def get_model(self):
         """
         Return the model class for this index.

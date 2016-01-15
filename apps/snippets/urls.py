@@ -23,6 +23,9 @@ urlpatterns = (
     # Snippet raw content page
     url(r'^(?P<pk>[0-9]+)/source/$', views.snippet_raw, name='snippet_raw'),
 
-    # Snippet raw content page
+    # Snippet download page
     url(r'^(?P<pk>[0-9]+)/telechargement/$', views.snippet_raw, {'download': True}, name='snippet_download'),
+
+    # Snippet download in zip page
+    url(r'^(?P<pk>[0-9]+)/telechargement-zip/$', views.snippet_zip_download, name='snippet_zip_download'),
 )

@@ -2,6 +2,10 @@
 Views for the code snippets app.
 """
 
+import os.path
+from zipfile import ZipFile
+from io import BytesIO
+
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.template.response import TemplateResponse
@@ -87,5 +91,36 @@ def snippet_raw(request, pk, download=False):
     response['Content-Length'] = len(source_code)
     if download:
         response['Content-Disposition'] = 'attachment; filename="%s"' % snippet_obj.filename
+    response['X-Content-Type-Options'] = 'nosniff'
+    return response
+
+
+def snippet_zip_download(request, pk):
+    """
+    Download the code snippet in a zip archive.
+    :param request: The desired code snippet's PK.
+    :param pk: The current request.
+    :return: HttpResponse
+    """
+
+    # Retrieve the snippet
+    snippet_obj = get_object_or_404(CodeSnippet, pk=pk)
+
+    # Get the base filename
+    basename = os.path.basename(snippet_obj.filename)
+    basename = os.path.splitext(basename)[0]
+
+    # Craft the ZIP archive
+    output_zip_file = BytesIO()
+    zip_file = ZipFile(output_zip_file, 'w')
+    zip_file.writestr(basename + '/' + snippet_obj.filename, snippet_obj.source_code)
+    zip_file.close()
+    output_zip_file.seek(0)
+
+    # Return the snippet code as an archive
+    data = output_zip_file.read()
+    response = HttpResponse(data, content_type='application/zip')
+    response['Content-Length'] = len(data)
+    response['Content-Disposition'] = 'attachment; filename="%s.zip"' % snippet_obj.filename
     response['X-Content-Type-Options'] = 'nosniff'
     return response

@@ -18,6 +18,8 @@ from apps.txtrender.fields import RenderTextField
 from apps.txtrender.utils import render_document
 from apps.txtrender.signals import render_engine_changed
 
+from apps.licenses.models import License
+
 from .settings import (SNIPPETS_DEFAULT_TABULATION_SIZE,
                        SNIPPETS_DISPLAY_LINE_NUMBERS_BY_DEFAULT,
                        SNIPPETS_PYGMENTS_CSS_STYLE_NAME,
@@ -63,7 +65,14 @@ class CodeSnippet(ModelDiffMixin, models.Model):
     public_listing = models.BooleanField(_('Public listing'),
                                          default=True)
 
-    # TODO Add license field (FK) with according admin forms, views, feeds
+    license = models.ForeignKey(License,
+                                db_index=True,  # Database optimization
+                                related_name='snippets',
+                                verbose_name=_('License'),
+                                on_delete=models.SET_NULL,
+                                default=None,
+                                blank=True,
+                                null=True)
 
     description = RenderTextField(_('Description'))
 
@@ -124,6 +133,12 @@ class CodeSnippet(ModelDiffMixin, models.Model):
         Returns the download link to this snippet.
         """
         return reverse('snippets:snippet_download', kwargs={'pk': self.pk})
+
+    def get_zip_download_url(self):
+        """
+        Returns the download as zip archive link to this snippet.
+        """
+        return reverse('snippets:snippet_zip_download', kwargs={'pk': self.pk})
 
     def get_raw_url(self):
         """
