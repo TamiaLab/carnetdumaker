@@ -81,7 +81,7 @@
         body {
             padding-top: 120px;
             padding-bottom: 20px;
-            background-color: gray;
+            background-image: url("{% static "images/px_by_Gre3g.png" %}");
         }
 
         .page-content {
@@ -121,7 +121,7 @@
     <![endif]-->
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -197,8 +197,8 @@
         {% block extra_navbar %}{% endblock %}
 
         <!-- Beta-stage alert -->
-        <p class="text-center" id="beta-alert"><i class="fa fa-exclamation-triangle"></i> Site en beta !
-            Merci de rapporter tout bug sur le <a href="{% url 'bugtracker:index' %}">gestionnaire de bug</a> du site.
+        <p class="text-warning text-center" id="beta-alert"><i class="fa fa-exclamation-triangle"></i> Site en beta !
+            Merci de rapporter tout bug sur le <a class="text-warning" href="{% url 'bugtracker:index' %}">gestionnaire de bug</a> du site.
             Bonne lecture !
         </p>
     </nav>
@@ -304,7 +304,7 @@
                 <p class="text-center">Les codes sources présents sur Carnet du Maker sont la plupart du temps publiés sous <a href="http://www.gnu.org/licenses/gpl-3.0.fr.html">licence GPLv3</a>.
                 Mais, sauf mention contraire, tous les éléments du site (textes, images, codes sources, etc.), exception faite des contenus publiés sur le forum, sont la propriété exclusive de TamiaLab.
                 Toute reproduction totale ou partielle, sans autorisation préalable de l'auteur et de TamiaLab, sera succeptible d'entrainer des poursuites judiciaires.</p>
-                <!-- <p class="text-center">Motifs décoratifs réalisés par <a href="http://subtlepatterns.com/">Subtle Patterns</a> sous licence CC BY-SA 3.0.</p> -->
+                <p class="text-center">Motifs décoratifs réalisés par <a href="http://subtlepatterns.com/">Subtle Patterns</a> sous licence CC BY-SA 3.0.</p>
             </div>
         </footer>
     </div>
