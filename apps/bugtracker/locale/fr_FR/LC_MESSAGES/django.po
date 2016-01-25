@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-03 19:50+0100\n"
+"POT-Creation-Date: 2016-01-25 15:02+0100\n"
 "PO-Revision-Date: 2016-01-03 19:50+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -16,65 +16,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/bugtracker/admin.py:37
+#: apps/bugtracker/admin.py:38
 msgid "Component information"
 msgstr "Information sur le composant"
 
-#: apps/bugtracker/admin.py:87
+#: apps/bugtracker/admin.py:88
 msgid "General information"
 msgstr "Informations générales"
 
-#: apps/bugtracker/admin.py:92 apps/bugtracker/forms.py:75
+#: apps/bugtracker/admin.py:93 apps/bugtracker/forms.py:75
 #: apps/bugtracker/models.py:357 apps/bugtracker/models.py:423
 msgid "Comment text"
 msgstr "Texte du commentaire"
 
-#: apps/bugtracker/admin.py:107 apps/bugtracker/admin.py:326
+#: apps/bugtracker/admin.py:108 apps/bugtracker/admin.py:327
 msgid "ID"
 msgstr "ID"
 
-#: apps/bugtracker/admin.py:122
+#: apps/bugtracker/admin.py:123
 msgid "Author"
 msgstr "Auteur"
 
-#: apps/bugtracker/admin.py:165
+#: apps/bugtracker/admin.py:166
 msgid "Modification comment"
 msgstr "Commentaire de modification"
 
-#: apps/bugtracker/admin.py:297
+#: apps/bugtracker/admin.py:298
 msgid "Issue information"
 msgstr "Information sur le problème"
 
-#: apps/bugtracker/admin.py:305
+#: apps/bugtracker/admin.py:306
 msgid "Issue date and time"
 msgstr "Date et heure du problème"
 
-#: apps/bugtracker/admin.py:309
+#: apps/bugtracker/admin.py:310
 msgid "Issue status"
 msgstr "Statut du problème"
 
-#: apps/bugtracker/admin.py:338
+#: apps/bugtracker/admin.py:339
 msgid "Component"
 msgstr "Composant"
 
-#: apps/bugtracker/admin.py:353 apps/bugtracker/models.py:93
+#: apps/bugtracker/admin.py:354 apps/bugtracker/models.py:93
 msgid "Submitter"
 msgstr "Auteur"
 
-#: apps/bugtracker/admin.py:369 apps/bugtracker/models.py:106
+#: apps/bugtracker/admin.py:370 apps/bugtracker/models.py:106
 msgid "Assigned to"
 msgstr "Assigné à"
 
-#: apps/bugtracker/admin.py:381
+#: apps/bugtracker/admin.py:382
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/bugtracker/admin.py:418 apps/bugtracker/admin.py:456
+#: apps/bugtracker/admin.py:419 apps/bugtracker/admin.py:457
 #: apps/bugtracker/models.py:573
 msgid "Related user"
 msgstr "Utilisateur lié"
 
-#: apps/bugtracker/admin.py:446 apps/bugtracker/models.py:346
+#: apps/bugtracker/admin.py:447 apps/bugtracker/models.py:346
 #: apps/bugtracker/models.py:498 apps/bugtracker/models.py:542
 msgid "Related issue"
 msgstr "Problème lié"

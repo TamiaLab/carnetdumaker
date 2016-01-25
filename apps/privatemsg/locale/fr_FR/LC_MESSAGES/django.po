@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-03 19:50+0100\n"
+"POT-Creation-Date: 2016-01-25 15:02+0100\n"
 "PO-Revision-Date: 2016-01-03 19:50+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
@@ -235,10 +235,10 @@ msgstr "Restaurer le message"
 msgid "Blocked users list"
 msgstr "Liste des utilisateurs bloqués"
 
-#: apps/privatemsg/views.py:651
+#: apps/privatemsg/views.py:652
 msgid "Block user"
 msgstr "Bloquer l'utilisateur"
 
-#: apps/privatemsg/views.py:698
+#: apps/privatemsg/views.py:700
 msgid "Unblock user"
 msgstr "Débloquer l'utilisateur"
