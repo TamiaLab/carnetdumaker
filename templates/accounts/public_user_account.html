@@ -35,7 +35,7 @@
 
                     <!-- Avatar image -->
                     {% if public_user_profile.avatar %}
-                        <img src="{{ public_user_profile.avatar.url }}" class="img-rounded center-block" alt="Photo de profil">
+                        <img src="{{ public_user_profile.avatar.url }}" class="img-rounded center-block" alt="Photo de profil de {{ public_user.username }}">
                     {% else %}
                         <img src="{% static 'images/no_avatar.png' %}" class="img-rounded center-block" alt="Pas de photo de profil">
                     {% endif %}
