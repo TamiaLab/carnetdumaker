@@ -1,0 +1,8 @@
+{% extends "base_fullpage.html" %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'userapikey:index' %}">Ma clef d'accès API</a></li>{% endblock %}
+
+{% block pre_content %}
+    {% include "accounts/myaccount_tabs.html" with active_tab="user_api_key" %}
+{% endblock %}

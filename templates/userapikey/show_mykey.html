@@ -1,0 +1,46 @@
+{% extends "userapikey/base_user_api_key.html" %}
+{% load tools %}
+
+{% block title %}Ma clef d'accès API | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <!-- My API key -->
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-key"></i> Ma clef d'accès API</h1>
+            </div>
+
+            <div class="panel-body">
+
+                <p class="text-justify">
+                    La clef d'accès API ci-dessous permet d'accéder à certaines fonctionnalités de votre compte utilisateur sans connexion.
+                </p>
+
+                <p class="text-justify text-warning">
+                    Cette clef d'accès API est strictement confidentielle et personnelle.
+                    Ne la communiquez sous aucun prétexe, pas même à votre maman, vos amis ou votre chien.
+                </p>
+
+                <hr>
+
+                <p>Votre clef d'accès API est : <code>{{ api_key.get_full_api_key }}</code></p>
+                <p>Date de génération : {{ api_key.last_generation_date|datetime_html }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User action links -->
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-wrench"></i> Options avancées</h1>
+            </div>
+
+            <div class="panel-body">
+                <p><i class="fa fa-key"></i> <a href="{% url 'userapikey:regen_mykey' %}">Regénérer ma clef d'accès API</a>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

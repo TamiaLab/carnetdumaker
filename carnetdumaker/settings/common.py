@@ -225,6 +225,7 @@ INSTALLED_APPS = [
     'apps.notifications',
     'apps.paginator',
     'apps.privatemsg',
+    'apps.redirects',
     'apps.registration',
     'apps.shop',
     'apps.snippets',
@@ -233,6 +234,7 @@ INSTALLED_APPS = [
     'apps.tools',
     'apps.twitter',
     'apps.txtrender',
+    'apps.userapikey',
     'apps.usernotes',
     'apps.userstrike',
 ]
@@ -243,6 +245,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',  # For language activation upon login
     'apps.timezones.middleware.TimezoneMiddleware',  # For timezone activation upon login
+    'apps.redirects.middleware.RedirectFallbackMiddleware',  # For handling known 404 errors
+    # RedirectFallbackMiddleware MUST BE BEFORE CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

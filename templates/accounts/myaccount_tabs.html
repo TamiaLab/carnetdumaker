@@ -4,5 +4,6 @@
     <li{% if active_tab == "notifications" %} class="active"{% endif %}><a href="{% url 'notifications:myaccount' %}"><i class="fa fa-bell"></i> Notifications</a></li>
     <li{% if active_tab == "privatemsg" %} class="active"{% endif %}><a href="{% url 'privatemsg:myaccount' %}"><i class="fa fa-envelope"></i> Messages privés</a></li>
     <li{% if active_tab == "forum" %} class="active"{% endif %}><a href="{% url 'forum:myaccount' %}"><i class="fa fa-comments"></i> Forum</a></li>
+    <li{% if active_tab == "user_api_key" %} class="active"{% endif %}><a href="{% url 'userapikey:index' %}"><i class="fa fa-key"></i> Clef d'accès API</a></li>
 </ul>
 <p><!-- Spacer --></p>

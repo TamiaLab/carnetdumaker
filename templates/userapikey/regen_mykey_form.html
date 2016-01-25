@@ -1,0 +1,36 @@
+{% extends "userapikey/base_user_api_key.html" %}
+{% load bootstrapform %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'userapikey:regen_mykey' %}">Regénérer ma clef d'accès API</a></li>{% endblock %}
+
+{% block title %}Regénérer ma clef d'accès API | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <!-- Regenerate my API key -->
+    <div class="col-md-12">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-key"></i> Regénérer ma clef d'accès API</h1>
+            </div>
+
+            <div class="panel-body">
+                <p class="text-danger">ATTENTION : La régénération de votre clef API entrainera l'invalidation de la clef API actuelle.
+                Par conséquent, les applications utilisant la clef API actuelle ne pourront plus accéder à votre compte.</p>
+
+                <form method="post" action="{% url 'userapikey:regen_mykey' %}">
+                    {% csrf_token %}
+                    {{ form|bootstrapform }}
+                    <input type="submit" class="btn btn-danger center-block" value="Regénérer ma clef d'accès API" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Return link -->
+    <div class="col-md-12">
+        <p><a href="{% url 'userapikey:index' %}"><i class="fa fa-arrow-left"></i> Retour aux informations de clef d'accès API</a></p>
+    </div>
+{% endblock %}

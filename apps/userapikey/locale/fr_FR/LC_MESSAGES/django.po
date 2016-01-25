@@ -1,0 +1,56 @@
+# Fichier de traduction en langue francaise pour le projet CDM.
+# Copyright (C) 2015 TamiaLab
+# This file is distributed under the same license as the CDM package.
+# Fabien Batteix <fabien.batteix@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CarnetDuMaker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-25 15:02+0100\n"
+"PO-Revision-Date: 2016-01-03 19:50+0100\n"
+"Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/userapikey/admin.py:32
+msgid "Metadata"
+msgstr "Métadonnées"
+
+#: apps/userapikey/apps.py:15 apps/userapikey/models.py:39
+msgid "User API keys"
+msgstr "Clefs API utilisateur"
+
+#: apps/userapikey/forms.py:14
+msgid ""
+"I want to regenerate my API key and understand doing this will invalidate "
+"previous ones."
+msgstr "Je veux regènèrer ma clef API et je comprend que faire ceci invalidera "
+"toutes les clefs précédentes."
+
+#: apps/userapikey/models.py:26
+msgid "Related user"
+msgstr "Utilisateur lié"
+
+#: apps/userapikey/models.py:28
+msgid "API key"
+msgstr "Clef API"
+
+#: apps/userapikey/models.py:32
+msgid "Last generation date"
+msgstr "Date de derniére gènèration"
+
+#: apps/userapikey/models.py:38
+msgid "User API key"
+msgstr "Clef API utilisateur"
+
+#: apps/userapikey/views.py:37
+msgid "My API key"
+msgstr "Ma clef API"
+
+#: apps/userapikey/views.py:80
+msgid "Regenerate my API key"
+msgstr "Regènèrer ma clef API"

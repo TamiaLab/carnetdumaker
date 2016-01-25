@@ -59,6 +59,9 @@ urlpatterns = patterns('',
     # Log watcher account history
     url(r'^mon-compte/historique-connexion/', include('apps.loginwatcher.urls', namespace='loginwatcher')),
 
+    # API key manager
+    url(r'^mon-compte/clef-api/', include('apps.userapikey.urls', namespace='userapikey')),
+
     # User login and registration
     url(r'^authentification/', include('apps.registration.auth_urls', namespace='auth')),
     url(r'^inscription/', include('apps.registration.urls', namespace='registration')),
