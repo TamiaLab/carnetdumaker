@@ -31,14 +31,14 @@
         <h1>{{ announcement.title }}</h1>
 
         <p><i class="fa fa-user"></i> par {{ announcement.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ announcement.pub_date|datetime_html }}</p>
-        {% if announcement.has_been_modified_after_publication %}
-            <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
-        {% endif %}
         {% with announcement_tags=announcement.tags.all %}
             {% if announcement_tags %}
                 <p><i class="fa fa-tags"></i> Mots clefs :{% for tag in announcement_tags %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a> {% endfor %}</p>
             {% endif %}
         {% endwith %}
+        {% if announcement.has_been_modified_after_publication %}
+            <p><i class="fa fa-edit"></i> Derniére modification le {{ announcement.last_content_modification_date|datetime_html }}</p>
+        {% endif %}
 
         <!-- Preview mode warning -->
         {% if not announcement.is_published %}
