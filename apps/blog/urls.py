@@ -20,26 +20,26 @@ urlpatterns = (
     # Article tag index view
     url(r'^tags/$', views.tag_list, name='tag_list'),
 
+    # Latest articles for a specific tag feed
+    url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/$', feeds.LatestArticlesForTagFeed(),
+        name='latest_tag_articles_rss'),
+    url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/atom/$', feeds.LatestArticlesForTagAtomFeed(),
+        name='latest_tag_articles_atom'),
+
     # Article tag view
     url(r'^tags/(?P<slug>[-a-zA-Z0-9_]+)/$', views.tag_detail, name='tag_detail'),
-
-    # Latest articles for a specific tag feed
-    url(r'^/tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/$', feeds.LatestArticlesForTagFeed(),
-        name='latest_tag_articles_rss'),
-    url(r'^/tags/(?P<slug>[-a-zA-Z0-9_]+)/flux/atom/$', feeds.LatestArticlesForTagAtomFeed(),
-        name='latest_tag_articles_atom'),
 
     # Article category index view
     url(r'^categories/$', views.category_list, name='category_list'),
 
+    # Latest articles for a specific category feed
+    url(r'^categories/(?P<hierarchy>[-a-zA-Z0-9_/]+)/flux/$', feeds.LatestArticlesForCategoryFeed(),
+        name='latest_category_articles_rss'),
+    url(r'^categories/(?P<hierarchy>[-a-zA-Z0-9_/]+)/flux/atom/$', feeds.LatestArticlesForCategoryAtomFeed(),
+        name='latest_category_articles_atom'),
+
     # Article category view
     url(r'^categories/(?P<hierarchy>[-a-zA-Z0-9_/]+)/$', views.category_detail, name='category_detail'),
-
-    # Latest articles for a specific category feed
-    url(r'^/categories/(?P<hierarchy>[-a-zA-Z0-9_/]+)/flux/$', feeds.LatestArticlesForCategoryFeed(),
-        name='latest_category_articles_rss'),
-    url(r'^/categories/(?P<hierarchy>[-a-zA-Z0-9_/]+)/flux/atom/$', feeds.LatestArticlesForCategoryAtomFeed(),
-        name='latest_category_articles_atom'),
 
     # Article archives views
     url(r'^archives/$', views.archive_index, name='archive_index'),
@@ -47,13 +47,13 @@ urlpatterns = (
     url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.archive_month, name='archive_month'),
 
     # Archives feed
-    url(r'^/archives/(?P<year>[0-9]{4})/flux/$', feeds.ArticlesForYearFeed(),
+    url(r'^archives/(?P<year>[0-9]{4})/flux/$', feeds.ArticlesForYearFeed(),
         name='articles_archive_year_rss'),
-    url(r'^/archives/(?P<year>[0-9]{4})/flux/atom/$', feeds.ArticlesForYearAtomFeed(),
+    url(r'^archives/(?P<year>[0-9]{4})/flux/atom/$', feeds.ArticlesForYearAtomFeed(),
         name='articles_archive_year_atom'),
-    url(r'^/archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/flux/$', feeds.ArticlesForYearAndMonthFeed(),
+    url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/flux/$', feeds.ArticlesForYearAndMonthFeed(),
         name='articles_archive_month_rss'),
-    url(r'^/archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/flux/atom/$', feeds.ArticlesForYearAndMonthAtomFeed(),
+    url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/flux/atom/$', feeds.ArticlesForYearAndMonthAtomFeed(),
         name='articles_archive_month_atom'),
 
     # Article detail views
