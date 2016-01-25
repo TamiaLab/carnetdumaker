@@ -187,7 +187,7 @@ class ArticleCategoryTestCase(TestCase):
         Test __str__ result for other tests.
         """
         category = self._get_category()
-        self.assertEqual(category.name, str(category))
+        self.assertEqual('%s (%s)' % (category.name, category.slug_hierarchy), str(category))
 
     def test_get_absolute_url_method(self):
         """
