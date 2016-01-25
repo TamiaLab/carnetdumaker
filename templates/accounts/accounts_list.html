@@ -37,7 +37,7 @@
                         {% if account.googleplus_url %}<a href="{{ account.googleplus_url }}" title="Google+"><i class="fa fa-google-plus"></i></a>{% endif %}
                         {% if account.youtube_url %}<a href="{{ account.youtube_url }}" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
                         {% if account.email_public %}<a href="mailto:{{ account.user.email }}" title="Adresse email"><i class="fa fa-at"></i></a>{% endif %}
-                        <a href="{% url 'privatemsg:compose_to' recipient=account.user.username %}" title="message privé"><i class="fa fa-envelope"></i></a>
+                        <a href="{% url 'privatemsg:compose_to' recipient=account.user.username %}" title="Message privé"><i class="fa fa-envelope"></i></a>
                     </td>
                 </tr>
             {% empty %}
