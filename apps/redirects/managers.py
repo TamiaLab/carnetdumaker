@@ -29,16 +29,5 @@ class RedirectionManager(models.Manager):
         except self.model.DoesNotExist:
             pass
 
-        # Handle URL without ending slash
-        if settings.APPEND_SLASH and not request.path.endswith('/'):
-            try:
-                return self.get(
-                        site=current_site,
-                        old_path=request.get_full_path(force_append_slash=True),
-                        active=True
-                )
-            except self.model.DoesNotExist:
-                pass
-
         # No redirection found
         return None
