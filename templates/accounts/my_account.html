@@ -19,9 +19,9 @@
                     <div class="form-group">
                         <label class="control-label">Avatar</label>
                         <p class="form-control-static">{% if user.user_profile.avatar %}
-                            <img src="{{ user.user_profile.avatar.url }}" class="img-rounded" />
+                            <img src="{{ user.user_profile.avatar.url }}" class="img-rounded" alt="Photo de profil actuelle" />
                         {% else %}
-                            <img src="{% static "images/no_avatar.png" %}" class="img-rounded" />
+                            <img src="{% static "images/no_avatar.png" %}" class="img-rounded" alt="Pas de photo de profil" />
                         {% endif %}</p>
                     </div>
                     {{ form|bootstrapform }}
@@ -43,7 +43,7 @@
                 <p><i class="fa fa-key"></i> <a href="{% url 'myaccount:password_change' %}">Modifier mon mot de passe</a></p>
                 <p><i class="fa fa-at"></i> <a href="{% url 'myaccountmail:email_change' %}">Modifier mon adresse email</a></p>
                 <p><i class="fa fa-key"></i> <a href="{% url 'loginwatcher:index' %}">Voir l'historique de connexion de mon compte</a></p>
-                <p><i class="fa fa-info-circle"></i> Si vous souhaitez clôturer votre compte utilisateur, merci de contacter l'administrateur du site via le lien de contact en bas de page.</p>
+                <p class="text-center"><i class="fa fa-info-circle"></i> Si vous souhaitez clôturer votre compte utilisateur, merci de contacter l'administrateur du site via le lien de contact en bas de page.</p>
             </div>
         </div>
     </div>
