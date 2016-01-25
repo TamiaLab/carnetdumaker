@@ -59,10 +59,10 @@ class AutoResizingImageFieldFile(ImageFieldFile):
         """
 
         # Resize image before saving
-        content = self.resize_image(name, content, self.field.width, self.field.height)
+        new_name, content = self.resize_image(name, content, self.field.width, self.field.height)
 
         # Save the image
-        super(AutoResizingImageFieldFile, self).save(name, content, save)
+        super(AutoResizingImageFieldFile, self).save(new_name, content, save)
 
     @staticmethod
     def resize_image(name, content, width, height):
@@ -79,7 +79,7 @@ class AutoResizingImageFieldFile(ImageFieldFile):
         string = BytesIO()
         image.save(string, format='JPEG')
         new_name = '%s.jpg' % os.path.splitext(name)[0]
-        return ContentFile(string.getvalue(), name=new_name)
+        return new_name, ContentFile(string.getvalue(), name=new_name)
 
 
 class AutoResizingImageField(models.ImageField):
@@ -110,10 +110,10 @@ class ThumbnailImageFieldFile(ImageFieldFile):
         """
 
         # Resize image before saving
-        content = self.resize_image(name, content, self.field.width, self.field.height)
+        new_name, content = self.resize_image(name, content, self.field.width, self.field.height)
 
         # Save the image
-        super(ThumbnailImageFieldFile, self).save(name, content, save)
+        super(ThumbnailImageFieldFile, self).save(new_name, content, save)
 
     @staticmethod
     def resize_image(name, content, width, height):
@@ -130,7 +130,7 @@ class ThumbnailImageFieldFile(ImageFieldFile):
         string = BytesIO()
         image.save(string, format='JPEG')
         new_name = '%s.jpg' % os.path.splitext(name)[0]
-        return ContentFile(string.getvalue(), name=new_name)
+        return new_name, ContentFile(string.getvalue(), name=new_name)
 
 
 class ThumbnailImageField(models.ImageField):
