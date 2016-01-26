@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CarnetDuMaker\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 15:02+0100\n"
-"PO-Revision-Date: 2016-01-03 19:50+0100\n"
+"POT-Creation-Date: 2016-01-26 16:53+0100\n"
+"PO-Revision-Date: 2016-01-26 16:53+0100\n"
 "Last-Translator: Fabien Batteix <fabien.batteix@tamialab.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,31 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/snippets/admin.py:62 apps/snippets/models.py:48
+#: apps/snippets/admin.py:64 apps/snippets/admin.py:171
+#: apps/snippets/models.py:49 apps/snippets/models.py:261
 msgid "Title"
 msgstr "Titre"
 
-#: apps/snippets/admin.py:65
+#: apps/snippets/admin.py:67 apps/snippets/admin.py:174
 msgid "Metadata"
 msgstr "Métadonnées"
 
-#: apps/snippets/admin.py:74 apps/snippets/models.py:83
+#: apps/snippets/admin.py:76 apps/snippets/models.py:84
 msgid "Source code"
 msgstr "Code source"
 
-#: apps/snippets/admin.py:78
+#: apps/snippets/admin.py:80
 msgid "Display options"
 msgstr "Options d'affichage"
 
-#: apps/snippets/admin.py:91 apps/snippets/models.py:54
+#: apps/snippets/admin.py:93 apps/snippets/admin.py:193
+#: apps/snippets/models.py:55 apps/snippets/models.py:267
 msgid "Author"
 msgstr "Auteur"
 
-#: apps/snippets/admin.py:117
+#: apps/snippets/admin.py:119 apps/snippets/admin.py:205
 msgid "View on site"
 msgstr "Voir sur le site"
 
-#: apps/snippets/apps.py:15 apps/snippets/models.py:118
+#: apps/snippets/admin.py:181
+msgid "Content"
+msgstr "Contenu"
+
+#: apps/snippets/apps.py:15 apps/snippets/models.py:119
 msgid "Code snippets"
 msgstr "Extraits de code"
 
@@ -53,70 +59,86 @@ msgstr "Derniers extraits de code"
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: apps/snippets/models.py:56
+#: apps/snippets/models.py:57 apps/snippets/models.py:269
 msgid "Filename"
 msgstr "Nom de fichier"
 
-#: apps/snippets/models.py:59
+#: apps/snippets/models.py:60
 msgid "Code language"
 msgstr "Langage de programmation"
 
-#: apps/snippets/models.py:65
+#: apps/snippets/models.py:66 apps/snippets/models.py:272
 msgid "Public listing"
 msgstr "Listé publiquement"
 
-#: apps/snippets/models.py:71
+#: apps/snippets/models.py:72
 msgid "License"
 msgstr "Licence"
 
-#: apps/snippets/models.py:77
+#: apps/snippets/models.py:78 apps/snippets/models.py:275
 msgid "Description"
 msgstr "Description"
 
-#: apps/snippets/models.py:79
+#: apps/snippets/models.py:80 apps/snippets/models.py:277
 msgid "Description (raw HTML)"
 msgstr "Description (HTML brut)"
 
-#: apps/snippets/models.py:81
+#: apps/snippets/models.py:82 apps/snippets/models.py:279
 msgid "Description (raw text)"
 msgstr "Description (texte brut)"
 
-#: apps/snippets/models.py:85
+#: apps/snippets/models.py:86
 msgid "HTML for display"
 msgstr "HTML pour affichage"
 
-#: apps/snippets/models.py:89
+#: apps/snippets/models.py:90
 msgid "CSS for display"
 msgstr "CSS pour affichage"
 
-#: apps/snippets/models.py:93
+#: apps/snippets/models.py:94
 msgid "Display line numbers"
 msgstr "Afficher les numéros de lignes"
 
-#: apps/snippets/models.py:96
+#: apps/snippets/models.py:97
 msgid "Highlight lines"
 msgstr "Lignes en surbrillance"
 
-#: apps/snippets/models.py:97
+#: apps/snippets/models.py:98
 msgid "Enter line numbers separated by comma."
 msgstr "Entrer les numéros de lignes séparés par des virgules"
 
-#: apps/snippets/models.py:102
+#: apps/snippets/models.py:103
 msgid "Tabulation size in space"
 msgstr "Taille d'une tabulation en espaces"
 
-#: apps/snippets/models.py:105
+#: apps/snippets/models.py:106 apps/snippets/models.py:284
 msgid "Creation date"
 msgstr "Date de création"
 
-#: apps/snippets/models.py:108
+#: apps/snippets/models.py:109 apps/snippets/models.py:287
 msgid "Last modification date"
 msgstr "Date de dernière modification"
 
-#: apps/snippets/models.py:117
+#: apps/snippets/models.py:118
 msgid "Code snippet"
 msgstr "Extrait de code"
 
-#: apps/snippets/views.py:40
+#: apps/snippets/models.py:282
+msgid "Snippets in this bundle"
+msgstr "Extraits de code dans ce dossier"
+
+#: apps/snippets/models.py:293
+msgid "Code snippets bundle"
+msgstr "Dossier d'extraits de code"
+
+#: apps/snippets/models.py:294
+msgid "Code snippets bundles"
+msgstr "Dossiers d'extraits de code"
+
+#: apps/snippets/views.py:42
 msgid "Code snippets list"
 msgstr "Liste des extraits de code"
+
+#: apps/snippets/views.py:150
+msgid "Code snippets bundles list"
+msgstr "Liste des dossiers d'extraits de code"
