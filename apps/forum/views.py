@@ -1039,7 +1039,7 @@ def my_threads_subscription_list(request,
     # Get all subscriptions
     subscriptions = ForumThreadSubscription.objects.filter(user=request.user,
                                                            thread__deleted_at__isnull=True, active=True) \
-        .select_related('thread__first_post__author', 'thread__last_post')
+        .select_related('thread__first_post__author', 'thread__last_post__author')
 
     # Thread subscriptions list pagination
     paginator, page = paginate(subscriptions, request, NB_FORUM_THREAD_PER_PAGE)
