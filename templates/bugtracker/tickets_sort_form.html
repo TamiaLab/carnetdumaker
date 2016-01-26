@@ -1,9 +1,11 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2 class="panel-title"><i class="fa fa-cogs"></i> Options de filtrage</h2>
+<div class="panel panel-default" id="filteringForm">
+    <div class="panel-heading" id="filteringFormHeader">
+        <h2 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#filteringForm" href="#collapseFilteringForm" aria-expanded="true" aria-controls="collapseFilteringForm">
+                <i class="fa fa-cogs"></i> Options de filtrage</a><i class="indicator glyphicon glyphicon-chevron-down pull-right"></i></h2>
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body panel-collapse collapse" id="collapseFilteringForm" aria-labelledby="filteringFormHeader">
         <form action="" method="GET">
             <div class="form-group">
                 <label for="sortby" class="control-label col-xs-2">Trier par :</label>
