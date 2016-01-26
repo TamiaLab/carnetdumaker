@@ -46,6 +46,8 @@
                     {% include "search/include/licenses/license.html" %}
                 {% elif result.content_type == "snippets.codesnippet" %}
                     {% include "search/include/snippets/codesnippet.html" %}
+                {% elif result.content_type == "snippets.codesnippetbundle" %}
+                    {% include "search/include/snippets/codesnippetbundle.html" %}
                 {% endif %}
             {% empty %}
                 <p>Aucun résultat trouvés !</p>
