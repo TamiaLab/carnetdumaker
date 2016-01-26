@@ -7,7 +7,7 @@
 {% block title %}{{ snippet.title }} | {{ block.super }}{% endblock %}
 
 {% block opengraph_title %}{{ snippet.title }}{% endblock %}
-{% block opengraph_description %}{{ snippet.description_text }}{% endblock %}
+{% block opengraph_description %}{{ snippet.description_text|truncatewords:200 }}{% endblock %}
 {% block opengraph_image %}{% endblock %}
 {% block opengraph_url %}{{ block.super }}{{ snippet.get_absolute_url }}{% endblock %}
 
@@ -31,12 +31,12 @@
         <h1>{{ snippet.title }}</h1>
 
         <!-- Snippet information -->
-        <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}</p>
+        <p><i class="fa fa-user"></i> par {{ snippet.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippet.creation_date|datetime_html }}
+        | <i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}
+        | <i class="fa fa-copyright"></i> Licence : {% if snippet.license %}<a href="{{ snippet.license.get_absolute_url }}">{{ snippet.license.name }}</a>{% else %}(voir pied de page){% endif %}</p>
         {% if snippet.has_been_modified %}
             <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippet.last_modification_date|datetime_html }}</p>
         {% endif %}
-        <p><i class="fa fa-code"></i> Langue : {{ snippet.get_code_language_display }}</p>
-        <p><i class="fa fa-copyright"></i> Licence : {% if snippet.license %}<a href="{{ snippet.license.get_absolute_url }}">{{ snippet.license.name }}</a>{% else %}(voir pied de page){% endif %}</p>
 
         <!-- Secret snippet warning -->
         {% if not snippet.public_listing %}
@@ -55,8 +55,8 @@
         {% endif %}
 
         <!-- Snippet code with download and raw source links -->
-        <p><i class="fa fa-code"></i> Code source :
-            <a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a>
+        <p><i class="fa fa-code"></i> Code source :</p>
+        <p><a href="{{ snippet.get_raw_url }}"><i class="fa fa-file-code-o"></i> Voir le code source brut</a>
             | <a href="{{ snippet.get_download_url }}"><i class="fa fa-download"></i> Télécharger {{ snippet.filename }}</a>
             | <a href="{{ snippet.get_zip_download_url }}"><i class="fa fa-file-archive-o"></i> Télécharger {{ snippet.filename }}.zip</a></p>
 
