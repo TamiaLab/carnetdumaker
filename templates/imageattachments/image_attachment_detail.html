@@ -37,8 +37,9 @@
         <!-- Image information -->
         <h2>Information sur l'image</h2>
         <p><i class="fa fa-calendar"></i> Date de mise en ligne : {{ image.pub_date|date_html }}</p>
-        <p><i class="fa fa-info-circle"></i> Légende : {% if image.legend %}<i class="fa fa-quote-left"></i> {{ image.legend }} <i class="fa fa-quote-right"></i>{% else %}pas de légende{% endif %}</p>
-        {% if image.description %}<p><i class="fa fa-file-text-o"></i> Description :</p>
+        <p><i class="fa fa-info-circle"></i> Légende : {% if image.legend %}{{ image.legend }}{% else %}pas de légende{% endif %}</p>
+        {% if image.description_html %}
+            <p><i class="fa fa-file-text-o"></i> Description :</p>
             <div class="well">
                 {{ image.description_html|safe }}
             </div>
