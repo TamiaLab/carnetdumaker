@@ -24,6 +24,8 @@
             <p><a href="{% url 'admin:blog_articletag_change' tag.pk %}"><i class="fa fa-terminal"></i> Modifier le tag dans l'interface d'administration</a></p>
         {% endif %}
 
+        <hr>
+
         <!-- Related articles -->
         {% include "blog/articles.html" with articles=related_articles %}
     </div>
