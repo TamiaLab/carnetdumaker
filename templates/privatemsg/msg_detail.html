@@ -52,7 +52,7 @@
             {% endif %}
 
             <!-- Reply / block user links -->
-            <a href="{{ message.get_reply_url }}" class="btn btn-primary pull-right" role="button">Répondre à ce message</a>
+            <a href="{{ message.get_reply_url }}" class="btn btn-primary pull-left" role="button">Répondre à ce message</a>
             <a href="{% url "privatemsg:block_user" username=message.sender.username %}" class="btn btn-primary pull-right" role="button">Bloquer l'utilisateur</a>
         </div>
 
@@ -61,9 +61,10 @@
         <!-- Message tree -->
         <p><i class="fa fa-envelope-o"></i> Message parent : {% if message.parent_msg %}<a href="{{ message.parent_msg.get_absolute_url }}">{{ message.parent_msg.get_subject_display }}</a>{% else %}(aucun){% endif %}</p>
         {% with replies=message.replies.all %}
-            <p><strong><i class="fa fa-comments-o"></i> Réponses</strong></p>
+            <p><i class="fa fa-comments-o"></i> Réponses :</p>
             <ul>
                 {% for reply in replies %}
+                    {# TODO Handle deleted messages #}
                     <li>{{ reply.sent_at|date_html }}- <a href="{{ reply.get_absolute_url }}">{{ reply.get_subject_display }}</a></li>
                 {% empty %}
                     <li>Pas de réponse</li>

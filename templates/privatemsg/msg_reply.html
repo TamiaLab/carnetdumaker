@@ -22,6 +22,12 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
+                <!-- Parent message body -->
+                <p><i class="fa fa-envelope-o"></i> Message parent :</p>
+                <div class="well">
+                    {{ parent_msg.body_html|safe }}
+                </div>
+
                 <!-- Anti-flood protection -->
                 {% if is_flooding %}
                     <div class="alert alert-danger">
