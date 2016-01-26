@@ -7,7 +7,7 @@
     <!-- Bug tracker index page -->
     <div class="col-md-12">
 
-        <h1>Bienvenue sur le gestionnaire de bugs du Carnet Du Maker</h1>
+        <h1 class="text-center">Bienvenue sur le gestionnaire de bugs</h1>
 
         <p class="text-center">Ce gestionnaire de bugs permet à tout un chacun de rapporter un bug, un défaut du site, une fonctionnalité
         manquante, ou tout simplement d'émettre un souhait d'évolution pour les futures versions du site.</p>
@@ -16,10 +16,16 @@
         Si le problème que vous avez constaté n'a pas déjà été rapporté, n'hésitez pas une seule seconde à ouvrir un ticket.
         Les nouveaux tickets seront lus, classés et traités aussi vite que possible.</p>
 
+        <hr>
+
+        <h3 class="text-center">Je veux …</h3>
+
         <!-- Bug tracker links -->
-        <div class="well">
-            <p><i class="fa fa-list"></i> Pour voir la liste des tickets : <a href="{% url "bugtracker:issues_list" %}">cliquez ici</a>.</p>
-            <p><i class="fa fa-plus"></i> Pour ouvrir un nouveau ticket : <a href="{% url "bugtracker:issue_create" %}">cliquez ici</a>.</p>
+        <div class="text-center">
+            <p class="btn btn-default"><a href="{% url "bugtracker:issues_list" %}"><i class="fa fa-list"></i> Voir la liste des tickets</a></p>
+            <p class="btn btn-default"><a href="{% url "bugtracker:issue_create" %}"><i class="fa fa-plus"></i> Ouvrir un nouveau ticket</a></p>
         </div>
     </div>
 {% endblock %}
+
+{% block extra_footer_links %}<li><a href="https://www.youtube.com/watch?v=Dt6iTwVIiMM"><i class="fa fa-lemon-o"></i> DAMN LEMONS</a></li>{% endblock %}
