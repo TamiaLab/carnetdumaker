@@ -1,3 +1,4 @@
 {{ object.title }}
+{% if object.category %}{{ object.category.title }}{% endif %}
 {{ object.slug_hierarchy }}
 {{ object.description_text }}

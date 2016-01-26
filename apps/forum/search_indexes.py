@@ -28,7 +28,7 @@ class ForumIndex(indexes.SearchIndex, indexes.Indexable):
         """
         Used when the entire index for this model is updated.
         """
-        return self.get_model().objects.all()
+        return self.get_model().objects.all().select_related('category')
 
     def get_updated_field(self):
         """
@@ -59,7 +59,8 @@ class ForumThreadIndex(indexes.SearchIndex, indexes.Indexable):
         Used when the entire index for this model is updated.
         """
         return self.get_model().objects.public_threads().select_related('parent_forum',
-                                                                        'first_post__author')
+                                                                        'first_post__author',
+                                                                        'last_post__author')
 
     def get_updated_field(self):
         """
@@ -91,7 +92,10 @@ class ForumThreadPostIndex(indexes.SearchIndex, indexes.Indexable):
         """
         Used when the entire index for this model is updated.
         """
-        return self.get_model().objects.public_published()
+        return self.get_model().objects.public_published() \
+            .select_related('parent_thread',
+                            'author',
+                            'last_modification_by').prefetch_related('attachments')
 
     def get_updated_field(self):
         """
