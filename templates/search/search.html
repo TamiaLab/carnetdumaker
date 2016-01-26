@@ -67,7 +67,7 @@
                         <li class="disabled"><a href="#" aria-label="{{ PREVIOUS_PAGE }}"><span aria-hidden="true">&laquo;</span></a></li>
                     {% endif %}
                     {% for i in paginator.page_range %}
-                        <li {% if page.number == i %}class="active"{% endif %}>{% if i == 1 %}<a href="?{{ get_params }}">{% else %}<a href="?page={{ i }}{{ get_params_union }}">{% endif %}{{ i }}</a></li>
+                        <li {% if page.number == i %}class="active"{% endif %}>{% if i == 1 %}<a href="?q={{ query }}">{% else %}<a href="?page={{ i }}&q={{ query }}">{% endif %}{{ i }}</a></li>
                     {% endfor %}
                     {% if page.has_next %}
                         <li><a href="?q={{ query }}&amp;page={{ page.next_page_number }}" rel="next" aria-label="{{ NEXT_PAGE }}"><span aria-hidden="true">&raquo;</span></a></li>
