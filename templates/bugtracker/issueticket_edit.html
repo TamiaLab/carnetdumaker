@@ -3,16 +3,16 @@
 
 {% block breadcrumb %}{{ block.super }}
     <li><a href="{{ issue.get_absolute_url }}">Ticket #{{ issue.id }}</a></li>
-    <li><a href="{{ issue.get_edit_url }}">Editer le ticket</a></li>{% endblock %}
+    <li><a href="{{ issue.get_edit_url }}">Modifier le ticket</a></li>{% endblock %}
 
-{% block title %}Editer le ticket | {{ block.super }}{% endblock %}
+{% block title %}Modifier le ticket | {{ block.super }}{% endblock %}
 
 {% block content %}
 
     <!-- Edit ticket -->
     <div class="col-md-12">
 
-        <h1>Editer le ticket</h1>
+        <h1>Modifier le ticket</h1>
 
         <!-- Return link -->
         <p><a href="{{ issue.get_absolute_url }}"><i class="fa fa-arrow-left"></i> Retour au ticket</a></p>
