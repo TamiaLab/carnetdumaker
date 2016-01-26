@@ -19,28 +19,40 @@
         {% endif %}
 
         <!-- Root forums -->
-        <table class="table table-striped table-condensed table-responsive">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Titre</th>
-                <th>Description</th>
-            </tr>
-            </thead>
+        {% for category, root_forums in root_forums_by_cat %}
+            <table class="table forum table-striped table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th><h3>{% if category %}{{ category.title }}{% else %}Forums{% endif %}</h3></th>
+                    <th style="width: 60%">Description</th>
+                </tr>
+                </thead>
 
-            <tbody>
-            {% for root_forum in root_forums %}
-                {% if user|has_access_to:root_forum %}
-                    <tr>
-                        <td>{% if root_forum.logo %}<a href="{{ root_forum.get_absolute_url }}"><img src="{{ root_forum.logo.url }}" alt="Logo forum {{ root_forum.title }}" /></a>{% endif %}</td>
-                        <td><a href="{{ root_forum.get_absolute_url }}">{{ root_forum.title|capfirst }}</a></td>
-                        <td>{{ root_forum.description_html|safe }}</td>
-                    </tr>
-                {% endif %}
-            {% empty %}
-                <tr><td colspan="3"><p class="text-center">Aucun forum à afficher <i class="fa fa-frown-o"></i></p></td></tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                <tbody>
+                {% for root_forum in root_forums %}
+                    {% if user|has_access_to:root_forum %}
+                        <tr>
+                            <td>{% if root_forum.logo %}<a href="{{ root_forum.get_absolute_url }}"><img src="{{ root_forum.logo.url }}" alt="Logo forum {{ root_forum.title }}" /></a>{% endif %}</td>
+                            <td><h4><a href="{{ root_forum.get_absolute_url }}">{{ root_forum.title|capfirst }}</a></h4>
+                                {% with children_forums=root_forum.children.all %}
+                                    <p>{% if children_forums %}Sous forums :
+                                        {% for child_forum in children_forums %}
+                                            <a href="{{ child_forum.get_absolute_url }}">{{ child_forum.title }}</a>
+                                        {% endfor %}
+                                    {% endif %}</p>
+                                {% endwith %}
+                            </td>
+                            <td style="vertical-align: middle">{{ root_forum.description_html|safe }}</td>
+                        </tr>
+                    {% endif %}
+                {% empty %}
+                    <tr><td colspan="3"><p class="text-center">Aucun forum à afficher <i class="fa fa-frown-o"></i></p></td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% empty %}
+            <p class="text-center">Aucun forum à afficher <i class="fa fa-frown-o"></i></p>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -2,6 +2,8 @@
 Views for the forum app.
 """
 
+from collections import defaultdict
+
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, resolve_url
@@ -51,12 +53,19 @@ def forum_index(request,
     """
 
     # Retrieve all root forums
-    root_forums = Forum.objects.root_forums()
+    root_forums = Forum.objects.root_forums().select_related('category').prefetch_related('children')
+
+    # Group by category
+    root_forums_by_cat = defaultdict(list)
+    for forum in root_forums:
+        root_forums_by_cat[forum.category].append(forum)
+    root_forums_by_cat = sorted(root_forums_by_cat.items(), key=lambda x: x[0].ordering if x[0] else -1)
 
     # Render the template
     context = {
         'title': _('Forum home page'),
         'root_forums': root_forums,
+        'root_forums_by_cat': root_forums_by_cat,
     }
     if extra_context is not None:
         context.update(extra_context)

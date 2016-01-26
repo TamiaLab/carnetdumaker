@@ -39,6 +39,30 @@ from .managers import (ForumManager,
                        ReadForumThreadTrackerManager)
 
 
+class ForumCategory(models.Model):
+    """
+    Forum category data model.
+    A forum category is made of:
+    - a title,
+    - an ordering index.
+    """
+
+    title = models.CharField(_('Title'),
+                             max_length=255)
+
+    ordering = models.IntegerField(_('Ordering'),
+                                   db_index=True,  # Database optimization
+                                   default=1)
+
+    class Meta:
+        verbose_name = _('Forum category')
+        verbose_name_plural = _('Forum categories')
+        ordering = ('ordering', 'title')
+
+    def __str__(self):
+        return self.title
+
+
 class Forum(MPTTModel):
     """
     Forum main data model.
@@ -61,6 +85,14 @@ class Forum(MPTTModel):
     slug_hierarchy = models.SlugField(_('Slug hierarchy'),
                                       max_length=1023,
                                       unique=True)
+
+    category = models.ForeignKey(ForumCategory,
+                                 db_index=True,  # Database optimization
+                                 related_name='forums',
+                                 verbose_name=_('Category'),
+                                 default=None,
+                                 blank=True,
+                                 null=True)
 
     logo = AutoResizingImageField(_('Logo'),
                                   upload_to=FORUM_LOGO_UPLOAD_DIR_NAME,
@@ -514,6 +546,9 @@ class ForumThreadPost(models.Model):
 
     pub_date = models.DateTimeField(_('Publication date'),
                                     db_index=True)  # Database optimization
+
+    useful = models.BooleanField(_('Useful'),
+                                 default=False)
 
     last_content_modification_date = models.DateTimeField(_('Last content modification date'),
                                                           db_index=True)  # Database optimization

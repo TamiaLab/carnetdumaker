@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.tools.http_utils import get_client_ip_address
 
 from .models import (Forum,
+                     ForumCategory,
                      ForumThread,
                      ForumThreadPost,
                      ForumSubscription,
@@ -20,6 +21,19 @@ from .models import (Forum,
                      ForumUserProfile)
 from .notifications import (notify_of_new_forum_thread,
                             notify_of_new_thread_post)
+
+
+class ForumCategoryAdmin(admin.ModelAdmin):
+    """
+    ``ForumCategory`` admin form.
+    """
+
+    list_display = ('title', )
+
+    search_fields = ('title', )
+
+    fields = ('title',
+              'ordering')
 
 
 class ForumThreadPostAdmin(admin.ModelAdmin):
@@ -476,9 +490,12 @@ class ForumAdmin(admin.ModelAdmin):
 
     form = ForumAdminForm
 
+    list_select_related = ('category', )
+
     list_display = ('logo_img',
                     'slug_hierarchy',
                     'title',
+                    'category',
                     'private',
                     'closed',
                     'ordering',
@@ -499,13 +516,14 @@ class ForumAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ('title', )}
 
-    raw_id_fields = ('parent', )
+    raw_id_fields = ('parent', 'category')
 
     fieldsets = (
         (_('Forum information'), {
             'fields': ('title',
                        'slug',
                        'logo',
+                       'category',
                        'description')
         }),
         (_('Forum status'), {
@@ -568,6 +586,7 @@ class ForumUserProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Forum, ForumAdmin)
+admin.site.register(ForumCategory, ForumCategoryAdmin)
 admin.site.register(ForumThread, ForumThreadAdmin)
 admin.site.register(ForumThreadPost, ForumThreadPostAdmin)
 admin.site.register(ForumUserProfile, ForumUserProfileAdmin)
