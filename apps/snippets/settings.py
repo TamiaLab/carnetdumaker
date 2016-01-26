@@ -13,6 +13,9 @@ SNIPPETS_DISPLAY_LINE_NUMBERS_BY_DEFAULT = getattr(settings, 'SNIPPETS_DISPLAY_L
 # Number of code snippets per page
 NB_SNIPPETS_PER_PAGE = getattr(settings, 'NB_SNIPPETS_PER_PAGE', 25)
 
+# Number of code snippets bundles per page
+NB_SNIPPETS_BUNDLES_PER_PAGE = getattr(settings, 'NB_SNIPPETS_BUNDLES_PER_PAGE', 25)
+
 # Number of code snippets per feed
 NB_SNIPPETS_PER_FEED = getattr(settings, 'NB_SNIPPETS_PER_FEED', 10)
 

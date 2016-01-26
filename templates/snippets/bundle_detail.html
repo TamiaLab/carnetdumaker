@@ -1,0 +1,78 @@
+{% extends "snippets/base_bundles.html" %}
+{% load accounts tools %}
+
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{{ snippets_bundle.get_absolute_url }}">{{ snippets_bundle.title }}</a></li>{% endblock %}
+
+{% block title %}{{ snippets_bundle.title }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_title %}{{ snippets_bundle.title }}{% endblock %}
+{% block opengraph_description %}{{ snippets_bundle.description_text|truncatewords:200 }}{% endblock %}
+{% block opengraph_image %}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ snippets_bundle.get_absolute_url }}{% endblock %}
+
+{% block content %}
+
+    <!-- Bundle detail -->
+    <div class="col-md-12">
+
+        <h1>{{ snippets_bundle.title }}</h1>
+
+        <!-- Bundle information -->
+        <p><i class="fa fa-user"></i> par {{ snippets_bundle.author|user_profile_link }} | <i class="fa fa-calendar"></i> {{ snippets_bundle.creation_date|datetime_html }}</p>
+        {% if snippets_bundle.has_been_modified %}
+            <p><i class="fa fa-edit"></i> Modifié pour la derniére fois le {{ snippets_bundle.last_modification_date|datetime_html }}</p>
+        {% endif %}
+
+        <!-- Secret bundle warning -->
+        {% if not snippets_bundle.public_listing %}
+            <p class="text-warning"><i class="fa fa-exclamation-triangle"></i> Ce dossier d'extraits de code n'est pas public. Seules les personnes possédant le lien vers l'extrait peuvent le voir.</p>
+        {% endif %}
+
+        <!-- bundle description -->
+        <p><i class="fa fa-pencil-square-o"></i> Description :</p>
+        <div class="well">
+            {{ snippets_bundle.description_html|safe }}
+        </div>
+
+        <!-- Staff links -->
+        {% if user.is_staff %}
+            <p class="text-right"><a href="{% url 'admin:snippets_codesnippet_change' snippet.pk %}"><i class="fa fa-terminal"></i> Modifier l'extrait de code dans l'interface d'administration</a></p>
+        {% endif %}
+
+        <!-- Snippets links -->
+        <h2><i class="fa fa-code"></i> Extraits de code</h2>
+
+        <!-- Bundle code with download links -->
+        <p>Télécharger tous les extraits de code de ce dossier en une seule archive :
+            <a href="{{ snippets_bundle.get_download_url }}"><i class="fa fa-file-archive-o"></i> Télécharger {{ snippets_bundle.directory_name }}.zip</a></p>
+
+        <table class="table table-striped table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date de création</th>
+                <th>Langue</th>
+                <th>Licence</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for snippet in snippets %}
+                <tr>
+                    <td><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></td>
+                    <td>{{ snippet.creation_date|date_html }}</td>
+                    <td>{{ snippet.get_code_language_display }}</td>
+                    <td>{% if snippet.license %}<a href="{{ snippet.license.get_absolute_url }}">{{ snippet.license.name }}</a>{% else %}(voir pied de page){% endif %}</td>
+                    <td>{{ snippet.description }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">Aucun extrait de code à afficher <i class="fa fa-frown-o"></i></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

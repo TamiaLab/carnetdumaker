@@ -28,4 +28,13 @@ urlpatterns = (
 
     # Snippet download in zip page
     url(r'^(?P<pk>[0-9]+)/telechargement-zip/$', views.snippet_zip_download, name='snippet_zip_download'),
+
+    # Snippets bundle list view
+    url(r'^dossiers/$', views.bundle_list, name='bundle_index'),
+
+    # Snippets detail view
+    url(r'^dossiers/(?P<pk>[0-9]+)/$', views.bundle_detail, name='bundle_detail'),
+
+    # Snippet download page
+    url(r'^dossiers/(?P<pk>[0-9]+)/telechargement/$', views.bundle_download, name='bundle_download'),
 )

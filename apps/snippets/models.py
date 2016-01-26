@@ -26,7 +26,8 @@ from .settings import (SNIPPETS_DEFAULT_TABULATION_SIZE,
                        SNIPPETS_PYGMENTS_CSS_NAMESPACE)
 from .constants import (CODE_LANGUAGE_CHOICES,
                         CODE_LANGUAGE_DEFAULT)
-from .managers import CodeSnippetManager
+from .managers import (CodeSnippetManager,
+                       CodeSnippetBundleManager)
 
 
 class CodeSnippet(ModelDiffMixin, models.Model):
@@ -241,3 +242,136 @@ def _redo_code_snippets_text_rendering(sender, **kwargs):
         snippet.render_description(save=True)
 
 render_engine_changed.connect(_redo_code_snippets_text_rendering)
+
+
+class CodeSnippetBundle(models.Model):
+    """
+    Data model for a code snippet bundle.
+    A code snippet bundle is made of:
+    - an id,
+    - a title,
+    - an author,
+    - a "public" flag,
+    - a directory name,
+    - a description
+    - a list of snippets,
+    - a creation and last modification date for SEO.
+    """
+
+    title = models.CharField(_('Title'),
+                             max_length=255)
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               db_index=True,  # Database optimization
+                               related_name='snippets_bundle',
+                               verbose_name=_('Author'))
+
+    directory_name = models.CharField(_('Filename'),
+                                      max_length=255)
+
+    public_listing = models.BooleanField(_('Public listing'),
+                                         default=True)
+
+    description = RenderTextField(_('Description'))
+
+    description_html = models.TextField(_('Description (raw HTML)'))
+
+    description_text = models.TextField(_('Description (raw text)'))
+
+    snippets = models.ManyToManyField(CodeSnippet,
+                                      verbose_name=_('Snippets in this bundle'))
+
+    creation_date = models.DateTimeField(_('Creation date'),
+                                         auto_now_add=True)
+
+    last_modification_date = models.DateTimeField(_('Last modification date'),
+                                                  auto_now=True)
+
+    objects = CodeSnippetBundleManager()
+
+    class Meta:
+        verbose_name = _('Code snippets bundle')
+        verbose_name_plural = _('Code snippets bundles')
+        get_latest_by = 'creation_date'
+        ordering = ('-creation_date', )
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        """
+        Returns the permalink to this bundle.
+        """
+        return reverse('snippets:bundle_detail', kwargs={'pk': self.pk})
+
+    def get_download_url(self):
+        """
+        Returns the download link to this bundle.
+        """
+        return reverse('snippets:bundle_download', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        """
+        Save the model, also render the HTML version of the description.
+        :param args: For super()
+        :param kwargs: For super()
+        :return: None
+        """
+
+        # Render description
+        if kwargs.pop('render_description', True):
+            self.render_description()
+
+        # Save the model
+        super(CodeSnippetBundle, self).save(*args, **kwargs)
+
+    def has_been_modified(self):
+        """
+        Return True if the bundle has been modified after creation.
+        """
+        return self.last_modification_date is not None \
+               and self.last_modification_date != self.creation_date
+
+    def render_description(self, save=False):
+        """
+        Render the description.
+        :param save: Save the model field ``content_html`` if ``True``.
+        """
+
+        # Render HTML
+        content_html, content_text, _ = render_document(self.description,
+                                                        allow_text_formating=True,
+                                                        allow_text_extra=True,
+                                                        allow_text_alignments=True,
+                                                        allow_text_directions=True,
+                                                        allow_text_modifiers=True,
+                                                        allow_text_colors=True,
+                                                        allow_spoilers=True,
+                                                        allow_lists=True,
+                                                        allow_definition_lists=True,
+                                                        allow_tables=True,
+                                                        allow_quotes=True,
+                                                        allow_acronyms=True,
+                                                        allow_links=True,
+                                                        allow_medias=True,
+                                                        allow_cdm_extra=True,
+                                                        force_nofollow=False,
+                                                        render_text_version=True)
+        self.description_html = content_html
+        self.description_text = content_text
+
+        # Save if required
+        if save:
+            super(CodeSnippetBundle, self).save(update_fields=('description_html', 'description_text'))
+
+
+def _redo_snippet_bundles_text_rendering(sender, **kwargs):
+    """
+    Redo text rendering of all code snippets bundle.
+    :param sender: Not used.
+    :param kwargs: Not used.
+    """
+    for bundle in CodeSnippetBundle.objects.all():
+        bundle.render_description(save=True)
+
+render_engine_changed.connect(_redo_snippet_bundles_text_rendering)

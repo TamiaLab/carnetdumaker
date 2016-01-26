@@ -14,8 +14,10 @@ from django.http.response import HttpResponse
 from apps.paginator.shortcut import (update_context_for_pagination,
                                      paginate)
 
-from .models import CodeSnippet
-from .settings import NB_SNIPPETS_PER_PAGE
+from .models import (CodeSnippet,
+                     CodeSnippetBundle)
+from .settings import (NB_SNIPPETS_PER_PAGE,
+                       NB_SNIPPETS_BUNDLES_PER_PAGE)
 
 
 def snippet_list(request,
@@ -121,6 +123,94 @@ def snippet_zip_download(request, pk):
     data = output_zip_file.read()
     response = HttpResponse(data, content_type='application/zip')
     response['Content-Length'] = len(data)
-    response['Content-Disposition'] = 'attachment; filename="%s.zip"' % snippet_obj.filename
+    response['Content-Disposition'] = 'attachment; filename="%s.zip"' % snippet_obj.filename  # FIXME Possible headers injection/bug here!
+    response['X-Content-Type-Options'] = 'nosniff'
+    return response
+
+
+def bundle_list(request,
+                 template_name='snippets/bundle_list.html',
+                 extra_context=None):
+    """
+    Code snippets bundles list view.
+    :param request: The incoming request.
+    :param template_name: The template name to be used.
+    :param extra_context: Any extra context for the template.
+    :return: TemplateResponse
+    """
+
+    # Retrieve all published code snippets bundle
+    published_bundles = CodeSnippetBundle.objects.public_bundles().select_related('author').prefetch_related('snippets')
+
+    # Code snippets bundles list pagination
+    paginator, page = paginate(published_bundles, request, NB_SNIPPETS_BUNDLES_PER_PAGE)
+
+    # Render the template
+    context = {
+        'title': _('Code snippets bundles list'),
+    }
+    update_context_for_pagination(context, 'snippets_bundles', request, paginator, page)
+    if extra_context is not None:
+        context.update(extra_context)
+
+    return TemplateResponse(request, template_name, context)
+
+
+def bundle_detail(request, pk,
+                   template_name='snippets/bundle_detail.html',
+                   extra_context=None):
+    """
+    Detail view for a specific code snippet bundle.
+    :param pk: The desired code snippet's PK.
+    :param request: The incoming request.
+    :param template_name: The template name to be used.
+    :param extra_context: Any extra context for the template.
+    :return: TemplateResponse
+    """
+
+    # Retrieve the snippet
+    manager = CodeSnippetBundle.objects.select_related('author')
+    bundle_obj = get_object_or_404(manager, pk=pk)
+
+    # Render the template
+    context = {
+        'snippets_bundle': bundle_obj,
+        'snippets': bundle_obj.snippets.all(),
+        'title': bundle_obj.title,
+    }
+    if extra_context is not None:
+        context.update(extra_context)
+
+    return TemplateResponse(request, template_name, context)
+
+
+def bundle_download(request, pk):
+    """
+    Download the code snippet bundle in a zip archive.
+    :param request: The desired code snippet bundle's PK.
+    :param pk: The current request.
+    :return: HttpResponse
+    """
+
+    # Retrieve the bundle
+    bundle_obj = get_object_or_404(CodeSnippetBundle, pk=pk)
+
+    # Get the base filename
+    basename = os.path.basename(bundle_obj.directory_name)
+    basename = os.path.splitext(basename)[0]
+
+    # Craft the ZIP archive
+    output_zip_file = BytesIO()
+    zip_file = ZipFile(output_zip_file, 'w')
+    for snippet_obj in bundle_obj.snippets.all():
+        zip_file.writestr(basename + '/' + snippet_obj.filename, snippet_obj.source_code)
+    zip_file.close()
+    output_zip_file.seek(0)
+
+    # Return the snippet code as an archive
+    data = output_zip_file.read()
+    response = HttpResponse(data, content_type='application/zip')
+    response['Content-Length'] = len(data)
+    response['Content-Disposition'] = 'attachment; filename="%s.zip"' % bundle_obj.directory_name  # FIXME Possible headers injection/bug here!
     response['X-Content-Type-Options'] = 'nosniff'
     return response
