@@ -11,6 +11,7 @@
         <h1>Liste des catégories</h1>
 
         <!-- Categories -->
+        {# TODO Add more style #}
         <ul>{% recursetree categories %}
             <li>
                 <a href="{{ node.get_absolute_url }}">{{ node.name|capfirst }}</a><br/>

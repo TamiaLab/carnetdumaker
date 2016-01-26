@@ -11,6 +11,7 @@
         <h1>Les archives</h1>
 
         <!-- Archives -->
+        {# TODO Add more style #}
         <ul>
             {% for year, months in archive_calendar %}
                 <li><a href="{% url 'blog:archive_year' year=year %}">Année {{ year }}</a>
