@@ -18,16 +18,17 @@
         <p class="text-warning">Merci de ne signaler que des commentaires réellement inadéquats.
         De plus, pour faciliter le travail des modérateurs, merci de fournir une raison au signalement, même succinte.</p>
 
-        <!-- Comment preview -->
-        <p>Commentaire :</p>
-        <div class="well">
-            {% include "bugtracker/issue_comment.html" with report_disabled=True %}
-        </div>
-
         <!-- Report form -->
         <div class="panel panel-default">
             <div class="panel-heading"><i class="fa fa-bullhorn"></i> Signaler le commentaire</div>
             <div class="panel-body">
+                <!-- Comment preview -->
+                <p><i class="fa fa-comment"></i> Commentaire :</p>
+                <div class="well">
+                    {% include "bugtracker/issue_comment.html" with report_disabled=True %}
+                </div>
+
+                <!-- Comment report form -->
                 <form method="post" action="{{ comment.get_report_url }}">
                     {% csrf_token %}
                     {{ form|bootstrapform }}
