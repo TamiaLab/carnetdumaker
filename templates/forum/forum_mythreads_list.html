@@ -26,7 +26,6 @@
                     <tr>
                         <th></th>
                         <th>Sujet</th>
-                        <th>Auteur</th>
                         <th>Date mise à jour</th>
                         <th>Dernier message</th>
                     </tr>
@@ -41,14 +40,13 @@
                                 {% if thread.resolved %}<i class="fa fa-check" title="Résolu"></i>{% endif %}
                             </td>
                             <td><a href="{{ thread.get_absolute_url }}">{{ thread.title|capfirst }}</a></td>
-                            <td>{{ thread.first_post.author|user_profile_link }}</td>
                             <td>{{ thread.first_post.last_content_modification_date|datetime_html }}</td>
                             <td>par {{ thread.last_post.author|user_profile_link }}
                                 <a href="{{ thread.last_post.get_absolute_url_simple }}">{{ thread.last_post.last_content_modification_date|datetime_html }}</a></td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="5"><p class="text-center">Vous n'avez créé aucun topic !</p></td>
+                            <td colspan="4"><p class="text-center">Vous n'avez créé aucun topic !</p></td>
                         </tr>
                     {% endfor %}
                     </tbody>
