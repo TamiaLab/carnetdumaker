@@ -1,33 +1,97 @@
-{% load accounts tools %}
-<p><a id="post-{{ post.id }}" href="{{ post.get_absolute_url_simple }}">#{{ post.id }}</a> |
-<i class="fa fa-user"></i> par {{ post.author|user_profile_link }} |
-<i class="fa fa-calendar"></i> <time datetime="{{ post.pub_date|date:"d-m-Y" }} {{ post.pub_date|time:"H:i" }}">{{ post.pub_date|date }}</time></p>
+{% load static from staticfiles %}{% load accounts tools forum %}
 
-<div class="well">
-    {% if post.summary_html %}
-        {{ post.summary_html|safe }}
-        <hr>
-    {% endif %}
+<div class="media well no-bottom-margin">
+    <div class="media-left">
 
-    {{ post.content_html|safe }}
-
-    <hr>
-
-    {% if post.has_been_modified_after_publication %}
-        <p><em>Derniére modification le {{ post.last_content_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
-    {% endif %}
-
-    {{ post.footnotes_html|safe }}
-
-    {% with attachments=post.attachments.all %}
-        {% if attachments %}
-            <p><strong>Fichiers joints</strong></p>
-            <ul>
-            {% for attachment in attachments %}
-                <li><a href="{{ attachment.file.url }}">{{ attachment.filename }} ({{ attachment.get_size_display }})</a></li>
-            {% endfor %}
-            </ul>
+        <!-- Author avatar -->
+        {% if post.author.user_profile.avatar %}
+            <img src="{{ post.author.user_profile.avatar.url }}" class="img-rounded center-block" alt="Photo de profil de {{ post.author.username }}">
+        {% else %}
+            <img src="{% static 'images/no_avatar.png' %}" class="img-rounded center-block" alt="Pas de photo de profil">
         {% endif %}
-    {% endwith %}
+
+        <!-- Author username and status -->
+        <p class="text-center"><strong>{{ post.author|user_profile_link }}</strong></p>
+        <p class="text-center">Membre</p>
+        <p class="text-center">
+            {% if post.author.is_staff %}<span class="label label-primary"><i class="fa fa-life-ring"></i> Membre du staff</span>{% endif %}
+            {% if post.author.user_profile.is_online %}<span class="label label-success"><i class="fa fa-check"></i> En ligne</span>{% endif %}
+        </p>
+    </div>
+
+    <div class="media-body">
+
+        <!-- Post ID and link -->
+        <p><a id="post-{{ post.id }}" href="{{ post.get_absolute_url_simple }}">#{{ post.id }}</a> |
+            <i class="fa fa-calendar"></i> <time datetime="{{ post.pub_date|date:"d-m-Y" }} {{ post.pub_date|time:"H:i" }}">{{ post.pub_date|datetime_html }}</time>
+
+            <!-- Report link -->
+            {% if not report_disabled %}<span class="pull-right"><a href="{{ post.get_report_url }}"><i class="fa fa-bullhorn"></i> Signaler ce message</a></span>{% endif %}
+        </p>
+
+        <hr>
+
+        <!-- Summary -->
+        {% if post.summary_html %}
+            {{ post.summary_html|safe }}
+            <hr>
+        {% endif %}
+
+        <!-- Post content -->
+        {{ post.content_html|safe }}
+
+        <!-- Last modification date -->
+        {% if post.has_been_modified_after_publication %}
+            <p><em>Derniére modification le {{ post.last_content_modification_date|datetime_html }} par {{ post.last_modification_by|user_profile_link }}</em></p>
+        {% endif %}
+
+        <!-- Footnotes -->
+        {% if post.footnotes_html %}
+            <hr>
+            {{ post.footnotes_html|safe }}
+        {% endif %}
+
+        <!-- Attachments -->
+        {% with attachments=post.attachments.all %}
+            {% if attachments %}
+                <hr>
+                <p><strong>Fichiers joints</strong></p>
+                <ul>
+                    {% for attachment in attachments %}
+                        <li><a href="{{ attachment.file.url }}">{{ attachment.filename }} ({{ attachment.get_size_display }})</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="media-bottom">
+
+        <!-- Controls -->
+        {% if controls and user.is_authenticated %}
+            <p class="pull-right">
+
+                <!-- Edit link -->
+                {% if user|can_edit:post %}
+                    {% if post.is_first_post %}
+                        <a href="{{ thread.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                    {% else %}
+                        <a href="{{ post.get_edit_url }}"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                    {% endif %}
+                {% endif %}
+
+                <!-- Delete link -->
+                {% if user|can_delete:post %}
+                    {% if post.is_first_post %}
+                        <a href="{{ thread.get_delete_url }}"><i class="fa fa-trash"></i> Supprimer</a>
+                    {% else %}
+                        <a href="{{ post.get_delete_url }}"><i class="fa fa-trash"></i> Supprimer</a>
+                    {% endif %}
+                {% endif %}
+
+                <!-- Reply link -->
+                <a href="{{ post.get_reply_url }}"><i class="fa fa-reply"></i> Répondre</a>
+            </p>
+        {% endif %}
+    </div>
 </div>
-{% if not report_disabled %}<p class="pull-right"><a href="{{ post.get_report_url }}"><i class="fa fa-bullhorn"></i> Signaler ce message</a></p>{% endif %}
