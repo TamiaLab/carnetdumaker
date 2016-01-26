@@ -1007,7 +1007,7 @@ def my_forums_subscription_list(request,
     """
 
     # Get all subscriptions
-    subscriptions = ForumSubscription.objects.filter(user=request.user, active=True)
+    subscriptions = ForumSubscription.objects.filter(user=request.user, active=True).select_related('forum')
 
     # Forum subscriptions list pagination
     paginator, page = paginate(subscriptions, request, NB_FORUM_THREAD_PER_PAGE)
