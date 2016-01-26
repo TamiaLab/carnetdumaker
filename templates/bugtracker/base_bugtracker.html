@@ -1,7 +1,7 @@
 {% extends "base_fullpage.html" %}
 
 {% block breadcrumb %}{{ block.super }}
-    <li><a href="{% url 'bugtracker:index' %}">Bug tracker</a></li>{% endblock %}
+    <li><a href="{% url 'bugtracker:index' %}">Gestionnaire de bugs</a></li>{% endblock %}
 
 {% block feeds %}
     <link rel="alternate" type="application/rss+xml" title="Tickets récents (flux RSS)" href="{% url "bugtracker:latest_issues_rss" %}">
