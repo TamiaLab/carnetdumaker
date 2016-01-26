@@ -196,7 +196,8 @@ def render_document(input_text,
         titles_hierarchy = make_titles_hierarchy(titles)
 
         # Render titles hierarchy
-        titles_summary_output_html = '<ul>\n%s\n</ul>\n' % '\n'.join(recursive_render_title_html(titles_hierarchy, []))
+        html_inner = '\n'.join(recursive_render_title_html(titles_hierarchy, []))
+        titles_summary_output_html = '<ul>\n%s\n</ul>\n' % html_inner if html_inner else ''
         titles_summary_output_text = '\n'.join(recursive_render_title_text(titles_hierarchy, [])) if render_text_version else ''
 
     else:
