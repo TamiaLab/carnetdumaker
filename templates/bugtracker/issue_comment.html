@@ -17,7 +17,7 @@
                         <p><strong>Modifications effectuées :</strong></p>
                         <ul>
                             {% for change in changes %}
-                                <li>{{ change.field_name }} : {% if change.old_value %}{{ change.old_value }}{% else %}non spécifié{% endif %} -> {% if change.new_value %}{{ change.new_value }}{% else %}non spécifié{% endif %}</li>
+                                <li>{{ change.field_name }} : {% if change.old_value %}{{ change.old_value }}{% else %}non spécifié{% endif %} <i class="fa fa-long-arrow-right"></i> {% if change.new_value %}{{ change.new_value }}{% else %}non spécifié{% endif %}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
