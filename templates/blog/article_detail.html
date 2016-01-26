@@ -29,7 +29,7 @@
 
         <!-- Article title -->
         <h1>{{ article.title }}</h1>
-        {% if article.subtitle %}<h2><small>{{ article.subtitle }}</small></h2>{% endif %}
+        {% if article.subtitle %}<h2 class="no-top-margin"><small>{{ article.subtitle }}</small></h2>{% endif %}
 
         <!-- Article preview mode warning -->
         {% if article.is_gone %}
@@ -50,11 +50,11 @@
 
         <!-- Article information 1/2 -->
         <p><i class="fa fa-user"></i> par {{ article.author|user_profile_link }} |
-        <i class="fa fa-calendar"></i> {{ article.pub_date|date_html }} |
-        <i class="fa fa-copyright"></i> Licence {% if article.license %}<a href="{{ article.license.get_absolute_url }}">{{ article.license.name }}</a>{% else %}(voir pied de page){% endif %}</p>
+            <i class="fa fa-calendar"></i> {{ article.pub_date|date_html }} |
+            <i class="fa fa-copyright"></i> Licence {% if article.license %}<a href="{{ article.license.get_absolute_url }}">{{ article.license.name }}</a>{% else %}(voir pied de page){% endif %}
+            {% if article.featured %} | <i class="fa fa-thumb-tack"></i> Article en vedette{% endif %}</p>
         <p><i class="fa fa-folder-open"></i> Catégories :{% for category in article.categories.all %} <a href="{{ category.get_absolute_url }}"><span class="label label-info">{{ category.name }}</span></a>{% endfor %} |
-        <i class="fa fa-tags"></i> Tags :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}
-        {% if article.featured %} | <i class="fa fa-thumb-tack"></i> Article en vedette{% endif %}</p>
+            <i class="fa fa-tags"></i> Mots clefs :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}</p>
 
         <!-- Article information 2/2 -->
         {% if article.has_been_modified_after_publication %}
@@ -89,9 +89,7 @@
         <!-- Article summary (HTML) -->
         {% if article.summary_html %}
             <h3>Sommaire</h3>
-
             {{ article.summary_html|safe }}
-
             <p><!-- Spacer --></p>
         {% endif %}
 
@@ -104,19 +102,18 @@
             {{ article.content_html|safe }}
         {% endif %}
 
+        <!-- Article footnotes (HTML) -->
+        {% if article.footnotes_html %}
+            <hr>
+            {{ article.footnotes_html|safe }}
+        {% endif %}
+
         <!-- Article foot notes -->
         {% with foot_notes=article.foot_notes.all %}
             {% if foot_notes %}
                 {% include "blog/notes.html" with notes=foot_notes %}
             {% endif %}
         {% endwith %}
-
-        <!-- Article footnotes (HTML) -->
-        {% if article.footnotes_html %}
-            <hr>
-
-            {{ article.footnotes_html|safe }}
-        {% endif %}
 
         <!-- Article image attachments (gallery like) -->
         {% with img_attachments=article.img_attachments.all %}
@@ -148,7 +145,7 @@
         {% with follow_up_articles=article.follow_up_articles.all %}
             {% if follow_up_articles %}
                 <div class="col-md-6">
-                    <h3>Articles suivants</h3>
+                    <h3><i class="fa fa-forward"></i> Articles suivants</h3>
                     <ul>
                         {% for next_part in follow_up_articles %}
                             <li><a href="{{ next_part.get_absolute_url }}">{{ next_part.title }}</a></li>
@@ -162,7 +159,7 @@
         {% with follow_up_of=article.follow_up_of.all %}
             {% if follow_up_of %}
                 <div class="col-md-6">
-                    <h3>Articles précédents</h3>
+                    <h3><i class="fa fa-backward"></i> Articles précédents</h3>
                     <ul>
                         {% for previous_part in follow_up_of %}
                             <li><a href="{{ previous_part.get_absolute_url }}">{{ previous_part.title }}</a></li>
@@ -176,7 +173,7 @@
         {% with related_articles=article.related_articles.all %}
             {% if related_articles %}
                 <div class="col-md-6">
-                    <h3>Articles en relation avec celui-ci</h3>
+                    <h3><i class="fa fa-recycle"></i> Articles en relation avec celui-ci</h3>
                     <ul>
                         {% for related_article in related_articles %}
                             <li><a href="{{ related_article.get_absolute_url }}">{{ related_article.title }}</a></li>
@@ -190,7 +187,7 @@
         {% with related_articles=article.related_articles_reverse.all %}
             {% if related_articles %}
                 <div class="col-md-6">
-                    <h3>Articles pouvant vous intéresser</h3>
+                    <h3><i class="fa fa-lightbulb-o"></i> Articles pouvant vous intéresser</h3>
                     <ul>
                         {% for related_article in related_articles %}
                             <li><a href="{{ related_article.get_absolute_url }}">{{ related_article.title }}</a></li>
