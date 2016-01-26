@@ -29,7 +29,7 @@
             <p><i class="fa fa-user"></i> par {{ article.author|user_profile_link }} |
             <i class="fa fa-calendar"></i> {{ article.pub_date|date_html }} |
             <i class="fa fa-folder-open"></i> Catégories :{% for category in article.categories.all %} <a href="{{ category.get_absolute_url }}"><span class="label label-info">{{ category.name }}</span></a>{% endfor %} |
-            <i class="fa fa-tags"></i> Tags :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}</p>
+            <i class="fa fa-tags"></i> Mots clefs :{% for tag in article.tags.all %} <a href="{{ tag.get_absolute_url }}"><span class="label label-info">{{ tag.name }}</span></a>{% endfor %}</p>
         </div>
     </div>
 {% empty %}
