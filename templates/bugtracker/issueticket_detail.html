@@ -16,7 +16,7 @@
     <!-- Ticket detail -->
     <div class="col-md-12">
 
-        <h1>{{ issue.title }} | Ticket #{{ issue.id }}</h1>
+        <h1>Ticket #{{ issue.id }} {{ issue.title }}</h1>
 
         <!-- Ticket information -->
         <p><i class="fa fa-user"></i> Auteur : {{ issue.submitter|user_profile_link }}</p>
@@ -31,6 +31,7 @@
         <hr>
 
         <!-- Ticket description -->
+        <p><i class="fa fa-file-text-o"></i> Description du ticket :</p>
         <blockquote>{{ issue.description_html|safe }}</blockquote>
 
         <!-- Ticket edit link -->
@@ -59,7 +60,7 @@
         <hr>
 
         <!-- Ticket comments header and feeds -->
-        <h2>Commentaires</h2>
+        <h2><i class="fa fa-comments"></i> Commentaires</h2>
         <p><a href="{{ issue.get_latest_comments_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des commentaires récents pour ce ticket</a> (<a href="{{ issue.get_latest_comments_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
         <!-- Ticket comments sorting links -->
@@ -69,11 +70,13 @@
             <span style="text-decoration: underline;">du plus ancien au plus récent</span> | <a href="{{ issue.get_absolute_url }}?sort=reverse">du plus récent au plus ancien</a>
         {% endif %}</p>
 
+        <hr>
+
         <!-- Ticket comments -->
         {% for comment in issue_comments %}
             {% include "bugtracker/issue_comment.html" %}
         {% empty %}
-            <p class="text-center">Pas de commentaires !</p>
+            <p class="text-center">Ce ticket n'a pas de commentaires ! <i class="fa fa-frown-o"></i></p>
         {% endfor %}
 
         <!-- Ticket comment panel -->
@@ -81,7 +84,7 @@
             <hr>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-comments"></i> Ajouter un commentaire</div>
+                <div class="panel-heading"><i class="fa fa-commenting"></i> Ajouter un commentaire</div>
                 <div class="panel-body">
 
                     <!-- Flood protection -->
