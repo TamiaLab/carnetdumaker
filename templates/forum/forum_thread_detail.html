@@ -12,6 +12,8 @@
         <h1>Topic "{{ thread.title }}"</h1>
         <p><a href="{{ thread.get_latest_posts_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des posts récents dans ce topic</a> (<a href="{{ thread.get_latest_posts_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
+        <hr>
+
         <!-- User links -->
         {% if user.is_authenticated %}
 
