@@ -10,6 +10,7 @@
 
         <h1>Extraits de code</h1>
         <p><a href="{% url "snippets:latest_snippets_rss" %}"><i class="fa fa-rss"></i> Flux RSS des extraits récents</a> (<a href="{% url "snippets:latest_snippets_atom" %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+        <p><a href="{% url "snippets:bundle_index" %}"><i class="fa fa-folder-open-o"></i> Voir la liste des dossiers d'extraits de code disponibles.</a></p>
 
         <!-- Staff links -->
         {% if user.is_staff %}
@@ -35,7 +36,7 @@
                     <td>{{ snippet.creation_date|date_html }}</td>
                     <td>{{ snippet.get_code_language_display }}</td>
                     <td>{% if snippet.license %}<a href="{{ snippet.license.get_absolute_url }}">{{ snippet.license.name }}</a>{% else %}(voir pied de page){% endif %}</td>
-                    <td>{{ snippet.description }}</td>
+                    <td>{{ snippet.description_html|safe }}</td>
                 </tr>
             {% empty %}
                 <tr>
