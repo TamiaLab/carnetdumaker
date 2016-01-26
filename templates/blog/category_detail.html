@@ -20,15 +20,21 @@
     <div class="col-md-12">
 
         <h1>Catégorie "{{ category.name }}"</h1>
+        <p><a href="{{ category.get_latest_articles_rss_feed_url }}"><i class="fa fa-rss"></i> Flux RSS des articles dans la catégorie</a> (<a href="{{ category.get_latest_articles_atom_feed_url }}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
 
         <!-- Category logo -->
         {% if category.logo %}
-            <img src="{{ category.logo.url }}" alt="logo catégorie {{ category.name }}" class="center-block" />
+            <img src="{{ category.logo.url }}" alt="Logo de la catégorie {{ category.name }}" class="center-block" />
         {% endif %}
 
         <!-- Category description -->
         {% if category.description_html %}
-            <p><strong>{{ category.description_html|safe }}</strong></p>
+            <p><i class="fa fa-file-text-o"></i> Description :</p>
+            <div class="well">
+                {{ category.description_html|safe }}
+            </div>
+        {% else %}
+            <p><i class="fa fa-file-text-o"></i> Description : pas de description</p>
         {% endif %}
 
         <!-- Parent category -->
@@ -50,7 +56,7 @@
 
         <!-- Staff links -->
         {% if user.is_staff %}
-            <p><a href="{% url 'admin:blog_articlecategory_change' category.pk %}"><i class="fa fa-terminal"></i> Modifier la catégorie dans l'interface d'administration</a></p>
+            <p class="text-right"><a href="{% url 'admin:blog_articlecategory_change' category.pk %}"><i class="fa fa-terminal"></i> Modifier la catégorie dans l'interface d'administration</a></p>
         {% endif %}
 
         <hr>
