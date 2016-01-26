@@ -977,7 +977,7 @@ def my_posts_list(request,
 
     # Get the post list for the current user
     post_list = request.user.forum_posts.published() \
-        .select_related('author', 'last_modification_by')
+        .select_related('author', 'last_modification_by').prefetch_related('attachments')
 
     # Post list pagination
     paginator, page = paginate(post_list, request, NB_FORUM_POST_PER_PAGE)
