@@ -1,5 +1,13 @@
 {% extends "licenses/license_detail.html" %}
 
+{% block breadcrumb %}{{ block.super }}
+    <li><a href="{% url 'bloglicense:license_articles_detail' slug=license.slug %}">Articles liés</a></li>{% endblock %}
+
+{% block feeds %}
+    <link rel="alternate" type="application/rss+xml" title="Articles liés à la licence {{ license.name }} (flux RSS)" href="{% url "bloglicense:latest_license_articles_rss" slug=license.slug %}">
+    <link rel="alternate" type="application/atom+xml" title="Articles liés à la licence {{ license.name }} (flux Atom)" href="{% url "bloglicense:latest_license_articles_atom" slug=license.slug %}">
+{% endblock %}
+
 {% block title %}Les articles liés | {{ block.super }}{% endblock %}
 
 {% block content %}
@@ -10,6 +18,8 @@
         <!-- Related articles feeds -->
         <h1>Les articles liés à la licence {{ license.name }}</h1>
         <p><a href="{% url "bloglicense:latest_license_articles_rss" slug=license.slug %}"><i class="fa fa-rss"></i> Flux RSS des articles liés</a> (<a href="{% url "bloglicense:latest_license_articles_atom" slug=license.slug %}"><i class="fa fa-rss"></i> Flux Atom</a>)</p>
+
+        <hr>
 
         <!-- Related articles -->
         {% include "blog/articles.html" with articles=related_articles %}
