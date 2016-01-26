@@ -5,6 +5,12 @@
 
 {% block title %}Licence {{ license.name }} | {{ block.super }}{% endblock %}
 
+{% block twitter_card %}article{% endblock %}
+{% block opengraph_title %}Licence {{ license.name }}{% endblock %}
+{% block opengraph_description %}{{ license.description_text|truncatewords:200 }}{% endblock %}
+{% block opengraph_url %}{{ block.super }}{{ license.get_absolute_url }}{% endblock %}
+{% block opengraph_image %}{% if license.logo %}{{ license.logo.url }}{% endif %}{% endblock %}
+
 {% block content %}
 
     <!-- License detail -->
