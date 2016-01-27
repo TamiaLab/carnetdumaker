@@ -173,11 +173,11 @@
                     {% if user.is_authenticated %}
                         {% notifications_count as notifications_count %}
                         {% inbox_count as messages_count %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> {{ user.username }}{% if notifications_count %} <span class="badge"><i class="fa fa-bell"></i> {{ notifications_count }}</span>{% endif %}{% if messages_count %} <span class="badge"><i class="fa fa-envelope"></i> {{ messages_count }}</span>{% endif %} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> {{ user.username }}{% if notifications_count %} <span class="label label-info label-as-badge"><i class="fa fa-bell"></i> {{ notifications_count }}</span>{% endif %}{% if messages_count %} <span class="label label-info label-as-badge"><i class="fa fa-envelope"></i> {{ messages_count }}</span>{% endif %} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{% url 'myaccount:index' %}"><i class="fa fa-pencil-square-o"></i> Mon compte</a></li>
-                            <li><a href="{% url 'notifications:index' %}"><i class="fa fa-bell"></i> Mes notifications{% if notifications_count %} <span class="badge">{{ notifications_count }}</span>{% endif %}</a></li>
-                            <li><a href="{% url 'privatemsg:inbox' %}"><i class="fa fa-envelope"></i> Mes messages privés{% if messages_count %} <span class="badge">{{ messages_count }}</span>{% endif %}</a></li>
+                            <li><a href="{% url 'notifications:index' %}"><i class="fa fa-bell"></i> Mes notifications{% if notifications_count %} <span class="label label-info label-as-badge">{{ notifications_count }}</span>{% endif %}</a></li>
+                            <li><a href="{% url 'privatemsg:inbox' %}"><i class="fa fa-envelope"></i> Mes messages privés{% if messages_count %} <span class="label label-info label-as-badge">{{ messages_count }}</span>{% endif %}</a></li>
                             <li class="divider"></li>
                             {% if user.is_staff %}
                                 <li><a href="{% url 'admin:index' %}"><i class="fa fa-terminal"></i> Site d'administration</a></li>

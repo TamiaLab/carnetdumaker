@@ -87,6 +87,13 @@
 }
 
 
+/* Label as badge */
+
+.label-as-badge {
+    border-radius: 1em;
+}
+
+
 /* Custom navbar theme */
 
 .navbar-default {
