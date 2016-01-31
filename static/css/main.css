@@ -199,3 +199,9 @@
 .no-bottom-margin {
     margin-bottom: 0;
 }
+
+.codetable {
+    width:100%;
+    height: auto;
+    overflow: auto;
+}
