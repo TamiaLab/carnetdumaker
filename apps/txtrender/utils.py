@@ -19,14 +19,18 @@ from skcode.utility import (make_paragraphs,
                             extract_titles,
                             make_titles_hierarchy,
                             make_auto_title_ids,
+                            render_titles_hierarchy_html,
+                            render_titles_hierarchy_text,
                             setup_smileys_replacement,
-                            setup_cosmetics_replacement)
+                            setup_cosmetics_replacement,
+                            setup_relative_urls_conversion)
 from skcode.tools import escape_attrvalue
 
 from django.template import loader
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from .settings import EMOTICONS_IMG_DIR
+from .settings import (EMOTICONS_IMG_DIR,
+                       RELATIVE_URL_BASE)
 
 
 def copy_tags_if_allowed(tags, tags_array_in, tags_array_out, allowed):
@@ -40,29 +44,6 @@ def copy_tags_if_allowed(tags, tags_array_in, tags_array_out, allowed):
     if allowed:
         for tag_name in tags:
             tags_array_out[tag_name] = tags_array_in[tag_name]
-
-
-# Recursive helper for HTML rendering
-def recursive_render_title_html(title_groups, output):
-    for parent_title, sub_titles in title_groups:
-        title_id, tree_node, title_level = parent_title
-        output.append('<li>')
-        output.append('<a href="#%s">%s</a>' % (title_id, tree_node.get_raw_content()))
-        if sub_titles:
-            output.append('<ul>')
-            recursive_render_title_html(sub_titles, output)
-            output.append('</ul>')
-        output.append('</li>')
-    return output
-
-
-# Recursive helper for text rendering
-def recursive_render_title_text(title_groups, output, indent=0):
-    for parent_title, sub_titles in title_groups:
-        title_id, tree_node, title_level = parent_title
-        output.append('%s %s' % ('#' * indent, tree_node.get_raw_content()))
-        recursive_render_title_text(sub_titles, output, indent + 1)
-    return output
 
 
 def render_document(input_text,
@@ -170,6 +151,10 @@ def render_document(input_text,
     setup_cosmetics_replacement(document)
     setup_smileys_replacement(document, _base_url)
 
+    # Setup absolute URL conversion
+    if RELATIVE_URL_BASE:
+        setup_relative_urls_conversion(document, RELATIVE_URL_BASE)
+
     # Make paragraphs
     if make_auto_paragraphs:
         make_paragraphs(document)
@@ -196,16 +181,15 @@ def render_document(input_text,
         titles_hierarchy = make_titles_hierarchy(titles)
 
         # Render titles hierarchy
-        html_inner = '\n'.join(recursive_render_title_html(titles_hierarchy, []))
-        titles_summary_output_html = '<ul>\n%s\n</ul>\n' % html_inner if html_inner else ''
-        titles_summary_output_text = '\n'.join(recursive_render_title_text(titles_hierarchy, [])) if render_text_version else ''
+        titles_summary_output_html = render_titles_hierarchy_html(titles_hierarchy)
+        titles_summary_output_text = render_titles_hierarchy_text(titles_hierarchy) if render_text_version else ''
 
     else:
         titles_summary_output_html = ''
         titles_summary_output_text = ''
 
     # Render the document
-    content_html = render_to_html(document, force_nofollow)
+    content_html = render_to_html(document, force_rel_nofollow=force_nofollow)
     content_text = render_to_text(document) if render_text_version else ''
 
     # Merge footnotes if requested
