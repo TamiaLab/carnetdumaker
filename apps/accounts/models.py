@@ -415,7 +415,8 @@ class UserProfile(models.Model):
                                                         allow_medias=allow_medias_in_signature,
                                                         allow_cdm_extra=allow_cdm_extra_in_signature,
                                                         force_nofollow=force_nofollow_in_signature,
-                                                        render_text_version=True)
+                                                        render_text_version=True,
+                                                        make_auto_paragraphs=False)
         self.signature_html = content_html
         self.signature_text = content_text
 
